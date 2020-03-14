@@ -1,0 +1,332 @@
+     1: 
+     2: #include <htc.h>
+     3: 
+     4: 
+     5: /*
+     6: ----SMP: Sample bit
+     7: SPI Master mode:
+     8: 1 = Input data sampled at end of data output time
+     9: 0 = Input data sampled at middle of data output time
+    10: SPI Slave mode:
+    11: SMP must be cleared when SPI is used in Slave mode.
+    12: 
+    13: 
+    14: 
+    15: ----CKE: SPI Clock Select bit
+    16: 1 = Transmit occurs on transition from active to Idle clock state
+    17: 0 = Transmit occurs on transition from Idle to active clock state
+    18: Note: Polarity of clock state is set by the CKP bit (SSPCON1<4>).
+    19: 
+    20: 
+    21: 
+    22: -----BF: Buffer Full Status bit (Receive mode only)
+    23: 1 = Receive complete, SSPBUF is full
+    24: 0 = Receive not complete, SSPBUF is empty
+    25: 
+    26: 
+    27: 
+    28: 
+    29: ----WCOL: Write Collision Detect bit (Transmit mode only)
+    30: 1 = The SSPBUF register is written while it is still transmitting the previous word. (Must be
+    31: cleared in software.)
+    32: 0 = No collision
+    33: bit 6 SSPOV: Receive Overflow Indicator bit
+    34: SPI Slave mode:
+    35: 1 = A new byte is received while the SSPBUF register is still holding the previous data. In case
+    36: of overflow, the data in SSPSR is lost. Overflow can only occur in Slave mode. The user
+    37: must read the SSPBUF, even if only transmitting data, to avoid setting overflow. (Must be
+    38: cleared in software.)
+    39: 0 = No overflow
+    40: Note: In Master mode, the overflow bit is not set, since each new reception (and
+    41: transmission) is initiated by writing to the SSPBUF register.
+    42: 
+    43: 
+    44: ----SSPEN: Synchronous Serial Port Enable bit
+    45: 1 = Enables serial port and configures SCK, SDO, SDI, and SS as serial port pins
+    46: 0 = Disables serial port and configures these pins as I/O port pins
+    47: Note: When enabled, these pins must be properly configured as input or output.
+    48: 
+    49: ----CKP: Clock Polarity Select bit
+    50: 1 = Idle state for clock is a high level
+    51: 0 = Idle state for clock is a low level
+    52: 
+    53: 
+    54: ----SSPM3:SSPM0: Synchronous Serial Port Mode Select bits
+    55: 0101 = SPI Slave mode, clock = SCK pin. SS pin control disabled. SS can be used as I/O pin.
+    56: 0100 = SPI Slave mode, clock = SCK pin. SS pin control enabled.
+    57: 0011 = SPI Master mode, clock = TMR2 output/2
+    58: 0010 = SPI Master mode, clock = FOSC/64
+    59: 0001 = SPI Master mode, clock = FOSC/16
+    60: 0000 = SPI Master mode, clock = FOSC/4
+    61: Note: Bit combinations not specifically listed here are either reserved or implemented in
+    62: I2C mode only.
+    63: 
+    64: 
+    65: 
+    66: 
+    67: SDO must have TRISC<5> bit cleared
+    68: • SCK (Master mode) must have TRISC<3> bit
+    69: cleared
+    70: • SCK (Slave mode) must have TRISC<3> bit set
+    71: • SS must have TRISC<4> bit set
+    72: 
+    73: */
+    74: char gelen;
+    75: 
+    76: void spi_hazirla() 
+    77: {
+    78:         
+    79:         SSPEN = 1; //Enable the SPI module....
+    80:         CKP = 0;//Idle state for clock is a low level
+    81:         CKE = 1;
+    82:         
+    83:         SMP = 0;
+    84:         //0000 = SPI Master mode, clock = FOSC/4
+    85:         
+    86:         SSPM3 = 0;
+    87:         SSPM2 = 0;
+    88:     SSPM1 = 0;
+    89:     SSPM0 = 0;  
+    90:         
+    91:         
+    92:         
+    93:         
+    94: }
+    95: 
+    96: char c;
+    97: unsigned char spi_yaz( unsigned char veri )
+    98: {
+    99:         
+   100:         
+   101:                 
+   102:         SSPBUF = veri;
+   103:         
+   104:         while( BF );
+   105:         
+   106:         while( !BF );
+   107:                 
+   108:         return SSPBUF;
+   109:         
+   110:         
+   111:         
+   112:         
+   113:         }
+   114: 
+   115: unsigned char spi_oku()
+   116: {
+   117:         SSPBUF = 0x00;
+   118:         while( !SSPIF);
+   119:         
+   120:         while( !SSPIF );
+   121:                 
+   122:         return SSPBUF;
+   123:         
+   124:         
+   125: }
+   126: 
+   127: #define DelayMs __delay_ms
+   128: #define DelayUs __delay_us
+   129: char data [ 50 ];
+   130: int count;
+   131: char veri , ikinci;
+   132: 
+   133: void main()
+   134: {
+   135:         
+   136:         TRISB = 0b00001000;
+   137:         
+   138:         PORTB = 0;
+   139:         TRISC =  0b00010000;
+   140: PORTC = 0;
+   141: RC0 = 1;
+   142: spi_hazirla();
+   143:         DelayMs( 1000 );
+   144:         DelayMs( 2000 );
+   145:         ///*
+   146:         RC0 = 0;
+   147:         
+   148:         spi_yaz( 0x06 );
+   149:         
+   150:         RC0 = 1;
+   151:         
+   152:         RC0 = 0;
+   153:         spi_yaz( 0x02 );
+   154: spi_yaz( 0x03 );
+   155: spi_yaz( 'S' );
+   156: RC0 = 1;
+   157: DelayMs( 5 );
+   158:         RB1 = 1;
+   159:         
+   160:         
+   161:         
+   162:         RC0 = 0;
+   163:         
+   164:         spi_yaz( 0x06 );
+   165:         
+   166:         RC0 = 1;
+   167:         
+   168:         RC0 = 0;
+   169:         spi_yaz( 0x02 );
+   170: spi_yaz( 0x04 );
+   171: spi_yaz( 'A' );
+   172: RC0 = 1;
+   173: DelayMs( 5 );
+   174:         RB1 = 1;
+   175:         
+   176:         RC0 = 0;
+   177:         
+   178:         spi_yaz( 0x06 );
+   179:         
+   180:         RC0 = 1;
+   181:         
+   182:         RC0 = 0;
+   183:         spi_yaz( 0x02 );
+   184: spi_yaz( 0x05 );
+   185: spi_yaz( 'I' );
+   186: RC0 = 1;
+   187: DelayMs( 5 );
+   188:         RB1 = 1;
+   189:         RC0 = 0;
+   190:         
+   191:         spi_yaz( 0x06 );
+   192:         
+   193:         RC0 = 1;
+   194:         
+   195:         RC0 = 0;
+   196:         spi_yaz( 0x02 );
+   197: spi_yaz( 0x06 );
+   198: spi_yaz( 'M' );
+   199: RC0 = 1;
+   200: DelayMs( 5 );
+   201:         RB1 = 1;
+   202: 
+   203: RC0 = 0;
+   204:         
+   205:         spi_yaz( 0x06 );
+   206:         
+   207:         RC0 = 1;
+   208:         
+   209:         RC0 = 0;
+   210:         spi_yaz( 0x02 );
+   211: spi_yaz( 0x07 );
+   212: spi_yaz( ' ' );
+   213: RC0 = 1;
+   214: DelayMs( 5 );
+   215:         RB1 = 1;
+   216: 
+   217: 
+   218: RC0 = 0;
+   219:         
+   220:         spi_yaz( 0x06 );
+   221:         
+   222:         RC0 = 1;
+   223:         
+   224:         RC0 = 0;
+   225:         spi_yaz( 0x02 );
+   226: spi_yaz( 0x08 );
+   227: spi_yaz( 'N' );
+   228: RC0 = 1;
+   229: DelayMs( 5 );
+   230:         RB1 = 1;
+   231: 
+   232: RC0 = 0;
+   233:         
+   234:         spi_yaz( 0x06 );
+   235:         
+   236:         RC0 = 1;
+   237:         
+   238:         RC0 = 0;
+   239:         spi_yaz( 0x02 );
+   240: spi_yaz( 0x09 );
+   241: spi_yaz( 'U' );
+   242: RC0 = 1;
+   243: DelayMs( 5 );
+   244:         RB1 = 1;
+   245: RC0 = 0;
+   246:         
+   247:         spi_yaz( 0x06 );
+   248:         
+   249:         RC0 = 1;
+   250:         
+   251:         RC0 = 0;
+   252:         spi_yaz( 0x02 );
+   253: spi_yaz( 0x0A );
+   254: spi_yaz( 'N' );
+   255: RC0 = 1;
+   256: DelayMs( 5 );
+   257:         RB1 = 1;
+   258: RC0 = 0;
+   259:         
+   260:         spi_yaz( 0x06 );
+   261:         
+   262:         RC0 = 1;
+   263:         
+   264:         RC0 = 0;
+   265:         spi_yaz( 0x02 );
+   266: spi_yaz( 0x0B );
+   267: spi_yaz( 'E' );
+   268: RC0 = 1;
+   269: DelayMs( 5 );
+   270:         RB1 = 1;
+   271: 
+   272: RC0 = 0;
+   273:         
+   274:         spi_yaz( 0x06 );
+   275:         
+   276:         RC0 = 1;
+   277:         
+   278:         RC0 = 0;
+   279:         spi_yaz( 0x02 );
+   280: spi_yaz( 0x0C );
+   281: spi_yaz( 'L' );
+   282: RC0 = 1;
+   283: DelayMs( 5 );
+   284:         RB1 = 1;
+   285: 
+   286: //*/
+   287:         
+   288:         
+   289:         
+   290:         
+   291:         
+   292:         
+   293:         
+   294:         
+   295:         
+   296:         
+   297:         
+   298:         for( int b = 0 ; b < 49 ; b++ )
+   299:         {
+   300:         RC0 = 0;
+   301:         DelayUs( 5 );
+   302:                 spi_yaz( 0x03 );
+   303:         gelen =  spi_yaz( b );
+   304:         ikinci = spi_oku( );
+   305:         data [ b ] = ikinci;
+   306:         DelayMs( 100 );
+   307:         RC0 = 1 ;
+   308:         
+   309:         DelayMs( 50 );
+   310:         }
+   311:         
+   312:         
+   313: 
+   314:         
+   315:         
+   316:         
+   317:         
+   318:         
+   319:         
+   320: while( 1 )
+   321: {
+   322:         
+   323:         DelayMs( 250 );
+   324:         
+   325:         
+   326: }
+   327:         
+   328:         
+   329:         
+   330:         
+   331:         
+   332: }

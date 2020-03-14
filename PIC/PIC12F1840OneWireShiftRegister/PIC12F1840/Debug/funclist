@@ -1,0 +1,4 @@
+_MainRegisterSetPin: CODE, 1928 0 52
+_main: CODE, 1880 0 48
+_MainRegisterLoadData: CODE, 1980 0 68
+Total: 168

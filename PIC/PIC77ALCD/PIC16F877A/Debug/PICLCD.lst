@@ -1,0 +1,357 @@
+     1: 
+     2: #include<htc.h>
+     3: 
+     4: #ifndef _XTAL_FREQ
+     5:  // Unless already defined assume 4MHz system frequency
+     6:  // This definition is required to calibrate __delay_us() and __delay_ms()
+     7:  #define _XTAL_FREQ 4000000
+     8: #endif
+     9: #define DelayMs(x) __delay_ms(x)
+    10: #define DelayUs(x) __delay_us(x)
+    11: 
+    12: 
+    13: #include  "LCD.h" 
+    14: unsigned char custom[8] = {
+    15:         
+    16:         0b00000,
+    17:         0b01110,
+    18:         0b10000,
+    19:         0b10000,
+    20:         0b10000,
+    21:         0b01110,
+    22:         0b00100,
+    23:         0b00000
+    24:         
+    25: };
+    26: 
+    27: #define lcd_komut lcd_command
+    28: #define lcd_veri lcd_data
+    29: void ozel_karakterler()
+    30: {
+    31:    // CGRAM'de 1. Adrese "Ç" Karakteri Kaydediliyor
+    32:     lcd_komut(0x40);lcd_veri( 0 );
+    33:         lcd_komut(0x41);lcd_veri(14);
+    34:    lcd_komut(0x42);lcd_veri(17);
+    35:   
+    36:    lcd_komut(0x43);lcd_veri(16);
+    37:    lcd_komut(0x44);lcd_veri(16);
+    38:    lcd_komut(0x45);lcd_veri(21);
+    39:    lcd_komut(0x46);lcd_veri(14);
+    40:    lcd_komut(0x47);lcd_veri(0);
+    41: 
+    42:    // CGRAM'de 1. Adrese "Ð" Karakteri Kaydediliyor
+    43:    lcd_komut(0x48);lcd_veri(14);
+    44:    lcd_komut(0x49);lcd_veri(0);
+    45:    lcd_komut(0x4A);lcd_veri(15);
+    46:    lcd_komut(0x4B);lcd_veri(16);
+    47:    lcd_komut(0x4C);lcd_veri(19);
+    48:    lcd_komut(0x4D);lcd_veri(17);
+    49:    lcd_komut(0x4E);lcd_veri(15);
+    50:    lcd_komut(0x4F);lcd_veri(0);
+    51: 
+    52:    // CGRAM'de 2. Adrese "Ý" Karakteri Kaydediliyor
+    53:    lcd_komut(0x50);lcd_veri(4);
+    54:    lcd_komut(0x51);lcd_veri(0);
+    55:    lcd_komut(0x52);lcd_veri(4);
+    56:    lcd_komut(0x53);lcd_veri(4);
+    57:    lcd_komut(0x54);lcd_veri(4);
+    58:    lcd_komut(0x55);lcd_veri(4);
+    59:    lcd_komut(0x56);lcd_veri(4);
+    60:    lcd_komut(0x57);lcd_veri(0);
+    61: 
+    62:    // CGRAM'de 3. Adrese "Ö" Karakteri Kaydediliyor
+    63:    lcd_komut(0x58);lcd_veri(10);
+    64:    lcd_komut(0x59);lcd_veri(0);
+    65:    lcd_komut(0x5A);lcd_veri(14);
+    66:    lcd_komut(0x5B);lcd_veri(17);
+    67:    lcd_komut(0x5C);lcd_veri(17);
+    68:    lcd_komut(0x5D);lcd_veri(17);
+    69:    lcd_komut(0x5E);lcd_veri(14);
+    70:    lcd_komut(0x5F);lcd_veri(0);
+    71: 
+    72:    // CGRAM'de 4. Adrese "Þ" Karakteri Kaydediliyor
+    73:    lcd_komut(0x60);lcd_veri(14);
+    74:    lcd_komut(0x61);lcd_veri(17);
+    75:    lcd_komut(0x62);lcd_veri(16);
+    76:    lcd_komut(0x63);lcd_veri(14);
+    77:    lcd_komut(0x64);lcd_veri(1);
+    78:    lcd_komut(0x65);lcd_veri(21);
+    79:    lcd_komut(0x66);lcd_veri(14);
+    80:    lcd_komut(0x67);lcd_veri(0);
+    81: 
+    82:    // CGRAM'de 5. Adrese "Ü" Karakteri Kaydediliyor
+    83:    lcd_komut(0x68);lcd_veri(10);
+    84:    lcd_komut(0x69);lcd_veri(0);
+    85:    lcd_komut(0x6A);lcd_veri(17);
+    86:    lcd_komut(0x6B);lcd_veri(17);
+    87:    lcd_komut(0x6C);lcd_veri(17);
+    88:    lcd_komut(0x6D);lcd_veri(17);
+    89:    lcd_komut(0x6E);lcd_veri(14);
+    90:    lcd_komut(0x6F);lcd_veri(0);
+    91: 
+    92:    // CGRAM'de 6. Adrese "I" Karakteri Kaydediliyor
+    93:    lcd_komut(0x70);lcd_veri(4);
+    94:    lcd_komut(0x71);lcd_veri(4);
+    95:    lcd_komut(0x72);lcd_veri(4);
+    96:    lcd_komut(0x73);lcd_veri(4);
+    97:    lcd_komut(0x74);lcd_veri(4);
+    98:    lcd_komut(0x75);lcd_veri(4);
+    99:    lcd_komut(0x76);lcd_veri(4);
+   100:    lcd_komut(0x77);lcd_veri(0);
+   101: 
+   102:    // CGRAM'de 7. Adrese "'" Karakteri Kaydediliyor
+   103:    lcd_komut(0x78);lcd_veri(12);
+   104:    lcd_komut(0x79);lcd_veri(18);
+   105:    lcd_komut(0x7A);lcd_veri(18);
+   106:    lcd_komut(0x7B);lcd_veri(12);
+   107:    lcd_komut(0x7C);lcd_veri(0);
+   108:    lcd_komut(0x7D);lcd_veri(0);
+   109:    lcd_komut(0x7E);lcd_veri(0);
+   110:    lcd_komut(0x7F);lcd_veri(0);
+   111: }
+   112: 
+   113:         static char len  = 1 ;
+   114: unsigned char deneme;
+   115: unsigned char veri;
+   116: lcd_yaz( const char * p )
+   117: {
+   118:  
+   119:         
+   120:         
+   121:         while( *( p)!='\0' )
+   122:         {
+   123:                 if( *p == 'Ç' ) 
+   124:                 {
+   125:                 lcd_komut(0x40);;DelayMs( 2 );lcd_veri( 0 );DelayMs( 2 );
+   126:         lcd_komut(0x41);;DelayMs( 2 );lcd_veri(14);DelayMs( 2 );
+   127:    lcd_komut(0x42);;DelayMs( 2 );lcd_veri(17);DelayMs( 2 );
+   128:   
+   129:    lcd_komut(0x43);DelayMs( 2 );lcd_veri(16);DelayMs( 2 );
+   130:    lcd_komut(0x44);DelayMs( 2 );lcd_veri(16);DelayMs( 2 );
+   131:    lcd_komut(0x45);DelayMs( 2 );lcd_veri(21);
+   132:    lcd_komut(0x46);DelayMs( 2 );lcd_veri(14);
+   133:    lcd_komut(0x47);DelayMs( 2 );lcd_veri(0);DelayMs( 2 );
+   134:         //      lcd_command( 128 );
+   135:         //      lcd_goto ( ( len / 16 ) + 1 , len % 16 );DelayMs( 2 );
+   136:                 
+   137:                         lcd_data(0);
+   138:                         ///lcd_komut( 128 ) ;
+   139:                 RD1 = 1 ;       
+   140:                         
+   141:                         }
+   142:                         else if ( *p == 'Þ' )
+   143:                 {
+   144:         // CGRAM'de 4. Adrese "Þ" Karakteri Kaydediliyor
+   145:    lcd_komut(0x48);lcd_veri(14);
+   146:    lcd_komut(0x49);lcd_veri(17);
+   147:    lcd_komut(0x4a);lcd_veri(16);
+   148:    lcd_komut(0x4b);lcd_veri(14);
+   149:    lcd_komut(0x4c);lcd_veri(1);
+   150:    lcd_komut(0x4d);lcd_veri(21);
+   151:    lcd_komut(0x4e);lcd_veri(14);
+   152:    lcd_komut(0x4f);lcd_veri(0);
+   153:                 //lcd_command( 128 ) ;
+   154:                         //lcd_goto ( ( len / 16 ) + 1 , len % 16 );DelayMs( 2 );
+   155:                 //lcd_goto ( 1, 1 );DelayMs( 2 );
+   156:                 lcd_data(1);
+   157:                         //lcd_komut( 128 ) ;
+   158:                 }       
+   159:                 
+   160:         else if ( *p == 'þ' )
+   161:                 {
+   162: // CGRAM'de 4. Adrese "þ" Karakteri Kaydediliyor
+   163:    lcd_komut(0x78);lcd_veri(0b00000);
+   164:    lcd_komut(0x79);lcd_veri(0b01110);
+   165:    lcd_komut(0x7a);lcd_veri(0b01000);
+   166:    lcd_komut(0x7b);lcd_veri(0b01110);
+   167:    lcd_komut(0x7c);lcd_veri(0b00010);
+   168:    lcd_komut(0x7d);lcd_veri(0b01110);
+   169:    lcd_komut(0x7e);lcd_veri(0b01100);
+   170:    lcd_komut(0x7f);lcd_veri(0);
+   171:                 //lcd_command( 128 ) ;
+   172:                 //      lcd_goto ( ( len / 16 ) + 1 , len % 16 );DelayMs( 2 );
+   173:                 //lcd_goto ( 1, 1 );DelayMs( 2 );
+   174:                 lcd_data(7);
+   175:                 RD6 = 1;
+   176:                 //      lcd_komut( 128 ) ;
+   177:                         
+   178:                         }       
+   179:         
+   180: /*      else if ( *p == 'ð' )
+   181:                 {
+   182: // CGRAM'de 4. Adrese "ð" Karakteri Kaydediliyor
+   183:    lcd_komut(0x80);lcd_veri(0b01110);
+   184:    lcd_komut(0x81);lcd_veri(0b00000);
+   185:    lcd_komut(0x82);lcd_veri(0b01110);
+   186:    lcd_komut(0x83);lcd_veri(0b01010);
+   187:    lcd_komut(0x84);lcd_veri(0b01110);
+   188:    lcd_komut(0x85);lcd_veri(0b00010);
+   189:    lcd_komut(0x86);lcd_veri(0b01110);
+   190:    lcd_komut(0x87);lcd_veri(0);
+   191:                 //lcd_command( 128 ) ;
+   192:                         lcd_goto ( ( len / 16 ) + 1 , len % 16 );DelayMs( 2 );
+   193:                 //lcd_goto ( 1, 1 );DelayMs( 2 );
+   194:                 lcd_data(7);
+   195:                 RD6 = 1;
+   196:                 }       
+   197:         
+   198:         
+   199:         */
+   200:                 else if ( *p == 'Ý' )
+   201:                 {
+   202:         
+   203:    // CGRAM'de 2. Adrese "Ý" Karakteri Kaydediliyor
+   204:    lcd_komut(0x50);lcd_veri(4);
+   205:    lcd_komut(0x51);lcd_veri(0);
+   206:    lcd_komut(0x52);lcd_veri(4);
+   207:    lcd_komut(0x53);lcd_veri(4);
+   208:    lcd_komut(0x54);lcd_veri(4);
+   209:    lcd_komut(0x55);lcd_veri(4);
+   210:    lcd_komut(0x56);lcd_veri(4);
+   211:    lcd_komut(0x57);lcd_veri(0);
+   212: 
+   213:                 //lcd_command( 128 ) ;
+   214:                         //lcd_komut( 128 ) ;
+   215:                         
+   216:                         //lcd_goto ( ( len / 16 ) + 1 , len % 16 );DelayMs( 2 );
+   217:                 //lcd_goto ( 1, 1 );DelayMs( 2 );
+   218:                 lcd_data(2);
+   219:                 //      lcd_komut( 128 ) ;
+   220:                 }       
+   221:                 
+   222:                 
+   223:                 
+   224:                 
+   225:                 
+   226:                 
+   227:                 else if ( *p == 'Ð' )
+   228:                 {
+   229:         // CGRAM'de 1. Adrese "Ð" Karakteri Kaydediliyor
+   230:    lcd_komut(0x58);lcd_veri(14);
+   231:    lcd_komut(0x59);lcd_veri(0);
+   232:    lcd_komut(0x5a);lcd_veri(15);
+   233:    lcd_komut(0x5b);lcd_veri(16);
+   234:    lcd_komut(0x5c);lcd_veri(19);
+   235:    lcd_komut(0x5d);lcd_veri(17);
+   236:    lcd_komut(0x5e);lcd_veri(15);
+   237:    lcd_komut(0x5f);lcd_veri(0);
+   238:                 //lcd_command( 128 ) ;
+   239:                         //lcd_goto ( ( len / 16 ) + 1 , len % 16 );DelayMs( 2 );
+   240:                 //lcd_goto ( 1, 1 );DelayMs( 2 );
+   241:                 lcd_data(3);
+   242:                         //lcd_komut( 128 ) ;
+   243:                 }       
+   244:                 else if ( *p == 'Ü' )
+   245:                 {
+   246:                 // CGRAM'de 5. Adrese "Ü" Karakteri Kaydediliyor
+   247:    lcd_komut(0x60);lcd_veri(10);
+   248:    lcd_komut(0x61);lcd_veri(0);
+   249:    lcd_komut(0x62);lcd_veri(17);
+   250:    lcd_komut(0x63);lcd_veri(17);
+   251:    lcd_komut(0x64);lcd_veri(17);
+   252:    lcd_komut(0x65);lcd_veri(17);
+   253:    lcd_komut(0x66);lcd_veri(14);
+   254:    lcd_komut(0x67);lcd_veri(0);
+   255:                 //lcd_command( 128 ) ;
+   256:                         //lcd_goto ( ( len / 16 ) + 1 , len % 16 );DelayMs( 2 );
+   257:                 //lcd_goto ( 1, 1 );DelayMs( 2 );
+   258:                 lcd_data(4);
+   259:                         //lcd_komut( 128 ) ;
+   260:                 }       
+   261:                         else if ( *p == 'Ö' )
+   262:                 {
+   263:         // CGRAM'de 3. Adrese "Ö" Karakteri Kaydediliyor
+   264:    lcd_komut(0x68);lcd_veri(10);
+   265:    lcd_komut(0x69);lcd_veri(0);
+   266:    lcd_komut(0x6A);lcd_veri(14);
+   267:    lcd_komut(0x6B);lcd_veri(17);
+   268:    lcd_komut(0x6C);lcd_veri(17);
+   269:    lcd_komut(0x6D);lcd_veri(17);
+   270:    lcd_komut(0x6E);lcd_veri(14);
+   271:    lcd_komut(0x6F);lcd_veri(0);
+   272:                 //lcd_command( 128 ) ;
+   273:                         //lcd_goto ( ( len / 16 ) + 1 , len % 16 );DelayMs( 2 );
+   274:                 //lcd_goto ( 1, 1 );DelayMs( 2 );
+   275:                 lcd_data(5);
+   276:                 //      lcd_komut( 128 ) ;
+   277:                 }       
+   278:                 else if ( *p == 'I' )
+   279:                 {
+   280:         // CGRAM'de 6. Adrese "I" Karakteri Kaydediliyor
+   281:    lcd_komut(0x70);lcd_veri(4);
+   282:    lcd_komut(0x71);lcd_veri(4);
+   283:    lcd_komut(0x72);lcd_veri(4);
+   284:    lcd_komut(0x73);lcd_veri(4);
+   285:    lcd_komut(0x74);lcd_veri(4);
+   286:    lcd_komut(0x75);lcd_veri(4);
+   287:    lcd_komut(0x76);lcd_veri(4);
+   288:    lcd_komut(0x77);lcd_veri(0);
+   289:                 //lcd_command( 128 ) ;
+   290:                         //lcd_goto ( ( len / 16 ) + 1 , len % 16 );DelayMs( 2 );
+   291:                 //lcd_goto ( 1, 1 );DelayMs( 2 );
+   292:                 lcd_data(6);
+   293:                         ///lcd_komut( 128 ) ;
+   294:                 }       
+   295:                 
+   296:                 
+   297:                 else
+   298:                 lcd_data( *p ); 
+   299:                 
+   300:                 p++;
+   301:                 
+   302:                 len ++ ;
+   303:                 
+   304:         } // While end...
+   305:         
+   306:         
+   307:         
+   308:         
+   309: } //Fonk end
+   310: 
+   311: 
+   312: 
+   313: 
+   314: void main()
+   315: {
+   316:         
+   317:         
+   318:         deneme = 'Þ';
+   319: TRISA = 0b00000001;
+   320:         TRISD  = 0;
+   321:         PORTD = 0;
+   322:         PORTA = 0;
+   323:         TRISB = 0;
+   324:         PORTB = 0;
+   325:         TRISC = 0;
+   326:          PORTC = 0;
+   327:         //if( deneme =='Þ' ) RD0 = 1;
+   328: lcd_init();
+   329: 
+   330:         //if( deneme == 'þ' ) RD5 = 1;
+   331:         //ozel_karakterler();
+   332: DelayMs( 100 );
+   333:         //lcd_command( 0x40 );
+   334:         //for( int b = 0 ; b < 8 ; b++ )
+   335:         //{
+   336:         //lcd_command( 0x40 + b );
+   337:         //lcd_data( custom[ b ] );      
+   338:                 
+   339:                 
+   340: //      }
+   341:         lcd_goto ( 1, 1 );
+   342: //      lcd_data( 0 );
+   343:  lcd_yaz( "saim" );
+   344:                 //DelayMs( 2000 );
+   345:         //DelayMs( 2000 );
+   346:         //DelayMs( 2000 );
+   347:         DelayMs( 2000 );
+   348:         lcd_yaz( "Deneme" );
+   349:                 //lcd_veri( 'l' );DelayMs( 2 ); //lcd_goto( 2 , 1 );
+   350:         //lcd_yaz( "assaasÇ");
+   351: //lcd_data( 0 );lcd_data( 0 );
+   352:         while( 1 );     
+   353:         
+   354:         
+   355:         
+   356:         
+   357: }

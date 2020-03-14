@@ -1,0 +1,7 @@
+_seri_porta_veri_gonder: CODE, 592 0 24
+_main: CODE, 1280 0 75
+_DelayMs: CODE, 3 0 88
+_FNC: CODE, 96 0 30
+_seri_porttan_veri_al: CODE, 512 0 25
+_seri_portu_ayarla: CODE, 768 0 14
+Total: 256

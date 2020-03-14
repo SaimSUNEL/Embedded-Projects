@@ -1,0 +1,9 @@
+c:\users\saim\documents\visual studio 2013\Projects\DataLogger\DataLogger\bin\Debug\DataLogger.exe.config
+c:\users\saim\documents\visual studio 2013\Projects\DataLogger\DataLogger\bin\Debug\DataLogger.exe
+c:\users\saim\documents\visual studio 2013\Projects\DataLogger\DataLogger\bin\Debug\DataLogger.pdb
+c:\users\saim\documents\visual studio 2013\Projects\DataLogger\DataLogger\obj\Debug\DataLogger.csprojResolveAssemblyReference.cache
+c:\users\saim\documents\visual studio 2013\Projects\DataLogger\DataLogger\obj\Debug\DataLogger.Form1.resources
+c:\users\saim\documents\visual studio 2013\Projects\DataLogger\DataLogger\obj\Debug\DataLogger.Properties.Resources.resources
+c:\users\saim\documents\visual studio 2013\Projects\DataLogger\DataLogger\obj\Debug\DataLogger.csproj.GenerateResource.Cache
+c:\users\saim\documents\visual studio 2013\Projects\DataLogger\DataLogger\obj\Debug\DataLogger.exe
+c:\users\saim\documents\visual studio 2013\Projects\DataLogger\DataLogger\obj\Debug\DataLogger.pdb

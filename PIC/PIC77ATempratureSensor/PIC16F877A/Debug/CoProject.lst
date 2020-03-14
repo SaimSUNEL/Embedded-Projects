@@ -1,0 +1,151 @@
+     1: 
+     2: #include <htc.h>
+     3: #define DelayMs __delay_ms
+     4: #include "LCD.h"
+     5: 
+     6: int value = 0;
+     7: 
+     8: 
+     9: int pow( int a , int b )
+    10: { int c = 1;
+    11:         for( int k = 1 ; k <= b ; k++ )
+    12:         {
+    13:         c = c * a ;
+    14:                 }
+    15:         return c ;
+    16: 
+    17: }
+    18: 
+    19: 
+    20: int 
+    21: strlen( char * s)
+    22: {
+    23:          char * cp;
+    24: 
+    25:         cp = s;
+    26:         while(*cp++)
+    27:                 continue;
+    28:         return cp-s-1;
+    29: }
+    30: 
+    31: void karakter_yaz( char *s )
+    32: {
+    33: int boyut= strlen(s),deger=0;
+    34: 
+    35:         if(boyut<=16)
+    36: {
+    37:                 
+    38: lcd_write(s);   
+    39:         
+    40: }
+    41:         
+    42: if(boyut>16)
+    43: {while(deger<=16)       lcd_data(s[deger++]);
+    44: lcd_command(satir_2);
+    45: deger=deger-1;
+    46:         while(deger!=boyut)
+    47:         lcd_data(s[deger++]);   
+    48:                 
+    49:         
+    50:         
+    51: 
+    52:         
+    53:         
+    54:         }
+    55:         
+    56:         
+    57:         
+    58:         
+    59:         
+    60: 
+    61:         
+    62: 
+    63: 
+    64: }
+    65: 
+    66: char rakam_digits [ 5 ];
+    67: int bolum;
+    68: char rakam_digits [ 5 ];
+    69: int bolum;
+    70: void rakam_yaz ( int a )
+    71: {
+    72:    
+    73:                 for( int k = 4; k >= 0 ; k--)
+    74:                 {
+    75:                         bolum = a / pow( 10 , k );
+    76:             a = a % pow( 10 , k );
+    77:         rakam_digits[ 4 - k ] = bolum + 48 ;
+    78: 
+    79:                 }
+    80:  int k = 0;
+    81: while( rakam_digits[ k ] == '0')k++;
+    82: for( k=k ; k < 5 ; k ++ )
+    83: {       
+    84:         lcd_data( rakam_digits[ k ] );
+    85: }
+    86:                 }
+    87: 
+    88: 
+    89: void main()
+    90: {char *s;
+    91:         TRISA = 0b00000001;
+    92:         PORTA = 0;
+    93:         TRISB = 0;
+    94:         PORTB = 0;
+    95:         TRISC = 0;
+    96:          PORTC = 0;
+    97:         
+    98:         DelayMs( 200 );
+    99:         lcd_init();
+   100:         DelayMs( 200 );
+   101:         
+   102:         lcd_write( "Saim" );
+   103:         RC7 = 1;
+   104:         
+   105:         
+   106:         ADCS2 = 0;
+   107: ADCS1 = 0;
+   108: ADCS0 = 1;
+   109:         CHS2=0;
+   110:         CHS1=0;
+   111:         CHS0 = 0;
+   112:         ADON = 1;
+   113:         ADFM = 1;
+   114:         DelayMs( 500 );
+   115:         
+   116:         GO_DONE = 1;
+   117:         while( GO_DONE ) ;
+   118:         s = (char*)&value;
+   119:         *s = ADRESL;
+   120:         *( s + 1 )= ADRESH;
+   121:         value = value / 2; 
+   122:         
+   123:         while( 1 )
+   124:         {
+   125:                 
+   126:                 asm( "nop");
+   127:                 RC7 = 1;
+   128:                 
+   129:                 DelayMs( 1000 );
+   130:                 RC7 = 0;
+   131:                 DelayMs( 1000 );
+   132:                 
+   133:                 lcd_clear();
+   134: karakter_yaz( (char* )"Temp : " );
+   135:                 rakam_yaz( value );
+   136:         DelayMs( 2000 );
+   137:         
+   138:                 RA1 = 1;
+   139:                 RB0 = ~RB0;
+   140:         GO_DONE = 1;
+   141:                 while( !GO_DONE ) ;
+   142:         s = (char*)&value;
+   143:         *s = ADRESL;
+   144:         *( s + 1 )= ADRESH;
+   145:         value = value / 2; 
+   146:                 //rakam_yaz( value );
+   147:         DelayMs( 1000 );
+   148:         RA1 = 0;
+   149:         
+   150:                 }
+   151:         }

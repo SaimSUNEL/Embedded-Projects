@@ -1,0 +1,689 @@
+     1: 
+     2: /*
+     3: SD kart : 4 GB micro sd...
+     4: 
+     5: 
+     6: Herhangi bir dosyalama sistemi ( FAT12 , 16 ) implemente edilmedi... Sadece karttan müzik verisini yazdýðýmýz adresten itibaren
+     7: okumaya baþlayýp (eðer devre kapatýlmazsa sd kartýn tümü okunana kadar devam eder.Istenirse play , pause , stop butonlarý eklenebilir.
+     8: 
+     9: 
+    10: 
+    11: 
+    12: Wav dosyasý,  eðer PWM frekansý 22500 ise 8 bit 22050 HZ Stereo ; 44100 ise 8 bit 44100 HZ olamadýlýr.
+    13: 
+    14: MP3 , wav vb. dosyalarýnýzý  http://audio.online-convert.com/convert-to-wav gibi bir websitesi yada uygun bir müzik dönüþtürme programý ile gerekli formata dönüþtürebilirsiniz...
+    15: 
+    16: 
+    17: Wav dosyasýný Hex Editor Neo gibi dosyalarý byte byte açabilen bir programla Sd kartýn 0. adresinden itibaren kopyalýyoruz...
+    18: ( Not : bu iþlem kartýn dosyalama sistemini bozacaktýr ve içindeki diðer bilgilere( müzik , belgeler , video ... ) eriþim mümkün olmayacaktýr. )
+    19: 
+    20: 
+    21: */
+    22: 
+    23: 
+    24: 
+    25: 
+    26: 
+    27: #include <htc.h>
+    28: 
+    29: 
+    30: __CONFIG( FOSC_HS & WDTE_OFF & PWRTE_OFF & BOREN_OFF & LVP_OFF & CPD_OFF & WRT_OFF );
+    31: 
+    32: 
+    33: #ifndef _XTAL_FREQ
+    34:  // Unless already defined assume 4MHz system frequency
+    35:  // This definition is required to calibrate __delay_us() and __delay_ms()
+    36:  #define _XTAL_FREQ 20000000UL
+    37: #endif
+    38: 
+    39: unsigned int i , r;
+    40: 
+    41: 
+    42: void seri_port(unsigned char jk) 
+    43:  { while( !TXIF );
+    44:          TXREG=jk;
+    45: 
+    46:         
+    47:          }
+    48:          
+    49:          unsigned char seri_porttan_veri_al() 
+    50: {
+    51: while( !RCIF );
+    52:         //if( RCREG == 's' )asm( "ljmp 0x1eda" );
+    53: 
+    54: return RCREG;
+    55: }
+    56: 
+    57: 
+    58: void seri_porta_veri_gonder( int number )
+    59: {
+    60:         seri_port( 'd' );
+    61:         seri_port( (number >> 8) );
+    62:         seri_port( number );
+    63:         
+    64:         
+    65: }
+    66: 
+    67: 
+    68:          
+    69:          
+    70: void seri_portu_ayarla()  
+    71: {SPBRG=129; //DIVIDER;
+    72:         BRGH=1;
+    73:         
+    74:         
+    75:         SYNC=0;
+    76:         
+    77:         
+    78:         TX9=0;
+    79:         
+    80:         TXEN=1;
+    81:         
+    82:         RX9=0;
+    83:         
+    84:         CREN=1;
+    85:         
+    86:         
+    87:         
+    88:         SPEN=1;/*
+    89:         RC6=1;
+    90:         
+    91:         RC7=1;
+    92: */
+    93:         }
+    94: 
+    95: 
+    96: 
+    97: void string_gonder ( char * data )
+    98:         {
+    99:                 
+   100:                 while ( *data != '\0' )
+   101:                 {
+   102:                         seri_port ( *data ) ;
+   103:                         __delay_ms ( 50 ) ;
+   104:                                                 
+   105:                         data ++ ;
+   106:                 }
+   107:                 
+   108:                 
+   109:                 
+   110:                 
+   111:         }
+   112: 
+   113: 
+   114: 
+   115: 
+   116: 
+   117: 
+   118: 
+   119: 
+   120: 
+   121: #define CARD_SELECT RB7  //SD kard modulündeki CS pinine baðlý
+   122: #define ReadSPI() (spi_yaz(0xff)) //SD karttan gelen veri geri okumak için basit bit macro tanýmlýyoruz...
+   123: #define ClockSPI()(spi_yaz(0xff)) //Bazý yerlerde SD karta clock sinyali saðlamamýz gerekiyor..Aslýnda SD den okumakla ayný þey...
+   124: 
+   125: unsigned long adress; //Sd karttan okumaya baþlayacaðýmýz adres 
+   126: 
+   127: unsigned char spi_yaz( unsigned char veri )   // SPI veri gönderme fonksiyonu ayný zamanda gelen veriyi de alýyor...
+   128: {
+   129: 
+   130:         SSPBUF = veri;
+   131: 
+   132:         while( !BF );
+   133:                 SSPIF = 0 ;
+   134:         return SSPBUF;
+   135:         
+   136:         }
+   137:         
+   138: 
+   139: int sendSDCmd( unsigned char c , unsigned long x  , unsigned char frame ) //SD karta komut göndermek için kullandýðýmýz fonksiyon..
+   140: {
+   141: 
+   142: CARD_SELECT = 0 ; // CS pinini sýfýra çekiyoruz ve SD kart iletiþime aktif hale geliyor...
+   143: __delay_ms( 300 );
+   144:         string_gonder ( "cmd " ) ;
+   145:         seri_port (  c ) ;
+   146:         __delay_ms ( 50 ) ;
+   147:         string_gonder ( " gonderildi" ) ;
+   148:         
+   149:         spi_yaz( (  c | 0x40 ) & 0xff ); //Öncelikler komut verimizi gönderiyoruz...
+   150:         
+   151:         
+   152:         
+   153:         spi_yaz(  (x >> 24 ) & 0xff ); //Ardýndan 4 byttan oluþan adres bilgisi bazý komutlar için argüman bilgisi...
+   154: 
+   155:      spi_yaz( ( x>>16 ) & 0xff );
+   156: 
+   157:         spi_yaz( ( x >> 8 ) & 0xff  );
+   158: 
+   159:         spi_yaz( x  & 0xff );
+   160: 
+   161: spi_yaz( frame ); //Son olarak CRC bilgisini gönderiyoruz.... 
+   162: string_gonder ( "res:" ) ;
+   163:         
+   164:         //SD karttan gelen cevabý bekleyip geri döndürüyoruz...
+   165:         i= 200 ;
+   166:         do
+   167:         {
+   168:                 r = ReadSPI();
+   169: seri_port ( r ) ;
+   170: __delay_ms ( 50 ) ;             
+   171:                 if( r != 0xff ) break;
+   172:         }
+   173:         while( --i>0);
+   174:         
+   175: 
+   176:         ReadSPI();
+   177:         ReadSPI();
+   178:         
+   179:         return (r );
+   180:         
+   181:         
+   182:         
+   183:         /* return response
+   184: FF - timeout, no answer
+   185: 00 - command accepted
+   186: 01 - command received, card in idle state (after RESET)
+   187: other errors
+   188: */
+   189:         /*
+   190:         
+   191:         bit 0 = Idle state
+   192: bit 1 = Erase Reset
+   193: bit 2 = Illegal command
+   194: bit 3 = Communication CRC error
+   195: bit 4 = Erase sequence error
+   196: bit 5 = Address error
+   197: bit 6 = Parameter error
+   198: bit 7 = Always 0
+   199:         */
+   200:         
+   201: }
+   202: 
+   203: #define disableSD() CARD_SELECT=1;ClockSPI()
+   204: #define enableSD() CARD_SELECT=0
+   205: 
+   206: 
+   207: #define RESET 0//RESET komutu 0'dýr.
+   208: #define INIT 1 //Initialize komutu
+   209: #define READ_SINGLE 17 
+   210: #define WRITE_SINGLE 24
+   211: 
+   212: #define DATA_ACCEPT 0x05
+   213: int result;
+   214: #define DATA_START 0xFE
+   215: 
+   216: //Bu fonksiyonuz bu projede kullanmýyoruz...
+   217: int writeSector( unsigned long address , char * p )
+   218: {
+   219:         
+   220:         int r2 , i2;
+   221:         do 
+   222:         {
+   223:         
+   224:         r2      = sendSDCmd( WRITE_SINGLE , address , 0xff );
+   225:         } while (r2 != 0 );
+   226:         
+   227:         ;
+   228:         
+   229:         if( r2 == 0 )
+   230:         { 
+   231:                 spi_yaz( DATA_START );
+   232:                 for( i2 = 0 ;i2 < 512 ; i2 ++ )
+   233:                 {
+   234:                                                 spi_yaz( p[i2]  ) ;
+   235:                         
+   236:                 }
+   237:                 ClockSPI();
+   238:                 ClockSPI();
+   239:                 
+   240:                 
+   241:                 
+   242:                 while( ReadSPI() != 0 );
+   243:                 
+   244:         }
+   245: 
+   246:         disableSD();
+   247: 
+   248:         disableSD();
+   249:         ReadSPI();
+   250:         ReadSPI();
+   251:         return (r2);
+   252:         
+   253:         }
+   254: char gelen[ 20 ];
+   255:         
+   256:         
+   257:         
+   258:         //Bu fonksiyonu bu projede kullanmýyoruz...
+   259: int readSector( unsigned long addr , char * buf )
+   260: {
+   261:         int r, i;
+   262: 
+   263: do 
+   264: {
+   265: 
+   266:         
+   267:         r = sendSDCmd( READ_SINGLE , addr  , 0xff );
+   268: } while (r != 0 ) ;
+   269: 
+   270: 
+   271:         if( r == 0 )
+   272:         {
+   273:         //Usart_veri_gonder( 'T' );
+   274:         
+   275:                 while( ReadSPI() != DATA_START );
+   276:                 
+   277:                 
+   278:                 for( i = 0 ; i < 512 ; i ++ )
+   279:                 {
+   280:                         if( i < 20 ) gelen[ i ] = ReadSPI();
+   281:                         else    ReadSPI();
+   282:                 }
+   283:                 
+   284:                 ReadSPI();
+   285:                 ReadSPI();
+   286:                 
+   287:         }
+   288:         disableSD();
+   289:         ReadSPI();
+   290:         ReadSPI();
+   291:         return 0;
+   292: }
+   293: 
+   294: 
+   295: /*
+   296: 
+   297: bit 0 = Idle state
+   298: bit 1 = Erase Reset
+   299: bit 2 = Illegal command
+   300: bit 3 = Communication CRC error
+   301: bit 4 = Erase sequence error
+   302: bit 5 = Address error
+   303: bit 6 = Parameter error
+   304: bit 7 = Always 0
+   305: 
+   306: 
+   307: 
+   308: */
+   309: //Kartý yerleþtirip pice enerji verdiðimizde kartý kullanabilmek için bir takým ön iþlemler yapmamýz gerekiyor...
+   310: 
+   311: int initMedia()
+   312: {int i , r;
+   313:         adress = 0;
+   314:         
+   315:         //En baþta en az 80 clock sinyali göndermemiz gerekiyor... ( CS enable deðil )
+   316:         CARD_SELECT = 1 ;
+   317:          for( i = 0 ; i < 20 ; i++ )
+   318:         ClockSPI();
+   319:          
+   320:           //CS pinini lowa çekiyoruz ve reset komutunu gönderiyoruz.. addres(argüman) 0 , CRC Reset komutu için mutlaka 0x95 olmalýdýr.
+   321:          
+   322:          CARD_SELECT = 0 ;
+   323:  r = sendSDCmd( RESET , adress , 0x95 );
+   324:  
+   325: string_gonder ( "reset com res : " ) ;
+   326:          seri_port ( r ) ;
+   327:          __delay_ms ( 50 ) ;
+   328: if( r!= 1 )  //Eðer SD karttan uygun cevap gelmezse hata bilgisiyle geri dönüyoruz...
+   329: return 0x84;
+   330:         
+   331: 
+   332: 
+   333: //CMD8  *3      R7      No      SEND_IF_COND    For only SDC V2. Check voltage range
+   334: /*
+   335: 
+   336: Initializing high-capacity cards
+   337: After the card enters idle state with a CMD0, send a CMD8 with argument of 0x000001AA and correct CRC prior to initialization process.
+   338: If the CMD8 is rejected with illigal command error (0x05), the card is SDC version 1 or MMC version 3. If accepted, R7 response (R1(0x01) + 32-bit return value) will be returned. 
+   339: The lower 12 bits in the return value 0x1AA means that the card is SDC version 2 and it can work at voltage range of 2.7 to 3.6 volts. 
+   340: If not the case, the card should be rejected.
+   341: ( http://elm-chan.org/docs/mmc/mmc_e.html )
+   342: */
+   343: r = sendSDCmd( 8 , 0x1AA , 0X87 );
+   344: string_gonder ( "cmd 8 res : " ) ;
+   345: seri_port ( r ) ;
+   346: __delay_ms ( 50 ) ;
+   347: //Usart_veri_gonder( r );
+   348: __delay_ms( 100 );
+   349: for( int k =  0 ; k < 5 ; k++ ) {r = ReadSPI () ;seri_port ( r ) ;__delay_ms ( 50 ) ;   }
+   350: 
+   351: 
+   352: 
+   353: __delay_ms( 100 );
+   354: 
+   355: //Karta kart kabul edene kadar Initialize komutu gönderiyoruz...
+   356: do
+   357: {
+   358: r = sendSDCmd( 55 , 0 , 0xff ) ;  //Initialize komutu için gerekli ön komut...
+   359:         string_gonder ( "cmd55 res : " ) ;
+   360:         seri_port ( r ) ;
+   361:         __delay_ms ( 50 ) ;
+   362: r = sendSDCmd( 41 , 0X40000000  , 0xff );
+   363: 
+   364:         
+   365:         
+   366: } while ( r != 0  );
+   367: CARD_SELECT = 1 ;
+   368: 
+   369: return 0;
+   370:                 
+   371:         
+   372: }
+   373: 
+   374: 
+   375: 
+   376: 
+   377: 
+   378: void spi_hazirla() 
+   379: {
+   380: //      0010 = SPI Master mode, clock = FOSC/64
+   381: //0001 = SPI Master mode, clock = FOSC/16
+   382: //0000 = SPI Master mode, clock = FOSC/4
+   383: 
+   384:         
+   385:         
+   386:         CKP = 0;//Idle state for clock is a low level
+   387:         CKE = 1;  //Transmit occurs on transition from active to Idle clock state 
+   388:         SMP = 0 ;//Input data sampled at middle of data output time
+   389: 
+   390:         SSPM3 =  0 ; // 4
+   391:         //16/64 mhz baþlangýçta
+   392:         SSPM2 = 0 ;
+   393:         SSPM1 = 1 ; 
+   394:         SSPM0 = 0 ;
+   395:         SSPEN = 1; //Enable the SPI module....
+   396: }
+   397: 
+   398: char c;
+   399: void InitSd()
+   400:         {
+   401:                 TRISB7 = 0;
+   402:                 RB7 = 1;
+   403:                 spi_hazirla();
+   404:         }
+   405: 
+   406:         //Sd karttan veri okumak için sadece bu komutu kullanýyoruz...
+   407: unsigned char ReadMultiSector (   long adress  )
+   408:         {
+   409:         do
+   410:         {
+   411:                  r =    sendSDCmd( 18 , adress , 0xff );  //Karta multiple read komutunu , kart kabul edene kadar gönderiyoruz...
+   412:                 
+   413:         }while( r != 0 );
+   414:         return 0;
+   415:                 
+   416:         }
+   417:         
+   418: 
+   419: void main() 
+   420: {
+   421:         
+   422:         
+   423:         seri_portu_ayarla();
+   424:         
+   425:         string_gonder ( "Basliyoruz..." ) ;
+   426:         
+   427:         
+   428:                 string_gonder ( "Tamam\n" ) ;
+   429:                 __delay_ms ( 5000 ) ;
+   430:                 
+   431:         
+   432:         
+   433:     TRISB5= 0 ; //Kullanýlacak pinleri uygun bir þekilde output yada input yapýyoruz... 
+   434:         RB5 = 0 ;
+   435:         TRISC3 = 0;
+   436:     TRISC5 = 0;
+   437:         TRISC4 = 1 ;
+   438:         string_gonder ( "SD card intialize\n" ) ;
+   439:         InitSd();  //SD kartýn CS pini aktif ve SPI iletiþim hazýr...
+   440:         
+   441:         __delay_ms( 100 );
+   442: r = initMedia(); //Kartý baþlatýyoruz...
+   443: 
+   444:         if( r ) { //Sýfýr dýþý bir deðer gelirse kart initialize baþarýsýzdýr...
+   445:         RB5 = 1 ; //Ledi yak...
+   446:         
+   447:                 while( 1 );
+   448:         }
+   449:         
+   450:         
+   451:         string_gonder ( "intialize tamam\n" ) ;
+   452:         TRISC2 = 0; //CCP1 pin output olarak seçildi...
+   453:         //Wav stereo fakat biz sadece bir kanal kullanacaðýz( CCP1 ) . Ýstenirse ikinci CCP kullanýlarak ikinci hoparlör baðlanabilir...
+   454:         //Not : Eðer müzik datasý ikisi hoparlör için farklý bu projede bunlardan sadece bir tanesi çalýnacak...
+   455:         /*
+   456: //16 MHZ için 22050 PWM frekansý...
+   457: PR2 = 0b10110100 ;
+   458: T2CON = 0b00000100 ; //Timer2 post scaler 1:1 , prescale 1:1  Timer2 aktif 
+   459: CCP1CON = 0b00001100 ;  // CCP module PWM module olarak ayarlandý...
+   460:   //Timer2 yi daha sonra çalýþtýracaðýz...
+   461: */
+   462: 
+   463: 
+   464:         
+   465: //20 MHZ için 44100 PWM frekansý
+   466: PR2 = 0b01110000 ;
+   467: T2CON = 0b00000100 ;
+   468: CCPR1L = 0b00111000 ;
+   469: CCP1CON = 0b00011100 ;
+   470: 
+   471:         /*
+   472: //20 MHZ için 22050
+   473: PR2 = 0b11100010 ;
+   474: T2CON = 0b00000100 ;
+   475: CCPR1L = 0b01110001 ;
+   476: CCP1CON = 0b00011100 ;
+   477:         */
+   478:         TMR2ON = 0;
+   479:         
+   480: int index; 
+   481: 
+   482:         SSPM1 = 0 ; //SPI Speed 16 MHZ/4 e deðiþtirildi... Sd karttan okuma hýzýný 4 MHZ çýkartýyoruz...
+   483:     SSPM0 = 0;
+   484: ReadMultiSector (  0x00  ) ; //Kartýn en baþýndan itibaren okumaya baþlýyoruz...                
+   485: TMR2IF = 0;
+   486: TMR2ON = 1;  //Timer 2 aktif 
+   487: #asm
+   488: bcf 0x3 , 5  //Aþaðýdaki kullanýlacak registerlar için bank0'ý seçiyoruz...
+   489: bcf 0x3 , 6 
+   490: #endasm  //BAnk 0 selected...
+   491: string_gonder ( "music basladi..." ) ;
+   492: while( 1 )  //Program sürekli çalýþacak....
+   493:         {
+   494:                 
+   495:                 
+   496:                 /*
+   497:                 RP1:RP0 Bank
+   498:         00 0
+   499:         01 1
+   500:         10 2
+   501:         11 3
+   502:                 */
+   503:                 
+   504:                 
+   505: #asm
+   506: while_loop5:            
+   507:                 
+   508:                 
+   509: //SSPBUF 13h
+   510: //RP0 : 5 
+   511: // Z : 2
+   512: //SPSTAT 0x94
+   513:                 //BF : 0
+   514: 
+   515:                 
+   516:                 // while( ReadSPI != 0xFE );    //Multiple read komutunu gönderdikten ve her 512 byte okuma iþleminden sonra Sd karttan data start(0xfe) komutunu bekliyoruz    ...
+   517:                 
+   518:                 
+   519:                 start_karekteri_bekle:
+   520:                 
+   521:         movlw   0xff //SSBUF = 0xff ;
+   522:         movwf 0x13 ;
+   523:         
+   524:             bsf 0x03 , 5 // SSPSTAT için bank
+   525:                 
+   526:                 dongu:
+   527:                 btfss 0x14 , 0 
+   528:             goto dongu ;  // while ( BF == 0 ); 
+   529:                 bcf 0x03 , 5 //SSPBUF için banksel
+   530:                 movf 0x13 , W // W = SSPBUF and BF = 0
+   531:                 
+   532:                 XORLW 0xFE   
+   533:                 btfss 0x03 ,  2  //if( SSPBUF == 0xFE ) 
+   534:                 goto start_karekteri_bekle;
+   535: 
+   536: iorlw 0x1 //Z biti sýfýrlandý....
+   537: 
+   538: movlw 0x00  // 0 dan tekrar 0 sayacak 256 adým...For loop için...
+   539: movwf 0x21
+   540: for_loop :
+   541: btfsc 0x3 , 2   
+   542: goto for_loop_bitir;
+   543: 
+   544: //for( index = 0 ; index < 256 ; index ++ )
+   545: //{
+   546: 
+   547: 
+   548: 
+   549:         
+   550:         //Ýlk ReadSPI ();  //Sd karttan bir byte alýyoruz fakat bunu kullanmýyoruz bu byte ikinci hoparlör için...
+   551:                         
+   552:                 movlw   0xff //SSBUF = 0xff ; 
+   553:         movwf 0x13 ;
+   554:         
+   555:         bsf 0x03 , 5 // SSPSTAT için bank
+   556:                 
+   557:                 dongu2:
+   558:                 btfss 0x14 , 0
+   559:             goto dongu2 ;  // while ( BF == 0 );        
+   560:                 
+   561:                 bcf 0x03 , 5 //SSPBUF için banksel
+   562:                 movf 0x13 , W // W = SSPBUF and BF = 0
+   563: 
+   564: 
+   565: 
+   566: //IKINCI read SPI // ikinci byte'ý alýyoruz ve bunu CCP1 PWM registerlarýna atýyoruz...
+   567: 
+   568: movlw   0xff //SSBUF = 0xff ; 
+   569:         movwf 0x13 ;
+   570:         
+   571:         bsf 0x03 , 5 // SSPSTAT için bank
+   572:                 
+   573:                 dongu3:
+   574:                 btfss 0x14 , 0
+   575:             goto dongu3 ;  // while ( BF == 0 );        
+   576:                 
+   577:                 bcf 0x03, 5 //SSPBUF için banksel
+   578:                 movf 0x13 , W // W = SSPBUF and BF = 0
+   579:                         
+   580:                         
+   581: 
+   582: 
+   583:   movwf 0x24
+   584:         
+   585:                 
+   586:                                 
+   587: TMR2_loop:     //while( TMR2IF == 0 );  // TMR2IF periodun tamamlandýðýný gösterir...
+   588: btfss 0x0c, 1
+   589: goto TMR2_loop 
+   590:         
+   591: 
+   592:         
+   593:                 
+   594:         
+   595:                 
+   596:                 
+   597:                 btfss 0x24 , 1    //CCP1X = SSPBUF >> 1 ; Okunan verinin ikinci biti CCP1X PWM bitine atanýyor... 
+   598:         goto CCP1X_SIFIRLA;
+   599: 
+   600:         bsf 0x17, 5
+   601:         goto devam_et;
+   602: 
+   603:         CCP1X_SIFIRLA:
+   604:         bcf 0x17 , 5
+   605:         devam_et:
+   606: 
+   607: 
+   608: btfss 0x24 , 0     //CCP1Y = SSPBUF ;  Okunan verinin ilk biti CCP1Y PWM bitine atanýyor...
+   609: 
+   610: goto CCP1Y_SIFIRLA;
+   611: 
+   612: bsf 0x17 , 4
+   613: 
+   614: goto devam_et2;
+   615: CCP1Y_SIFIRLA:
+   616: bcf 0x17 , 4
+   617: 
+   618: devam_et2:
+   619: 
+   620: 
+   621: 
+   622: rrf 0x24 , W   //CCPR1L = SSPBUF >> 2 ;
+   623: movwf 0x25
+   624: rrf 0x25 , W
+   625: ANDLW 0x3f
+   626: movwf 0x15
+   627: //      TMR2IF = 0 ;  //TMR2 interrupt flagi sýfýrlýyoruz....
+   628:         
+   629: bcf 0x0c , 1
+   630: 
+   631: decf 0x21 , F
+   632: 
+   633: goto for_loop ;
+   634: 
+   635: for_loop_bitir:
+   636:                                 
+   637:                                         
+   638: //} for loop end                        
+   639:                                 
+   640:                         //Her 512 byte'tan sonra iki byte'lýk CRC bilgilerini alýyoruz...
+   641:                 
+   642:         
+   643: 
+   644: 
+   645:                                 //      ReadSPI();
+   646:                                         
+   647:                 
+   648:         movlw   0xff //SSBUF = 0xff ; //CRC Ýlk ReadSPI ();
+   649:         movwf 0x13 ;
+   650:         
+   651:         bsf 0x03 , 5 // SSPSTAT için bank
+   652:                 
+   653:                 dongu5:
+   654:                 btfss 0x14 , 0
+   655:             goto dongu5 ;  // while ( BF == 0 );        
+   656:                 
+   657:                 bcf 0x03 , 5 //SSPBUF için banksel
+   658:                 movf 0x13 , W // W = SSPBUF and BF = 0
+   659: 
+   660:                                         
+   661:                                         
+   662:                                         //ReadSPI();
+   663:                  
+   664: movlw   0xff //SSBUF = 0xff ; //CRC ikinci read SPI
+   665:         movwf 0x13 ;
+   666:         
+   667:         bsf 0x03 , 5 // SSPSTAT için bank
+   668:                 
+   669:                 dongu6:
+   670:                 btfss 0x14 , 0
+   671:             goto dongu6 ;  // while ( BF == 0 );        
+   672:                 
+   673:                 bcf 0x03, 5 //SSPBUF için banksel
+   674:                 movf 0x13 , W // W = SSPBUF and BF = 0
+   675:                 
+   676:                 
+   677:                 goto while_loop5 
+   678:                 #endasm
+   679:                 
+   680:                 }
+   681:         
+   682: }
+   683: 
+   684: 
+   685: 
+   686: 
+   687: 
+   688: 
+   689: 

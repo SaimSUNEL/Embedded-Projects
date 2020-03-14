@@ -1,0 +1,2595 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.82 build 9453 
+                                                                                               Wed Mar 04 16:02:46 2015
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 9453
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 9453"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F877A
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_seri_portu_ayarla
+    43                           	FNCALL	_main,_uyandir
+    44                           	FNCALL	_main,_senkron
+    45                           	FNCALL	_main,_kodla_gonder
+    46                           	FNCALL	_main,_DelayMs
+    47                           	FNCALL	_kodla_gonder,___awdiv
+    48                           	FNROOT	_main
+    49                           	global	_senk
+    50                           	global	_senk1
+    51                           	global	_uyan
+    52                           psect	idataBANK0,class=CODE,space=0,delta=2
+    53                           global __pidataBANK0
+    54  0413                     __pidataBANK0:
+    55                           	file	"C:\Users\Saim\Desktop\RemoteCar\verici.c"
+    56                           	line	59
+    57                           
+    58                           ;initializer for _senk
+    59  0413  3430               	retlw	030h
+    60  0414  3430               	retlw	030h
+    61  0415  3430               	retlw	030h
+    62  0416  3430               	retlw	030h
+    63  0417  3430               	retlw	030h
+    64  0418  3430               	retlw	030h
+    65  0419  3430               	retlw	030h
+    66  041A  3430               	retlw	030h
+    67  041B  3400               	retlw	0
+    68                           	line	60
+    69                           
+    70                           ;initializer for _senk1
+    71  041C  3431               	retlw	031h
+    72  041D  3431               	retlw	031h
+    73  041E  3431               	retlw	031h
+    74  041F  3431               	retlw	031h
+    75  0420  3431               	retlw	031h
+    76  0421  3431               	retlw	031h
+    77  0422  3431               	retlw	031h
+    78  0423  3431               	retlw	031h
+    79  0424  3400               	retlw	0
+    80                           	line	43
+    81                           
+    82                           ;initializer for _uyan
+    83  0425  3430               	retlw	030h
+    84  0426  3431               	retlw	031h
+    85  0427  3430               	retlw	030h
+    86  0428  3431               	retlw	031h
+    87  0429  3430               	retlw	030h
+    88  042A  3431               	retlw	031h
+    89  042B  3430               	retlw	030h
+    90  042C  3431               	retlw	031h
+    91  042D  3400               	retlw	0
+    92                           	global	_gelen_veri
+    93                           	global	_bolum
+    94                           	global	_index
+    95                           	global	_PORTB
+    96  0006                     _PORTB	set	6
+    97                           	global	_PORTC
+    98  0007                     _PORTC	set	7
+    99                           	global	_RCREG
+   100  001A                     _RCREG	set	26
+   101                           	global	_TXREG
+   102  0019                     _TXREG	set	25
+   103                           	global	_CARRY
+   104  0018                     _CARRY	set	24
+   105                           	global	_CREN
+   106  00C4                     _CREN	set	196
+   107                           	global	_GIE
+   108  005F                     _GIE	set	95
+   109                           	global	_RB0
+   110  0030                     _RB0	set	48
+   111                           	global	_RB6
+   112  0036                     _RB6	set	54
+   113                           	global	_RB7
+   114  0037                     _RB7	set	55
+   115                           	global	_RC6
+   116  003E                     _RC6	set	62
+   117                           	global	_RC7
+   118  003F                     _RC7	set	63
+   119                           	global	_RCIF
+   120  0065                     _RCIF	set	101
+   121                           	global	_RX9
+   122  00C6                     _RX9	set	198
+   123                           	global	_SPEN
+   124  00C7                     _SPEN	set	199
+   125                           	global	_TXIF
+   126  0064                     _TXIF	set	100
+   127                           	global	_SPBRG
+   128  0099                     _SPBRG	set	153
+   129                           	global	_TRISB
+   130  0086                     _TRISB	set	134
+   131                           	global	_TRISC
+   132  0087                     _TRISC	set	135
+   133                           	global	_BRGH
+   134  04C2                     _BRGH	set	1218
+   135                           	global	_SYNC
+   136  04C4                     _SYNC	set	1220
+   137                           	global	_TX9
+   138  04C6                     _TX9	set	1222
+   139                           	global	_TXEN
+   140  04C5                     _TXEN	set	1221
+   141                           	global	_EEADR
+   142  010D                     _EEADR	set	269
+   143                           	global	_EEDATA
+   144  010C                     _EEDATA	set	268
+   145                           	global	_EECON1
+   146  018C                     _EECON1	set	396
+   147                           	global	_EECON2
+   148  018D                     _EECON2	set	397
+   149                           	global	_RD
+   150  0C60                     _RD	set	3168
+   151                           	global	_WR
+   152  0C61                     _WR	set	3169
+   153                           	global	_WREN
+   154  0C62                     _WREN	set	3170
+   155                           	file	"RemoteCarverici.as"
+   156                           	line	#
+   157                           psect cinit,class=CODE,delta=2
+   158                           global start_initialization
+   159  042E                     start_initialization:
+   160                           
+   161                           psect	bssBANK0,class=BANK0,space=1
+   162                           global __pbssBANK0
+   163  003B                     __pbssBANK0:
+   164  003B                     _gelen_veri:
+   165  003B                            ds      8
+   166                           
+   167  0043                     _bolum:
+   168  0043                            ds      2
+   169                           
+   170  0045                     _index:
+   171  0045                            ds      2
+   172                           
+   173                           psect	dataBANK0,class=BANK0,space=1
+   174                           global __pdataBANK0
+   175  0020                     __pdataBANK0:
+   176                           	file	"C:\Users\Saim\Desktop\RemoteCar\verici.c"
+   177                           	line	59
+   178  0020                     _senk:
+   179  0020                            ds      9
+   180                           
+   181                           psect	dataBANK0
+   182                           	file	"C:\Users\Saim\Desktop\RemoteCar\verici.c"
+   183                           	line	60
+   184  0029                     _senk1:
+   185  0029                            ds      9
+   186                           
+   187                           psect	dataBANK0
+   188                           	file	"C:\Users\Saim\Desktop\RemoteCar\verici.c"
+   189                           	line	43
+   190  0032                     _uyan:
+   191  0032                            ds      9
+   192                           
+   193                           ; Clear objects allocated to BANK0
+   194                           psect cinit,class=CODE,delta=2
+   195  042E  01BB               	clrf	((__pbssBANK0)+0)&07Fh
+   196  042F  01BC               	clrf	((__pbssBANK0)+1)&07Fh
+   197  0430  01BD               	clrf	((__pbssBANK0)+2)&07Fh
+   198  0431  01BE               	clrf	((__pbssBANK0)+3)&07Fh
+   199  0432  01BF               	clrf	((__pbssBANK0)+4)&07Fh
+   200  0433  01C0               	clrf	((__pbssBANK0)+5)&07Fh
+   201  0434  01C1               	clrf	((__pbssBANK0)+6)&07Fh
+   202  0435  01C2               	clrf	((__pbssBANK0)+7)&07Fh
+   203  0436  01C3               	clrf	((__pbssBANK0)+8)&07Fh
+   204  0437  01C4               	clrf	((__pbssBANK0)+9)&07Fh
+   205  0438  01C5               	clrf	((__pbssBANK0)+10)&07Fh
+   206  0439  01C6               	clrf	((__pbssBANK0)+11)&07Fh
+   207                           global btemp
+   208                           psect inittext,class=CODE,delta=2
+   209                           global init_fetch,btemp
+   210                           ;	Called with low address in FSR and high address in W
+   211  03EC                     init_fetch:
+   212  03EC  087E               	movf btemp,w
+   213  03ED  008A               	movwf pclath
+   214  03EE  087F               	movf btemp+1,w
+   215  03EF  0082               	movwf pc
+   216                           global init_ram
+   217                           ;Called with:
+   218                           ;	high address of idata address in btemp 
+   219                           ;	low address of idata address in btemp+1 
+   220                           ;	low address of data in FSR
+   221                           ;	high address + 1 of data in btemp-1
+   222  03F0                     init_ram:
+   223  03F0  120A  118A  23EC   	fcall init_fetch
+              120A  118A         
+   224  03F5  0080               	movwf indf,f
+   225  03F6  0A84               	incf fsr,f
+   226  03F7  0804               	movf fsr,w
+   227  03F8  067D               	xorwf btemp-1,w
+   228  03F9  1903               	btfsc status,2
+   229  03FA  3400               	retlw 0
+   230  03FB  0AFF               	incf btemp+1,f
+   231  03FC  1903               	btfsc status,2
+   232  03FD  0AFE               	incf btemp,f
+   233  03FE  2BF0               	goto init_ram
+   234                           ; Initialize objects allocated to BANK0
+   235                           psect cinit,class=CODE,delta=2
+   236                           global init_ram, __pidataBANK0
+   237  043A  1383               	bcf	status, 7	;select IRP bank0
+   238  043B  303B               	movlw low(__pdataBANK0+27)
+   239  043C  00FD               	movwf btemp-1,f
+   240  043D  3004               	movlw high(__pidataBANK0)
+   241  043E  00FE               	movwf btemp,f
+   242  043F  3013               	movlw low(__pidataBANK0)
+   243  0440  00FF               	movwf btemp+1,f
+   244  0441  3020               	movlw low(__pdataBANK0)
+   245  0442  0084               	movwf fsr,f
+   246  0443  120A  118A  23F0   	fcall init_ram
+              120A  118A         
+   247                           psect cinit,class=CODE,delta=2
+   248                           global end_of_initialization
+   249                           
+   250                           ;End of C runtime variable initialization code
+   251                           
+   252  0448                     end_of_initialization:
+   253  0448  0183               clrf status
+   254  0449  120A  118A  2E69   ljmp _main	;jump to C main() function
+   255                           psect	cstackCOMMON,class=COMMON,space=1
+   256                           global __pcstackCOMMON
+   257  0070                     __pcstackCOMMON:
+   258                           	global	?_DelayMs
+   259  0070                     ?_DelayMs:	; 0 bytes @ 0x0
+   260                           	global	??_DelayMs
+   261  0070                     ??_DelayMs:	; 0 bytes @ 0x0
+   262                           	global	?_seri_portu_ayarla
+   263  0070                     ?_seri_portu_ayarla:	; 0 bytes @ 0x0
+   264                           	global	??_seri_portu_ayarla
+   265  0070                     ??_seri_portu_ayarla:	; 0 bytes @ 0x0
+   266                           	global	?_uyandir
+   267  0070                     ?_uyandir:	; 0 bytes @ 0x0
+   268                           	global	??_uyandir
+   269  0070                     ??_uyandir:	; 0 bytes @ 0x0
+   270                           	global	?_senkron
+   271  0070                     ?_senkron:	; 0 bytes @ 0x0
+   272                           	global	??_senkron
+   273  0070                     ??_senkron:	; 0 bytes @ 0x0
+   274                           	global	?_main
+   275  0070                     ?_main:	; 0 bytes @ 0x0
+   276                           	global	?___awdiv
+   277  0070                     ?___awdiv:	; 2 bytes @ 0x0
+   278                           	global	___awdiv@divisor
+   279  0070                     ___awdiv@divisor:	; 2 bytes @ 0x0
+   280  0070                     	ds	1
+   281                           	global	DelayMs@cnt
+   282  0071                     DelayMs@cnt:	; 1 bytes @ 0x1
+   283                           	global	uyandir@_dcnt
+   284  0071                     uyandir@_dcnt:	; 1 bytes @ 0x1
+   285                           	global	senkron@_dcnt
+   286  0071                     senkron@_dcnt:	; 1 bytes @ 0x1
+   287  0071                     	ds	1
+   288                           	global	DelayMs@i
+   289  0072                     DelayMs@i:	; 1 bytes @ 0x2
+   290                           	global	uyandir@_dcnt_1243
+   291  0072                     uyandir@_dcnt_1243:	; 1 bytes @ 0x2
+   292                           	global	senkron@_dcnt_1248
+   293  0072                     senkron@_dcnt_1248:	; 1 bytes @ 0x2
+   294                           	global	___awdiv@dividend
+   295  0072                     ___awdiv@dividend:	; 2 bytes @ 0x2
+   296  0072                     	ds	1
+   297                           	global	DelayMs@_dcnt
+   298  0073                     DelayMs@_dcnt:	; 1 bytes @ 0x3
+   299                           	global	senkron@_dcnt_1249
+   300  0073                     senkron@_dcnt_1249:	; 1 bytes @ 0x3
+   301                           	global	uyandir@a
+   302  0073                     uyandir@a:	; 2 bytes @ 0x3
+   303  0073                     	ds	1
+   304                           	global	??___awdiv
+   305  0074                     ??___awdiv:	; 0 bytes @ 0x4
+   306                           	global	senkron@a
+   307  0074                     senkron@a:	; 2 bytes @ 0x4
+   308  0074                     	ds	1
+   309                           	global	___awdiv@counter
+   310  0075                     ___awdiv@counter:	; 1 bytes @ 0x5
+   311  0075                     	ds	1
+   312                           	global	___awdiv@sign
+   313  0076                     ___awdiv@sign:	; 1 bytes @ 0x6
+   314                           	global	senkron@a_1247
+   315  0076                     senkron@a_1247:	; 2 bytes @ 0x6
+   316  0076                     	ds	1
+   317                           	global	___awdiv@quotient
+   318  0077                     ___awdiv@quotient:	; 2 bytes @ 0x7
+   319  0077                     	ds	2
+   320                           	global	?_kodla_gonder
+   321  0079                     ?_kodla_gonder:	; 2 bytes @ 0x9
+   322                           	global	kodla_gonder@sayi
+   323  0079                     kodla_gonder@sayi:	; 2 bytes @ 0x9
+   324  0079                     	ds	2
+   325                           	global	??_kodla_gonder
+   326  007B                     ??_kodla_gonder:	; 0 bytes @ 0xB
+   327  007B                     	ds	1
+   328                           	global	??_main
+   329  007C                     ??_main:	; 0 bytes @ 0xC
+   330  007C                     	ds	1
+   331                           	global	main@gelen
+   332  007D                     main@gelen:	; 1 bytes @ 0xD
+   333  007D                     	ds	1
+   334                           psect	cstackBANK0,class=BANK0,space=1
+   335                           global __pcstackBANK0
+   336  0047                     __pcstackBANK0:
+   337                           	global	kodla_gonder@_dcnt
+   338  0047                     kodla_gonder@_dcnt:	; 1 bytes @ 0x0
+   339  0047                     	ds	1
+   340                           	global	kodla_gonder@_dcnt_1253
+   341  0048                     kodla_gonder@_dcnt_1253:	; 1 bytes @ 0x1
+   342  0048                     	ds	1
+   343                           	global	kodla_gonder@_dcnt_1255
+   344  0049                     kodla_gonder@_dcnt_1255:	; 1 bytes @ 0x2
+   345  0049                     	ds	1
+   346                           	global	kodla_gonder@_dcnt_1256
+   347  004A                     kodla_gonder@_dcnt_1256:	; 1 bytes @ 0x3
+   348  004A                     	ds	1
+   349                           	global	kodla_gonder@a
+   350  004B                     kodla_gonder@a:	; 2 bytes @ 0x4
+   351  004B                     	ds	2
+   352 ;;Data sizes: Strings 0, constant 0, data 27, bss 12, persistent 0 stack 0
+   353 ;;Auto spaces:   Size  Autos    Used
+   354 ;; COMMON          14     14      14
+   355 ;; BANK0           80      6      45
+   356 ;; BANK1           80      0       0
+   357 ;; BANK3           96      0       0
+   358 ;; BANK2           96      0       0
+   359                           
+   360 ;;
+   361 ;; Pointer list with targets:
+   362                           
+   363 ;; ?___awdiv	int  size(1) Largest target is 0
+   364 ;;
+   365                           
+   366                           
+   367 ;;
+   368 ;; Critical Paths under _main in COMMON
+   369 ;;
+   370 ;;   _main->_kodla_gonder
+   371 ;;   _kodla_gonder->___awdiv
+   372 ;;
+   373 ;; Critical Paths under _main in BANK0
+   374 ;;
+   375 ;;   _main->_kodla_gonder
+   376 ;;
+   377 ;; Critical Paths under _main in BANK1
+   378 ;;
+   379 ;;   None.
+   380 ;;
+   381 ;; Critical Paths under _main in BANK3
+   382 ;;
+   383 ;;   None.
+   384 ;;
+   385 ;; Critical Paths under _main in BANK2
+   386 ;;
+   387 ;;   None.
+   388                           
+   389 ;;
+   390 ;;Main: autosize = 0, tempsize = 1, incstack = 0, save=0
+   391 ;;
+   392                           
+   393 ;;
+   394 ;;Call Graph Tables:
+   395 ;;
+   396 ;; ---------------------------------------------------------------------------------
+   397 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   398 ;; ---------------------------------------------------------------------------------
+   399 ;; (0) _main                                                 2     2      0    1046
+   400 ;;                                             12 COMMON     2     2      0
+   401 ;;                  _seri_portu_ayarla
+   402 ;;                            _uyandir
+   403 ;;                            _senkron
+   404 ;;                       _kodla_gonder
+   405 ;;                            _DelayMs
+   406 ;; ---------------------------------------------------------------------------------
+   407 ;; (1) _kodla_gonder                                         9     7      2     505
+   408 ;;                                              9 COMMON     3     1      2
+   409 ;;                                              0 BANK0      6     6      0
+   410 ;;                            ___awdiv
+   411 ;; ---------------------------------------------------------------------------------
+   412 ;; (2) ___awdiv                                              9     5      4     300
+   413 ;;                                              0 COMMON     9     5      4
+   414 ;; ---------------------------------------------------------------------------------
+   415 ;; (1) _senkron                                              8     8      0     205
+   416 ;;                                              0 COMMON     8     8      0
+   417 ;; ---------------------------------------------------------------------------------
+   418 ;; (1) _uyandir                                              5     5      0     114
+   419 ;;                                              0 COMMON     5     5      0
+   420 ;; ---------------------------------------------------------------------------------
+   421 ;; (1) _seri_portu_ayarla                                    0     0      0       0
+   422 ;; ---------------------------------------------------------------------------------
+   423 ;; (1) _DelayMs                                              4     4      0      45
+   424 ;;                                              0 COMMON     4     4      0
+   425 ;; ---------------------------------------------------------------------------------
+   426 ;; Estimated maximum stack depth 2
+   427 ;; ---------------------------------------------------------------------------------
+   428                           
+   429 ;; Call Graph Graphs:
+   430                           
+   431 ;; _main (ROOT)
+   432 ;;   _seri_portu_ayarla
+   433 ;;   _uyandir
+   434 ;;   _senkron
+   435 ;;   _kodla_gonder
+   436 ;;     ___awdiv
+   437 ;;   _DelayMs
+   438 ;;
+   439                           
+   440 ;; Address spaces:
+   441                           
+   442 ;;Name               Size   Autos  Total    Cost      Usage
+   443 ;;BANK3               60      0       0       9        0.0%
+   444 ;;BITBANK3            60      0       0       8        0.0%
+   445 ;;SFR3                 0      0       0       4        0.0%
+   446 ;;BITSFR3              0      0       0       4        0.0%
+   447 ;;BANK2               60      0       0      11        0.0%
+   448 ;;BITBANK2            60      0       0      10        0.0%
+   449 ;;SFR2                 0      0       0       5        0.0%
+   450 ;;BITSFR2              0      0       0       5        0.0%
+   451 ;;SFR1                 0      0       0       2        0.0%
+   452 ;;BITSFR1              0      0       0       2        0.0%
+   453 ;;BANK1               50      0       0       7        0.0%
+   454 ;;BITBANK1            50      0       0       6        0.0%
+   455 ;;CODE                 0      0       0       0        0.0%
+   456 ;;DATA                 0      0      3D      12        0.0%
+   457 ;;ABS                  0      0      3B       3        0.0%
+   458 ;;NULL                 0      0       0       0        0.0%
+   459 ;;STACK                0      0       2       2        0.0%
+   460 ;;BANK0               50      6      2D       5       56.3%
+   461 ;;BITBANK0            50      0       0       4        0.0%
+   462 ;;SFR0                 0      0       0       1        0.0%
+   463 ;;BITSFR0              0      0       0       1        0.0%
+   464 ;;COMMON               E      E       E       1      100.0%
+   465 ;;BITCOMMON            E      0       0       0        0.0%
+   466 ;;EEDATA             100      0       0       0        0.0%
+   467                           
+   468                           	global	_main
+   469                           psect	maintext,global,class=CODE,delta=2
+   470                           global __pmaintext
+   471  0669                     __pmaintext:
+   472                           
+   473 ;; *************** function _main *****************
+   474 ;; Defined at:
+   475 ;;		line 116 in file "C:\Users\Saim\Desktop\RemoteCar\verici.c"
+   476 ;; Parameters:    Size  Location     Type
+   477 ;;		None
+   478 ;; Auto vars:     Size  Location     Type
+   479 ;;  gelen           1   13[COMMON] unsigned char 
+   480 ;; Return value:  Size  Location     Type
+   481 ;;		None               void
+   482 ;; Registers used:
+   483 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   484 ;; Tracked objects:
+   485 ;;		On entry : 17F/0
+   486 ;;		On exit  : 0/0
+   487 ;;		Unchanged: 0/0
+   488 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   489 ;;      Params:         0       0       0       0       0
+   490 ;;      Locals:         1       0       0       0       0
+   491 ;;      Temps:          1       0       0       0       0
+   492 ;;      Totals:         2       0       0       0       0
+   493 ;;Total ram usage:        2 bytes
+   494 ;; Hardware stack levels required when called:    2
+   495 ;; This function calls:
+   496 ;;		_seri_portu_ayarla
+   497 ;;		_uyandir
+   498 ;;		_senkron
+   499 ;;		_kodla_gonder
+   500 ;;		_DelayMs
+   501 ;; This function is called by:
+   502 ;;		Startup code after reset
+   503 ;; This function uses a non-reentrant model
+   504 ;;
+   505                           psect	maintext
+   506                           	file	"C:\Users\Saim\Desktop\RemoteCar\verici.c"
+   507                           	line	116
+   508                           	global	__size_of_main
+   509  0197                     	__size_of_main	equ	__end_of_main-_main
+   510                           	
+   511  0669                     _main:	
+   512                           	opt	stack 6
+   513                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   514                           	line	118
+   515                           	
+   516  0669                     l3030:	
+   517                           ;verici.c: 118: TRISB=0b11100000;
+   518  0669  30E0               	movlw	(0E0h)
+   519  066A  1683               	bsf	status, 5	;RP0=1, select bank1
+   520  066B  1303               	bcf	status, 6	;RP1=0, select bank1
+   521  066C  0086               	movwf	(134)^080h	;volatile
+   522                           	line	119
+   523                           	
+   524  066D                     l3032:	
+   525                           ;verici.c: 119: PORTB=0;
+   526  066D  1283               	bcf	status, 5	;RP0=0, select bank0
+   527  066E  1303               	bcf	status, 6	;RP1=0, select bank0
+   528  066F  0186               	clrf	(6)	;volatile
+   529                           	line	120
+   530                           	
+   531  0670                     l3034:	
+   532                           ;verici.c: 120: TRISC=0b10000000;
+   533  0670  3080               	movlw	(080h)
+   534  0671  1683               	bsf	status, 5	;RP0=1, select bank1
+   535  0672  1303               	bcf	status, 6	;RP1=0, select bank1
+   536  0673  0087               	movwf	(135)^080h	;volatile
+   537                           	line	121
+   538                           ;verici.c: 121: PORTC=0;
+   539  0674  1283               	bcf	status, 5	;RP0=0, select bank0
+   540  0675  1303               	bcf	status, 6	;RP1=0, select bank0
+   541  0676  0187               	clrf	(7)	;volatile
+   542                           	line	122
+   543                           	
+   544  0677                     l3036:	
+   545                           ;verici.c: 122: seri_portu_ayarla();
+   546  0677  120A  118A  23FF   	fcall	_seri_portu_ayarla
+              120A  118A         
+   547  067C  2E7D               	goto	l3038
+   548                           	line	125
+   549                           ;verici.c: 123: unsigned char gelen;
+   550                           ;verici.c: 125: while (1)
+   551                           	
+   552  067D                     l769:	
+   553                           	line	128
+   554                           	
+   555  067D                     l3038:	
+   556                           ;verici.c: 127: {
+   557                           ;verici.c: 128: if(RCIF==1)
+   558  067D  1283               	bcf	status, 5	;RP0=0, select bank0
+   559  067E  1303               	bcf	status, 6	;RP1=0, select bank0
+   560  067F  1E8C               	btfss	(101/8),(101)&7
+   561  0680  2E82               	goto	u3001
+   562  0681  2E83               	goto	u3000
+   563  0682                     u3001:
+   564  0682  2E87               	goto	l770
+   565  0683                     u3000:
+   566                           	line	129
+   567                           	
+   568  0683                     l3040:	
+   569                           ;verici.c: 129: gelen=RCREG;
+   570  0683  081A               	movf	(26),w	;volatile
+   571  0684  00FC               	movwf	(??_main+0)+0
+   572  0685  087C               	movf	(??_main+0)+0,w
+   573  0686  00FD               	movwf	(main@gelen)
+   574                           	
+   575  0687                     l770:	
+   576                           	line	130
+   577                           ;verici.c: 130: if(gelen=='2')
+   578  0687  087D               	movf	(main@gelen),w
+   579  0688  3A32               	xorlw	032h
+   580  0689  1D03               	skipz
+   581  068A  2E8C               	goto	u3011
+   582  068B  2E8D               	goto	u3010
+   583  068C                     u3011:
+   584  068C  2EAB               	goto	l3044
+   585  068D                     u3010:
+   586                           	line	132
+   587                           	
+   588  068D                     l3042:	
+   589                           ;verici.c: 131: {
+   590                           ;verici.c: 132: uyandir();
+   591  068D  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   592                           	line	133
+   593                           ;verici.c: 133: uyandir();
+   594  0692  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   595                           	line	134
+   596                           ;verici.c: 134: uyandir();
+   597  0697  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   598                           	line	135
+   599                           ;verici.c: 135: senkron();
+   600  069C  120A  118A  2531   	fcall	_senkron
+              120A  118A         
+   601                           	line	137
+   602                           ;verici.c: 137: kodla_gonder('2');
+   603  06A1  3032               	movlw	low(032h)
+   604  06A2  00F9               	movwf	(?_kodla_gonder)
+   605  06A3  3000               	movlw	high(032h)
+   606  06A4  00FA               	movwf	((?_kodla_gonder))+1
+   607  06A5  120A  118A  25C1   	fcall	_kodla_gonder
+              120A  118A         
+   608  06AA  2EAB               	goto	l3044
+   609                           	line	141
+   610                           	
+   611  06AB                     l771:	
+   612                           	line	143
+   613                           	
+   614  06AB                     l3044:	
+   615                           ;verici.c: 141: }
+   616                           ;verici.c: 143: if(gelen=='4')
+   617  06AB  087D               	movf	(main@gelen),w
+   618  06AC  3A34               	xorlw	034h
+   619  06AD  1D03               	skipz
+   620  06AE  2EB0               	goto	u3021
+   621  06AF  2EB1               	goto	u3020
+   622  06B0                     u3021:
+   623  06B0  2ECF               	goto	l3048
+   624  06B1                     u3020:
+   625                           	line	145
+   626                           	
+   627  06B1                     l3046:	
+   628                           ;verici.c: 144: {
+   629                           ;verici.c: 145: uyandir();
+   630  06B1  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   631                           	line	146
+   632                           ;verici.c: 146: uyandir();
+   633  06B6  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   634                           	line	147
+   635                           ;verici.c: 147: uyandir();
+   636  06BB  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   637                           	line	148
+   638                           ;verici.c: 148: senkron();
+   639  06C0  120A  118A  2531   	fcall	_senkron
+              120A  118A         
+   640                           	line	150
+   641                           ;verici.c: 150: kodla_gonder('4');
+   642  06C5  3034               	movlw	low(034h)
+   643  06C6  00F9               	movwf	(?_kodla_gonder)
+   644  06C7  3000               	movlw	high(034h)
+   645  06C8  00FA               	movwf	((?_kodla_gonder))+1
+   646  06C9  120A  118A  25C1   	fcall	_kodla_gonder
+              120A  118A         
+   647  06CE  2ECF               	goto	l3048
+   648                           	line	154
+   649                           	
+   650  06CF                     l772:	
+   651                           	line	155
+   652                           	
+   653  06CF                     l3048:	
+   654                           ;verici.c: 154: }
+   655                           ;verici.c: 155: if(gelen=='5')
+   656  06CF  087D               	movf	(main@gelen),w
+   657  06D0  3A35               	xorlw	035h
+   658  06D1  1D03               	skipz
+   659  06D2  2ED4               	goto	u3031
+   660  06D3  2ED5               	goto	u3030
+   661  06D4                     u3031:
+   662  06D4  2EF3               	goto	l3052
+   663  06D5                     u3030:
+   664                           	line	157
+   665                           	
+   666  06D5                     l3050:	
+   667                           ;verici.c: 156: {
+   668                           ;verici.c: 157: uyandir();
+   669  06D5  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   670                           	line	158
+   671                           ;verici.c: 158: uyandir();
+   672  06DA  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   673                           	line	159
+   674                           ;verici.c: 159: uyandir();
+   675  06DF  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   676                           	line	160
+   677                           ;verici.c: 160: senkron();
+   678  06E4  120A  118A  2531   	fcall	_senkron
+              120A  118A         
+   679                           	line	162
+   680                           ;verici.c: 162: kodla_gonder('5');
+   681  06E9  3035               	movlw	low(035h)
+   682  06EA  00F9               	movwf	(?_kodla_gonder)
+   683  06EB  3000               	movlw	high(035h)
+   684  06EC  00FA               	movwf	((?_kodla_gonder))+1
+   685  06ED  120A  118A  25C1   	fcall	_kodla_gonder
+              120A  118A         
+   686  06F2  2EF3               	goto	l3052
+   687                           	line	166
+   688                           	
+   689  06F3                     l773:	
+   690                           	line	168
+   691                           	
+   692  06F3                     l3052:	
+   693                           ;verici.c: 166: }
+   694                           ;verici.c: 168: if(gelen=='7')
+   695  06F3  087D               	movf	(main@gelen),w
+   696  06F4  3A37               	xorlw	037h
+   697  06F5  1D03               	skipz
+   698  06F6  2EF8               	goto	u3041
+   699  06F7  2EF9               	goto	u3040
+   700  06F8                     u3041:
+   701  06F8  2F17               	goto	l3056
+   702  06F9                     u3040:
+   703                           	line	170
+   704                           	
+   705  06F9                     l3054:	
+   706                           ;verici.c: 169: {
+   707                           ;verici.c: 170: uyandir();
+   708  06F9  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   709                           	line	171
+   710                           ;verici.c: 171: uyandir();
+   711  06FE  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   712                           	line	172
+   713                           ;verici.c: 172: uyandir();
+   714  0703  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   715                           	line	173
+   716                           ;verici.c: 173: senkron();
+   717  0708  120A  118A  2531   	fcall	_senkron
+              120A  118A         
+   718                           	line	175
+   719                           ;verici.c: 175: kodla_gonder('7');
+   720  070D  3037               	movlw	low(037h)
+   721  070E  00F9               	movwf	(?_kodla_gonder)
+   722  070F  3000               	movlw	high(037h)
+   723  0710  00FA               	movwf	((?_kodla_gonder))+1
+   724  0711  120A  118A  25C1   	fcall	_kodla_gonder
+              120A  118A         
+   725  0716  2F17               	goto	l3056
+   726                           	line	179
+   727                           	
+   728  0717                     l774:	
+   729                           	line	180
+   730                           	
+   731  0717                     l3056:	
+   732                           ;verici.c: 179: }
+   733                           ;verici.c: 180: if(gelen=='b')
+   734  0717  087D               	movf	(main@gelen),w
+   735  0718  3A62               	xorlw	062h
+   736  0719  1D03               	skipz
+   737  071A  2F1C               	goto	u3051
+   738  071B  2F1D               	goto	u3050
+   739  071C                     u3051:
+   740  071C  2F3B               	goto	l3060
+   741  071D                     u3050:
+   742                           	line	182
+   743                           	
+   744  071D                     l3058:	
+   745                           ;verici.c: 181: {
+   746                           ;verici.c: 182: uyandir();
+   747  071D  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   748                           	line	183
+   749                           ;verici.c: 183: uyandir();
+   750  0722  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   751                           	line	184
+   752                           ;verici.c: 184: uyandir();
+   753  0727  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   754                           	line	185
+   755                           ;verici.c: 185: senkron();
+   756  072C  120A  118A  2531   	fcall	_senkron
+              120A  118A         
+   757                           	line	187
+   758                           ;verici.c: 187: kodla_gonder('b');
+   759  0731  3062               	movlw	low(062h)
+   760  0732  00F9               	movwf	(?_kodla_gonder)
+   761  0733  3000               	movlw	high(062h)
+   762  0734  00FA               	movwf	((?_kodla_gonder))+1
+   763  0735  120A  118A  25C1   	fcall	_kodla_gonder
+              120A  118A         
+   764  073A  2F3B               	goto	l3060
+   765                           	line	191
+   766                           	
+   767  073B                     l775:	
+   768                           	line	193
+   769                           	
+   770  073B                     l3060:	
+   771                           ;verici.c: 191: }
+   772                           ;verici.c: 193: if(gelen=='d')
+   773  073B  087D               	movf	(main@gelen),w
+   774  073C  3A64               	xorlw	064h
+   775  073D  1D03               	skipz
+   776  073E  2F40               	goto	u3061
+   777  073F  2F41               	goto	u3060
+   778  0740                     u3061:
+   779  0740  2F5F               	goto	l3064
+   780  0741                     u3060:
+   781                           	line	195
+   782                           	
+   783  0741                     l3062:	
+   784                           ;verici.c: 194: {
+   785                           ;verici.c: 195: uyandir();
+   786  0741  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   787                           	line	196
+   788                           ;verici.c: 196: uyandir();
+   789  0746  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   790                           	line	197
+   791                           ;verici.c: 197: uyandir();
+   792  074B  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   793                           	line	198
+   794                           ;verici.c: 198: senkron();
+   795  0750  120A  118A  2531   	fcall	_senkron
+              120A  118A         
+   796                           	line	200
+   797                           ;verici.c: 200: kodla_gonder('d');
+   798  0755  3064               	movlw	low(064h)
+   799  0756  00F9               	movwf	(?_kodla_gonder)
+   800  0757  3000               	movlw	high(064h)
+   801  0758  00FA               	movwf	((?_kodla_gonder))+1
+   802  0759  120A  118A  25C1   	fcall	_kodla_gonder
+              120A  118A         
+   803  075E  2F5F               	goto	l3064
+   804                           	line	204
+   805                           	
+   806  075F                     l776:	
+   807                           	line	206
+   808                           	
+   809  075F                     l3064:	
+   810                           ;verici.c: 204: }
+   811                           ;verici.c: 206: if(gelen=='e')
+   812  075F  087D               	movf	(main@gelen),w
+   813  0760  3A65               	xorlw	065h
+   814  0761  1D03               	skipz
+   815  0762  2F64               	goto	u3071
+   816  0763  2F65               	goto	u3070
+   817  0764                     u3071:
+   818  0764  2F83               	goto	l3068
+   819  0765                     u3070:
+   820                           	line	208
+   821                           	
+   822  0765                     l3066:	
+   823                           ;verici.c: 207: {
+   824                           ;verici.c: 208: uyandir();
+   825  0765  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   826                           	line	209
+   827                           ;verici.c: 209: uyandir();
+   828  076A  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   829                           	line	210
+   830                           ;verici.c: 210: uyandir();
+   831  076F  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   832                           	line	211
+   833                           ;verici.c: 211: senkron();
+   834  0774  120A  118A  2531   	fcall	_senkron
+              120A  118A         
+   835                           	line	213
+   836                           ;verici.c: 213: kodla_gonder('e');
+   837  0779  3065               	movlw	low(065h)
+   838  077A  00F9               	movwf	(?_kodla_gonder)
+   839  077B  3000               	movlw	high(065h)
+   840  077C  00FA               	movwf	((?_kodla_gonder))+1
+   841  077D  120A  118A  25C1   	fcall	_kodla_gonder
+              120A  118A         
+   842  0782  2F83               	goto	l3068
+   843                           	line	217
+   844                           	
+   845  0783                     l777:	
+   846                           	line	219
+   847                           	
+   848  0783                     l3068:	
+   849                           ;verici.c: 217: }
+   850                           ;verici.c: 219: if(gelen=='g')
+   851  0783  087D               	movf	(main@gelen),w
+   852  0784  3A67               	xorlw	067h
+   853  0785  1D03               	skipz
+   854  0786  2F88               	goto	u3081
+   855  0787  2F89               	goto	u3080
+   856  0788                     u3081:
+   857  0788  2FA7               	goto	l3072
+   858  0789                     u3080:
+   859                           	line	221
+   860                           	
+   861  0789                     l3070:	
+   862                           ;verici.c: 220: {
+   863                           ;verici.c: 221: uyandir();
+   864  0789  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   865                           	line	222
+   866                           ;verici.c: 222: uyandir();
+   867  078E  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   868                           	line	223
+   869                           ;verici.c: 223: uyandir();
+   870  0793  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   871                           	line	224
+   872                           ;verici.c: 224: senkron();
+   873  0798  120A  118A  2531   	fcall	_senkron
+              120A  118A         
+   874                           	line	226
+   875                           ;verici.c: 226: kodla_gonder('g');
+   876  079D  3067               	movlw	low(067h)
+   877  079E  00F9               	movwf	(?_kodla_gonder)
+   878  079F  3000               	movlw	high(067h)
+   879  07A0  00FA               	movwf	((?_kodla_gonder))+1
+   880  07A1  120A  118A  25C1   	fcall	_kodla_gonder
+              120A  118A         
+   881  07A6  2FA7               	goto	l3072
+   882                           	line	230
+   883                           	
+   884  07A7                     l778:	
+   885                           	line	233
+   886                           	
+   887  07A7                     l3072:	
+   888                           ;verici.c: 230: }
+   889                           ;verici.c: 233: if(RB7==1)
+   890  07A7  1283               	bcf	status, 5	;RP0=0, select bank0
+   891  07A8  1303               	bcf	status, 6	;RP1=0, select bank0
+   892  07A9  1F86               	btfss	(55/8),(55)&7
+   893  07AA  2FAC               	goto	u3091
+   894  07AB  2FAD               	goto	u3090
+   895  07AC                     u3091:
+   896  07AC  2FD1               	goto	l3078
+   897  07AD                     u3090:
+   898                           	line	236
+   899                           	
+   900  07AD                     l3074:	
+   901                           ;verici.c: 234: {
+   902                           ;verici.c: 236: uyandir();
+   903  07AD  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   904                           	line	237
+   905                           ;verici.c: 237: uyandir();
+   906  07B2  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   907                           	line	238
+   908                           ;verici.c: 238: uyandir();
+   909  07B7  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   910                           	line	239
+   911                           ;verici.c: 239: senkron();
+   912  07BC  120A  118A  2531   	fcall	_senkron
+              120A  118A         
+   913                           	line	241
+   914                           ;verici.c: 241: kodla_gonder('2');
+   915  07C1  3032               	movlw	low(032h)
+   916  07C2  00F9               	movwf	(?_kodla_gonder)
+   917  07C3  3000               	movlw	high(032h)
+   918  07C4  00FA               	movwf	((?_kodla_gonder))+1
+   919  07C5  120A  118A  25C1   	fcall	_kodla_gonder
+              120A  118A         
+   920                           	line	242
+   921                           	
+   922  07CA                     l3076:	
+   923                           ;verici.c: 242: DelayMs(650);
+   924  07CA  308A               	movlw	(08Ah)
+   925  07CB  120A  118A  244C   	fcall	_DelayMs
+              120A  118A         
+   926  07D0  2FD1               	goto	l3078
+   927                           	line	243
+   928                           	
+   929  07D1                     l779:	
+   930                           	line	244
+   931                           	
+   932  07D1                     l3078:	
+   933                           ;verici.c: 243: }
+   934                           ;verici.c: 244: if(RB6==1)
+   935  07D1  1283               	bcf	status, 5	;RP0=0, select bank0
+   936  07D2  1303               	bcf	status, 6	;RP1=0, select bank0
+   937  07D3  1F06               	btfss	(54/8),(54)&7
+   938  07D4  2FD6               	goto	u3101
+   939  07D5  2FD7               	goto	u3100
+   940  07D6                     u3101:
+   941  07D6  2E7D               	goto	l3038
+   942  07D7                     u3100:
+   943                           	line	246
+   944                           	
+   945  07D7                     l3080:	
+   946                           ;verici.c: 245: {
+   947                           ;verici.c: 246: uyandir();
+   948  07D7  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   949                           	line	248
+   950                           ;verici.c: 248: uyandir();
+   951  07DC  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   952                           	line	249
+   953                           ;verici.c: 249: uyandir();
+   954  07E1  120A  118A  246D   	fcall	_uyandir
+              120A  118A         
+   955                           	line	250
+   956                           ;verici.c: 250: senkron();
+   957  07E6  120A  118A  2531   	fcall	_senkron
+              120A  118A         
+   958                           	line	251
+   959                           ;verici.c: 251: kodla_gonder('b');
+   960  07EB  3062               	movlw	low(062h)
+   961  07EC  00F9               	movwf	(?_kodla_gonder)
+   962  07ED  3000               	movlw	high(062h)
+   963  07EE  00FA               	movwf	((?_kodla_gonder))+1
+   964  07EF  120A  118A  25C1   	fcall	_kodla_gonder
+              120A  118A         
+   965                           	line	252
+   966                           	
+   967  07F4                     l3082:	
+   968                           ;verici.c: 252: DelayMs(650);
+   969  07F4  308A               	movlw	(08Ah)
+   970  07F5  120A  118A  244C   	fcall	_DelayMs
+              120A  118A         
+   971  07FA  2E7D               	goto	l3038
+   972                           	line	253
+   973                           	
+   974  07FB                     l780:	
+   975  07FB  2E7D               	goto	l3038
+   976                           	line	267
+   977                           	
+   978  07FC                     l781:	
+   979                           	line	125
+   980  07FC  2E7D               	goto	l3038
+   981                           	
+   982  07FD                     l782:	
+   983                           	line	271
+   984                           	
+   985  07FD                     l783:	
+   986                           	global	start
+   987  07FD  120A  118A  2800   	ljmp	start
+   988                           	opt stack 0
+   989                           GLOBAL	__end_of_main
+   990  0800                     	__end_of_main:
+   991 ;; =============== function _main ends ============
+   992                           
+   993                           	signat	_main,88
+   994                           	global	_kodla_gonder
+   995                           psect	text197,local,class=CODE,delta=2
+   996                           global __ptext197
+   997  05C1                     __ptext197:
+   998                           
+   999 ;; *************** function _kodla_gonder *****************
+  1000 ;; Defined at:
+  1001 ;;		line 85 in file "C:\Users\Saim\Desktop\RemoteCar\verici.c"
+  1002 ;; Parameters:    Size  Location     Type
+  1003 ;;  sayi            2    9[COMMON] int 
+  1004 ;; Auto vars:     Size  Location     Type
+  1005 ;;  _dcnt           1    2[BANK0 ] unsigned char 
+  1006 ;;  _dcnt           1    3[BANK0 ] unsigned char 
+  1007 ;;  a               2    4[BANK0 ] int 
+  1008 ;;  _dcnt           1    1[BANK0 ] unsigned char 
+  1009 ;;  _dcnt           1    0[BANK0 ] unsigned char 
+  1010 ;; Return value:  Size  Location     Type
+  1011 ;;                  2    9[COMMON] int 
+  1012 ;; Registers used:
+  1013 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+  1014 ;; Tracked objects:
+  1015 ;;		On entry : 0/0
+  1016 ;;		On exit  : 0/0
+  1017 ;;		Unchanged: 0/0
+  1018 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1019 ;;      Params:         2       0       0       0       0
+  1020 ;;      Locals:         0       6       0       0       0
+  1021 ;;      Temps:          1       0       0       0       0
+  1022 ;;      Totals:         3       6       0       0       0
+  1023 ;;Total ram usage:        9 bytes
+  1024 ;; Hardware stack levels used:    1
+  1025 ;; Hardware stack levels required when called:    1
+  1026 ;; This function calls:
+  1027 ;;		___awdiv
+  1028 ;; This function is called by:
+  1029 ;;		_main
+  1030 ;; This function uses a non-reentrant model
+  1031 ;;
+  1032                           psect	text197
+  1033                           	file	"C:\Users\Saim\Desktop\RemoteCar\verici.c"
+  1034                           	line	85
+  1035                           	global	__size_of_kodla_gonder
+  1036  00A8                     	__size_of_kodla_gonder	equ	__end_of_kodla_gonder-_kodla_gonder
+  1037                           	
+  1038  05C1                     _kodla_gonder:	
+  1039                           	opt	stack 6
+  1040                           ; Regs used in _kodla_gonder: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+  1041                           	
+  1042  05C1                     l2990:	
+  1043  05C1  1283               	bcf	status, 5	;RP0=0, select bank0
+  1044  05C2  1303               	bcf	status, 6	;RP1=0, select bank0
+  1045  05C3  01C5               	clrf	(_index)
+  1046  05C4  01C6               	clrf	(_index+1)
+  1047                           	line	86
+  1048                           ;verici.c: 86: while(index!=8)
+  1049  05C5  2DF5               	goto	l3000
+  1050                           	
+  1051  05C6                     l750:	
+  1052                           	line	88
+  1053                           	
+  1054  05C6                     l2992:	
+  1055                           ;verici.c: 87: {
+  1056                           ;verici.c: 88: gelen_veri[7-index]=sayi%2;
+  1057  05C6  0879               	movf	(kodla_gonder@sayi),w
+  1058  05C7  3901               	andlw	01h
+  1059  05C8  00FB               	movwf	(??_kodla_gonder+0)+0
+  1060  05C9  0345               	decf	(_index),w
+  1061  05CA  3AFF               	xorlw	0ffh
+  1062  05CB  3E07               	addlw	07h
+  1063  05CC  3E3B               	addlw	_gelen_veri&0ffh
+  1064  05CD  0084               	movwf	fsr0
+  1065  05CE  087B               	movf	(??_kodla_gonder+0)+0,w
+  1066  05CF  1383               	bcf	status, 7	;select IRP bank0
+  1067  05D0  0080               	movwf	indf
+  1068                           	line	89
+  1069                           	
+  1070  05D1                     l2994:	
+  1071                           ;verici.c: 89: bolum=sayi/2;
+  1072  05D1  3002               	movlw	low(02h)
+  1073  05D2  00F0               	movwf	(?___awdiv)
+  1074  05D3  3000               	movlw	high(02h)
+  1075  05D4  00F1               	movwf	((?___awdiv))+1
+  1076  05D5  087A               	movf	(kodla_gonder@sayi+1),w
+  1077  05D6  01F3               	clrf	1+(?___awdiv)+02h
+  1078  05D7  07F3               	addwf	1+(?___awdiv)+02h
+  1079  05D8  0879               	movf	(kodla_gonder@sayi),w
+  1080  05D9  01F2               	clrf	0+(?___awdiv)+02h
+  1081  05DA  07F2               	addwf	0+(?___awdiv)+02h
+  1082                           
+  1083  05DB  120A  118A  24BD   	fcall	___awdiv
+              120A  118A         
+  1084  05E0  0871               	movf	(1+(?___awdiv)),w
+  1085  05E1  1283               	bcf	status, 5	;RP0=0, select bank0
+  1086  05E2  1303               	bcf	status, 6	;RP1=0, select bank0
+  1087  05E3  01C4               	clrf	(_bolum+1)
+  1088  05E4  07C4               	addwf	(_bolum+1)
+  1089  05E5  0870               	movf	(0+(?___awdiv)),w
+  1090  05E6  01C3               	clrf	(_bolum)
+  1091  05E7  07C3               	addwf	(_bolum)
+  1092                           
+  1093                           	line	90
+  1094                           	
+  1095  05E8                     l2996:	
+  1096                           ;verici.c: 90: sayi=bolum;
+  1097  05E8  0844               	movf	(_bolum+1),w
+  1098  05E9  01FA               	clrf	(kodla_gonder@sayi+1)
+  1099  05EA  07FA               	addwf	(kodla_gonder@sayi+1)
+  1100  05EB  0843               	movf	(_bolum),w
+  1101  05EC  01F9               	clrf	(kodla_gonder@sayi)
+  1102  05ED  07F9               	addwf	(kodla_gonder@sayi)
+  1103                           
+  1104                           	line	91
+  1105                           	
+  1106  05EE                     l2998:	
+  1107                           ;verici.c: 91: index++;
+  1108  05EE  3001               	movlw	low(01h)
+  1109  05EF  07C5               	addwf	(_index),f
+  1110  05F0  1803               	skipnc
+  1111  05F1  0AC6               	incf	(_index+1),f
+  1112  05F2  3000               	movlw	high(01h)
+  1113  05F3  07C6               	addwf	(_index+1),f
+  1114  05F4  2DF5               	goto	l3000
+  1115                           	line	92
+  1116                           	
+  1117  05F5                     l749:	
+  1118                           	line	86
+  1119                           	
+  1120  05F5                     l3000:	
+  1121  05F5  3008               	movlw	08h
+  1122  05F6  0645               	xorwf	(_index),w
+  1123  05F7  0446               	iorwf	(_index+1),w
+  1124  05F8  1D03               	skipz
+  1125  05F9  2DFB               	goto	u2911
+  1126  05FA  2DFC               	goto	u2910
+  1127  05FB                     u2911:
+  1128  05FB  2DC6               	goto	l2992
+  1129  05FC                     u2910:
+  1130                           	
+  1131  05FC                     l751:	
+  1132                           	line	93
+  1133                           ;verici.c: 92: }
+  1134                           ;verici.c: 93: RB0=1;
+  1135  05FC  1406               	bsf	(48/8),(48)&7
+  1136                           	line	94
+  1137                           	
+  1138  05FD                     l3002:	
+  1139                           ;verici.c: 94: { unsigned char _dcnt; _dcnt = (2000-1)/((12*1000L)/(4*1000L))|1; while(-
+                                 -_dcnt != 0) continue; };
+  1140  05FD  309B               	movlw	(09Bh)
+  1141  05FE  00FB               	movwf	(??_kodla_gonder+0)+0
+  1142  05FF  087B               	movf	(??_kodla_gonder+0)+0,w
+  1143  0600  00C7               	movwf	(kodla_gonder@_dcnt)
+  1144  0601  2E03               	goto	l3004
+  1145                           	
+  1146  0602                     l753:	
+  1147  0602  2E03               	goto	l3004
+  1148                           	
+  1149  0603                     l752:	
+  1150                           	
+  1151  0603                     l3004:	
+  1152  0603  3001               	movlw	low(01h)
+  1153  0604  02C7               	subwf	(kodla_gonder@_dcnt),f
+  1154  0605  1D03               	btfss	status,2
+  1155  0606  2E08               	goto	u2921
+  1156  0607  2E09               	goto	u2920
+  1157  0608                     u2921:
+  1158  0608  2E03               	goto	l3004
+  1159  0609                     u2920:
+  1160                           	
+  1161  0609                     l754:	
+  1162                           	line	95
+  1163                           ;verici.c: 95: RB0=0;
+  1164  0609  1006               	bcf	(48/8),(48)&7
+  1165                           	line	96
+  1166                           	
+  1167  060A                     l3006:	
+  1168                           ;verici.c: 96: { unsigned char _dcnt; _dcnt = (1200-1)/((12*1000L)/(4*1000L))|1; while(-
+                                 -_dcnt != 0) continue; };
+  1169  060A  308F               	movlw	(08Fh)
+  1170  060B  00FB               	movwf	(??_kodla_gonder+0)+0
+  1171  060C  087B               	movf	(??_kodla_gonder+0)+0,w
+  1172  060D  00C8               	movwf	(kodla_gonder@_dcnt_1253)
+  1173  060E  2E10               	goto	l3008
+  1174                           	
+  1175  060F                     l756:	
+  1176  060F  2E10               	goto	l3008
+  1177                           	
+  1178  0610                     l755:	
+  1179                           	
+  1180  0610                     l3008:	
+  1181  0610  3001               	movlw	low(01h)
+  1182  0611  02C8               	subwf	(kodla_gonder@_dcnt_1253),f
+  1183  0612  1D03               	btfss	status,2
+  1184  0613  2E15               	goto	u2931
+  1185  0614  2E16               	goto	u2930
+  1186  0615                     u2931:
+  1187  0615  2E10               	goto	l3008
+  1188  0616                     u2930:
+  1189  0616  2E17               	goto	l3010
+  1190                           	
+  1191  0617                     l757:	
+  1192                           	line	98
+  1193                           	
+  1194  0617                     l3010:	
+  1195                           ;verici.c: 98: for(int a=0;a<8;a++)
+  1196  0617  01CB               	clrf	(kodla_gonder@a)
+  1197  0618  01CC               	clrf	(kodla_gonder@a+1)
+  1198                           	
+  1199  0619                     l3012:	
+  1200  0619  084C               	movf	(kodla_gonder@a+1),w
+  1201  061A  3A80               	xorlw	80h
+  1202  061B  00FF               	movwf	btemp+1
+  1203  061C  3080               	movlw	(high(08h))^80h
+  1204  061D  027F               	subwf	btemp+1,w
+  1205  061E  1D03               	skipz
+  1206  061F  2E22               	goto	u2945
+  1207  0620  3008               	movlw	low(08h)
+  1208  0621  024B               	subwf	(kodla_gonder@a),w
+  1209  0622                     u2945:
+  1210                           
+  1211  0622  1C03               	skipc
+  1212  0623  2E25               	goto	u2941
+  1213  0624  2E26               	goto	u2940
+  1214  0625                     u2941:
+  1215  0625  2E28               	goto	l3016
+  1216  0626                     u2940:
+  1217  0626  2E59               	goto	l3026
+  1218                           	
+  1219  0627                     l3014:	
+  1220  0627  2E59               	goto	l3026
+  1221                           	line	99
+  1222                           	
+  1223  0628                     l758:	
+  1224                           	line	100
+  1225                           	
+  1226  0628                     l3016:	
+  1227                           ;verici.c: 99: {
+  1228                           ;verici.c: 100: RB0=gelen_veri[a];
+  1229  0628  1283               	bcf	status, 5	;RP0=0, select bank0
+  1230  0629  1303               	bcf	status, 6	;RP1=0, select bank0
+  1231  062A  084B               	movf	(kodla_gonder@a),w
+  1232  062B  3E3B               	addlw	_gelen_veri&0ffh
+  1233  062C  0084               	movwf	fsr0
+  1234  062D  1383               	bcf	status, 7	;select IRP bank0
+  1235  062E  1800               	btfsc	indf,0
+  1236  062F  2E31               	goto	u2951
+  1237  0630  2E35               	goto	u2950
+  1238                           	
+  1239  0631                     u2951:
+  1240  0631  1283               	bcf	status, 5	;RP0=0, select bank0
+  1241  0632  1303               	bcf	status, 6	;RP1=0, select bank0
+  1242  0633  1406               	bsf	(48/8),(48)&7
+  1243  0634  2E38               	goto	u2964
+  1244  0635                     u2950:
+  1245  0635  1283               	bcf	status, 5	;RP0=0, select bank0
+  1246  0636  1303               	bcf	status, 6	;RP1=0, select bank0
+  1247  0637  1006               	bcf	(48/8),(48)&7
+  1248  0638                     u2964:
+  1249                           	line	101
+  1250                           	
+  1251  0638                     l3018:	
+  1252                           ;verici.c: 101: { unsigned char _dcnt; _dcnt = (1500)/((12*1000L)/(4*1000L))|1; while(--
+                                 _dcnt != 0) continue; };
+  1253  0638  30F5               	movlw	(0F5h)
+  1254  0639  00FB               	movwf	(??_kodla_gonder+0)+0
+  1255  063A  087B               	movf	(??_kodla_gonder+0)+0,w
+  1256  063B  00C9               	movwf	(kodla_gonder@_dcnt_1255)
+  1257  063C  2E3E               	goto	l3020
+  1258                           	
+  1259  063D                     l761:	
+  1260  063D  2E3E               	goto	l3020
+  1261                           	
+  1262  063E                     l760:	
+  1263                           	
+  1264  063E                     l3020:	
+  1265  063E  3001               	movlw	low(01h)
+  1266  063F  02C9               	subwf	(kodla_gonder@_dcnt_1255),f
+  1267  0640  1D03               	btfss	status,2
+  1268  0641  2E43               	goto	u2971
+  1269  0642  2E44               	goto	u2970
+  1270  0643                     u2971:
+  1271  0643  2E3E               	goto	l3020
+  1272  0644                     u2970:
+  1273  0644  2E45               	goto	l3022
+  1274                           	
+  1275  0645                     l762:	
+  1276                           	line	98
+  1277                           	
+  1278  0645                     l3022:	
+  1279  0645  3001               	movlw	low(01h)
+  1280  0646  07CB               	addwf	(kodla_gonder@a),f
+  1281  0647  1803               	skipnc
+  1282  0648  0ACC               	incf	(kodla_gonder@a+1),f
+  1283  0649  3000               	movlw	high(01h)
+  1284  064A  07CC               	addwf	(kodla_gonder@a+1),f
+  1285                           	
+  1286  064B                     l3024:	
+  1287  064B  084C               	movf	(kodla_gonder@a+1),w
+  1288  064C  3A80               	xorlw	80h
+  1289  064D  00FF               	movwf	btemp+1
+  1290  064E  3080               	movlw	(high(08h))^80h
+  1291  064F  027F               	subwf	btemp+1,w
+  1292  0650  1D03               	skipz
+  1293  0651  2E54               	goto	u2985
+  1294  0652  3008               	movlw	low(08h)
+  1295  0653  024B               	subwf	(kodla_gonder@a),w
+  1296  0654                     u2985:
+  1297                           
+  1298  0654  1C03               	skipc
+  1299  0655  2E57               	goto	u2981
+  1300  0656  2E58               	goto	u2980
+  1301  0657                     u2981:
+  1302  0657  2E28               	goto	l3016
+  1303  0658                     u2980:
+  1304  0658  2E59               	goto	l3026
+  1305                           	
+  1306  0659                     l759:	
+  1307                           	line	104
+  1308                           	
+  1309  0659                     l3026:	
+  1310                           ;verici.c: 103: }
+  1311                           ;verici.c: 104: { unsigned char _dcnt; _dcnt = (1000)/((12*1000L)/(4*1000L))|1; while(--
+                                 _dcnt != 0) continue; };
+  1312  0659  304D               	movlw	(04Dh)
+  1313  065A  00FB               	movwf	(??_kodla_gonder+0)+0
+  1314  065B  087B               	movf	(??_kodla_gonder+0)+0,w
+  1315  065C  1283               	bcf	status, 5	;RP0=0, select bank0
+  1316  065D  1303               	bcf	status, 6	;RP1=0, select bank0
+  1317  065E  00CA               	movwf	(kodla_gonder@_dcnt_1256)
+  1318  065F  2E61               	goto	l3028
+  1319                           	
+  1320  0660                     l764:	
+  1321  0660  2E61               	goto	l3028
+  1322                           	
+  1323  0661                     l763:	
+  1324                           	
+  1325  0661                     l3028:	
+  1326  0661  3001               	movlw	low(01h)
+  1327  0662  02CA               	subwf	(kodla_gonder@_dcnt_1256),f
+  1328  0663  1D03               	btfss	status,2
+  1329  0664  2E66               	goto	u2991
+  1330  0665  2E67               	goto	u2990
+  1331  0666                     u2991:
+  1332  0666  2E61               	goto	l3028
+  1333  0667                     u2990:
+  1334                           	
+  1335  0667                     l765:	
+  1336                           	line	105
+  1337                           ;verici.c: 105: RB0=0;
+  1338  0667  1006               	bcf	(48/8),(48)&7
+  1339                           	line	109
+  1340                           	
+  1341  0668                     l766:	
+  1342  0668  0008               	return
+  1343                           	opt stack 0
+  1344                           GLOBAL	__end_of_kodla_gonder
+  1345  0669                     	__end_of_kodla_gonder:
+  1346 ;; =============== function _kodla_gonder ends ============
+  1347                           
+  1348                           	signat	_kodla_gonder,4218
+  1349                           	global	___awdiv
+  1350                           psect	text198,local,class=CODE,delta=2
+  1351                           global __ptext198
+  1352  04BD                     __ptext198:
+  1353                           
+  1354 ;; *************** function ___awdiv *****************
+  1355 ;; Defined at:
+  1356 ;;		line 5 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.82\sources\awdiv.c"
+  1357 ;; Parameters:    Size  Location     Type
+  1358 ;;  divisor         2    0[COMMON] int 
+  1359 ;;  dividend        2    2[COMMON] int 
+  1360 ;; Auto vars:     Size  Location     Type
+  1361 ;;  quotient        2    7[COMMON] int 
+  1362 ;;  sign            1    6[COMMON] unsigned char 
+  1363 ;;  counter         1    5[COMMON] unsigned char 
+  1364 ;; Return value:  Size  Location     Type
+  1365 ;;                  2    0[COMMON] int 
+  1366 ;; Registers used:
+  1367 ;;		wreg, status,2, status,0
+  1368 ;; Tracked objects:
+  1369 ;;		On entry : 0/0
+  1370 ;;		On exit  : 0/0
+  1371 ;;		Unchanged: 0/0
+  1372 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1373 ;;      Params:         4       0       0       0       0
+  1374 ;;      Locals:         4       0       0       0       0
+  1375 ;;      Temps:          1       0       0       0       0
+  1376 ;;      Totals:         9       0       0       0       0
+  1377 ;;Total ram usage:        9 bytes
+  1378 ;; Hardware stack levels used:    1
+  1379 ;; This function calls:
+  1380 ;;		Nothing
+  1381 ;; This function is called by:
+  1382 ;;		_kodla_gonder
+  1383 ;; This function uses a non-reentrant model
+  1384 ;;
+  1385                           psect	text198
+  1386                           	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.82\sources\awdiv.c"
+  1387                           	line	5
+  1388                           	global	__size_of___awdiv
+  1389  0074                     	__size_of___awdiv	equ	__end_of___awdiv-___awdiv
+  1390                           	
+  1391  04BD                     ___awdiv:	
+  1392                           	opt	stack 6
+  1393                           ; Regs used in ___awdiv: [wreg+status,2+status,0]
+  1394                           	line	9
+  1395                           	
+  1396  04BD                     l2950:	
+  1397  04BD  01F6               	clrf	(___awdiv@sign)
+  1398                           	line	10
+  1399  04BE  1FF1               	btfss	(___awdiv@divisor+1),7
+  1400  04BF  2CC1               	goto	u2811
+  1401  04C0  2CC2               	goto	u2810
+  1402  04C1                     u2811:
+  1403  04C1  2CCB               	goto	l2954
+  1404  04C2                     u2810:
+  1405                           	line	11
+  1406                           	
+  1407  04C2                     l2952:	
+  1408  04C2  09F0               	comf	(___awdiv@divisor),f
+  1409  04C3  09F1               	comf	(___awdiv@divisor+1),f
+  1410  04C4  0AF0               	incf	(___awdiv@divisor),f
+  1411  04C5  1903               	skipnz
+  1412  04C6  0AF1               	incf	(___awdiv@divisor+1),f
+  1413                           	line	12
+  1414  04C7  01F6               	clrf	(___awdiv@sign)
+  1415  04C8  1403               	bsf	status,0
+  1416  04C9  0DF6               	rlf	(___awdiv@sign),f
+  1417  04CA  2CCB               	goto	l2954
+  1418                           	line	13
+  1419                           	
+  1420  04CB                     l1606:	
+  1421                           	line	14
+  1422                           	
+  1423  04CB                     l2954:	
+  1424  04CB  1FF3               	btfss	(___awdiv@dividend+1),7
+  1425  04CC  2CCE               	goto	u2821
+  1426  04CD  2CCF               	goto	u2820
+  1427  04CE                     u2821:
+  1428  04CE  2CD9               	goto	l2960
+  1429  04CF                     u2820:
+  1430                           	line	15
+  1431                           	
+  1432  04CF                     l2956:	
+  1433  04CF  09F2               	comf	(___awdiv@dividend),f
+  1434  04D0  09F3               	comf	(___awdiv@dividend+1),f
+  1435  04D1  0AF2               	incf	(___awdiv@dividend),f
+  1436  04D2  1903               	skipnz
+  1437  04D3  0AF3               	incf	(___awdiv@dividend+1),f
+  1438                           	line	16
+  1439                           	
+  1440  04D4                     l2958:	
+  1441  04D4  3001               	movlw	(01h)
+  1442  04D5  00F4               	movwf	(??___awdiv+0)+0
+  1443  04D6  0874               	movf	(??___awdiv+0)+0,w
+  1444  04D7  06F6               	xorwf	(___awdiv@sign),f
+  1445  04D8  2CD9               	goto	l2960
+  1446                           	line	17
+  1447                           	
+  1448  04D9                     l1607:	
+  1449                           	line	18
+  1450                           	
+  1451  04D9                     l2960:	
+  1452  04D9  01F7               	clrf	(___awdiv@quotient)
+  1453  04DA  01F8               	clrf	(___awdiv@quotient+1)
+  1454                           	line	19
+  1455                           	
+  1456  04DB                     l2962:	
+  1457  04DB  0871               	movf	(___awdiv@divisor+1),w
+  1458  04DC  0470               	iorwf	(___awdiv@divisor),w
+  1459  04DD  1903               	skipnz
+  1460  04DE  2CE0               	goto	u2831
+  1461  04DF  2CE1               	goto	u2830
+  1462  04E0                     u2831:
+  1463  04E0  2D1F               	goto	l2982
+  1464  04E1                     u2830:
+  1465                           	line	20
+  1466                           	
+  1467  04E1                     l2964:	
+  1468  04E1  01F5               	clrf	(___awdiv@counter)
+  1469  04E2  1403               	bsf	status,0
+  1470  04E3  0DF5               	rlf	(___awdiv@counter),f
+  1471                           	line	21
+  1472  04E4  2CF1               	goto	l2970
+  1473                           	
+  1474  04E5                     l1610:	
+  1475                           	line	22
+  1476                           	
+  1477  04E5                     l2966:	
+  1478  04E5  3001               	movlw	01h
+  1479                           	
+  1480  04E6                     u2845:
+  1481  04E6  1003               	clrc
+  1482  04E7  0DF0               	rlf	(___awdiv@divisor),f
+  1483  04E8  0DF1               	rlf	(___awdiv@divisor+1),f
+  1484  04E9  3EFF               	addlw	-1
+  1485  04EA  1D03               	skipz
+  1486  04EB  2CE6               	goto	u2845
+  1487                           	line	23
+  1488                           	
+  1489  04EC                     l2968:	
+  1490  04EC  3001               	movlw	(01h)
+  1491  04ED  00F4               	movwf	(??___awdiv+0)+0
+  1492  04EE  0874               	movf	(??___awdiv+0)+0,w
+  1493  04EF  07F5               	addwf	(___awdiv@counter),f
+  1494  04F0  2CF1               	goto	l2970
+  1495                           	line	24
+  1496                           	
+  1497  04F1                     l1609:	
+  1498                           	line	21
+  1499                           	
+  1500  04F1                     l2970:	
+  1501  04F1  1FF1               	btfss	(___awdiv@divisor+1),(15)&7
+  1502  04F2  2CF4               	goto	u2851
+  1503  04F3  2CF5               	goto	u2850
+  1504  04F4                     u2851:
+  1505  04F4  2CE5               	goto	l2966
+  1506  04F5                     u2850:
+  1507  04F5  2CF7               	goto	l2972
+  1508                           	
+  1509  04F6                     l1611:	
+  1510  04F6  2CF7               	goto	l2972
+  1511                           	line	25
+  1512                           	
+  1513  04F7                     l1612:	
+  1514                           	line	26
+  1515                           	
+  1516  04F7                     l2972:	
+  1517  04F7  3001               	movlw	01h
+  1518                           	
+  1519  04F8                     u2865:
+  1520  04F8  1003               	clrc
+  1521  04F9  0DF7               	rlf	(___awdiv@quotient),f
+  1522  04FA  0DF8               	rlf	(___awdiv@quotient+1),f
+  1523  04FB  3EFF               	addlw	-1
+  1524  04FC  1D03               	skipz
+  1525  04FD  2CF8               	goto	u2865
+  1526                           	line	27
+  1527  04FE  0871               	movf	(___awdiv@divisor+1),w
+  1528  04FF  0273               	subwf	(___awdiv@dividend+1),w
+  1529  0500  1D03               	skipz
+  1530  0501  2D04               	goto	u2875
+  1531  0502  0870               	movf	(___awdiv@divisor),w
+  1532  0503  0272               	subwf	(___awdiv@dividend),w
+  1533  0504                     u2875:
+  1534  0504  1C03               	skipc
+  1535  0505  2D07               	goto	u2871
+  1536  0506  2D08               	goto	u2870
+  1537  0507                     u2871:
+  1538  0507  2D10               	goto	l2978
+  1539  0508                     u2870:
+  1540                           	line	28
+  1541                           	
+  1542  0508                     l2974:	
+  1543  0508  0870               	movf	(___awdiv@divisor),w
+  1544  0509  02F2               	subwf	(___awdiv@dividend),f
+  1545  050A  0871               	movf	(___awdiv@divisor+1),w
+  1546  050B  1C03               	skipc
+  1547  050C  03F3               	decf	(___awdiv@dividend+1),f
+  1548  050D  02F3               	subwf	(___awdiv@dividend+1),f
+  1549                           	line	29
+  1550                           	
+  1551  050E                     l2976:	
+  1552  050E  1477               	bsf	(___awdiv@quotient)+(0/8),(0)&7
+  1553  050F  2D10               	goto	l2978
+  1554                           	line	30
+  1555                           	
+  1556  0510                     l1613:	
+  1557                           	line	31
+  1558                           	
+  1559  0510                     l2978:	
+  1560  0510  3001               	movlw	01h
+  1561                           	
+  1562  0511                     u2885:
+  1563  0511  1003               	clrc
+  1564  0512  0CF1               	rrf	(___awdiv@divisor+1),f
+  1565  0513  0CF0               	rrf	(___awdiv@divisor),f
+  1566  0514  3EFF               	addlw	-1
+  1567  0515  1D03               	skipz
+  1568  0516  2D11               	goto	u2885
+  1569                           	line	32
+  1570                           	
+  1571  0517                     l2980:	
+  1572  0517  3001               	movlw	low(01h)
+  1573  0518  02F5               	subwf	(___awdiv@counter),f
+  1574  0519  1D03               	btfss	status,2
+  1575  051A  2D1C               	goto	u2891
+  1576  051B  2D1D               	goto	u2890
+  1577  051C                     u2891:
+  1578  051C  2CF7               	goto	l2972
+  1579  051D                     u2890:
+  1580  051D  2D1F               	goto	l2982
+  1581                           	
+  1582  051E                     l1614:	
+  1583  051E  2D1F               	goto	l2982
+  1584                           	line	33
+  1585                           	
+  1586  051F                     l1608:	
+  1587                           	line	34
+  1588                           	
+  1589  051F                     l2982:	
+  1590  051F  0876               	movf	(___awdiv@sign),w
+  1591  0520  1D03               	skipz
+  1592  0521  2D23               	goto	u2900
+  1593  0522  2D29               	goto	l2986
+  1594  0523                     u2900:
+  1595                           	line	35
+  1596                           	
+  1597  0523                     l2984:	
+  1598  0523  09F7               	comf	(___awdiv@quotient),f
+  1599  0524  09F8               	comf	(___awdiv@quotient+1),f
+  1600  0525  0AF7               	incf	(___awdiv@quotient),f
+  1601  0526  1903               	skipnz
+  1602  0527  0AF8               	incf	(___awdiv@quotient+1),f
+  1603  0528  2D29               	goto	l2986
+  1604                           	
+  1605  0529                     l1615:	
+  1606                           	line	36
+  1607                           	
+  1608  0529                     l2986:	
+  1609  0529  0878               	movf	(___awdiv@quotient+1),w
+  1610  052A  01F1               	clrf	(?___awdiv+1)
+  1611  052B  07F1               	addwf	(?___awdiv+1)
+  1612  052C  0877               	movf	(___awdiv@quotient),w
+  1613  052D  01F0               	clrf	(?___awdiv)
+  1614  052E  07F0               	addwf	(?___awdiv)
+  1615                           
+  1616  052F  2D30               	goto	l1616
+  1617                           	
+  1618  0530                     l2988:	
+  1619                           	line	37
+  1620                           	
+  1621  0530                     l1616:	
+  1622  0530  0008               	return
+  1623                           	opt stack 0
+  1624                           GLOBAL	__end_of___awdiv
+  1625  0531                     	__end_of___awdiv:
+  1626 ;; =============== function ___awdiv ends ============
+  1627                           
+  1628                           	signat	___awdiv,8314
+  1629                           	global	_senkron
+  1630                           psect	text199,local,class=CODE,delta=2
+  1631                           global __ptext199
+  1632  0531                     __ptext199:
+  1633                           
+  1634 ;; *************** function _senkron *****************
+  1635 ;; Defined at:
+  1636 ;;		line 62 in file "C:\Users\Saim\Desktop\RemoteCar\verici.c"
+  1637 ;; Parameters:    Size  Location     Type
+  1638 ;;		None
+  1639 ;; Auto vars:     Size  Location     Type
+  1640 ;;  _dcnt           1    2[COMMON] unsigned char 
+  1641 ;;  _dcnt           1    1[COMMON] unsigned char 
+  1642 ;;  _dcnt           1    3[COMMON] unsigned char 
+  1643 ;;  a               2    6[COMMON] int 
+  1644 ;;  a               2    4[COMMON] int 
+  1645 ;; Return value:  Size  Location     Type
+  1646 ;;		None               void
+  1647 ;; Registers used:
+  1648 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1
+  1649 ;; Tracked objects:
+  1650 ;;		On entry : 0/0
+  1651 ;;		On exit  : 0/0
+  1652 ;;		Unchanged: 0/0
+  1653 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1654 ;;      Params:         0       0       0       0       0
+  1655 ;;      Locals:         7       0       0       0       0
+  1656 ;;      Temps:          1       0       0       0       0
+  1657 ;;      Totals:         8       0       0       0       0
+  1658 ;;Total ram usage:        8 bytes
+  1659 ;; Hardware stack levels used:    1
+  1660 ;; This function calls:
+  1661 ;;		Nothing
+  1662 ;; This function is called by:
+  1663 ;;		_main
+  1664 ;; This function uses a non-reentrant model
+  1665 ;;
+  1666                           psect	text199
+  1667                           	file	"C:\Users\Saim\Desktop\RemoteCar\verici.c"
+  1668                           	line	62
+  1669                           	global	__size_of_senkron
+  1670  0090                     	__size_of_senkron	equ	__end_of_senkron-_senkron
+  1671                           	
+  1672  0531                     _senkron:	
+  1673                           	opt	stack 7
+  1674                           ; Regs used in _senkron: [wreg-fsr0h+status,2+status,0+btemp+1]
+  1675                           	line	63
+  1676                           	
+  1677  0531                     l2914:	
+  1678                           ;verici.c: 63: for(int a=0;a<8;a++)
+  1679  0531  01F4               	clrf	(senkron@a)
+  1680  0532  01F5               	clrf	(senkron@a+1)
+  1681                           	
+  1682  0533                     l2916:	
+  1683  0533  0875               	movf	(senkron@a+1),w
+  1684  0534  3A80               	xorlw	80h
+  1685  0535  00FF               	movwf	btemp+1
+  1686  0536  3080               	movlw	(high(08h))^80h
+  1687  0537  027F               	subwf	btemp+1,w
+  1688  0538  1D03               	skipz
+  1689  0539  2D3C               	goto	u2705
+  1690  053A  3008               	movlw	low(08h)
+  1691  053B  0274               	subwf	(senkron@a),w
+  1692  053C                     u2705:
+  1693                           
+  1694  053C  1C03               	skipc
+  1695  053D  2D3F               	goto	u2701
+  1696  053E  2D40               	goto	u2700
+  1697  053F                     u2701:
+  1698  053F  2D42               	goto	l2920
+  1699  0540                     u2700:
+  1700  0540  2D71               	goto	l2930
+  1701                           	
+  1702  0541                     l2918:	
+  1703  0541  2D71               	goto	l2930
+  1704                           	line	64
+  1705                           	
+  1706  0542                     l733:	
+  1707                           	
+  1708  0542                     l2920:	
+  1709                           ;verici.c: 64: {RB0=senk[a]-48;
+  1710  0542  0874               	movf	(senkron@a),w
+  1711  0543  3E20               	addlw	_senk&0ffh
+  1712  0544  0084               	movwf	fsr0
+  1713  0545  1383               	bcf	status, 7	;select IRP bank0
+  1714  0546  1800               	btfsc	indf,0
+  1715  0547  2D49               	goto	u2711
+  1716  0548  2D4D               	goto	u2710
+  1717                           	
+  1718  0549                     u2711:
+  1719  0549  1283               	bcf	status, 5	;RP0=0, select bank0
+  1720  054A  1303               	bcf	status, 6	;RP1=0, select bank0
+  1721  054B  1406               	bsf	(48/8),(48)&7
+  1722  054C  2D50               	goto	u2724
+  1723  054D                     u2710:
+  1724  054D  1283               	bcf	status, 5	;RP0=0, select bank0
+  1725  054E  1303               	bcf	status, 6	;RP1=0, select bank0
+  1726  054F  1006               	bcf	(48/8),(48)&7
+  1727  0550                     u2724:
+  1728                           	line	65
+  1729                           	
+  1730  0550                     l2922:	
+  1731                           ;verici.c: 65: { unsigned char _dcnt; _dcnt = (1500)/((12*1000L)/(4*1000L))|1; while(--_
+                                 dcnt != 0) continue; };
+  1732  0550  30F5               	movlw	(0F5h)
+  1733  0551  00F0               	movwf	(??_senkron+0)+0
+  1734  0552  0870               	movf	(??_senkron+0)+0,w
+  1735  0553  00F1               	movwf	(senkron@_dcnt)
+  1736  0554  2D56               	goto	l2924
+  1737                           	
+  1738  0555                     l736:	
+  1739  0555  2D56               	goto	l2924
+  1740                           	
+  1741  0556                     l735:	
+  1742                           	
+  1743  0556                     l2924:	
+  1744  0556  3001               	movlw	low(01h)
+  1745  0557  02F1               	subwf	(senkron@_dcnt),f
+  1746  0558  1D03               	btfss	status,2
+  1747  0559  2D5B               	goto	u2731
+  1748  055A  2D5C               	goto	u2730
+  1749  055B                     u2731:
+  1750  055B  2D56               	goto	l2924
+  1751  055C                     u2730:
+  1752  055C  2D5D               	goto	l2926
+  1753                           	
+  1754  055D                     l737:	
+  1755                           	line	63
+  1756                           	
+  1757  055D                     l2926:	
+  1758  055D  3001               	movlw	low(01h)
+  1759  055E  07F4               	addwf	(senkron@a),f
+  1760  055F  1803               	skipnc
+  1761  0560  0AF5               	incf	(senkron@a+1),f
+  1762  0561  3000               	movlw	high(01h)
+  1763  0562  07F5               	addwf	(senkron@a+1),f
+  1764                           	
+  1765  0563                     l2928:	
+  1766  0563  0875               	movf	(senkron@a+1),w
+  1767  0564  3A80               	xorlw	80h
+  1768  0565  00FF               	movwf	btemp+1
+  1769  0566  3080               	movlw	(high(08h))^80h
+  1770  0567  027F               	subwf	btemp+1,w
+  1771  0568  1D03               	skipz
+  1772  0569  2D6C               	goto	u2745
+  1773  056A  3008               	movlw	low(08h)
+  1774  056B  0274               	subwf	(senkron@a),w
+  1775  056C                     u2745:
+  1776                           
+  1777  056C  1C03               	skipc
+  1778  056D  2D6F               	goto	u2741
+  1779  056E  2D70               	goto	u2740
+  1780  056F                     u2741:
+  1781  056F  2D42               	goto	l2920
+  1782  0570                     u2740:
+  1783  0570  2D71               	goto	l2930
+  1784                           	
+  1785  0571                     l734:	
+  1786                           	line	68
+  1787                           	
+  1788  0571                     l2930:	
+  1789                           ;verici.c: 67: }
+  1790                           ;verici.c: 68: for(int a=0;a<8;a++)
+  1791  0571  01F6               	clrf	(senkron@a_1247)
+  1792  0572  01F7               	clrf	(senkron@a_1247+1)
+  1793                           	
+  1794  0573                     l2932:	
+  1795  0573  0877               	movf	(senkron@a_1247+1),w
+  1796  0574  3A80               	xorlw	80h
+  1797  0575  00FF               	movwf	btemp+1
+  1798  0576  3080               	movlw	(high(08h))^80h
+  1799  0577  027F               	subwf	btemp+1,w
+  1800  0578  1D03               	skipz
+  1801  0579  2D7C               	goto	u2755
+  1802  057A  3008               	movlw	low(08h)
+  1803  057B  0276               	subwf	(senkron@a_1247),w
+  1804  057C                     u2755:
+  1805                           
+  1806  057C  1C03               	skipc
+  1807  057D  2D7F               	goto	u2751
+  1808  057E  2D80               	goto	u2750
+  1809  057F                     u2751:
+  1810  057F  2D82               	goto	l2936
+  1811  0580                     u2750:
+  1812  0580  2DB0               	goto	l739
+  1813                           	
+  1814  0581                     l2934:	
+  1815  0581  2DB0               	goto	l739
+  1816                           	line	69
+  1817                           	
+  1818  0582                     l738:	
+  1819                           	
+  1820  0582                     l2936:	
+  1821                           ;verici.c: 69: {RB0=senk1[a]-48;
+  1822  0582  0876               	movf	(senkron@a_1247),w
+  1823  0583  3E29               	addlw	_senk1&0ffh
+  1824  0584  0084               	movwf	fsr0
+  1825  0585  1383               	bcf	status, 7	;select IRP bank0
+  1826  0586  1800               	btfsc	indf,0
+  1827  0587  2D89               	goto	u2761
+  1828  0588  2D8D               	goto	u2760
+  1829                           	
+  1830  0589                     u2761:
+  1831  0589  1283               	bcf	status, 5	;RP0=0, select bank0
+  1832  058A  1303               	bcf	status, 6	;RP1=0, select bank0
+  1833  058B  1406               	bsf	(48/8),(48)&7
+  1834  058C  2D90               	goto	u2774
+  1835  058D                     u2760:
+  1836  058D  1283               	bcf	status, 5	;RP0=0, select bank0
+  1837  058E  1303               	bcf	status, 6	;RP1=0, select bank0
+  1838  058F  1006               	bcf	(48/8),(48)&7
+  1839  0590                     u2774:
+  1840                           	line	70
+  1841                           	
+  1842  0590                     l2938:	
+  1843                           ;verici.c: 70: { unsigned char _dcnt; _dcnt = (1500)/((12*1000L)/(4*1000L))|1; while(--_
+                                 dcnt != 0) continue; };
+  1844  0590  30F5               	movlw	(0F5h)
+  1845  0591  00F0               	movwf	(??_senkron+0)+0
+  1846  0592  0870               	movf	(??_senkron+0)+0,w
+  1847  0593  00F2               	movwf	(senkron@_dcnt_1248)
+  1848  0594  2D96               	goto	l2940
+  1849                           	
+  1850  0595                     l741:	
+  1851  0595  2D96               	goto	l2940
+  1852                           	
+  1853  0596                     l740:	
+  1854                           	
+  1855  0596                     l2940:	
+  1856  0596  3001               	movlw	low(01h)
+  1857  0597  02F2               	subwf	(senkron@_dcnt_1248),f
+  1858  0598  1D03               	btfss	status,2
+  1859  0599  2D9B               	goto	u2781
+  1860  059A  2D9C               	goto	u2780
+  1861  059B                     u2781:
+  1862  059B  2D96               	goto	l2940
+  1863  059C                     u2780:
+  1864  059C  2D9D               	goto	l2942
+  1865                           	
+  1866  059D                     l742:	
+  1867                           	line	68
+  1868                           	
+  1869  059D                     l2942:	
+  1870  059D  3001               	movlw	low(01h)
+  1871  059E  07F6               	addwf	(senkron@a_1247),f
+  1872  059F  1803               	skipnc
+  1873  05A0  0AF7               	incf	(senkron@a_1247+1),f
+  1874  05A1  3000               	movlw	high(01h)
+  1875  05A2  07F7               	addwf	(senkron@a_1247+1),f
+  1876                           	
+  1877  05A3                     l2944:	
+  1878  05A3  0877               	movf	(senkron@a_1247+1),w
+  1879  05A4  3A80               	xorlw	80h
+  1880  05A5  00FF               	movwf	btemp+1
+  1881  05A6  3080               	movlw	(high(08h))^80h
+  1882  05A7  027F               	subwf	btemp+1,w
+  1883  05A8  1D03               	skipz
+  1884  05A9  2DAC               	goto	u2795
+  1885  05AA  3008               	movlw	low(08h)
+  1886  05AB  0276               	subwf	(senkron@a_1247),w
+  1887  05AC                     u2795:
+  1888                           
+  1889  05AC  1C03               	skipc
+  1890  05AD  2DAF               	goto	u2791
+  1891  05AE  2DB0               	goto	u2790
+  1892  05AF                     u2791:
+  1893  05AF  2D82               	goto	l2936
+  1894  05B0                     u2790:
+  1895                           	
+  1896  05B0                     l739:	
+  1897                           	line	73
+  1898                           ;verici.c: 72: }
+  1899                           ;verici.c: 73: RB0=0;
+  1900  05B0  1283               	bcf	status, 5	;RP0=0, select bank0
+  1901  05B1  1303               	bcf	status, 6	;RP1=0, select bank0
+  1902  05B2  1006               	bcf	(48/8),(48)&7
+  1903                           	line	74
+  1904                           	
+  1905  05B3                     l2946:	
+  1906                           ;verici.c: 74: { unsigned char _dcnt; _dcnt = (1500)/((12*1000L)/(4*1000L))|1; while(--_
+                                 dcnt != 0) continue; };
+  1907  05B3  30F5               	movlw	(0F5h)
+  1908  05B4  00F0               	movwf	(??_senkron+0)+0
+  1909  05B5  0870               	movf	(??_senkron+0)+0,w
+  1910  05B6  00F3               	movwf	(senkron@_dcnt_1249)
+  1911  05B7  2DB9               	goto	l2948
+  1912                           	
+  1913  05B8                     l744:	
+  1914  05B8  2DB9               	goto	l2948
+  1915                           	
+  1916  05B9                     l743:	
+  1917                           	
+  1918  05B9                     l2948:	
+  1919  05B9  3001               	movlw	low(01h)
+  1920  05BA  02F3               	subwf	(senkron@_dcnt_1249),f
+  1921  05BB  1D03               	btfss	status,2
+  1922  05BC  2DBE               	goto	u2801
+  1923  05BD  2DBF               	goto	u2800
+  1924  05BE                     u2801:
+  1925  05BE  2DB9               	goto	l2948
+  1926  05BF                     u2800:
+  1927  05BF  2DC0               	goto	l746
+  1928                           	
+  1929  05C0                     l745:	
+  1930                           	line	78
+  1931                           	
+  1932  05C0                     l746:	
+  1933  05C0  0008               	return
+  1934                           	opt stack 0
+  1935                           GLOBAL	__end_of_senkron
+  1936  05C1                     	__end_of_senkron:
+  1937 ;; =============== function _senkron ends ============
+  1938                           
+  1939                           	signat	_senkron,88
+  1940                           	global	_uyandir
+  1941                           psect	text200,local,class=CODE,delta=2
+  1942                           global __ptext200
+  1943  046D                     __ptext200:
+  1944                           
+  1945 ;; *************** function _uyandir *****************
+  1946 ;; Defined at:
+  1947 ;;		line 46 in file "C:\Users\Saim\Desktop\RemoteCar\verici.c"
+  1948 ;; Parameters:    Size  Location     Type
+  1949 ;;		None
+  1950 ;; Auto vars:     Size  Location     Type
+  1951 ;;  _dcnt           1    1[COMMON] unsigned char 
+  1952 ;;  _dcnt           1    2[COMMON] unsigned char 
+  1953 ;;  a               2    3[COMMON] int 
+  1954 ;; Return value:  Size  Location     Type
+  1955 ;;		None               void
+  1956 ;; Registers used:
+  1957 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1
+  1958 ;; Tracked objects:
+  1959 ;;		On entry : 0/0
+  1960 ;;		On exit  : 0/0
+  1961 ;;		Unchanged: 0/0
+  1962 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1963 ;;      Params:         0       0       0       0       0
+  1964 ;;      Locals:         4       0       0       0       0
+  1965 ;;      Temps:          1       0       0       0       0
+  1966 ;;      Totals:         5       0       0       0       0
+  1967 ;;Total ram usage:        5 bytes
+  1968 ;; Hardware stack levels used:    1
+  1969 ;; This function calls:
+  1970 ;;		Nothing
+  1971 ;; This function is called by:
+  1972 ;;		_main
+  1973 ;; This function uses a non-reentrant model
+  1974 ;;
+  1975                           psect	text200
+  1976                           	file	"C:\Users\Saim\Desktop\RemoteCar\verici.c"
+  1977                           	line	46
+  1978                           	global	__size_of_uyandir
+  1979  0050                     	__size_of_uyandir	equ	__end_of_uyandir-_uyandir
+  1980                           	
+  1981  046D                     _uyandir:	
+  1982                           	opt	stack 7
+  1983                           ; Regs used in _uyandir: [wreg-fsr0h+status,2+status,0+btemp+1]
+  1984                           	line	47
+  1985                           	
+  1986  046D                     l2894:	
+  1987                           ;verici.c: 47: for(int a=0;a<8;a++)
+  1988  046D  01F3               	clrf	(uyandir@a)
+  1989  046E  01F4               	clrf	(uyandir@a+1)
+  1990                           	
+  1991  046F                     l2896:	
+  1992  046F  0874               	movf	(uyandir@a+1),w
+  1993  0470  3A80               	xorlw	80h
+  1994  0471  00FF               	movwf	btemp+1
+  1995  0472  3080               	movlw	(high(08h))^80h
+  1996  0473  027F               	subwf	btemp+1,w
+  1997  0474  1D03               	skipz
+  1998  0475  2C78               	goto	u2645
+  1999  0476  3008               	movlw	low(08h)
+  2000  0477  0273               	subwf	(uyandir@a),w
+  2001  0478                     u2645:
+  2002                           
+  2003  0478  1C03               	skipc
+  2004  0479  2C7B               	goto	u2641
+  2005  047A  2C7C               	goto	u2640
+  2006  047B                     u2641:
+  2007  047B  2C7E               	goto	l2900
+  2008  047C                     u2640:
+  2009  047C  2CAC               	goto	l723
+  2010                           	
+  2011  047D                     l2898:	
+  2012  047D  2CAC               	goto	l723
+  2013                           	line	48
+  2014                           	
+  2015  047E                     l722:	
+  2016                           	
+  2017  047E                     l2900:	
+  2018                           ;verici.c: 48: {RB0=uyan[a]-48;
+  2019  047E  0873               	movf	(uyandir@a),w
+  2020  047F  3E32               	addlw	_uyan&0ffh
+  2021  0480  0084               	movwf	fsr0
+  2022  0481  1383               	bcf	status, 7	;select IRP bank0
+  2023  0482  1800               	btfsc	indf,0
+  2024  0483  2C85               	goto	u2651
+  2025  0484  2C89               	goto	u2650
+  2026                           	
+  2027  0485                     u2651:
+  2028  0485  1283               	bcf	status, 5	;RP0=0, select bank0
+  2029  0486  1303               	bcf	status, 6	;RP1=0, select bank0
+  2030  0487  1406               	bsf	(48/8),(48)&7
+  2031  0488  2C8C               	goto	u2664
+  2032  0489                     u2650:
+  2033  0489  1283               	bcf	status, 5	;RP0=0, select bank0
+  2034  048A  1303               	bcf	status, 6	;RP1=0, select bank0
+  2035  048B  1006               	bcf	(48/8),(48)&7
+  2036  048C                     u2664:
+  2037                           	line	49
+  2038                           	
+  2039  048C                     l2902:	
+  2040                           ;verici.c: 49: { unsigned char _dcnt; _dcnt = (1500)/((12*1000L)/(4*1000L))|1; while(--_
+                                 dcnt != 0) continue; };
+  2041  048C  30F5               	movlw	(0F5h)
+  2042  048D  00F0               	movwf	(??_uyandir+0)+0
+  2043  048E  0870               	movf	(??_uyandir+0)+0,w
+  2044  048F  00F1               	movwf	(uyandir@_dcnt)
+  2045  0490  2C92               	goto	l2904
+  2046                           	
+  2047  0491                     l725:	
+  2048  0491  2C92               	goto	l2904
+  2049                           	
+  2050  0492                     l724:	
+  2051                           	
+  2052  0492                     l2904:	
+  2053  0492  3001               	movlw	low(01h)
+  2054  0493  02F1               	subwf	(uyandir@_dcnt),f
+  2055  0494  1D03               	btfss	status,2
+  2056  0495  2C97               	goto	u2671
+  2057  0496  2C98               	goto	u2670
+  2058  0497                     u2671:
+  2059  0497  2C92               	goto	l2904
+  2060  0498                     u2670:
+  2061  0498  2C99               	goto	l2906
+  2062                           	
+  2063  0499                     l726:	
+  2064                           	line	47
+  2065                           	
+  2066  0499                     l2906:	
+  2067  0499  3001               	movlw	low(01h)
+  2068  049A  07F3               	addwf	(uyandir@a),f
+  2069  049B  1803               	skipnc
+  2070  049C  0AF4               	incf	(uyandir@a+1),f
+  2071  049D  3000               	movlw	high(01h)
+  2072  049E  07F4               	addwf	(uyandir@a+1),f
+  2073                           	
+  2074  049F                     l2908:	
+  2075  049F  0874               	movf	(uyandir@a+1),w
+  2076  04A0  3A80               	xorlw	80h
+  2077  04A1  00FF               	movwf	btemp+1
+  2078  04A2  3080               	movlw	(high(08h))^80h
+  2079  04A3  027F               	subwf	btemp+1,w
+  2080  04A4  1D03               	skipz
+  2081  04A5  2CA8               	goto	u2685
+  2082  04A6  3008               	movlw	low(08h)
+  2083  04A7  0273               	subwf	(uyandir@a),w
+  2084  04A8                     u2685:
+  2085                           
+  2086  04A8  1C03               	skipc
+  2087  04A9  2CAB               	goto	u2681
+  2088  04AA  2CAC               	goto	u2680
+  2089  04AB                     u2681:
+  2090  04AB  2C7E               	goto	l2900
+  2091  04AC                     u2680:
+  2092                           	
+  2093  04AC                     l723:	
+  2094                           	line	53
+  2095                           ;verici.c: 51: }
+  2096                           ;verici.c: 53: RB0=0;
+  2097  04AC  1283               	bcf	status, 5	;RP0=0, select bank0
+  2098  04AD  1303               	bcf	status, 6	;RP1=0, select bank0
+  2099  04AE  1006               	bcf	(48/8),(48)&7
+  2100                           	line	54
+  2101                           	
+  2102  04AF                     l2910:	
+  2103                           ;verici.c: 54: { unsigned char _dcnt; _dcnt = (1500)/((12*1000L)/(4*1000L))|1; while(--_
+                                 dcnt != 0) continue; };
+  2104  04AF  30F5               	movlw	(0F5h)
+  2105  04B0  00F0               	movwf	(??_uyandir+0)+0
+  2106  04B1  0870               	movf	(??_uyandir+0)+0,w
+  2107  04B2  00F2               	movwf	(uyandir@_dcnt_1243)
+  2108  04B3  2CB5               	goto	l2912
+  2109                           	
+  2110  04B4                     l728:	
+  2111  04B4  2CB5               	goto	l2912
+  2112                           	
+  2113  04B5                     l727:	
+  2114                           	
+  2115  04B5                     l2912:	
+  2116  04B5  3001               	movlw	low(01h)
+  2117  04B6  02F2               	subwf	(uyandir@_dcnt_1243),f
+  2118  04B7  1D03               	btfss	status,2
+  2119  04B8  2CBA               	goto	u2691
+  2120  04B9  2CBB               	goto	u2690
+  2121  04BA                     u2691:
+  2122  04BA  2CB5               	goto	l2912
+  2123  04BB                     u2690:
+  2124  04BB  2CBC               	goto	l730
+  2125                           	
+  2126  04BC                     l729:	
+  2127                           	line	58
+  2128                           	
+  2129  04BC                     l730:	
+  2130  04BC  0008               	return
+  2131                           	opt stack 0
+  2132                           GLOBAL	__end_of_uyandir
+  2133  04BD                     	__end_of_uyandir:
+  2134 ;; =============== function _uyandir ends ============
+  2135                           
+  2136                           	signat	_uyandir,88
+  2137                           	global	_seri_portu_ayarla
+  2138                           psect	text201,local,class=CODE,delta=2
+  2139                           global __ptext201
+  2140  03FF                     __ptext201:
+  2141                           
+  2142 ;; *************** function _seri_portu_ayarla *****************
+  2143 ;; Defined at:
+  2144 ;;		line 27 in file "C:\Users\Saim\Desktop\RemoteCar\verici.c"
+  2145 ;; Parameters:    Size  Location     Type
+  2146 ;;		None
+  2147 ;; Auto vars:     Size  Location     Type
+  2148 ;;		None
+  2149 ;; Return value:  Size  Location     Type
+  2150 ;;		None               void
+  2151 ;; Registers used:
+  2152 ;;		wreg
+  2153 ;; Tracked objects:
+  2154 ;;		On entry : 0/0
+  2155 ;;		On exit  : 0/0
+  2156 ;;		Unchanged: 0/0
+  2157 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2158 ;;      Params:         0       0       0       0       0
+  2159 ;;      Locals:         0       0       0       0       0
+  2160 ;;      Temps:          0       0       0       0       0
+  2161 ;;      Totals:         0       0       0       0       0
+  2162 ;;Total ram usage:        0 bytes
+  2163 ;; Hardware stack levels used:    1
+  2164 ;; This function calls:
+  2165 ;;		Nothing
+  2166 ;; This function is called by:
+  2167 ;;		_main
+  2168 ;; This function uses a non-reentrant model
+  2169 ;;
+  2170                           psect	text201
+  2171                           	file	"C:\Users\Saim\Desktop\RemoteCar\verici.c"
+  2172                           	line	27
+  2173                           	global	__size_of_seri_portu_ayarla
+  2174  0014                     	__size_of_seri_portu_ayarla	equ	__end_of_seri_portu_ayarla-_seri_portu_ayarla
+  2175                           	
+  2176  03FF                     _seri_portu_ayarla:	
+  2177                           	opt	stack 7
+  2178                           ; Regs used in _seri_portu_ayarla: [wreg]
+  2179                           	
+  2180  03FF                     l1862:	
+  2181  03FF  3019               	movlw	(019h)
+  2182  0400  1683               	bsf	status, 5	;RP0=1, select bank1
+  2183  0401  1303               	bcf	status, 6	;RP1=0, select bank1
+  2184  0402  0099               	movwf	(153)^080h	;volatile
+  2185                           	line	28
+  2186                           	
+  2187  0403                     l1864:	
+  2188                           ;verici.c: 28: BRGH=1;
+  2189  0403  1518               	bsf	(1218/8)^080h,(1218)&7
+  2190                           	line	29
+  2191                           	
+  2192  0404                     l1866:	
+  2193                           ;verici.c: 29: SPEN=1;
+  2194  0404  1283               	bcf	status, 5	;RP0=0, select bank0
+  2195  0405  1303               	bcf	status, 6	;RP1=0, select bank0
+  2196  0406  1798               	bsf	(199/8),(199)&7
+  2197                           	line	30
+  2198                           	
+  2199  0407                     l1868:	
+  2200                           ;verici.c: 30: SYNC=0;
+  2201  0407  1683               	bsf	status, 5	;RP0=1, select bank1
+  2202  0408  1303               	bcf	status, 6	;RP1=0, select bank1
+  2203  0409  1218               	bcf	(1220/8)^080h,(1220)&7
+  2204                           	line	31
+  2205                           	
+  2206  040A                     l1870:	
+  2207                           ;verici.c: 31: TX9=0;
+  2208  040A  1318               	bcf	(1222/8)^080h,(1222)&7
+  2209                           	line	32
+  2210                           	
+  2211  040B                     l1872:	
+  2212                           ;verici.c: 32: TXEN=1;
+  2213  040B  1698               	bsf	(1221/8)^080h,(1221)&7
+  2214                           	line	33
+  2215                           	
+  2216  040C                     l1874:	
+  2217                           ;verici.c: 33: RX9=0;
+  2218  040C  1283               	bcf	status, 5	;RP0=0, select bank0
+  2219  040D  1303               	bcf	status, 6	;RP1=0, select bank0
+  2220  040E  1318               	bcf	(198/8),(198)&7
+  2221                           	line	34
+  2222                           	
+  2223  040F                     l1876:	
+  2224                           ;verici.c: 34: CREN=1;
+  2225  040F  1618               	bsf	(196/8),(196)&7
+  2226                           	line	35
+  2227                           	
+  2228  0410                     l1878:	
+  2229                           ;verici.c: 35: RC6=1;
+  2230  0410  1707               	bsf	(62/8),(62)&7
+  2231                           	line	36
+  2232                           	
+  2233  0411                     l1880:	
+  2234                           ;verici.c: 36: RC7=1;
+  2235  0411  1787               	bsf	(63/8),(63)&7
+  2236                           	line	37
+  2237                           	
+  2238  0412                     l719:	
+  2239  0412  0008               	return
+  2240                           	opt stack 0
+  2241                           GLOBAL	__end_of_seri_portu_ayarla
+  2242  0413                     	__end_of_seri_portu_ayarla:
+  2243 ;; =============== function _seri_portu_ayarla ends ============
+  2244                           
+  2245                           	signat	_seri_portu_ayarla,88
+  2246                           	global	_DelayMs
+  2247                           psect	text202,local,class=CODE,delta=2
+  2248                           global __ptext202
+  2249  044C                     __ptext202:
+  2250                           
+  2251 ;; *************** function _DelayMs *****************
+  2252 ;; Defined at:
+  2253 ;;		line 11 in file "c:\\tc\\delay.c"
+  2254 ;; Parameters:    Size  Location     Type
+  2255 ;;  cnt             1    wreg     unsigned char 
+  2256 ;; Auto vars:     Size  Location     Type
+  2257 ;;  cnt             1    1[COMMON] unsigned char 
+  2258 ;;  _dcnt           1    3[COMMON] unsigned char 
+  2259 ;;  i               1    2[COMMON] unsigned char 
+  2260 ;; Return value:  Size  Location     Type
+  2261 ;;		None               void
+  2262 ;; Registers used:
+  2263 ;;		wreg, status,2, status,0
+  2264 ;; Tracked objects:
+  2265 ;;		On entry : 0/0
+  2266 ;;		On exit  : 0/0
+  2267 ;;		Unchanged: 0/0
+  2268 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2269 ;;      Params:         0       0       0       0       0
+  2270 ;;      Locals:         3       0       0       0       0
+  2271 ;;      Temps:          1       0       0       0       0
+  2272 ;;      Totals:         4       0       0       0       0
+  2273 ;;Total ram usage:        4 bytes
+  2274 ;; Hardware stack levels used:    1
+  2275 ;; This function calls:
+  2276 ;;		Nothing
+  2277 ;; This function is called by:
+  2278 ;;		_main
+  2279 ;; This function uses a non-reentrant model
+  2280 ;;
+  2281                           psect	text202
+  2282                           	file	"c:\\tc\\delay.c"
+  2283                           	line	11
+  2284                           	global	__size_of_DelayMs
+  2285  0021                     	__size_of_DelayMs	equ	__end_of_DelayMs-_DelayMs
+  2286                           	
+  2287  044C                     _DelayMs:	
+  2288                           	opt	stack 7
+  2289                           ; Regs used in _DelayMs: [wreg+status,2+status,0]
+  2290                           ;DelayMs@cnt stored from wreg
+  2291  044C  00F1               	movwf	(DelayMs@cnt)
+  2292                           	line	20
+  2293                           ;delay.c: 19: unsigned char i;
+  2294                           ;delay.c: 20: do {
+  2295                           	
+  2296  044D                     l697:	
+  2297                           	line	21
+  2298                           	
+  2299  044D                     l1844:	
+  2300                           ;delay.c: 21: i = 4;
+  2301  044D  3004               	movlw	(04h)
+  2302  044E  00F0               	movwf	(??_DelayMs+0)+0
+  2303  044F  0870               	movf	(??_DelayMs+0)+0,w
+  2304  0450  00F2               	movwf	(DelayMs@i)
+  2305                           	line	22
+  2306                           ;delay.c: 22: do {
+  2307                           	
+  2308  0451                     l698:	
+  2309                           	line	23
+  2310                           ;delay.c: 23: { unsigned char _dcnt; _dcnt = (250)/((12*1000L)/(4*1000L))|1; while(--_dc
+                                 nt != 0) continue; };
+  2311  0451  3053               	movlw	(053h)
+  2312  0452  00F0               	movwf	(??_DelayMs+0)+0
+  2313  0453  0870               	movf	(??_DelayMs+0)+0,w
+  2314  0454  00F3               	movwf	(DelayMs@_dcnt)
+  2315  0455  2C57               	goto	l1846
+  2316                           	
+  2317  0456                     l700:	
+  2318  0456  2C57               	goto	l1846
+  2319                           	
+  2320  0457                     l699:	
+  2321                           	
+  2322  0457                     l1846:	
+  2323  0457  3001               	movlw	low(01h)
+  2324  0458  02F3               	subwf	(DelayMs@_dcnt),f
+  2325  0459  1D03               	btfss	status,2
+  2326  045A  2C5C               	goto	u11
+  2327  045B  2C5D               	goto	u10
+  2328  045C                     u11:
+  2329  045C  2C57               	goto	l1846
+  2330  045D                     u10:
+  2331  045D  2C5E               	goto	l1848
+  2332                           	
+  2333  045E                     l701:	
+  2334                           	line	24
+  2335                           	
+  2336  045E                     l1848:	
+  2337                           ;delay.c: 24: } while(--i);
+  2338  045E  3001               	movlw	low(01h)
+  2339  045F  02F2               	subwf	(DelayMs@i),f
+  2340  0460  1D03               	btfss	status,2
+  2341  0461  2C63               	goto	u21
+  2342  0462  2C64               	goto	u20
+  2343  0463                     u21:
+  2344  0463  2C51               	goto	l698
+  2345  0464                     u20:
+  2346  0464  2C65               	goto	l1850
+  2347                           	
+  2348  0465                     l702:	
+  2349                           	line	25
+  2350                           	
+  2351  0465                     l1850:	
+  2352                           ;delay.c: 25: } while(--cnt);
+  2353  0465  3001               	movlw	low(01h)
+  2354  0466  02F1               	subwf	(DelayMs@cnt),f
+  2355  0467  1D03               	btfss	status,2
+  2356  0468  2C6A               	goto	u31
+  2357  0469  2C6B               	goto	u30
+  2358  046A                     u31:
+  2359  046A  2C4D               	goto	l697
+  2360  046B                     u30:
+  2361  046B  2C6C               	goto	l704
+  2362                           	
+  2363  046C                     l703:	
+  2364                           	line	27
+  2365                           	
+  2366  046C                     l704:	
+  2367  046C  0008               	return
+  2368                           	opt stack 0
+  2369                           GLOBAL	__end_of_DelayMs
+  2370  046D                     	__end_of_DelayMs:
+  2371 ;; =============== function _DelayMs ends ============
+  2372                           
+  2373                           	signat	_DelayMs,4216
+  2374                           psect	text203,local,class=CODE,delta=2
+  2375                           global __ptext203
+  2376  0000                     __ptext203:
+  2377                           	global	btemp
+  2378  007E                     	btemp set 07Eh
+  2379                           
+  2380                           	DABS	1,126,2	;btemp
+  2381                           	global	wtemp0
+  2382  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.82 build 9453 
+Symbol Table                                                                                   Wed Mar 04 16:02:46 2015
+
+                         pc 0002                          _RD 0C60                          u10 045D  
+                        u11 045C                          u20 0464                          u21 0463  
+                        u30 046B                          u31 046A                          _WR 0C61  
+              ___awdiv@sign 0076                          fsr 0004                         l700 0456  
+                       l701 045E                         l702 0465                         l703 046C  
+                       l704 046C                         l730 04BC                         l722 047E  
+                       l723 04AC                         l724 0492                         l740 0596  
+                       l725 0491                         l741 0595                         l733 0542  
+                       l726 0499                         l742 059D                         l734 0571  
+                       l750 05C6                         l719 0412                         l727 04B5  
+                       l743 05B9                         l735 0556                         l751 05FC  
+                       l728 04B4                         l744 05B8                         l736 0555  
+                       l760 063E                         l752 0603                         l729 04BC  
+                       l745 05C0                         l737 055D                         l761 063D  
+                       l753 0602                         l746 05C0                         l738 0582  
+                       l762 0645                         l754 0609                         l770 0687  
+                       l739 05B0                         l763 0661                         l755 0610  
+                       l771 06AB                         l764 0660                         l756 060F  
+                       l780 07FB                         l772 06CF                         l765 0667  
+                       l757 0617                         l749 05F5                         l781 07FC  
+                       l773 06F3                         l766 0668                         l758 0628  
+                       l782 07FD                         l774 0717                         l759 0659  
+                       l783 07FD                         l775 073B                         l776 075F  
+                       l697 044D                         l777 0783                         l769 067D  
+                       l698 0451                         l778 07A7                         l699 0457  
+                       l779 07D1                         _GIE 005F                         _RB0 0030  
+                       _RB6 0036                         _RB7 0037                         _RC6 003E  
+                       _RC7 003F                         _RX9 00C6                         _TX9 04C6  
+                       fsr0 0004                         indf 0000                        l3000 05F5  
+                      l3010 0617                        l3002 05FD                        l3020 063E  
+                      l3012 0619                        l3004 0603                        l3022 0645  
+                      l3014 0627                        l3006 060A                        l3030 0669  
+                      l3024 064B                        l3016 0628                        l3008 0610  
+                      l3040 0683                        l3032 066D                        l1610 04E5  
+                      l3018 0638                        l3026 0659                        l3050 06D5  
+                      l3042 068D                        l3034 0670                        l1611 04F6  
+                      l1612 04F7                        l3028 0661                        l3060 073B  
+                      l3052 06F3                        l3044 06AB                        l3036 0677  
+                      l1613 0510                        l1614 051E                        l1606 04CB  
+                      l3070 0789                        l3062 0741                        l3054 06F9  
+                      l3046 06B1                        l3038 067D                        l1615 0529  
+                      l1607 04D9                        l1616 0530                        l1608 051F  
+                      l3080 07D7                        l3072 07A7                        l3064 075F  
+                      l3056 0717                        l3048 06CF                        l1609 04F1  
+                      l3082 07F4                        l3074 07AD                        l3066 0765  
+                      l3058 071D                        l3076 07CA                        l3068 0783  
+                      l3078 07D1                        l1850 0465                        l1844 044D  
+                      l2900 047E                        l1846 0457                        l1870 040A  
+                      l1862 03FF                        l2910 04AF                        l2902 048C  
+                      l1848 045E                        l1880 0411                        l1872 040B  
+                      l1864 0403                        l2912 04B5                        l2904 0492  
+                      l2920 0542                        l1874 040C                        l1866 0404  
+                      l2906 0499                        l2922 0550                        l2930 0571  
+                      l2914 0531                        l1876 040F                        l1868 0407  
+                      l2908 049F                        l2940 0596                        l2932 0573  
+                      l2924 0556                        l2916 0533                        l1878 0410  
+                      l2942 059D                        l2934 0581                        l2926 055D  
+                      l2918 0541                        l2950 04BD                        l2944 05A3  
+                      l2936 0582                        l2928 0563                        l2960 04D9  
+                      l2952 04C2                        l2946 05B3                        l2938 0590  
+                      l2970 04F1                        l2962 04DB                        l2954 04CB  
+                      l2948 05B9                        l2980 0517                        l2972 04F7  
+                      l2964 04E1                        l2956 04CF                        l2894 046D  
+                      l2974 0508                        l2966 04E5                        l2982 051F  
+                      l2958 04D4                        l2990 05C1                        l2896 046F  
+                      l2984 0523                        l2976 050E                        l2968 04EC  
+                      l2992 05C6                        l2898 047D                        l2986 0529  
+                      l2978 0510                        l2994 05D1                        l2988 0530  
+                      l2996 05E8                        l2998 05EE                        _BRGH 04C2  
+                      _CREN 00C4                        u3000 0683                        u3001 0682  
+                      u3010 068D                        u3011 068C                        u3100 07D7  
+                      u3020 06B1                        u3101 07D6                        u3021 06B0  
+                      u3030 06D5                        u3031 06D4                        u3040 06F9  
+                      u3041 06F8                        u3050 071D                        u3051 071C  
+                      u3060 0741                        u3061 0740                        u3070 0765  
+                      u3071 0764                        u3080 0789                        u3081 0788  
+                      u3090 07AD                        u3091 07AC                        u2700 0540  
+                      u2701 053F                        u2710 054D                        u2711 0549  
+                      u2640 047C                        u2800 05BF                        u2641 047B  
+                      u2801 05BE                        u2705 053C                        u2650 0489  
+                      u2730 055C                        u2810 04C2                        u2651 0485  
+                      u2731 055B                        u2811 04C1                        u2740 0570  
+                      u2724 0550                        u2900 0523                        u2820 04CF  
+                      u2645 0478                        u2741 056F                        u2821 04CE  
+                      u2670 0498                        u2750 0580                        u2830 04E1  
+                      u2910 05FC                        u2671 0497                        u2751 057F  
+                      u2831 04E0                        u2911 05FB                        u2680 04AC  
+                      u2664 048C                        u2760 058D                        u2920 0609  
+                      u2681 04AB                        u2761 0589                        u2745 056C  
+                      u2921 0608                        u2690 04BB                        u2850 04F5  
+                      u2930 0616                        u2691 04BA                        u2755 057C  
+                      u2851 04F4                        u2931 0615                        u2780 059C  
+                      u2940 0626                        u2685 04A8                        u2781 059B  
+                      u2845 04E6                        u2941 0625                        u2790 05B0  
+                      u2774 0590                        u2870 0508                        u2950 0635  
+                      u2791 05AF                        u2871 0507                        u2951 0631  
+                      u2865 04F8                        u2945 0622                        u2890 051D  
+                      u2970 0644                        u2795 05AC                        u2891 051C  
+                      u2875 0504                        u2971 0643                        u2980 0658  
+                      u2964 0638                        _RCIF 0065                        u2885 0511  
+                      u2981 0657                        u2990 0667                        u2991 0666  
+                      u2985 0654                        _SPEN 00C7                        _WREN 0C62  
+                      _TXEN 04C5                        _TXIF 0064                        _SYNC 04C4  
+                      _main 0669                        _senk 0020                        btemp 007E  
+                      _uyan 0032                        start 0000             __end_of_DelayMs 046D  
+    kodla_gonder@_dcnt_1253 0048      kodla_gonder@_dcnt_1255 0049      kodla_gonder@_dcnt_1256 004A  
+                     ?_main 0070             __end_of___awdiv 0531                       _EEADR 010D  
+                     _CARRY 0018             ___awdiv@divisor 0070             ___awdiv@counter 0075  
+                     _RCREG 001A                       _SPBRG 0099                       _PORTB 0006  
+                     _PORTC 0007                       _TRISB 0086                       _TRISC 0087  
+                     _TXREG 0019                       _bolum 0043                       _index 0045  
+                     _senk1 0029                       pclath 000A            kodla_gonder@sayi 0079  
+           __end_of_senkron 05C1                       status 0003                       wtemp0 007E  
+           __end_of_uyandir 04BD                __end_of_main 0800                      ??_main 007C  
+                    _EEDATA 010C                      _EECON1 018C                      _EECON2 018D  
+          ___awdiv@dividend 0072           uyandir@_dcnt_1243 0072                   ??_DelayMs 0070  
+             ?_kodla_gonder 0079                   ??___awdiv 0074            ___awdiv@quotient 0077  
+         kodla_gonder@_dcnt 0047                   ??_senkron 0070                   ??_uyandir 0070  
+         _seri_portu_ayarla 03FF              ??_kodla_gonder 007B          ?_seri_portu_ayarla 0070  
+            __pcstackCOMMON 0070                __pidataBANK0 0413         ??_seri_portu_ayarla 0070  
+ __end_of_seri_portu_ayarla 0413                  __pbssBANK0 003B                  __pmaintext 0669  
+                _gelen_veri 003B                     _DelayMs 044C                     ___awdiv 04BD  
+      __end_of_kodla_gonder 0669                     _senkron 0531  __size_of_seri_portu_ayarla 0014  
+                   _uyandir 046D                uyandir@_dcnt 0071        end_of_initialization 0448  
+                   init_ram 03F0                DelayMs@_dcnt 0073         start_initialization 042E  
+         senkron@_dcnt_1248 0072           senkron@_dcnt_1249 0073       __size_of_kodla_gonder 00A8  
+               __pdataBANK0 0020               __pcstackBANK0 0047                    ?_DelayMs 0070  
+              _kodla_gonder 05C1                    ?___awdiv 0070                   __ptext200 046D  
+                 __ptext201 03FF                   __ptext202 044C                   __ptext203 0000  
+                 __ptext197 05C1                   __ptext198 04BD                   __ptext199 0531  
+                  ?_senkron 0070                    ?_uyandir 0070                    DelayMs@i 0072  
+                 main@gelen 007D               senkron@a_1247 0076            __size_of_DelayMs 0021  
+                 init_fetch 03EC            __size_of___awdiv 0074            __size_of_senkron 0090  
+          __size_of_uyandir 0050               __size_of_main 0197               kodla_gonder@a 004B  
+                DelayMs@cnt 0071                senkron@_dcnt 0071                    senkron@a 0074  
+                  uyandir@a 0073  

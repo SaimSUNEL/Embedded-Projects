@@ -1,0 +1,416 @@
+     1: 
+     2: #include <htc.h>
+     3: #define BAUD 9600 //Osilatore hesaba göre secilir
+     4: #define FOSC 4000000L //osc
+     5: #define DIVIDER ((int)(FOSC/(16UL * BAUD) -1))//SPBRG calculator
+     6: //void seri_porta_veri_gonder(unsigned char jk);
+     7: char gelen_veri[8];
+     8: unsigned char seri_porttan_veri_al();
+     9: #define DelayMs __delay_ms
+    10: 
+    11: void seri_port(unsigned char jk) 
+    12:  { while( !TXIF );
+    13:          TXREG=jk;
+    14: TXIF = 0;
+    15:         
+    16:          }
+    17:          
+    18:          unsigned char seri_porttan_veri_al() 
+    19: {
+    20: while( !RCIF );
+    21:         //if( RCREG == 's' )asm( "ljmp 0x1eda" );
+    22: 
+    23: return RCREG;
+    24: }
+    25: 
+    26: 
+    27: void seri_porta_veri_gonder( int number )
+    28: {
+    29:         seri_port( 'd' );
+    30:         DelayMs( 20 );
+    31:         seri_port( (number >> 8) );DelayMs( 20 );
+    32:         seri_port( number );DelayMs( 20 );
+    33:         
+    34:         
+    35: }
+    36: void seri_portu_ayarla()
+    37: {SPBRG=DIVIDER;
+    38:         BRGH=1;
+    39:         SPEN=1;
+    40:         SYNC=0;
+    41:         TX9=0;
+    42:         TXEN=1;
+    43:         RX9=0;
+    44:         CREN=1;
+    45:         
+    46:         
+    47:         
+    48:         RC6=1;
+    49:         RC7=1;
+    50: }
+    51: 
+    52: 
+    53: 
+    54: I2C_Start(  )
+    55: {
+    56:         SEN = 1;
+    57:         while( SEN );
+    58:         SSPIF = 0;
+    59:         
+    60:         }
+    61: 
+    62:         I2C_Stop(  )
+    63:         {
+    64:                 PEN = 1;
+    65:                 while( PEN );
+    66:                 SSPIF = 0;
+    67:         }
+    68:         
+    69: I2C_gonder(  unsigned char veri )
+    70: {
+    71: SSPBUF = veri;
+    72:         while( !SSPIF );
+    73:                 SSPIF = 0;
+    74: 
+    75:         
+    76: 
+    77: }       
+    78: 
+    79: 
+    80: unsigned char I2C_oku (   )
+    81: {
+    82: RCEN  = 1;      //RCEN = 1;     
+    83:         while( !SSPIF );
+    84:         SSPIF = 0;
+    85: return SSPBUF;  
+    86:         
+    87:         
+    88:         
+    89:         
+    90: }
+    91: 
+    92: 
+    93: I2C_Master_ayarla (   )
+    94: {
+    95: SMP = 1;
+    96: CKE = 0;
+    97: 
+    98:         
+    99:         
+   100:         //Fosc/4( 0 +1 )
+   101:         //100 khz
+   102:         SSPADD = 9;//
+   103:         
+   104:         
+   105:         
+   106:         
+   107:         
+   108:         //I2C 7 bit 
+   109: SSPM3 = 1;
+   110: SSPM2 = 0;
+   111: SSPM1 = 0;;
+   112: SSPM0 = 0;      
+   113:         
+   114:         
+   115: 
+   116:  
+   117: SSPEN = 1;
+   118:         
+   119:         
+   120:         
+   121: }
+   122: 
+   123: void Send_NACK()
+   124: {
+   125:         
+   126:         ACKDT = 1;
+   127:         ACKEN = 1;
+   128:         while( ACKEN );
+   129:                 SSPIF = 0;
+   130:         
+   131:         
+   132: }
+   133: unsigned char veri ;
+   134: 
+   135: int DS1307_saniye( )
+   136: {
+   137:         
+   138: 
+   139:                 I2C_Start();
+   140:         I2C_gonder( 0b11010000 );
+   141:         I2C_gonder( 0x00 );
+   142:         I2C_Stop();
+   143:         I2C_Start();
+   144:         I2C_gonder( 0b11010001 );
+   145:         veri = I2C_oku(  );
+   146: veri = ( veri >> 4 ) * 10 + ( veri & 15 ) ;
+   147:                 Send_NACK();
+   148:                 I2C_Stop();
+   149:                 
+   150:                 
+   151: return veri;
+   152:         
+   153:         
+   154: }
+   155: 
+   156: int DS1307_dakika( )
+   157: {
+   158:         
+   159:         I2C_Start();
+   160:         I2C_gonder( 0b11010000 );
+   161:         I2C_gonder( 0x01 );
+   162:         I2C_Stop();
+   163:         I2C_Start();
+   164:         I2C_gonder( 0b11010001 );
+   165: 
+   166:         veri = I2C_oku(  );
+   167: veri = ( veri >> 4 ) * 10 + ( veri & 15 ) ;
+   168:                 Send_NACK();
+   169:                 I2C_Stop();
+   170:         return veri;
+   171:         
+   172:         
+   173:         
+   174: }
+   175: 
+   176: int DS1307_saat()
+   177:  {
+   178:          
+   179:          I2C_Start();
+   180:         I2C_gonder( 0b11010000 );
+   181:         I2C_gonder( 0x02 );
+   182:         I2C_Stop();
+   183:         I2C_Start();
+   184:         I2C_gonder( 0b11010001 );
+   185:         veri = I2C_oku(  );
+   186: veri = ( veri >> 4 ) * 10 + ( veri & 15 ) ;
+   187:                 Send_NACK();
+   188:                 I2C_Stop();
+   189:          
+   190:          return veri;
+   191:  }
+   192: 
+   193: char DS1307_ay()
+   194:  {
+   195:           I2C_Start();
+   196:         I2C_gonder( 0b11010000 );
+   197:         I2C_gonder( 0x05 );
+   198:         I2C_Stop();
+   199:         I2C_Start();
+   200:         I2C_gonder( 0b11010001 );
+   201:         veri = I2C_oku(  );
+   202: veri = ( veri >> 4 ) * 10 + ( veri & 15 ) ;
+   203:                 Send_NACK();
+   204:                 I2C_Stop();
+   205:          
+   206:          return veri;
+   207:          
+   208:          
+   209:          
+   210:          }
+   211:  char DS1307_gun()
+   212:  {
+   213:           I2C_Start();
+   214:         I2C_gonder( 0b11010000 );
+   215:         I2C_gonder( 0x04 );
+   216:         I2C_Stop();
+   217:         I2C_Start();
+   218:         I2C_gonder( 0b11010001 );
+   219:         veri = I2C_oku(  );
+   220: veri = ( veri >> 4 ) * 10 + ( veri & 15 ) ;
+   221:                 Send_NACK();
+   222:                 I2C_Stop();
+   223:          
+   224:          return veri;
+   225:          
+   226:          
+   227:          
+   228:          }
+   229:  
+   230:  char DS1307_yil()
+   231:  {
+   232:           I2C_Start();
+   233:         I2C_gonder( 0b11010000 );
+   234:         I2C_gonder( 0x06 );
+   235:         I2C_Stop();
+   236:         I2C_Start();
+   237:         I2C_gonder( 0b11010001 );
+   238:         veri = I2C_oku(  );
+   239: veri = ( veri >> 4 ) * 10 + ( veri & 15 ) ;
+   240:                 Send_NACK();
+   241:                 I2C_Stop();
+   242:          
+   243:          return veri;
+   244:          
+   245:          
+   246:          
+   247:          }
+   248:  
+   249: void DS1307_dakika_ayarla( char value )
+   250: {
+   251:   I2C_Start();
+   252:         I2C_gonder( 0b11010000 );
+   253:         I2C_gonder( 0x01 );
+   254:         
+   255:         value =  (   ( value / 10 ) << 4  ) | ( value - ( value/10 ) * 10  ) ; 
+   256:         I2C_gonder( value );
+   257:         I2C_Stop();
+   258:   
+   259:  // value =  (   ( value / 10 ) << 4  ) | ( value - ( value/10 ) * 10  ) ; 
+   260:        
+   261:   
+   262: }
+   263: 
+   264: void DS1307_saat_ayarla( char value )
+   265: {
+   266:   I2C_Start();
+   267:         I2C_gonder( 0b11010000 );
+   268:         I2C_gonder( 0x02 );
+   269:         
+   270:         value =  (   ( value / 10 ) << 4  ) | ( value - ( value/10 ) * 10  ) ; 
+   271:         I2C_gonder( value );
+   272:         I2C_Stop();
+   273:   
+   274:  // value =  (   ( value / 10 ) << 4  ) | ( value - ( value/10 ) * 10  ) ; 
+   275:        
+   276:   
+   277: }
+   278: 
+   279: 
+   280: 
+   281: 
+   282: void DS1307_saniye_ayarla( char value )
+   283: {
+   284:   
+   285:  I2C_Start();
+   286:         I2C_gonder( 0b11010000 );
+   287:         I2C_gonder( 0x00 );
+   288:         
+   289:         value =  (   ( value / 10 ) << 4  ) | ( value - ( value/10 ) * 10  ) ; 
+   290:         I2C_gonder( value );
+   291:         I2C_Stop();
+   292:   
+   293:   
+   294:   
+   295: }
+   296: 
+   297: 
+   298: 
+   299: 
+   300: void DS1307_gun_ayarla( char value )
+   301: {
+   302:   I2C_Start();
+   303:         I2C_gonder( 0b11010000 );
+   304:         I2C_gonder( 0x04 );
+   305:         
+   306:         value =  (   ( value / 10 ) << 4  ) | ( value - ( value/10 ) * 10  ) ; 
+   307:         I2C_gonder( value );
+   308:         I2C_Stop();
+   309:   
+   310:  // value =  (   ( value / 10 ) << 4  ) | ( value - ( value/10 ) * 10  ) ; 
+   311:        
+   312:   
+   313: }
+   314: void DS1307_ay_ayarla( char value )
+   315: {
+   316:   I2C_Start();
+   317:         I2C_gonder( 0b11010000 );
+   318:         I2C_gonder( 0x05 );
+   319:         
+   320:         value =  (   ( value / 10 ) << 4  ) | ( value - ( value/10 ) * 10  ) ; 
+   321:         I2C_gonder( value );
+   322:         I2C_Stop();
+   323:   
+   324:  // value =  (   ( value / 10 ) << 4  ) | ( value - ( value/10 ) * 10  ) ; 
+   325:        
+   326:   
+   327: }
+   328: 
+   329: void DS1307_yil_ayarla( char value )
+   330: {
+   331:   I2C_Start();
+   332:         I2C_gonder( 0b11010000 );
+   333:         I2C_gonder( 0x06 );
+   334:         
+   335:         value =  (   ( value / 10 ) << 4  ) | ( value - ( value/10 ) * 10  ) ; 
+   336:         I2C_gonder( value );
+   337:         I2C_Stop();
+   338:   
+   339:  // value =  (   ( value / 10 ) << 4  ) | ( value - ( value/10 ) * 10  ) ; 
+   340:        
+   341:   
+   342: }
+   343: 
+   344: 
+   345: int dakika , saat , saniye;
+   346: int gun , ay ,yil;
+   347: void main(  )
+   348: {
+   349:         TRISB0 = 0;
+   350:         RB0=1;//SCL and SDA pins are input...
+   351:         seri_portu_ayarla();
+   352:         
+   353:         DelayMs( 100 );
+   354:         TRISC3 = 1;
+   355:         TRISC4 = 1;
+   356:         RC3=0;
+   357:         RC4 = 0;
+   358:         
+   359:         I2C_Master_ayarla();
+   360:         DelayMs( 100 );
+   361:         seri_porta_veri_gonder ( 'M' );
+   362:         seri_porta_veri_gonder ( 't' );
+   363:         seri_porta_veri_gonder ( 'T' );
+   364:         DS1307_saniye_ayarla( 23 );
+   365:         DS1307_dakika_ayarla( 23 );
+   366:         DS1307_saat_ayarla( 23 );
+   367:         DS1307_gun_ayarla( 23 );
+   368:         DS1307_ay_ayarla( 12 );
+   369:         DS1307_yil_ayarla( 23 );
+   370:         
+   371:         seri_porta_veri_gonder( 'T' );
+   372:         
+   373:         
+   374:         dakika = DS1307_dakika();
+   375:         seri_porta_veri_gonder( dakika );
+   376:     
+   377:         
+   378:         
+   379:         
+   380:         saat = DS1307_saat();
+   381:         seri_porta_veri_gonder( saat );
+   382:         
+   383:         gun = DS1307_gun();
+   384:         ay = DS1307_ay();
+   385:         yil = DS1307_yil();
+   386:         while( 1 )
+   387:         {
+   388:                 RB0 =  ~ RB0 ;
+   389:                 saniye = DS1307_saniye();
+   390:         seri_porta_veri_gonder( saniye );
+   391:                 if ( saniye == 0 )
+   392:                 {
+   393:                         dakika = DS1307_dakika();
+   394:                         seri_porta_veri_gonder( dakika );
+   395:                         if( dakika == 0 )
+   396:                         {
+   397:                                 
+   398:                                 saat = DS1307_saat();
+   399:                                 seri_porta_veri_gonder( saat );
+   400:                                 
+   401:                                 
+   402:                         }
+   403:                         
+   404:                         
+   405:                 }
+   406:                 
+   407:                 
+   408:                 DelayMs( 900 );
+   409:         
+   410:                 
+   411:                 
+   412:                 
+   413:                 }
+   414:         
+   415:         
+   416: }

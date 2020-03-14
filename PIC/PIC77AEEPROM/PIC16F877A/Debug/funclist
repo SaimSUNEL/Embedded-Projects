@@ -1,0 +1,4 @@
+_eeprom_hazirla: CODE, 1811 0 7
+_main: CODE, 1870 0 178
+_eeprom_yaz: CODE, 1841 0 29
+Total: 214

@@ -1,0 +1,1568 @@
+     1: /*
+     2: 16MHZ kuracaðýz ona göre usartý hex dosyasýnýn frequency , I2c frekansýný 16 MHz ye göre ayarla...
+     3: Devreyi çalýþtýrmadan önce tüm eerpoma sýfýr yazan bir program çalýþtýr ve tüm eepromu sýfýrla
+     4: 
+     5: DHT11 RC5 pininde
+     6: 
+     7: 
+     8: 
+     9: */
+    10: #include<stdio.h>
+    11: 
+    12: 
+    13: #include<htc.h>
+    14: 
+    15: 
+    16: #define DelayMs(x) __delay_ms(x)
+    17: 
+    18: 
+    19: //#define LCDPORT PORTB
+    20: #define RS RC1  //
+    21: //Rw direk ground ta
+    22: #define E RC2//
+    23: #define sil 0x01
+    24: #define basla 0x02
+    25: #define sola 0x04
+    26: #define saga 0x06
+    27: #define kapat 0x08
+    28: #define imlec_yok 0x0C
+    29: #define imlec_var 0x0F
+    30: #define imlec_sola 0x10
+    31: #define imlec_saga 0x14
+    32: #define display_sola 0x18
+    33: #define display_saga 0x1C
+    34: #define satir_1 0x80
+    35: #define satir_2 0xC0
+    36: #define cift_4bit 0x28
+    37: #define cift_8bit 0x38
+    38: #define tek_4bit 0x3C
+    39: #define tek_8bit 0x30
+    40: 
+    41: unsigned char _temp_ ;
+    42: unsigned char tempor_var ;
+    43: 
+    44: void lcd_data(unsigned char);
+    45:  void lcd_init(void);
+    46:  void lcd_write(const char *s);
+    47:  void lcd_clear(void);
+    48:  void lcd_goto(unsigned char,unsigned char);
+    49:  void lcd_command(unsigned char c); 
+    50: 
+    51: 
+    52: void lcd_command(unsigned char c)
+    53: {
+    54:         //PORTD lcd data da 
+    55:         /*
+    56:         RD4 - Data4
+    57:         RD5 - Data5
+    58:         RD6 - Data6
+    59:         RD7 - Data7
+    60:         
+    61:         
+    62:         
+    63:         
+    64:         */
+    65:         
+    66:         
+    67: RS=0;
+    68: E=1;
+    69:         
+    70: _temp_ =  c&0xF0 ;
+    71: RD7 = _temp_ >> 7 ; //7.bit Data7
+    72: RD6 = _temp_ >> 6 ; //6. bit data6
+    73: RD5 = _temp_ >> 5 ; //5. bit data 5
+    74: RD4 = _temp_ >> 4 ; //4 .bit Data4
+    75: 
+    76:         
+    77: //LCDPORT =  ;
+    78: DelayMs( 2 );
+    79: E=0;
+    80: DelayMs(1);
+    81: E=1;
+    82: _temp_ = ((c & 0x0F)<<4) ;
+    83: RD7 = _temp_ >> 7 ; //7.bit Data7
+    84: RD6 = _temp_ >> 6 ; //6. bit data6
+    85: RD5 = _temp_ >> 5 ; //5. bit data 5
+    86: RD4 = _temp_ >> 4 ; //4 .bit Data4
+    87: 
+    88: 
+    89: //LCDPORT=((c & 0x0F)<<4);
+    90: 
+    91: DelayMs( 2 );
+    92: E=0;
+    93: DelayMs(1);
+    94: }
+    95: 
+    96: void lcd_data(unsigned char c)
+    97: {
+    98: 
+    99: RS=1;
+   100: E=1;
+   101:         
+   102:         _temp_ = (c & 0xF0) ;
+   103:         RD7 = _temp_ >> 7 ; //7.bit Data7
+   104: RD6 = _temp_ >> 6 ; //6. bit data6
+   105: RD5 = _temp_ >> 5 ; //5. bit data 5
+   106: RD4 = _temp_ >> 4 ; //4 .bit Data4
+   107: 
+   108: //LCDPORT=(c & 0xF0);DelayMs( 2 );
+   109: E=0;
+   110: DelayMs(1);
+   111: E=1;
+   112:         
+   113: _temp_ =        ((c & 0x0F)<<4) ;
+   114:                 RD7 = _temp_ >> 7 ; //7.bit Data7
+   115: RD6 = _temp_ >> 6 ; //6. bit data6
+   116: RD5 = _temp_ >> 5 ; //5. bit data 5
+   117: RD4 = _temp_ >> 4 ; //4 .bit Data4
+   118: 
+   119: //LCDPORT=((c & 0x0F)<<4);DelayMs( 2 );
+   120: E=0;
+   121: DelayMs(1);
+   122: }
+   123: void lcd_clear(void)
+   124: {
+   125: 
+   126: 
+   127: lcd_command(sil);
+   128: DelayMs(2);
+   129: }
+   130: 
+   131: void lcd_write(const char *s)
+   132: {
+   133: DelayMs(1);
+   134: while(*s)lcd_data(*s++);
+   135: }
+   136: void lcd_goto(unsigned char p_1,unsigned char p_2)
+   137: {
+   138: 
+   139: if(p_1==1)
+   140: {lcd_command(satir_1+((p_2-1)%16));
+   141: }else{
+   142: lcd_command(satir_2+((p_2-1)%16));
+   143: }
+   144: 
+   145: }
+   146: 
+   147: 
+   148: void lcd_init()
+   149: {
+   150:         //LCD data ve gerekli pinlerin trisleri için....
+   151:         TRISC1 = 0 ;
+   152:         TRISC2 = 0 ;
+   153:         TRISD = 0 ; 
+   154:         PORTD = 0 ;
+   155:         
+   156: RS=0;
+   157: E=0;
+   158: 
+   159: DelayMs(1);
+   160: E=1;
+   161: lcd_command(basla);
+   162: DelayMs(2);
+   163: lcd_command(cift_4bit);
+   164: lcd_command(saga);
+   165: 
+   166: lcd_command(saga);
+   167: 
+   168: lcd_command(imlec_yok);
+   169: 
+   170: lcd_clear();
+   171: 
+   172: lcd_command(satir_1);
+   173: }
+   174: 
+   175: 
+   176: 
+   177: 
+   178: 
+   179: 
+   180: 
+   181: 
+   182: 
+   183: 
+   184: 
+   185: 
+   186: 
+   187: 
+   188: 
+   189: 
+   190: 
+   191: 
+   192: 
+   193: 
+   194: 
+   195: 
+   196: 
+   197: 
+   198: 
+   199: unsigned char ttt ;
+   200: 
+   201: unsigned char ar = 0 ;
+   202: 
+   203: typedef unsigned char byte ;
+   204: 
+   205: 
+   206: #define SANIYE_1 8
+   207: #define SANIYE_0 9
+   208: 
+   209: #define DAKIKA_1 6
+   210: #define DAKIKA_0 7
+   211: 
+   212: #define SAAT_1 4
+   213: #define SAAT_0 5
+   214: 
+   215: #define GUN_1 10 
+   216: #define GUN_0  11
+   217: 
+   218: #define AY_1 12
+   219: #define AY_0 13
+   220: 
+   221: #define YIL_1 14
+   222: #define YIL_0 15
+   223: #define true 1
+   224: #define false 0
+   225: 
+   226: 
+   227: char en_yakin_alarm_bulundu = false ; 
+   228: 
+   229: 
+   230: 
+   231: 
+   232: struct Alarm {
+   233:         unsigned char birinci ;
+   234:         unsigned char ikinci ;
+   235:         unsigned char ucuncu ;
+   236:         
+   237:         
+   238: };
+   239: 
+   240: 
+   241: 
+   242: unsigned char temporary ;
+   243: unsigned char seri_porttan_veri_al()
+   244: {
+   245:         
+   246:         if( FERR == 1 )  temporary = RCREG ;
+   247:         CREN = 1 ;
+   248: while( !RCIF );
+   249: return RCREG;
+   250: }
+   251: void seri_porta_veri_gonder(unsigned char jk)
+   252:  { 
+   253: 
+   254:  TXREG=jk;
+   255: 
+   256:         while( !TRMT );
+   257: 
+   258: 
+   259: 
+   260:          }
+   261:          
+   262:          void seri_port_string( const char * s  )
+   263:          { static int index = 0 ;
+   264: 
+   265: 
+   266: 
+   267:                  while(*s != '\0'  )
+   268:                  {
+   269:                          seri_porta_veri_gonder( *s );
+   270: 
+   271: s++;
+   272:                  
+   273: 
+   274:                          __delay_ms( 10 ) ;
+   275:                          
+   276:                  }
+   277:                  
+   278:          }
+   279:          
+   280:          int pow( int a , int b )
+   281: { int c = 1;
+   282:         for( int k = 1 ; k <= b ; k++ )
+   283:         {
+   284:         c = c * a ;
+   285:                 }
+   286:         return c ;
+   287: 
+   288: }
+   289: void seri_portu_ayarla()
+   290: {TXSTA = 0 ;  //Bootloader UART ý kapatmýyor hata olmuþ olabilir , Error flaglerini sýfýrlýyoruz yeniden kullanabilmek için....
+   291:          
+   292:         RCSTA = 0 ; 
+   293:         temporary = RCREG ;
+   294:         
+   295:         SPBRG=103 ; // 16mhz 9600 ;//DIVIDER;
+   296:         BRGH=1;
+   297:         
+   298:         
+   299:         SYNC=0;
+   300:         
+   301:         TX9=0;
+   302:         
+   303:         TXEN=1;
+   304:         
+   305:         RX9=0;
+   306:         
+   307:         CREN=1;
+   308:         
+   309:         
+   310:         
+   311:         SPEN=1;/*
+   312:         RC6=1;
+   313:         
+   314:         RC7=1;
+   315: */
+   316:         }
+   317: 
+   318: 
+   319: 
+   320: 
+   321: 
+   322: 
+   323: 
+   324: 
+   325: 
+   326: 
+   327: 
+   328: 
+   329: 
+   330: I2C_Start(  )
+   331: {
+   332:         SEN = 1;
+   333:         while( SEN );
+   334:         SSPIF = 0;
+   335:         
+   336:         }
+   337: 
+   338:         I2C_Stop(  )
+   339:         {
+   340:                 PEN = 1;
+   341:                 while( PEN );
+   342:                 SSPIF = 0;
+   343:         }
+   344:         
+   345: I2C_gonder(  unsigned char veri )
+   346: {
+   347: SSPBUF = veri;
+   348:         while( !SSPIF );
+   349:                 SSPIF = 0;
+   350: 
+   351:         
+   352: 
+   353: }       
+   354: 
+   355: 
+   356: unsigned char I2C_oku (   )
+   357: {
+   358: RCEN  = 1;      //RCEN = 1;     
+   359:         while( !SSPIF );
+   360:         SSPIF = 0;
+   361: return SSPBUF;  
+   362:         
+   363:         
+   364:         
+   365:         
+   366: }
+   367: 
+   368: 
+   369: I2C_Master_ayarla (   )
+   370: {
+   371: SMP = 1;
+   372: CKE = 0;
+   373: 
+   374:         
+   375:         
+   376:         //Fosc/4( 0 +1 )
+   377:         //100 khz
+   378:         SSPADD = 39;//for 100 khz in 16 MHz ; 9 for 4 Mhz
+   379:         
+   380:         
+   381:         
+   382:         
+   383:         //I2C 7 bit 
+   384: SSPM3 = 1;
+   385: SSPM2 = 0;
+   386: SSPM1 = 0;;
+   387: SSPM0 = 0;      
+   388:         
+   389:         
+   390: 
+   391:  
+   392: SSPEN = 1;
+   393:         
+   394:         
+   395:         
+   396: }
+   397: 
+   398: void Send_NACK()
+   399: {
+   400:         
+   401:         ACKDT = 1;
+   402:         ACKEN = 1;
+   403:         while( ACKEN );
+   404:                 SSPIF = 0;
+   405:         
+   406:         
+   407: }
+   408: unsigned char veri ;
+   409: 
+   410: int DS1307_saniye( )
+   411: {
+   412:         
+   413: 
+   414:                 I2C_Start();
+   415:         I2C_gonder( 0b11010000 );
+   416:         I2C_gonder( 0x00 );
+   417:         I2C_Stop();
+   418:         I2C_Start();
+   419:         I2C_gonder( 0b11010001 );
+   420:         veri = I2C_oku(  );
+   421: veri = ( veri >> 4 ) * 10 + ( veri & 15 ) ;
+   422:                 Send_NACK();
+   423:                 I2C_Stop();
+   424:                 
+   425:                 
+   426: return veri;
+   427:         
+   428:         
+   429: }
+   430: 
+   431: int DS1307_dakika( )
+   432: {
+   433:         
+   434:         I2C_Start();
+   435:         I2C_gonder( 0b11010000 );
+   436:         I2C_gonder( 0x01 );
+   437:         I2C_Stop();
+   438:         I2C_Start();
+   439:         I2C_gonder( 0b11010001 );
+   440: 
+   441:         veri = I2C_oku(  );
+   442: veri = ( veri >> 4 ) * 10 + ( veri & 15 ) ;
+   443:                 Send_NACK();
+   444:                 I2C_Stop();
+   445:         return veri;
+   446:         
+   447:         
+   448:         
+   449: }
+   450: 
+   451: int DS1307_saat()
+   452:  {
+   453:          
+   454:          I2C_Start();
+   455:         I2C_gonder( 0b11010000 );
+   456:         I2C_gonder( 0x02 );
+   457:         I2C_Stop();
+   458:         I2C_Start();
+   459:         I2C_gonder( 0b11010001 );
+   460:         veri = I2C_oku(  );
+   461: veri = ( veri >> 4 ) * 10 + ( veri & 15 ) ;
+   462:                 Send_NACK();
+   463:                 I2C_Stop();
+   464:          
+   465:          return veri;
+   466:  }
+   467: 
+   468: char DS1307_ay()
+   469:  {
+   470:           I2C_Start();
+   471:         I2C_gonder( 0b11010000 );
+   472:         I2C_gonder( 0x05 );
+   473:         I2C_Stop();
+   474:         I2C_Start();
+   475:         I2C_gonder( 0b11010001 );
+   476:         veri = I2C_oku(  );
+   477: veri = ( veri >> 4 ) * 10 + ( veri & 15 ) ;
+   478:                 Send_NACK();
+   479:                 I2C_Stop();
+   480:          
+   481:          return veri;
+   482:          
+   483:          
+   484:          
+   485:          }
+   486:  char DS1307_gun()
+   487:  {
+   488:           I2C_Start();
+   489:         I2C_gonder( 0b11010000 );
+   490:         I2C_gonder( 0x04 );
+   491:         I2C_Stop();
+   492:         I2C_Start();
+   493:         I2C_gonder( 0b11010001 );
+   494:         veri = I2C_oku(  );
+   495: veri = ( veri >> 4 ) * 10 + ( veri & 15 ) ;
+   496:                 Send_NACK();
+   497:                 I2C_Stop();
+   498:          
+   499:          return veri;
+   500:          
+   501:          
+   502:          
+   503:          }
+   504:  
+   505:  char DS1307_yil()
+   506:  {
+   507:           I2C_Start();
+   508:         I2C_gonder( 0b11010000 );
+   509:         I2C_gonder( 0x06 );
+   510:         I2C_Stop();
+   511:         I2C_Start();
+   512:         I2C_gonder( 0b11010001 );
+   513:         veri = I2C_oku(  );
+   514: veri = ( veri >> 4 ) * 10 + ( veri & 15 ) ;
+   515:                 Send_NACK();
+   516:                 I2C_Stop();
+   517:          
+   518:          return veri;
+   519:          
+   520:          
+   521:          
+   522:          }
+   523:  
+   524: void DS1307_dakika_ayarla( char value )
+   525: {
+   526:   I2C_Start();
+   527:         I2C_gonder( 0b11010000 );
+   528:         I2C_gonder( 0x01 );
+   529:         
+   530:         value =  (   ( value / 10 ) << 4  ) | ( value - ( value/10 ) * 10  ) ; 
+   531:         I2C_gonder( value );
+   532:         I2C_Stop();
+   533:   
+   534:  // value =  (   ( value / 10 ) << 4  ) | ( value - ( value/10 ) * 10  ) ; 
+   535:        
+   536:   
+   537: }
+   538: 
+   539: void DS1307_saat_ayarla( char value )
+   540: {
+   541:   I2C_Start();
+   542:         I2C_gonder( 0b11010000 );
+   543:         I2C_gonder( 0x02 );
+   544:         
+   545:         value =  (   ( value / 10 ) << 4  ) | ( value - ( value/10 ) * 10  ) ; 
+   546:         I2C_gonder( value );
+   547:         I2C_Stop();
+   548:   
+   549:  // value =  (   ( value / 10 ) << 4  ) | ( value - ( value/10 ) * 10  ) ; 
+   550:        
+   551:   
+   552: }
+   553: 
+   554: 
+   555: 
+   556: 
+   557: void DS1307_saniye_ayarla( char value )
+   558: {
+   559:   
+   560:  I2C_Start();
+   561:         I2C_gonder( 0b11010000 );
+   562:         I2C_gonder( 0x00 );
+   563:         
+   564:         value =  (   ( value / 10 ) << 4  ) | ( value - ( value/10 ) * 10  ) ; 
+   565:         I2C_gonder( value );
+   566:         I2C_Stop();
+   567:   
+   568:   
+   569:   
+   570: }
+   571: 
+   572: 
+   573: 
+   574: 
+   575: void DS1307_gun_ayarla( char value )
+   576: {
+   577:   I2C_Start();
+   578:         I2C_gonder( 0b11010000 );
+   579:         I2C_gonder( 0x04 );
+   580:         
+   581:         value =  (   ( value / 10 ) << 4  ) | ( value - ( value/10 ) * 10  ) ; 
+   582:         I2C_gonder( value );
+   583:         I2C_Stop();
+   584:   
+   585:  // value =  (   ( value / 10 ) << 4  ) | ( value - ( value/10 ) * 10  ) ; 
+   586:        
+   587:   
+   588: }
+   589: void DS1307_ay_ayarla( char value )
+   590: {
+   591:   I2C_Start();
+   592:         I2C_gonder( 0b11010000 );
+   593:         I2C_gonder( 0x05 );
+   594:         
+   595:         value =  (   ( value / 10 ) << 4  ) | ( value - ( value/10 ) * 10  ) ; 
+   596:         I2C_gonder( value );
+   597:         I2C_Stop();
+   598:   
+   599:  // value =  (   ( value / 10 ) << 4  ) | ( value - ( value/10 ) * 10  ) ; 
+   600:        
+   601:   
+   602: }
+   603: 
+   604: void DS1307_yil_ayarla( char value )
+   605: {
+   606:   I2C_Start();
+   607:         I2C_gonder( 0b11010000 );
+   608:         I2C_gonder( 0x06 );
+   609:         
+   610:         value =  (   ( value / 10 ) << 4  ) | ( value - ( value/10 ) * 10  ) ; 
+   611:         I2C_gonder( value );
+   612:         I2C_Stop();
+   613:   
+   614:  // value =  (   ( value / 10 ) << 4  ) | ( value - ( value/10 ) * 10  ) ; 
+   615:        
+   616:   
+   617: }
+   618:  
+   619: 
+   620: 
+   621: void segmente_sayi_yukle ( char segment_numarasi , char yuklenecek_sayi )
+   622: {
+   623:         PORTB = yuklenecek_sayi | segment_numarasi << 4 ;
+   624:         
+   625:         RC0 = 1 ;
+   626:         __delay_ms( 10 ) ;
+   627:         RC0 = 0 ;
+   628:         
+   629:         
+   630:         
+   631:         
+   632:         
+   633: }
+   634: 
+   635: 
+   636: 
+   637: 
+   638: void eeprom_hazirla()
+   639: {
+   640:         //EEIF = 0;//EEPROM write operation flag bit...
+   641:         /*
+   642:         Control bits, RD and WR, initiate read and write or
+   643: erase, respectively. These bits cannot be cleared, only
+   644: set, in software.
+   645:         */
+   646:         
+   647:         
+   648: //      EEDATA holds the 8 bit-data for read/write
+   649:         //we can access the program memory by using these registers...
+   650:         //EEADR holds the address of the eeprom location being accessed... range 00h - ffh
+   651:         //EEPGD determines whether the access will be a program or data memory access...
+   652:         //Access data memory
+   653:         
+   654:         //WR = 1; it writes set 0 by the hardware RD = 1; reads set zero by the hardware...
+   655:         
+   656:         
+   657:         EEPGD = 0;
+   658:         
+   659:         EEIE = 0;//EEPROM write operation interrupt bit...
+   660: }
+   661: 
+   662: void eeprom_yaz( unsigned char adres , unsigned char veri )
+   663: {       
+   664:         ttt = GIE ;
+   665:         GIE = 0 ;
+   666:         WREN = 1;
+   667:         
+   668:         EEADR = adres;
+   669:         EEDATA =veri;
+   670:         
+   671:         EECON2 = 0x055;//Nedensiz
+   672:         EECON2 = 0xAA;//...
+   673:         WR = 1;
+   674:         while( WR );
+   675:         EEIF= 0;
+   676: WREN = 0;       
+   677:         
+   678:         GIE = ttt ;
+   679: }
+   680: 
+   681: unsigned char eeprom_oku( unsigned char adres )
+   682: {
+   683:         ttt = GIE ;
+   684:         GIE = 0 ;
+   685: EEADR = adres;
+   686:         EEDATA = 0;
+   687:  RD = 1;
+   688:         GIE = ttt ;
+   689: return EEDATA;
+   690:                 
+   691:         
+   692:         
+   693: }       
+   694: 
+   695: char saniye , dakika , saat , gun , yil , ay  , sicaklik , nem ;
+   696: 
+   697: unsigned char buffer [ 20 ] ;
+   698: unsigned char received_data = 0 ;
+   699: unsigned char buffer_index = 0 ; 
+   700: 
+   701: 
+   702: 
+   703:  
+   704: 
+   705: 
+   706: unsigned char temp_sayi ;
+   707: unsigned char dd ;
+   708: unsigned char ffa ;
+   709: 
+   710: void eepromu_resetle()
+   711: {
+   712:         int a ;
+   713:         for(  a = 0 ; a <= 255 ; a++ )
+   714:                 eeprom_yaz( a , 0  );
+   715:         
+   716:         
+   717: }
+   718: 
+   719: struct Alarm time_to_struct (  char t_saat , char t_dakika ,   char t_gun , char t_ay , char t_yil  )
+   720: {
+   721:         struct Alarm _al ;
+   722:         _al.birinci = ( t_saat << 3  ) | (  t_dakika >> 3    ) ;
+   723:         _al.ikinci =  (( t_dakika & 7 ) << 5 ) | ( t_ay << 1  ) |  ( t_gun >> 4 ) ;
+   724:         _al.ucuncu = ( t_gun << 4 ) | ( t_yil  )  ;
+   725:         return _al ;
+   726:         
+   727:         
+   728: }
+   729: char bos_alan_bul ()
+   730: {
+   731: unsigned char ind = 0 ;
+   732:         
+   733:         for( ind = 1 ; ind < 255 ; ind = ind + 3 )
+   734:         {
+   735:                 if( (eeprom_oku( ind + 2 )) == 0 ) return ind ;
+   736:                         
+   737:         }
+   738:         
+   739:         
+   740:         
+   741:         return -1 ;
+   742: }
+   743: 
+   744: void alarm_ekle( struct Alarm yazilacak_alarm  ) 
+   745: {
+   746: unsigned char kayit_index = bos_alan_bul (); //Eklenecek uygun bir alan bul 
+   747:         
+   748:         eeprom_yaz( kayit_index  , yazilacak_alarm.birinci      ) ;  //Verileri kaydet ; 
+   749:         eeprom_yaz( kayit_index + 1 , yazilacak_alarm.ikinci );
+   750:         eeprom_yaz ( kayit_index +2 , yazilacak_alarm.ucuncu ) ;
+   751:         
+   752:         eeprom_yaz ( 0 , eeprom_oku( 0 ) +1 ) ;//Kayýtta bulunan alarm sayýsýný artýr... 
+   753:         
+   754:         
+   755: }
+   756: 
+   757: struct Alarm _temp__ ;
+   758: void alarm_sil ( struct Alarm silinecek_alarm  ) ;
+   759: 
+   760: void interrupt FNC () 
+   761: {
+   762:         
+   763: 
+   764: if( RCIF )
+   765: {
+   766:         received_data = RCREG ; //RCIF sýfýrlandý...
+   767:         
+   768:         
+   769:         if( received_data == '#' ) //Telefonda program baðlandýðý anda bu mesajý gönderecek sýcaklýk nem ve zaman ve ayarlanmýþ alarmlarý...
+   770:         {
+   771:                 seri_porta_veri_gonder( 'T' ) ; //Onaylama kodu...
+   772:         __delay_ms( 300  ) ;
+   773:                 
+   774:                 seri_porta_veri_gonder( saat );
+   775:         __delay_ms( 100 ) ;
+   776:         seri_porta_veri_gonder( dakika ) ;
+   777:         __delay_ms( 100 ) ;
+   778:         seri_porta_veri_gonder( saniye ) ;
+   779:         __delay_ms( 100 ) ;
+   780:         
+   781:                 
+   782:                 
+   783:                 seri_porta_veri_gonder( sicaklik ) ;
+   784:         __delay_ms( 100 ) ;
+   785:         seri_porta_veri_gonder( nem ) ;
+   786:         __delay_ms( 100 ) ;
+   787:                 
+   788:                 
+   789:                 
+   790:                 seri_porta_veri_gonder( gun ) ;
+   791:         __delay_ms( 100 ) ;
+   792:         seri_porta_veri_gonder( ay ) ;
+   793:         __delay_ms( 100 ) ;
+   794:         seri_porta_veri_gonder( yil ) ;
+   795:         __delay_ms( 100 ) ;
+   796:                 
+   797:                 
+   798:         }
+   799:         
+   800: else if ( received_data == '$' ) //Alarm zamanlarý buradan gönderiliyor telefona...
+   801:         {
+   802:         
+   803:         
+   804:         temp_sayi = eeprom_oku ( 0 ) ;
+   805:    seri_porta_veri_gonder( temp_sayi ) ;
+   806:         __delay_ms( 100 ) ;
+   807:         ffa = 1 ;
+   808:         for( dd = 0 ; dd < temp_sayi ; dd ++ )
+   809:         {
+   810:                 
+   811:                 
+   812:                 while( eeprom_oku ( ffa +2 ) == 0  ) ffa = ffa +3 ; 
+   813:                 
+   814:                 seri_porta_veri_gonder( eeprom_oku ( ffa ) );
+   815:                 __delay_ms( 100 ) ;
+   816:                 seri_porta_veri_gonder( eeprom_oku ( ffa+1 ) );
+   817:                 __delay_ms( 100 ) ;
+   818:         seri_porta_veri_gonder( eeprom_oku ( ffa+2 ) );
+   819:                 __delay_ms( 100 ) ;             
+   820:                 ffa+=3;
+   821:                 __delay_ms ( 500  );
+   822:         }
+   823: 
+   824: 
+   825: seri_porta_veri_gonder( 'T' ) ;
+   826:         __delay_ms( 100 ) ;
+   827:         
+   828: }
+   829: 
+   830: else    if( received_data == 'E' ) //yeni alarm ekleme...
+   831:                 
+   832:         {
+   833:                 
+   834:                 buffer[ 1 ]  = seri_porttan_veri_al ( );
+   835:                 buffer[ 2 ] = seri_porttan_veri_al();
+   836:                 buffer[ 3 ]  = seri_porttan_veri_al ( );
+   837:                 buffer[ 4 ] = seri_porttan_veri_al();
+   838:                 buffer[ 5 ]  = seri_porttan_veri_al ( );
+   839:                 ar = buffer[ 5 ] ;
+   840:         struct Alarm tmp =      time_to_struct( buffer[ 1 ] , buffer[ 2 ] , buffer[ 3 ] , buffer[ 4 ] , buffer[ 5]     );
+   841:                 alarm_ekle( tmp  ) ;
+   842:         seri_porta_veri_gonder( 'T' ) ;
+   843:         __delay_ms( 100 ) ;
+   844:                 
+   845:         }
+   846:         else if ( received_data == 'Z' ) //Telefondan saat bilgisi ayarlanýyor...
+   847:         {
+   848:         
+   849:         saniye = seri_porttan_veri_al ( ) ;
+   850:         DS1307_saniye_ayarla (  saniye ) ;
+   851:         dakika = seri_porttan_veri_al ( ) ;
+   852:                 DS1307_dakika_ayarla (dakika ) ;
+   853:         saat = seri_porttan_veri_al ( );
+   854:                 DS1307_saat_ayarla ( saat ) ;
+   855:                 gun = seri_porttan_veri_al () ;
+   856:                 DS1307_gun_ayarla ( gun);
+   857:                 ay = seri_porttan_veri_al();
+   858:                 DS1307_ay_ayarla( ay ) ;
+   859:                 yil = seri_porttan_veri_al();
+   860:                 DS1307_yil_ayarla ( yil ) ;
+   861:                 
+   862:                 seri_porta_veri_gonder( 'T' ) ;
+   863:                 
+   864:                 
+   865:                 
+   866:                 
+   867:                 
+   868:         }
+   869:         else if ( received_data == 'R' )
+   870:         {
+   871:                 eepromu_resetle();
+   872:                 seri_porta_veri_gonder( 'T' ) ;
+   873:                 __delay_ms( 100 ) ;
+   874:                 
+   875:         }
+   876: else if ( received_data == '%' )
+   877: {
+   878:         
+   879:         _temp__.birinci = seri_porttan_veri_al ( ) ;
+   880:         _temp__.ikinci  = seri_porttan_veri_al ( ) ;
+   881:         _temp__.ucuncu = seri_porttan_veri_al ( ) ;
+   882:         
+   883: alarm_sil ( _temp__ ) ; 
+   884:         
+   885: }
+   886: 
+   887: 
+   888:         
+   889:         
+   890:         
+   891: //Telefondan gelen alarm tarihi , saati burada alýnacak...      
+   892:         
+   893:         
+   894:         
+   895:         
+   896:         
+   897:         
+   898:         
+   899:         
+   900:         
+   901:         
+   902:         
+   903: 
+   904:         
+   905:          //RCREG i oku ;( RCIF sýfýrlanacak... )
+   906:         
+   907: }  //if RCIF
+   908: 
+   909:         
+   910:         
+   911:         
+   912:         
+   913:         
+   914:         
+   915: }
+   916: 
+   917: 
+   918: void alarm_sil ( struct Alarm silinecek_alarm  )
+   919: {
+   920:         char alarm_sayisi = eeprom_oku ( 0  );
+   921:         
+   922:         unsigned char ind = 1 ;
+   923:         while( alarm_sayisi > 0 ) 
+   924:    {
+   925:                 
+   926:         if ( eeprom_oku ( ind ) == silinecek_alarm.birinci )
+   927:         {
+   928:                 if( eeprom_oku ( ind +1 ) == silinecek_alarm.ikinci )
+   929:                 {
+   930:                         if( eeprom_oku( ind +2 ) == silinecek_alarm.ucuncu )
+   931:                         {
+   932:                                 eeprom_yaz( ind  , 0 );
+   933:                                 eeprom_yaz( ind + 1 , 0 );
+   934:                                 eeprom_yaz ( ind +2 , 0  );
+   935:                                 eeprom_yaz( 0 , eeprom_oku (0) - 1  );
+   936:                         
+   937:                         
+   938:                                 
+   939:                                 } //ikinci if
+   940:                         
+   941:                         
+   942:                         
+   943:                 } //ilk if
+   944:                 
+   945:                 
+   946:                 
+   947:                 
+   948:                 
+   949:         }
+   950:         
+   951:                 ind = ind + 3 ;
+   952:                 if( eeprom_oku ( ind +2 ) !=0 ) alarm_sayisi -- ;
+   953:                 
+   954:                 
+   955:         } //while
+   956:         
+   957:         
+   958:         
+   959: }//function
+   960: 
+   961: void alarm_ver (  ) 
+   962: {
+   963:         ADCON1 = 0x7 ;
+   964:         TRISA = 0 ;
+   965:         PORTA = 0 ;
+   966:         for ( int k = 0 ; k < 20 ;k++ )
+   967:                 
+   968:         {
+   969:                 RA0 = ~RA0 ;
+   970:                 __delay_ms( 250  ) ;
+   971:                 
+   972:         }
+   973:         
+   974:         
+   975: }
+   976: 
+   977: 
+   978: 
+   979: 
+   980: 
+   981: void alarm_kontrol_et  ( struct Alarm alarm )
+   982: {
+   983:         
+   984:         
+   985:         char alarm_sayisi = eeprom_oku ( 0  );
+   986:         
+   987:         unsigned char ind = 1 ;
+   988:         while( alarm_sayisi > 0 ) 
+   989:    {
+   990:                 
+   991:         if ( eeprom_oku ( ind ) == alarm.birinci )
+   992:         {
+   993:                 if( eeprom_oku ( ind +1 ) == alarm.ikinci )
+   994:                 {
+   995:                         if( eeprom_oku( ind +2 ) == alarm.ucuncu )
+   996:                         {
+   997:                                 eeprom_yaz( ind  , 0 );  //Alarm bulundu ve bu alaný sýfýrla
+   998:                                 eeprom_yaz( ind + 1 , 0 );
+   999:                                 eeprom_yaz ( ind +2 , 0  );
+  1000:                                 eeprom_yaz( 0 , eeprom_oku (0) - 1  );
+  1001:                         
+  1002:                                 alarm_ver ( );
+  1003:                                 
+  1004:                         
+  1005:                                 
+  1006:                                 } //ikinci if
+  1007:                         
+  1008:                         
+  1009:                         
+  1010:                 } //ilk if
+  1011:                 
+  1012:                 
+  1013:                 
+  1014:                 
+  1015:                 
+  1016:         }
+  1017:         
+  1018:                 ind = ind + 3 ;
+  1019:                 if( eeprom_oku ( ind +2 ) !=0 ) alarm_sayisi -- ;
+  1020:                 
+  1021:                 
+  1022:         } //while
+  1023:         
+  1024:         
+  1025:         
+  1026:         
+  1027:         
+  1028:         
+  1029:         
+  1030:         
+  1031:         
+  1032:         
+  1033:         
+  1034:         
+  1035: }
+  1036: 
+  1037: /*
+  1038: void en_yakin_alarmi_bul () 
+  1039: {
+  1040:         char en_yakin_index  = 1 ;
+  1041:         
+  1042:         
+  1043:         long en_yakin_fark  = -5 ;
+  1044:         long fark ;
+  1045:         long current_fark ;
+  1046:         long temp_fark ;
+  1047:         
+  1048:         
+  1049:         char current_hour = saat ;
+  1050:         char current_minute = dakika ;
+  1051:         char current_day = gun ;
+  1052:         char current_month = ay ;;
+  1053:         char current_year = yil-16 ;
+  1054:         
+  1055:         char alarm_dakika , alarm_saat , alarm_saniye , alarm_ay , alarm_yil , alarm_gun ;
+  1056:         char alarm_sayisi = eeprom_oku ( 0  );
+  1057:         
+  1058:         char eeprom1 ,eeprom2 , eeprom3 ;
+  1059:         
+  1060:         unsigned char ind = 1 ;
+  1061:         while( alarm_sayisi > 0 ) 
+  1062:    {
+  1063:                 
+  1064:                 
+  1065:          
+  1066:            
+  1067:            
+  1068:            
+  1069:                 
+  1070:                 if( eeprom_oku ( ind +2 ) !=0 )
+  1071:                 {       
+  1072:                         eeprom1 = eeprom_oku ( ind ) ;
+  1073:                         eeprom2 = eeprom_oku ( ind +1  );
+  1074:                         eeprom3 = eeprom_oku( ind + 2  );
+  1075:                         
+  1076:                         
+  1077:                         
+  1078:                         
+  1079:         alarm_saat = eeprom1 >> 5 ;
+  1080:         alarm_dakika =  ((eeprom1 & 0x7 ) << 3 ) |  ( eeprom2 >> 5 ) ;
+  1081:         alarm_ay =  (( eeprom2 >> 1 ) & 0xf )   ;       
+  1082:         alarm_gun = (( eeprom2 & 1 ) << 4  ) |  ( eeprom3 >> 4  ) ;             
+  1083:         alarm_yil = eeprom3 & 0xf ;             
+  1084:                         
+  1085:         if ( alarm_yil < current_year )
+  1086:         {
+  1087:         
+  1088:                 
+  1089:                 
+  1090:         }       else
+  1091:         {
+  1092: 
+  1093: if( alarm_ay < current_month )
+  1094: {
+  1095:         
+  1096: }
+  1097: else
+  1098: {
+  1099:         if( alarm_gun < current_day ) 
+  1100:          ;
+  1101:         else
+  1102:         {
+  1103:                 if( alarm_saat < current_hour  );
+  1104:                         else
+  1105:                         {
+  1106:                                 if( alarm_dakika < current_minute );
+  1107:                                         else
+  1108:                                         {
+  1109:                                                 current_fark  = 365*current_year*24*60 + current_month*30*24*60 + current_day*24*60 + current_hour*60 + current_minute ;
+  1110:                                                 fark = 365*alarm_yil*24*60 + alarm_ay*30*24*60 + alarm_gun*24*60+ alarm_saat*60 + alarm_dakika ;
+  1111:                                                 if ( en_yakin_fark < 0 ){en_yakin_alarm_bulundu = true ; en_yakin_fark = fark - current_fark ; en_yakin_index = ind ; }
+  1112:                                                 else
+  1113:                                                 {
+  1114:                                                         if( en_yakin_fark > ( fark-current_fark ) )
+  1115:                                                         {
+  1116:                                                                 en_yakin_fark = fark-current_fark ;
+  1117:                                                                 en_yakin_index = ind ;
+  1118:                                                                 en_yakin_alarm_bulundu = true ;
+  1119:                                                                 
+  1120:                                                         }
+  1121:                                                         
+  1122:                                                         
+  1123:                                                 }
+  1124:                                                 
+  1125:                                         }
+  1126:                                 
+  1127:                         }
+  1128:                 
+  1129:                 
+  1130:                 
+  1131:                 
+  1132:         }
+  1133:         
+  1134:         
+  1135:         
+  1136:         
+  1137:         
+  1138:         
+  1139:         
+  1140: }
+  1141:                 
+  1142:                 
+  1143:                 
+  1144:                 
+  1145:                 
+  1146:         }               
+  1147:                         
+  1148:                         
+  1149:                         
+  1150:                 alarm_sayisi -- ;
+  1151:                 
+  1152:                 }       
+  1153:                 ind = ind + 3 ;
+  1154:                 
+  1155:                 
+  1156:                 
+  1157:                 
+  1158:                 
+  1159:                 
+  1160:         } //while
+  1161:         
+  1162:         
+  1163:         
+  1164:         
+  1165:         
+  1166:         
+  1167: }
+  1168: */
+  1169: 
+  1170: 
+  1171: 
+  1172: 
+  1173: 
+  1174: unsigned char data [ 5 ] = { 0 , 0  , 0 , 0 , 0 } ;
+  1175: 
+  1176: 
+  1177: static int index = 0 ;
+  1178: static int count ;
+  1179:  int temp ;
+  1180: int saim ;
+  1181: unsigned char rakam[ 5 ] ;
+  1182: int fa = 0 ;
+  1183: int  sayi ;
+  1184: char _ind ;
+  1185: void start_signal()
+  1186: {
+  1187:         for( fa =  0; fa < 5 ; fa++ )
+  1188:         data[ fa ] = 0 ;        
+  1189: //      TRISB0 = 0 ;//DDRB |= 1 ;//trisb.RB0 = 1 ;
+  1190: //      RB0 = 1 ; //PORTB = 1 ;//portb.RB0 = 1 ;
+  1191: //      __delay_ms( 250 ) ; //iþlemci baþlayýnca biraz bekle line is high pull up tan ötürü
+  1192:          // PB0 pini output ve low line is low
+  1193: //      TRISB0=0;
+  1194:         TRISC5 = 0 ;
+  1195:         RC5 = 0 ; //PORTB = 0 ;//portb.RB0 = 0 ;
+  1196:         __delay_ms( 25 ) ; //Start signal için...
+  1197:         RC5 = 1 ; //PORTB = 1 ;//portb.RB0 = 1 ; //PB0 high line is high
+  1198:         
+  1199:         __delay_us( 30 ) ;
+  1200:         RC5 = 0 ; //PORTB = 0 ; //portb.RB0 = 0 ;
+  1201:         //Bundan sonra input edilip
+  1202: //      nRBPU=1;
+  1203:         //OPTION_REG |= ( 1 << 7 );
+  1204:         TRISC5 = 1 ; //DDRB = 0 ; //trisb.RB0 = 0 ; //PB0 input
+  1205:         sayi = 0 ;
+  1206: 
+  1207: while(  !RC5 ){ sayi ++ ; if( sayi == 200 ) {lcd_goto( 1 , 1  ); lcd_write( "ilk low response hata\n" ) ; return;}    }  ; //DHT responsu tamam....
+  1208: saim = sayi ;
+  1209: 
+  1210: 
+  1211: sayi = 0 ;
+  1212:         while( RC5  ) { sayi ++ ; if( sayi == 200 ) { lcd_goto( 1 , 1  ); lcd_write( "ilk high response hata\n" ) ; return ;}    }  ;  
+  1213: 
+  1214: 
+  1215:         for ( _ind = 0 ; _ind < 5 ; _ind++ )
+  1216:         {
+  1217:                         for( index = 0 ; index < 8 ; index ++ )
+  1218:                         {
+  1219:                                 
+  1220:                                 count = 0 ;
+  1221:                                 while( !RC5 ) 
+  1222:                                         { count ++  ; 
+  1223:                                                 if( count > 100 ) { 
+  1224:                                                         lcd_goto( 1 , 1) ;
+  1225:                                                         
+  1226:                                                         lcd_write( "ilkbithatalow\n" );return ;  
+  1227:                                                         }  
+  1228:                                                         } 
+  1229:                                 temp = count;
+  1230:                                 count = 0 ;
+  1231:                                 while( RC5 ){ 
+  1232:                                         count ++  ; 
+  1233:                                         if( count > 100 ) 
+  1234:                                                 
+  1235:                                                 {  lcd_goto( 1 , 1 ) ;
+  1236:                                                         lcd_write( "ilkbithatagigh\n" );
+  1237:                                                         
+  1238:                                                         return ;  }   
+  1239:                                                         }
+  1240:                                 if( count > temp ) data[ _ind ] |= 1 << (7- (index ) ) ;
+  1241:                         }
+  1242:                 }
+  1243:                         
+  1244:                         
+  1245:                         
+  1246: 
+  1247: 
+  1248: }
+  1249: 
+  1250: void data_gonder( )
+  1251: {
+  1252: for( int f = 0 ; f < 5 ; f++ )
+  1253: {
+  1254: sprintf( rakam  , "%d" , data[ f ]  );
+  1255: seri_port_string( rakam );
+  1256: seri_porta_veri_gonder( '\n' ) ;
+  1257: __delay_ms( 10 ) ;
+  1258:         
+  1259: }
+  1260:         
+  1261:         
+  1262: }
+  1263: 
+  1264: 
+  1265: void verileri_lcdye_yaz( ) 
+  1266: {
+  1267:         
+  1268:         
+  1269:         lcd_goto( 1  , 7 ) ;
+  1270:         lcd_data ( saniye / 10 + 48 ) ;
+  1271: 
+  1272:         lcd_data ( saniye %10 +48 ) ;
+  1273: 
+  1274: 
+  1275:         lcd_goto( 1  , 4 ) ;
+  1276:         lcd_data ( dakika / 10 + 48 ) ;
+  1277:         
+  1278:         lcd_data ( dakika %10 +48 ) ;   
+  1279: 
+  1280:         
+  1281:         
+  1282:                 lcd_goto( 2  , 4 ) ;
+  1283:         lcd_data ( ay / 10 + 48 ) ;
+  1284:         
+  1285:         lcd_data ( ay %10 +48 ) ;
+  1286:         
+  1287: 
+  1288:         lcd_goto( 2  , 7 ) ;
+  1289:         lcd_data ( yil / 10 + 48 ) ;
+  1290:         
+  1291:         lcd_data ( yil %10 +48 ) ;      
+  1292: 
+  1293: 
+  1294: lcd_goto( 1  , 1 ) ;
+  1295:         lcd_data ( saat / 10 + 48 ) ;
+  1296:         
+  1297:         lcd_data ( saat %10 +48 ) ;
+  1298:         
+  1299:         lcd_goto( 1 , 3 ) ;
+  1300:         lcd_data( ':' );
+  1301:         lcd_goto ( 1 , 6 );
+  1302:         lcd_data ( ':' );
+  1303:         
+  1304:         lcd_goto( 2 , 3 ) ;
+  1305:         lcd_data( '/' );
+  1306: lcd_goto( 2 , 6   );
+  1307:         lcd_data ( '/' );
+  1308: 
+  1309: 
+  1310:         lcd_goto( 2  , 1 ) ;
+  1311:         lcd_data ( gun / 10 + 48 ) ;
+  1312:         
+  1313:         lcd_data ( gun %10 +48 ) ;
+  1314:         
+  1315: 
+  1316: 
+  1317: //Sýcaklýk ve nem bilgileri de gösterilecek...
+  1318: 
+  1319: 
+  1320: }
+  1321: 
+  1322: 
+  1323: void sensor_bilgilerini_yaz ( )
+  1324: 
+  1325: {
+  1326:         lcd_goto  ( 1 , 9 ) ;
+  1327:     lcd_write( "-SCKL:22" ) ;   
+  1328:         lcd_goto ( 2 , 9 ) ;
+  1329:         lcd_write( "-NEM:%" ) ;
+  1330:         lcd_goto( 1 , 15 ) ;
+  1331:         lcd_data  ( data[2] /10 + 48    ) ;
+  1332:         sicaklik  = data[2] ;
+  1333:         lcd_data( data[2] %10 + 48 ) ;
+  1334:         lcd_goto( 2 , 15) ;
+  1335:         lcd_data( data[0 ] /10 + 48 ) ;
+  1336:         nem = data[ 0 ] ;
+  1337:         lcd_data( data[ 0 ]  %10 + 48 ) ;
+  1338:         
+  1339:         
+  1340:         
+  1341: }
+  1342: 
+  1343: 
+  1344: 
+  1345: void main () 
+  1346: 
+  1347: {
+  1348:         lcd_init ( ) ; //LCD yi baþlattýk...
+  1349:         
+  1350:         __delay_ms( 100 ) ;
+  1351:         lcd_write( "Saim SUNEL" ) ;
+  1352:         
+  1353:         eeprom_hazirla();
+  1354:         /*
+  1355:         for ( int k = 0 ; k < 256 ;k++ )
+  1356:         {
+  1357:                 eeprom_yaz ( k , 0  );
+  1358:                 
+  1359:         }
+  1360:         
+  1361:         while( 1  );
+  1362:         */
+  1363:         
+  1364:         
+  1365: seri_portu_ayarla();
+  1366:         /*
+  1367:         RCIE = 1 ; 
+  1368:         RCIE enabled et
+  1369:         GIE = 1;
+  1370:         PEIE = 1 ;
+  1371: */      
+  1372:         
+  1373:         RCIE = 1 ;
+  1374:         PEIE = 1 ;
+  1375:         GIE = 1 ;
+  1376:         
+  1377: TRISB = 0 ;  //PortB 7 segmentlerin deðerlerini ayarlamak için kullanýlacak...
+  1378: PORTB = 0 ;  //RB7 pini clock olarak kullanýlacak....   
+  1379: TRISC0 = 0 ; //RC0 pini registerlara veri yüklemek için....
+  1380: RC0 = 0 ;       
+  1381:         
+  1382:         TRISC3 = 1 ;//I2C pinleri input
+  1383:         TRISC4 = 1 ; 
+  1384:         RC3 = 0 ;
+  1385:         RC4 = 0 ;
+  1386:         I2C_Master_ayarla();
+  1387:         
+  1388:         
+  1389:         /*
+  1390:         */
+  1391:         __delay_ms ( 100  );
+  1392:         saniye = DS1307_saniye();
+  1393:         __delay_ms ( 1000 ) ;
+  1394:         if ( saniye == DS1307_saniye () ) 
+  1395:         {       
+  1396:                 DS1307_saniye_ayarla( 52 );
+  1397:                 saniye = 52 ;
+  1398:         DS1307_dakika_ayarla( 0 );
+  1399:         DS1307_saat_ayarla( 0);
+  1400:         DS1307_gun_ayarla( 1);
+  1401:         DS1307_ay_ayarla( 1 );
+  1402:         DS1307_yil_ayarla( 2016 );
+  1403:         }
+  1404:         
+  1405: dakika = DS1307_dakika ( );
+  1406: saat = DS1307_saat () ;
+  1407: ay = DS1307_ay();
+  1408: gun = DS1307_gun();
+  1409: yil = DS1307_yil();     
+  1410:         
+  1411:         
+  1412:         segmente_sayi_yukle( SANIYE_1 , saniye / 10 );
+  1413:         segmente_sayi_yukle( SANIYE_0 , saniye % 10 );
+  1414:         
+  1415: 
+  1416:         
+  1417:         
+  1418:         
+  1419:         segmente_sayi_yukle( DAKIKA_1 , dakika / 10 );
+  1420:         segmente_sayi_yukle( DAKIKA_0 , dakika % 10 );
+  1421:         
+  1422: 
+  1423:         
+  1424:         
+  1425:         segmente_sayi_yukle( AY_1 , ay / 10 );
+  1426:         segmente_sayi_yukle( AY_0 , ay % 10 );
+  1427:         
+  1428:         
+  1429:         
+  1430:         
+  1431:         
+  1432:         
+  1433:         segmente_sayi_yukle( YIL_1 , yil / 10 );
+  1434:         segmente_sayi_yukle( YIL_0 , yil % 10 );
+  1435:         
+  1436: 
+  1437: 
+  1438:         
+  1439:         segmente_sayi_yukle( GUN_1 , gun /      10 );
+  1440:         segmente_sayi_yukle( GUN_0 , gun % 10 );
+  1441:         
+  1442:         
+  1443:         
+  1444:         
+  1445:         
+  1446:         
+  1447:         segmente_sayi_yukle( SAAT_1 , saat / 10 );
+  1448:         segmente_sayi_yukle( SAAT_0 , saat % 10 );
+  1449: 
+  1450: verileri_lcdye_yaz( );
+  1451: struct Alarm alarm ;
+  1452: start_signal () ;
+  1453: sensor_bilgilerini_yaz() ;
+  1454: /*      
+  1455:         char t_saat = 02 ;
+  1456:         char t_dakika = 32  ;
+  1457:         char t_gun = 2 ;
+  1458:         char t_ay = 7 ;
+  1459:         char t_yil = 0 ; //16+t_yil set edilmiþ alarm yýlý
+  1460:         
+  1461:         
+  1462:                 
+  1463:         alarm = time_to_struct( t_saat , t_dakika , t_gun , t_ay , t_yil ) ;
+  1464:         
+  1465:         //alarm_ekle( alarm ) ;
+  1466: //alarm_sil( alarm ) ;
+  1467:         
+  1468:         */
+  1469:         
+  1470: int sayi = 0 ;
+  1471:         
+  1472:         char sensor_check = 0 ;
+  1473:         
+  1474:         
+  1475:         
+  1476:         
+  1477:         while( 1 ) 
+  1478: {
+  1479: 
+  1480:         saniye = DS1307_saniye();
+  1481:         segmente_sayi_yukle( SANIYE_1 , saniye / 10 );
+  1482:         segmente_sayi_yukle( SANIYE_0 , saniye % 10 );
+  1483:         
+  1484:         verileri_lcdye_yaz();  
+  1485:         
+  1486:         
+  1487:         __delay_ms( 400 );
+  1488:         
+  1489:         if( saniye == 59 ) //dakikayý güncelle
+  1490:         {
+  1491:                 
+  1492:                 sensor_check ++ ;
+  1493:                 if( sensor_check == 30 ) //30 saniyede bir kontrol et sýcaklýðý ve nemi
+  1494:                 {
+  1495:                         sensor_check = 0 ;
+  1496:                         start_signal() ;
+  1497:                         sensor_bilgilerini_yaz();
+  1498:                         
+  1499:                 }
+  1500:         dakika = DS1307_dakika ( );
+  1501:                 segmente_sayi_yukle( DAKIKA_1 , dakika / 10 );
+  1502:         segmente_sayi_yukle( DAKIKA_0 , dakika % 10 );
+  1503:                 
+  1504:                 
+  1505:                 verileri_lcdye_yaz();  
+  1506:         
+  1507:                 alarm = time_to_struct ( saat , dakika , gun , ay , yil-16  ) ;
+  1508:                 alarm_kontrol_et (  alarm ) ;
+  1509:                 
+  1510:                 
+  1511:                 
+  1512:                 
+  1513:                 
+  1514:                 if( dakika == 0 ) //saati güncelle
+  1515:                 {
+  1516:                         saat = DS1307_saat () ;
+  1517:                         segmente_sayi_yukle( SAAT_1 , saat / 10 );
+  1518:                 segmente_sayi_yukle( SAAT_0 , saat % 10 );
+  1519:         verileri_lcdye_yaz();   
+  1520:                         if( saat == 0 ) //Günü güncelle
+  1521:                  {
+  1522:                          
+  1523:                          gun = DS1307_gun();
+  1524:                          segmente_sayi_yukle( GUN_1 , gun / 10 );
+  1525:         segmente_sayi_yukle( GUN_0 , gun % 10 );
+  1526: verileri_lcdye_yaz();  
+  1527:                          if( gun == 1 ) //ayý güncelle
+  1528:         {
+  1529:         ay = DS1307_ay();
+  1530:         segmente_sayi_yukle( AY_1 , ay / 10 );
+  1531:         segmente_sayi_yukle( AY_0 , ay % 10 );
+  1532:         verileri_lcdye_yaz();  
+  1533:                 if( ay == 1 ) //yýlý güncelle
+  1534:         {
+  1535:         
+  1536:         yil = DS1307_yil();     
+  1537:         segmente_sayi_yukle( YIL_1 , yil /      10 );
+  1538:         segmente_sayi_yukle( YIL_0 , yil % 10 );
+  1539:                 verileri_lcdye_yaz();  
+  1540:                 
+  1541:         }       
+  1542:                 
+  1543:                 
+  1544:                 
+  1545:         }       
+  1546:                          
+  1547:                          
+  1548:                          
+  1549:                  }
+  1550:                         
+  1551:                         
+  1552:                         
+  1553:                 }
+  1554:                 
+  1555:                 
+  1556:                 
+  1557:         }
+  1558:         
+  1559:         
+  1560:         
+  1561:         
+  1562: }
+  1563:         
+  1564:         
+  1565:         
+  1566:         
+  1567:         
+  1568: }

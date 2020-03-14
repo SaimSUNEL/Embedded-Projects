@@ -1,0 +1,131 @@
+     1: 
+     2: #include<htc.h>
+     3: 
+     4: 
+     5: 
+     6: //16 mhz tamam....
+     7: 
+     8: 
+     9: 
+    10: 
+    11: 
+    12: 
+    13: 
+    14: 
+    15: 
+    16: void SerialSoftware_ayarla() 
+    17: {
+    18:         
+    19:         TRISD7=1;
+    20:         TRISD6=0;
+    21:         RD7 = 0;
+    22:         RD6 = 1 ;
+    23:         
+    24:         
+    25: }
+    26: char __ind ;
+    27: void SoftwareSerial_gonder ( unsigned char data )
+    28: {
+    29:         RD6 = 0 ; 
+    30:         __delay_us ( 100 ) ;
+    31:         
+    32:         for  (  __ind =  0 ; __ind < 8 ;__ind ++ )
+    33:         {
+    34:                 
+    35:                 RD6 = data >> __ind ;
+    36:                 __delay_us ( 95 );//55 for 9600 in 4 mhz  //75 for 9600 in 8MHZ  ; 95 for 9600 in 16mhz 
+    37:                 
+    38:                 
+    39:                 
+    40:         }
+    41:         
+    42:         //RD6 = 0 ; 
+    43:         //__delay_us ( 85  );
+    44:         RD6 = 1 ;
+    45:         __delay_us ( 104 ) ;
+    46:         
+    47:         
+    48:         
+    49:         
+    50:         
+    51:         
+    52:         
+    53:         
+    54:         
+    55:         
+    56:         
+    57: }
+    58: 
+    59: unsigned char t ;
+    60: 
+    61: unsigned char gelen_data ;
+    62: unsigned char SoftwareSerial_receive ( ) 
+    63: {
+    64:         gelen_data = 0 ;
+    65: while ( RD7 == 1 ) ;
+    66: 
+    67: 
+    68: __delay_us ( 110) ;
+    69: 
+    70: for ( __ind = 0 ; __ind < 8 ; __ind ++ )
+    71: {
+    72:         gelen_data |= RD7 << __ind ;
+    73:         RD5 = RD7 ;
+    74:         __delay_us (100 ) ; //60 for 9600 in 4 mhz //80 for 9600 in 8mhz ;  100 for 9600 in 16MHZ
+    75:         
+    76:         
+    77:         
+    78: }
+    79:         
+    80:         
+    81:         t = gelen_data ;
+    82:         return gelen_data ;
+    83:         
+    84:         
+    85: }
+    86: 
+    87: 
+    88: 
+    89: 
+    90: 
+    91: 
+    92: 
+    93: 
+    94: void main ()
+    95: {
+    96:         
+    97:         TRISB0 = 0 ;
+    98:          RB0 = 0 ;
+    99:         
+   100:         
+   101:         SerialSoftware_ayarla ( ); 
+   102:         __delay_ms ( 100 ) ;
+   103:         TRISD5 = 0 ;
+   104:         RD5 = 0 ;
+   105:         
+   106:         
+   107:         
+   108:         
+   109:         
+   110:         
+   111:         while ( 1 ) 
+   112:         {
+   113:                 
+   114:          SoftwareSerial_gonder ( 'a' ) ;
+   115:                 __delay_ms ( 100  );
+   116:                 SoftwareSerial_gonder( 's' ) ;
+   117:                 __delay_ms ( 10 );
+   118:                 SoftwareSerial_gonder( 'a' );
+   119:                 t = SoftwareSerial_receive( ) ;
+   120:                 if( t == 'a' )
+   121:                 {
+   122:                         RB0 = ~RB0 ;
+   123:                         
+   124:                 }
+   125:                 __delay_ms ( 2000  );
+   126:                 
+   127:                 
+   128:         }
+   129:         
+   130:         
+   131: }

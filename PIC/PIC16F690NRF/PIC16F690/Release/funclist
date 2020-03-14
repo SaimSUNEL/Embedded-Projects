@@ -1,0 +1,15 @@
+___awdiv: CODE, 1341 0 116
+_UART_SendString: CODE, 903 0 50
+_shift_reg_set_pin: CODE, 953 0 55
+___awmod: CODE, 1239 0 102
+_main: CODE, 1628 0 187
+_NRF_ReceiveData: CODE, 1457 0 171
+_set_segment_shift: CODE, 1008 0 70
+_load_shift_data: CODE, 1078 0 75
+_display_number: CODE, 1153 0 86
+_SPI_WriteByte: CODE, 880 0 23
+_UART_SendByte: CODE, 786 0 14
+_NRF_Initialize: CODE, 1815 0 233
+_UART_Initialize: CODE, 858 0 22
+_SPI_Initialize: CODE, 817 0 20
+Total: 1224

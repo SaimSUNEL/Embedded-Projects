@@ -1,0 +1,728 @@
+
+328pSDCARD.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000012  00800100  00000402  00000496  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000402  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000214  00800112  00800112  000004a8  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000004a8  2**0
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000058  00000000  00000000  000004d8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000c39  00000000  00000000  00000530  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 0000028d  00000000  00000000  00001169  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000002fb  00000000  00000000  000013f6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000104  00000000  00000000  000016f4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000383  00000000  00000000  000017f8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    0000055d  00000000  00000000  00001b7b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000060  00000000  00000000  000020d8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 35 00 	jmp	0x6a	; 0x6a <__ctors_end>
+   4:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+   8:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+   c:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+  10:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+  14:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+  18:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+  1c:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+  20:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+  24:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+  28:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+  2c:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+  30:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+  34:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+  38:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+  3c:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+  40:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+  44:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+  48:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+  4c:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+  50:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+  54:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+  58:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+  5c:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+  60:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+  64:	0c 94 5d 00 	jmp	0xba	; 0xba <__bad_interrupt>
+
+00000068 <__ctors_start>:
+  68:	b0 01       	movw	r22, r0
+
+0000006a <__ctors_end>:
+  6a:	11 24       	eor	r1, r1
+  6c:	1f be       	out	0x3f, r1	; 63
+  6e:	cf ef       	ldi	r28, 0xFF	; 255
+  70:	d8 e0       	ldi	r29, 0x08	; 8
+  72:	de bf       	out	0x3e, r29	; 62
+  74:	cd bf       	out	0x3d, r28	; 61
+
+00000076 <__do_copy_data>:
+  76:	11 e0       	ldi	r17, 0x01	; 1
+  78:	a0 e0       	ldi	r26, 0x00	; 0
+  7a:	b1 e0       	ldi	r27, 0x01	; 1
+  7c:	e2 e0       	ldi	r30, 0x02	; 2
+  7e:	f4 e0       	ldi	r31, 0x04	; 4
+  80:	02 c0       	rjmp	.+4      	; 0x86 <__do_copy_data+0x10>
+  82:	05 90       	lpm	r0, Z+
+  84:	0d 92       	st	X+, r0
+  86:	a2 31       	cpi	r26, 0x12	; 18
+  88:	b1 07       	cpc	r27, r17
+  8a:	d9 f7       	brne	.-10     	; 0x82 <__do_copy_data+0xc>
+
+0000008c <__do_clear_bss>:
+  8c:	23 e0       	ldi	r18, 0x03	; 3
+  8e:	a2 e1       	ldi	r26, 0x12	; 18
+  90:	b1 e0       	ldi	r27, 0x01	; 1
+  92:	01 c0       	rjmp	.+2      	; 0x96 <.do_clear_bss_start>
+
+00000094 <.do_clear_bss_loop>:
+  94:	1d 92       	st	X+, r1
+
+00000096 <.do_clear_bss_start>:
+  96:	a6 32       	cpi	r26, 0x26	; 38
+  98:	b2 07       	cpc	r27, r18
+  9a:	e1 f7       	brne	.-8      	; 0x94 <.do_clear_bss_loop>
+
+0000009c <__do_global_ctors>:
+  9c:	10 e0       	ldi	r17, 0x00	; 0
+  9e:	ca e6       	ldi	r28, 0x6A	; 106
+  a0:	d0 e0       	ldi	r29, 0x00	; 0
+  a2:	04 c0       	rjmp	.+8      	; 0xac <__do_global_ctors+0x10>
+  a4:	22 97       	sbiw	r28, 0x02	; 2
+  a6:	fe 01       	movw	r30, r28
+  a8:	0e 94 fb 01 	call	0x3f6	; 0x3f6 <__tablejump__>
+  ac:	c8 36       	cpi	r28, 0x68	; 104
+  ae:	d1 07       	cpc	r29, r17
+  b0:	c9 f7       	brne	.-14     	; 0xa4 <__do_global_ctors+0x8>
+  b2:	0e 94 96 01 	call	0x32c	; 0x32c <main>
+  b6:	0c 94 ff 01 	jmp	0x3fe	; 0x3fe <_exit>
+
+000000ba <__bad_interrupt>:
+  ba:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000be <_Z9SPI_writeh>:
+		if ( cevap == 0x5 )
+		{
+			//SD card veriyi yazana kadar busydir ( DO sunu lowa çekiyor. o s?rada 0 okuyaca??z...
+			for ( int h = 0 ; h < 10000 ; h ++ )
+			{
+				cevap = SPI_yaz ( 0xff ) ;
+  be:	8e bd       	out	0x2e, r24	; 46
+  c0:	0d b4       	in	r0, 0x2d	; 45
+				if ( cevap  != 0 )
+  c2:	07 fe       	sbrs	r0, 7
+  c4:	fd cf       	rjmp	.-6      	; 0xc0 <_Z9SPI_writeh+0x2>
+  c6:	8e b5       	in	r24, 0x2e	; 46
+		}
+		
+		if ( cevap == 0x5 )
+		{
+			//SD card veriyi yazana kadar busydir ( DO sunu lowa çekiyor. o s?rada 0 okuyaca??z...
+			for ( int h = 0 ; h < 10000 ; h ++ )
+  c8:	08 95       	ret
+
+000000ca <_Z10SPI_ayarlav>:
+  ca:	8c b5       	in	r24, 0x2c	; 44
+  cc:	80 61       	ori	r24, 0x10	; 16
+  ce:	8c bd       	out	0x2c, r24	; 44
+  d0:	8c b5       	in	r24, 0x2c	; 44
+	}
+	else {
+		error = true ;
+		while ( 1 ) ;
+	}
+	SS= 1 ;
+  d2:	87 7f       	andi	r24, 0xF7	; 247
+  d4:	8c bd       	out	0x2c, r24	; 44
+  d6:	8c b5       	in	r24, 0x2c	; 44
+  d8:	8b 7f       	andi	r24, 0xFB	; 251
+  da:	8c bd       	out	0x2c, r24	; 44
+  dc:	8c b5       	in	r24, 0x2c	; 44
+  de:	8e 7f       	andi	r24, 0xFE	; 254
+  e0:	8c bd       	out	0x2c, r24	; 44
+  e2:	8c b5       	in	r24, 0x2c	; 44
+	}
+	
+	if ( cevap == 0 ) //Single block write command accepted...
+	{
+		
+		SPI_yaz ( 0xfe ) ; //We are sending data start token to SD card
+  e4:	82 60       	ori	r24, 0x02	; 2
+  e6:	8c bd       	out	0x2c, r24	; 44
+  e8:	8c b5       	in	r24, 0x2c	; 44
+		
+		
+		for ( int h = 0 ; h < 512 ; h++ )
+  ea:	80 64       	ori	r24, 0x40	; 64
+  ec:	8c bd       	out	0x2c, r24	; 44
+  ee:	08 95       	ret
+
+000000f0 <_Z19SDCARD_send_commandhmh>:
+  f0:	ff 92       	push	r15
+		error = true ;
+		while ( 1 ) ;
+	}
+	SS= 1 ;
+	
+}
+  f2:	0f 93       	push	r16
+  f4:	1f 93       	push	r17
+  f6:	cf 93       	push	r28
+  f8:	df 93       	push	r29
+  fa:	d4 2f       	mov	r29, r20
+  fc:	15 2f       	mov	r17, r21
+  fe:	06 2f       	mov	r16, r22
+ 100:	f7 2e       	mov	r15, r23
+ 102:	c2 2f       	mov	r28, r18
+byte SD_RESP[5];
+
+byte SDCARD_send_command(byte command, unsigned long param, byte crc)
+{
+	byte response = 0;
+	SS = 0;
+ 104:	e0 91 16 01 	lds	r30, 0x0116
+ 108:	f0 91 17 01 	lds	r31, 0x0117
+ 10c:	90 81       	ld	r25, Z
+ 10e:	9b 7f       	andi	r25, 0xFB	; 251
+ 110:	90 83       	st	Z, r25
+	
+	SPI_yaz ( command ) ;
+ 112:	0e 94 5f 00 	call	0xbe	; 0xbe <_Z9SPI_writeh>
+	
+	SPI_yaz ( param >> 24 ) ;
+ 116:	8f 2d       	mov	r24, r15
+ 118:	0e 94 5f 00 	call	0xbe	; 0xbe <_Z9SPI_writeh>
+	SPI_yaz ( param >> 16 ) ;
+ 11c:	80 2f       	mov	r24, r16
+ 11e:	0e 94 5f 00 	call	0xbe	; 0xbe <_Z9SPI_writeh>
+	SPI_yaz (  param >> 8 ) ;
+ 122:	81 2f       	mov	r24, r17
+ 124:	0e 94 5f 00 	call	0xbe	; 0xbe <_Z9SPI_writeh>
+	SPI_yaz ( param & 0xff ) ;
+ 128:	8d 2f       	mov	r24, r29
+ 12a:	0e 94 5f 00 	call	0xbe	; 0xbe <_Z9SPI_writeh>
+	//For CMD0 the CRC value
+	SPI_yaz ( crc ) ;
+ 12e:	8c 2f       	mov	r24, r28
+ 130:	0e 94 5f 00 	call	0xbe	; 0xbe <_Z9SPI_writeh>
+	
+	//Geçerli bir cevab?n gelmesi için en az 64 clock göndermke gerekebilir...
+	while((response = SPI_yaz ( 0xff )) == 0xff );
+ 134:	8f ef       	ldi	r24, 0xFF	; 255
+ 136:	0e 94 5f 00 	call	0xbe	; 0xbe <_Z9SPI_writeh>
+ 13a:	c8 2f       	mov	r28, r24
+ 13c:	8f 3f       	cpi	r24, 0xFF	; 255
+ 13e:	d1 f3       	breq	.-12     	; 0x134 <_Z19SDCARD_send_commandhmh+0x44>
+ 140:	d5 e0       	ldi	r29, 0x05	; 5
+	for(char j=0; j < 5; j++) SPI_yaz(0xff); //for some CMD8 CMD58
+ 142:	8f ef       	ldi	r24, 0xFF	; 255
+ 144:	0e 94 5f 00 	call	0xbe	; 0xbe <_Z9SPI_writeh>
+ 148:	d1 50       	subi	r29, 0x01	; 1
+ 14a:	d9 f7       	brne	.-10     	; 0x142 <_Z19SDCARD_send_commandhmh+0x52>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 14c:	2f ef       	ldi	r18, 0xFF	; 255
+ 14e:	81 ee       	ldi	r24, 0xE1	; 225
+ 150:	94 e0       	ldi	r25, 0x04	; 4
+ 152:	21 50       	subi	r18, 0x01	; 1
+ 154:	80 40       	sbci	r24, 0x00	; 0
+ 156:	90 40       	sbci	r25, 0x00	; 0
+ 158:	e1 f7       	brne	.-8      	; 0x152 <_Z19SDCARD_send_commandhmh+0x62>
+ 15a:	00 c0       	rjmp	.+0      	; 0x15c <_Z19SDCARD_send_commandhmh+0x6c>
+ 15c:	00 00       	nop
+	
+	_delay_ms(100);
+	SS = 1;
+ 15e:	e0 91 16 01 	lds	r30, 0x0116
+ 162:	f0 91 17 01 	lds	r31, 0x0117
+ 166:	80 81       	ld	r24, Z
+ 168:	84 60       	ori	r24, 0x04	; 4
+ 16a:	80 83       	st	Z, r24
+	return response;
+	
+	
+	
+}
+ 16c:	8c 2f       	mov	r24, r28
+ 16e:	df 91       	pop	r29
+ 170:	cf 91       	pop	r28
+ 172:	1f 91       	pop	r17
+ 174:	0f 91       	pop	r16
+ 176:	ff 90       	pop	r15
+ 178:	08 95       	ret
+
+0000017a <_Z21SDCARD_bir_sektor_okumPh>:
+
+
+byte nisa;
+byte threshold;
+void SDCARD_bir_sektor_oku  ( unsigned long adres , byte * buff )
+{
+ 17a:	ef 92       	push	r14
+ 17c:	ff 92       	push	r15
+ 17e:	0f 93       	push	r16
+ 180:	1f 93       	push	r17
+ 182:	cf 93       	push	r28
+ 184:	df 93       	push	r29
+ 186:	c6 2f       	mov	r28, r22
+ 188:	d7 2f       	mov	r29, r23
+ 18a:	f8 2e       	mov	r15, r24
+ 18c:	e9 2e       	mov	r14, r25
+ 18e:	8a 01       	movw	r16, r20
+	SS = 0 ;
+ 190:	e0 91 16 01 	lds	r30, 0x0116
+ 194:	f0 91 17 01 	lds	r31, 0x0117
+ 198:	20 81       	ld	r18, Z
+ 19a:	2b 7f       	andi	r18, 0xFB	; 251
+ 19c:	20 83       	st	Z, r18
+	
+	SPI_yaz ( 0x40 | 17 ) ;
+ 19e:	81 e5       	ldi	r24, 0x51	; 81
+ 1a0:	0e 94 5f 00 	call	0xbe	; 0xbe <_Z9SPI_writeh>
+	
+	SPI_yaz ( adres >> 24 ) ;
+ 1a4:	8e 2d       	mov	r24, r14
+ 1a6:	0e 94 5f 00 	call	0xbe	; 0xbe <_Z9SPI_writeh>
+	SPI_yaz ( adres >>  16  )  ;
+ 1aa:	8f 2d       	mov	r24, r15
+ 1ac:	0e 94 5f 00 	call	0xbe	; 0xbe <_Z9SPI_writeh>
+	SPI_yaz ( adres  >> 8 ) ;
+ 1b0:	8d 2f       	mov	r24, r29
+ 1b2:	0e 94 5f 00 	call	0xbe	; 0xbe <_Z9SPI_writeh>
+	SPI_yaz ( adres ) ;
+ 1b6:	8c 2f       	mov	r24, r28
+ 1b8:	0e 94 5f 00 	call	0xbe	; 0xbe <_Z9SPI_writeh>
+	
+	SPI_yaz ( 0xff ) ;
+ 1bc:	8f ef       	ldi	r24, 0xFF	; 255
+ 1be:	0e 94 5f 00 	call	0xbe	; 0xbe <_Z9SPI_writeh>
+ 1c2:	cb e0       	ldi	r28, 0x0B	; 11
+ 1c4:	d0 e0       	ldi	r29, 0x00	; 0
+	//Komut cevab?n? bekle
+	for ( int a = 0 ; a < 11 ;a++ )
+	{
+		cevap = SPI_yaz ( 0xff ) ;
+ 1c6:	8f ef       	ldi	r24, 0xFF	; 255
+ 1c8:	0e 94 5f 00 	call	0xbe	; 0xbe <_Z9SPI_writeh>
+ 1cc:	80 93 13 01 	sts	0x0113, r24
+		if ( cevap == 0 ) break ;
+ 1d0:	88 23       	and	r24, r24
+ 1d2:	21 f0       	breq	.+8      	; 0x1dc <_Z21SDCARD_bir_sektor_okumPh+0x62>
+ 1d4:	21 97       	sbiw	r28, 0x01	; 1
+	SPI_yaz ( adres  >> 8 ) ;
+	SPI_yaz ( adres ) ;
+	
+	SPI_yaz ( 0xff ) ;
+	//Komut cevab?n? bekle
+	for ( int a = 0 ; a < 11 ;a++ )
+ 1d6:	20 97       	sbiw	r28, 0x00	; 0
+ 1d8:	b1 f7       	brne	.-20     	; 0x1c6 <_Z21SDCARD_bir_sektor_okumPh+0x4c>
+ 1da:	2c c0       	rjmp	.+88     	; 0x234 <_Z21SDCARD_bir_sektor_okumPh+0xba>
+	{
+		cevap = SPI_yaz ( 0xff ) ;
+		if ( cevap == 0 ) break ;
+ 1dc:	c0 e1       	ldi	r28, 0x10	; 16
+ 1de:	d7 e2       	ldi	r29, 0x27	; 39
+		
+		//Wait for Data start token from the SD card....
+		
+		for ( int j = 0 ; j < 10000 ; j ++ )
+		{
+			cevap = SPI_yaz ( 0xf ) ;
+ 1e0:	8f e0       	ldi	r24, 0x0F	; 15
+ 1e2:	0e 94 5f 00 	call	0xbe	; 0xbe <_Z9SPI_writeh>
+ 1e6:	80 93 13 01 	sts	0x0113, r24
+			if ( cevap == 0xfe ) break ;
+ 1ea:	8e 3f       	cpi	r24, 0xFE	; 254
+ 1ec:	21 f0       	breq	.+8      	; 0x1f6 <_Z21SDCARD_bir_sektor_okumPh+0x7c>
+ 1ee:	21 97       	sbiw	r28, 0x01	; 1
+	{
+		
+		
+		//Wait for Data start token from the SD card....
+		
+		for ( int j = 0 ; j < 10000 ; j ++ )
+ 1f0:	20 97       	sbiw	r28, 0x00	; 0
+ 1f2:	b1 f7       	brne	.-20     	; 0x1e0 <_Z21SDCARD_bir_sektor_okumPh+0x66>
+ 1f4:	1f c0       	rjmp	.+62     	; 0x234 <_Z21SDCARD_bir_sektor_okumPh+0xba>
+		{
+			cevap = SPI_yaz ( 0xf ) ;
+			if ( cevap == 0xfe ) break ;
+ 1f6:	c0 e0       	ldi	r28, 0x00	; 0
+ 1f8:	d0 e0       	ldi	r29, 0x00	; 0
+			{
+				cevap = SPI_yaz ( 0xff ) ;
+				if ( k < 64 )
+				{
+					buff [ k ] = cevap ;
+					nisa = 'T';
+ 1fa:	0f 2e       	mov	r0, r31
+ 1fc:	f4 e5       	ldi	r31, 0x54	; 84
+ 1fe:	ff 2e       	mov	r15, r31
+ 200:	f0 2d       	mov	r31, r0
+		{
+			//Data ready geldi...
+			
+			for ( int k = 0 ; k < 512 ; k++ )
+			{
+				cevap = SPI_yaz ( 0xff ) ;
+ 202:	8f ef       	ldi	r24, 0xFF	; 255
+ 204:	0e 94 5f 00 	call	0xbe	; 0xbe <_Z9SPI_writeh>
+ 208:	80 93 13 01 	sts	0x0113, r24
+				if ( k < 64 )
+ 20c:	c0 34       	cpi	r28, 0x40	; 64
+ 20e:	d1 05       	cpc	r29, r1
+ 210:	34 f4       	brge	.+12     	; 0x21e <_Z21SDCARD_bir_sektor_okumPh+0xa4>
+ 212:	f8 01       	movw	r30, r16
+ 214:	ec 0f       	add	r30, r28
+ 216:	fd 1f       	adc	r31, r29
+				{
+					buff [ k ] = cevap ;
+ 218:	80 83       	st	Z, r24
+					nisa = 'T';
+ 21a:	f0 92 12 01 	sts	0x0112, r15
+		
+		if ( cevap == 0xfe )
+		{
+			//Data ready geldi...
+			
+			for ( int k = 0 ; k < 512 ; k++ )
+ 21e:	21 96       	adiw	r28, 0x01	; 1
+ 220:	c1 15       	cp	r28, r1
+ 222:	82 e0       	ldi	r24, 0x02	; 2
+ 224:	d8 07       	cpc	r29, r24
+ 226:	69 f7       	brne	.-38     	; 0x202 <_Z21SDCARD_bir_sektor_okumPh+0x88>
+					nisa = 'T';
+				}
+				
+			}
+			//CRC önemli de?il bizim için...
+			SPI_yaz ( 0xff ) ;
+ 228:	8f ef       	ldi	r24, 0xFF	; 255
+ 22a:	0e 94 5f 00 	call	0xbe	; 0xbe <_Z9SPI_writeh>
+			SPI_yaz ( 0xff ) ;
+ 22e:	8f ef       	ldi	r24, 0xFF	; 255
+ 230:	0e 94 5f 00 	call	0xbe	; 0xbe <_Z9SPI_writeh>
+		
+	}
+	
+	
+	
+	SS = 1 ;
+ 234:	e0 91 16 01 	lds	r30, 0x0116
+ 238:	f0 91 17 01 	lds	r31, 0x0117
+ 23c:	80 81       	ld	r24, Z
+ 23e:	84 60       	ori	r24, 0x04	; 4
+ 240:	80 83       	st	Z, r24
+	
+	
+	
+}
+ 242:	df 91       	pop	r29
+ 244:	cf 91       	pop	r28
+ 246:	1f 91       	pop	r17
+ 248:	0f 91       	pop	r16
+ 24a:	ff 90       	pop	r15
+ 24c:	ef 90       	pop	r14
+ 24e:	08 95       	ret
+
+00000250 <_Z13SDCARD_baslatv>:
+#define MM3_VER  3
+byte CARD_VERSION  =0;
+
+
+void SDCARD_baslat ( )
+{
+ 250:	cf 93       	push	r28
+ 252:	df 93       	push	r29
+ 254:	2f ef       	ldi	r18, 0xFF	; 255
+ 256:	81 ee       	ldi	r24, 0xE1	; 225
+ 258:	94 e0       	ldi	r25, 0x04	; 4
+ 25a:	21 50       	subi	r18, 0x01	; 1
+ 25c:	80 40       	sbci	r24, 0x00	; 0
+ 25e:	90 40       	sbci	r25, 0x00	; 0
+ 260:	e1 f7       	brne	.-8      	; 0x25a <_Z13SDCARD_baslatv+0xa>
+ 262:	00 c0       	rjmp	.+0      	; 0x264 <_Z13SDCARD_baslatv+0x14>
+ 264:	00 00       	nop
+	_delay_ms(100 ); ; //wait a little bit after powerup
+	
+	SS = 1 ;
+ 266:	e0 91 16 01 	lds	r30, 0x0116
+ 26a:	f0 91 17 01 	lds	r31, 0x0117
+ 26e:	80 81       	ld	r24, Z
+ 270:	84 60       	ori	r24, 0x04	; 4
+ 272:	80 83       	st	Z, r24
+ 274:	cb e0       	ldi	r28, 0x0B	; 11
+ 276:	d0 e0       	ldi	r29, 0x00	; 0
+	for ( int a = 0 ; a < 11 ; a++ ) //8*11 clocks are applied to card when CS 1
+	SPI_yaz ( 0xff ) ;
+ 278:	8f ef       	ldi	r24, 0xFF	; 255
+ 27a:	0e 94 5f 00 	call	0xbe	; 0xbe <_Z9SPI_writeh>
+ 27e:	21 97       	sbiw	r28, 0x01	; 1
+void SDCARD_baslat ( )
+{
+	_delay_ms(100 ); ; //wait a little bit after powerup
+	
+	SS = 1 ;
+	for ( int a = 0 ; a < 11 ; a++ ) //8*11 clocks are applied to card when CS 1
+ 280:	20 97       	sbiw	r28, 0x00	; 0
+ 282:	d1 f7       	brne	.-12     	; 0x278 <_Z13SDCARD_baslatv+0x28>
+ 284:	2f ef       	ldi	r18, 0xFF	; 255
+ 286:	81 ee       	ldi	r24, 0xE1	; 225
+ 288:	94 e0       	ldi	r25, 0x04	; 4
+ 28a:	21 50       	subi	r18, 0x01	; 1
+ 28c:	80 40       	sbci	r24, 0x00	; 0
+ 28e:	90 40       	sbci	r25, 0x00	; 0
+ 290:	e1 f7       	brne	.-8      	; 0x28a <_Z13SDCARD_baslatv+0x3a>
+ 292:	00 c0       	rjmp	.+0      	; 0x294 <_Z13SDCARD_baslatv+0x44>
+ 294:	00 00       	nop
+	SPI_yaz ( 0xff ) ;
+	
+	_delay_ms ( 100 ) ;
+
+	//First we are sending CMD0 for SD to enter reset ( idle state )
+	cevap = SDCARD_send_command(0x40, 0, 0x95);
+ 296:	25 e9       	ldi	r18, 0x95	; 149
+ 298:	40 e0       	ldi	r20, 0x00	; 0
+ 29a:	50 e0       	ldi	r21, 0x00	; 0
+ 29c:	ba 01       	movw	r22, r20
+ 29e:	80 e4       	ldi	r24, 0x40	; 64
+ 2a0:	0e 94 78 00 	call	0xf0	; 0xf0 <_Z19SDCARD_send_commandhmh>
+ 2a4:	80 93 13 01 	sts	0x0113, r24
+	
+	if(cevap != 0x1){ //lcd_write("E");
+ 2a8:	81 30       	cpi	r24, 0x01	; 1
+ 2aa:	09 f0       	breq	.+2      	; 0x2ae <_Z13SDCARD_baslatv+0x5e>
+ 2ac:	ff cf       	rjmp	.-2      	; 0x2ac <_Z13SDCARD_baslatv+0x5c>
+	while(1); }
+
+	//	//CMD8
+	
+	cevap = SDCARD_send_command(0x48, 0x1aa, 0x87);
+ 2ae:	27 e8       	ldi	r18, 0x87	; 135
+ 2b0:	4a ea       	ldi	r20, 0xAA	; 170
+ 2b2:	51 e0       	ldi	r21, 0x01	; 1
+ 2b4:	60 e0       	ldi	r22, 0x00	; 0
+ 2b6:	70 e0       	ldi	r23, 0x00	; 0
+ 2b8:	88 e4       	ldi	r24, 0x48	; 72
+ 2ba:	0e 94 78 00 	call	0xf0	; 0xf0 <_Z19SDCARD_send_commandhmh>
+ 2be:	80 93 13 01 	sts	0x0113, r24
+	if(cevap & 4){ //lcd_write("i");
+	}
+	
+	//CMD55 command...
+	cevap = SDCARD_send_command(0x77, 0, 1);
+ 2c2:	21 e0       	ldi	r18, 0x01	; 1
+ 2c4:	40 e0       	ldi	r20, 0x00	; 0
+ 2c6:	50 e0       	ldi	r21, 0x00	; 0
+ 2c8:	ba 01       	movw	r22, r20
+ 2ca:	87 e7       	ldi	r24, 0x77	; 119
+ 2cc:	0e 94 78 00 	call	0xf0	; 0xf0 <_Z19SDCARD_send_commandhmh>
+ 2d0:	80 93 13 01 	sts	0x0113, r24
+	
+	if(cevap != 0x1){ //lcd_write("E2");
+ 2d4:	81 30       	cpi	r24, 0x01	; 1
+ 2d6:	09 f0       	breq	.+2      	; 0x2da <_Z13SDCARD_baslatv+0x8a>
+ 2d8:	ff cf       	rjmp	.-2      	; 0x2d8 <_Z13SDCARD_baslatv+0x88>
+	while(1); }
+	//ACMD41
+	cevap = SDCARD_send_command(0x69, 0x40000000, 0x1 );
+ 2da:	21 e0       	ldi	r18, 0x01	; 1
+ 2dc:	40 e0       	ldi	r20, 0x00	; 0
+ 2de:	50 e0       	ldi	r21, 0x00	; 0
+ 2e0:	60 e0       	ldi	r22, 0x00	; 0
+ 2e2:	70 e4       	ldi	r23, 0x40	; 64
+ 2e4:	89 e6       	ldi	r24, 0x69	; 105
+ 2e6:	0e 94 78 00 	call	0xf0	; 0xf0 <_Z19SDCARD_send_commandhmh>
+ 2ea:	80 93 13 01 	sts	0x0113, r24
+	
+	if(cevap & 4)
+ 2ee:	82 ff       	sbrs	r24, 2
+ 2f0:	0e c0       	rjmp	.+28     	; 0x30e <_Z13SDCARD_baslatv+0xbe>
+	{
+		//lcd_write("illegal");
+		
+		//We are sending CMD1
+		cevap = 1;
+ 2f2:	81 e0       	ldi	r24, 0x01	; 1
+ 2f4:	80 93 13 01 	sts	0x0113, r24
+		while(cevap!=0)cevap = SDCARD_send_command(0x41, 0, 0xff);
+ 2f8:	2f ef       	ldi	r18, 0xFF	; 255
+ 2fa:	40 e0       	ldi	r20, 0x00	; 0
+ 2fc:	50 e0       	ldi	r21, 0x00	; 0
+ 2fe:	ba 01       	movw	r22, r20
+ 300:	81 e4       	ldi	r24, 0x41	; 65
+ 302:	0e 94 78 00 	call	0xf0	; 0xf0 <_Z19SDCARD_send_commandhmh>
+ 306:	80 93 13 01 	sts	0x0113, r24
+ 30a:	81 11       	cpse	r24, r1
+ 30c:	f5 cf       	rjmp	.-22     	; 0x2f8 <_Z13SDCARD_baslatv+0xa8>
+	}
+	
+	//write OCR 512 byte block...
+	cevap = SDCARD_send_command(0x50, 512, 1);
+ 30e:	21 e0       	ldi	r18, 0x01	; 1
+ 310:	40 e0       	ldi	r20, 0x00	; 0
+ 312:	52 e0       	ldi	r21, 0x02	; 2
+ 314:	60 e0       	ldi	r22, 0x00	; 0
+ 316:	70 e0       	ldi	r23, 0x00	; 0
+ 318:	80 e5       	ldi	r24, 0x50	; 80
+ 31a:	0e 94 78 00 	call	0xf0	; 0xf0 <_Z19SDCARD_send_commandhmh>
+ 31e:	80 93 13 01 	sts	0x0113, r24
+	
+	if(cevap != 0)
+ 322:	81 11       	cpse	r24, r1
+ 324:	ff cf       	rjmp	.-2      	; 0x324 <_Z13SDCARD_baslatv+0xd4>
+	{
+		//lcd_write("illegal");
+		while(1);
+	}
+}
+ 326:	df 91       	pop	r29
+ 328:	cf 91       	pop	r28
+ 32a:	08 95       	ret
+
+0000032c <main>:
+
+
+int main(void)
+{
+
+	DDRB = 0b00101100;
+ 32c:	8c e2       	ldi	r24, 0x2C	; 44
+ 32e:	84 b9       	out	0x04, r24	; 4
+	SPI_ayarla();
+ 330:	0e 94 65 00 	call	0xca	; 0xca <_Z10SPI_ayarlav>
+ 334:	8f e1       	ldi	r24, 0x1F	; 31
+ 336:	9e e4       	ldi	r25, 0x4E	; 78
+ 338:	01 97       	sbiw	r24, 0x01	; 1
+ 33a:	f1 f7       	brne	.-4      	; 0x338 <main+0xc>
+ 33c:	00 c0       	rjmp	.+0      	; 0x33e <main+0x12>
+ 33e:	00 00       	nop
+	_delay_ms(5);
+	SDCARD_baslat();
+ 340:	0e 94 28 01 	call	0x250	; 0x250 <_Z13SDCARD_baslatv>
+ 344:	8f e3       	ldi	r24, 0x3F	; 63
+ 346:	9c e9       	ldi	r25, 0x9C	; 156
+ 348:	01 97       	sbiw	r24, 0x01	; 1
+ 34a:	f1 f7       	brne	.-4      	; 0x348 <main+0x1c>
+ 34c:	00 c0       	rjmp	.+0      	; 0x34e <main+0x22>
+ 34e:	00 00       	nop
+	_delay_ms(10);
+	SDCARD_bir_sektor_oku( 0 , buff) ;
+ 350:	46 e2       	ldi	r20, 0x26	; 38
+ 352:	51 e0       	ldi	r21, 0x01	; 1
+ 354:	60 e0       	ldi	r22, 0x00	; 0
+ 356:	70 e0       	ldi	r23, 0x00	; 0
+ 358:	cb 01       	movw	r24, r22
+ 35a:	0e 94 bd 00 	call	0x17a	; 0x17a <_Z21SDCARD_bir_sektor_okumPh>
+ 35e:	ff cf       	rjmp	.-2      	; 0x35e <main+0x32>
+
+00000360 <_GLOBAL__sub_I_buff>:
+
+
+//PortlarÄ± okumak iÃ§in...
+
+_ports * waa = ( _ports * ) 0x023;
+_ports & pinb = *waa;
+ 360:	80 91 10 01 	lds	r24, 0x0110
+ 364:	90 91 11 01 	lds	r25, 0x0111
+ 368:	90 93 25 01 	sts	0x0125, r25
+ 36c:	80 93 24 01 	sts	0x0124, r24
+
+
+
+_ports * ab = ( _ports * ) 0x026;
+_ports & pinc = *ab;
+ 370:	80 91 0e 01 	lds	r24, 0x010E
+ 374:	90 91 0f 01 	lds	r25, 0x010F
+ 378:	90 93 23 01 	sts	0x0123, r25
+ 37c:	80 93 22 01 	sts	0x0122, r24
+
+
+_ports * ac = ( _ports * ) 0x029;
+_ports & pind = *ac;
+ 380:	80 91 0c 01 	lds	r24, 0x010C
+ 384:	90 91 0d 01 	lds	r25, 0x010D
+ 388:	90 93 21 01 	sts	0x0121, r25
+ 38c:	80 93 20 01 	sts	0x0120, r24
+
+// Picteki gibi RB0 etc. TRIS etc D portu iÃ§in... 
+
+
+_ports * f = ( _ports * ) 0x02B;
+_ports & portd = *f;
+ 390:	80 91 0a 01 	lds	r24, 0x010A
+ 394:	90 91 0b 01 	lds	r25, 0x010B
+ 398:	90 93 1f 01 	sts	0x011F, r25
+ 39c:	80 93 1e 01 	sts	0x011E, r24
+_ports * e = ( _ports * ) 0x02A;
+_ports &trisd = *e;
+ 3a0:	80 91 08 01 	lds	r24, 0x0108
+ 3a4:	90 91 09 01 	lds	r25, 0x0109
+ 3a8:	90 93 1d 01 	sts	0x011D, r25
+ 3ac:	80 93 1c 01 	sts	0x011C, r24
+
+
+// C portu iÃ§in
+
+_ports * ff = ( _ports * ) 0x028;
+_ports & portc = *ff;
+ 3b0:	80 91 06 01 	lds	r24, 0x0106
+ 3b4:	90 91 07 01 	lds	r25, 0x0107
+ 3b8:	90 93 1b 01 	sts	0x011B, r25
+ 3bc:	80 93 1a 01 	sts	0x011A, r24
+_ports * ef = ( _ports * ) 0x027;
+_ports &trisc = *ef;
+ 3c0:	80 91 04 01 	lds	r24, 0x0104
+ 3c4:	90 91 05 01 	lds	r25, 0x0105
+ 3c8:	90 93 19 01 	sts	0x0119, r25
+ 3cc:	80 93 18 01 	sts	0x0118, r24
+
+
+//B portu iÃ§in
+
+_ports * c =  ( _ports * ) 0x025 ; 
+ _ports &portb = *c;
+ 3d0:	80 91 02 01 	lds	r24, 0x0102
+ 3d4:	90 91 03 01 	lds	r25, 0x0103
+ 3d8:	90 93 17 01 	sts	0x0117, r25
+ 3dc:	80 93 16 01 	sts	0x0116, r24
+_ports * d = ( _ports * )  0x024;
+ 3e0:	80 91 00 01 	lds	r24, 0x0100
+ 3e4:	90 91 01 01 	lds	r25, 0x0101
+ 3e8:	90 93 15 01 	sts	0x0115, r25
+ 3ec:	80 93 14 01 	sts	0x0114, r24
+ 3f0:	08 95       	ret
+
+000003f2 <__tablejump2__>:
+ 3f2:	ee 0f       	add	r30, r30
+ 3f4:	ff 1f       	adc	r31, r31
+
+000003f6 <__tablejump__>:
+ 3f6:	05 90       	lpm	r0, Z+
+ 3f8:	f4 91       	lpm	r31, Z
+ 3fa:	e0 2d       	mov	r30, r0
+ 3fc:	09 94       	ijmp
+
+000003fe <_exit>:
+ 3fe:	f8 94       	cli
+
+00000400 <__stop_program>:
+ 400:	ff cf       	rjmp	.-2      	; 0x400 <__stop_program>

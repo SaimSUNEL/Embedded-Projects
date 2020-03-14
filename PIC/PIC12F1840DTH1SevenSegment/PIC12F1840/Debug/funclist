@@ -1,0 +1,12 @@
+___awdiv: CODE, 616 0 109
+i1_display_digit: CODE, 373 0 122
+___awmod: CODE, 833 0 97
+_main: CODE, 251 0 122
+_display_digit: CODE, 495 0 121
+i1___awdiv: CODE, 725 0 108
+_FNC: CODE, 4 0 86
+_DHT11_get_data: CODE, 93 0 158
+_display_number: CODE, 1026 0 64
+i1___awmod: CODE, 930 0 96
+i1_display_number: CODE, 1090 0 64
+Total: 1147

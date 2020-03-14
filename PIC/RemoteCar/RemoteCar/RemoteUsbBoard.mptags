@@ -1,0 +1,26 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+!_TAG_REVISION_NAME	MCHPTags	//
+!_TAG_REVISION_VERSION	6.0.1	//
+InitialiseSystem	C:\Users\Saim\Desktop\RemoteCar\usbboard.c	31;"	p	line:31	file:	signature:(void)
+MAIN_C	C:\Users\Saim\Desktop\RemoteCar\usbboard.c	2;"	d	line:2	file:
+ProcessIO	C:\Users\Saim\Desktop\RemoteCar\usbboard.c	32;"	p	line:32	file:	signature:(void)
+a	C:\Users\Saim\Desktop\RemoteCar\usbboard.c	36;"	v	line:36
+ar	C:\Users\Saim\Desktop\RemoteCar\usbboard.c	73;"	v	line:73
+bolum	C:\Users\Saim\Desktop\RemoteCar\usbboard.c	35;"	v	line:35
+gelen_veri	C:\Users\Saim\Desktop\RemoteCar\usbboard.c	34;"	v	line:34
+index	C:\Users\Saim\Desktop\RemoteCar\usbboard.c	33;"	v	line:33
+index	C:\Users\Saim\Desktop\RemoteCar\usbboard.c	74;"	v	line:74
+kodla_gonder	C:\Users\Saim\Desktop\RemoteCar\usbboard.c	75;"	f	line:75	signature:(int sayi)
+main	C:\Users\Saim\Desktop\RemoteCar\usbboard.c	110;"	f	line:110	signature:(void)
+say	C:\Users\Saim\Desktop\RemoteCar\usbboard.c	143;"	l	line:143
+sayi	C:\Users\Saim\Desktop\RemoteCar\usbboard.c	108;"	v	line:108
+senk	C:\Users\Saim\Desktop\RemoteCar\usbboard.c	51;"	v	line:51
+senk1	C:\Users\Saim\Desktop\RemoteCar\usbboard.c	52;"	v	line:52
+senkron	C:\Users\Saim\Desktop\RemoteCar\usbboard.c	53;"	f	line:53
+uyan	C:\Users\Saim\Desktop\RemoteCar\usbboard.c	34;"	v	line:34
+uyandir	C:\Users\Saim\Desktop\RemoteCar\usbboard.c	37;"	f	line:37

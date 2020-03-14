@@ -1,0 +1,181 @@
+     1: 
+     2: #include <htc.h>
+     3: 
+     4: typedef unsigned char byte ;
+     5: 
+     6: byte_send ( byte data )
+     7: {
+     8:    while ( !TXIF ) ;
+     9:       TXREG = data ;
+    10: }
+    11: 
+    12: byte byte_receive  ( )
+    13: {
+    14:    while ( !RCIF ) ;
+    15:  return RCREG ;
+    16:   
+    17: }
+    18: 
+    19: 
+    20: 
+    21: void Usart_ayarla ( ) 
+    22: {
+    23:    //Rx pin digital input
+    24:  ANSA1 = 0 ;
+    25:  TRISA1 = 1 ;
+    26:    //Tx pini digital output...
+    27:    ANSA0 = 0 ;
+    28:   TRISA1 = 0 ; 
+    29:    
+    30:    //Async mode...
+    31:    SYNC = 0 ;
+    32:    //9600 baud rate for 8MHz..
+    33:    BRGH = 0;
+    34:    BRG16 = 0 ;
+    35:    SPBRG = 12 ;
+    36:    //continuous receive enabled...
+    37:    CREN = 1 ;
+    38:    //Serial port enable...
+    39:    SPEN = 1 ;
+    40:    TXEN = 1 ;
+    41:   
+    42: }
+    43: #define VAR 1
+    44: #define YOK 0
+    45: char hata = 0;
+    46: char hata_array [ 5 ] ;
+    47: unsigned char dht_data [ 5 ] ;
+    48: 
+    49: unsigned char saim  , kk , lk , mm ;
+    50: 
+    51: void get_DHT11_data()
+    52: {
+    53:    unsigned char fa  , _ind , sayi  , count , temp , index  ;
+    54:    
+    55:   
+    56:    
+    57:         for( fa =  0; fa < 5 ; fa++ )
+    58:         dht_data [ fa ] = 0 ;   
+    59: //      TRISB0 = 0 ;//DDRB |= 1 ;//trisb.RB0 = 1 ;
+    60: //      RB0 = 1 ; //PORTB = 1 ;//portb.RB0 = 1 ;
+    61: //      __delay_ms( 250 ) ; //iþlemci baþlayýnca biraz bekle line is high pull up tan ötürü
+    62:          // PB0 pini output ve low line is low
+    63: //      TRISB0=0;
+    64:         TRISA5 = 0 ;
+    65:         RA5     = 0 ; //PORTB = 0 ;//portb.RB0 = 0 ;
+    66:         __delay_ms(18) ; //Start signal için...
+    67:         RA5 = 1 ; //PORTB = 1 ;//portb.RB0 = 1 ; //PB0 high line is high
+    68:         
+    69:         while ( RA5 ) ;
+    70:         //__delay_us(30) ;
+    71:         RA5 = 0 ; //PORTB = 0 ; //portb.RB0 = 0 ;
+    72:         //Bundan sonra input edilip
+    73: //      nRBPU=1;
+    74:         //OPTION_REG |= ( 1 << 7 );
+    75:         TRISA5 = 1 ; //DDRB = 0 ; //trisb.RB0 = 0 ; //PB0 input
+    76:         sayi = 0 ;
+    77: 
+    78: while(  !RA5 ){ sayi ++ ; if( sayi == 200 ) { hata = VAR ;return;    }   } //DHT responsu tamam....
+    79: //saim = sayi ;
+    80: 
+    81: 
+    82: sayi = 0 ;
+    83: 
+    84:         while( RA5  ) { sayi ++ ; if( sayi == 200 ) {hata = VAR ; return ;}    }  ;  
+    85: 
+    86: //kk = sayi ;
+    87:         for ( _ind = 0 ; _ind < 5 ; _ind++ )
+    88:         {
+    89:                         for( index = 0 ; index < 8 ; index ++ )
+    90:                         {
+    91:                                 
+    92:                                 count = 0 ;
+    93:                           
+    94:                                 while( !RA5 ) 
+    95:                                         { count ++  ; 
+    96:                                                 if( count >200 ) { hata = VAR ;
+    97:                                                    hata_array [ _ind ] = 1 ;
+    98:                                                         return ;  
+    99:                                                         }  
+   100:                                                         } 
+   101:                                 temp = count;
+   102:                                         __delay_us(2);
+   103:                                                         
+   104:                                 count = 0 ;
+   105:                                                         while( RA5 ){ 
+   106:                                         count ++  ; 
+   107:                                         if( count > 200 ) 
+   108:                                                 
+   109:                                                 {       hata = VAR ;
+   110:                                                     hata_array [ _ind ] = 1 ;
+   111:                                                    
+   112:                                                         return ;  }   
+   113:                                                         }
+   114:                                                         
+   115:                                         //              mm = count ;
+   116:                                 if( count > temp ) dht_data[ _ind ] |= 1 << (7- (index ) ) ;
+   117:                         }
+   118:                 }
+   119:                         
+   120:                         
+   121:                         
+   122: TRISA5 = 0 ;
+   123: RA5 = 1 ;
+   124: 
+   125: }
+   126: 
+   127: 
+   128: 
+   129: int sicaklik , nem ;
+   130: 
+   131: 
+   132: void main ( ) 
+   133: {
+   134:    
+   135:    
+   136:    //Internal oscillator will be used...
+   137:         SCS1 = 1 ;
+   138:         SCS0 = 0 ; 
+   139:         
+   140:         //8 MHZ...
+   141:         IRCF3 = 1 ;
+   142:         IRCF2 = 1 ;
+   143:         
+   144:    IRCF1 = 1;
+   145:         IRCF0 = 0 ;
+   146:   // IRCF1 = 1 ;
+   147:         //IRCF0 = 0 ;
+   148: /*      
+   149:    IRCF1 = 0 ;
+   150:         IRCF0 = 1 ;
+   151: */      
+   152:         ANSELA  = 0 ;
+   153:         
+   154:         
+   155:         TRISA = 0 ;
+   156:         PORTA = 0 ;
+   157:         Usart_ayarla ( ) ;
+   158:         
+   159:         
+   160:         //A3 pini input uzaklýk sensöründen gelen....
+   161:         TRISA3 = 1 ;
+   162: //DHT pini...                                   
+   163: TRISA5 = 0 ;
+   164: RA5 = 1 ;
+   165:         
+   166:         while ( 1 ) 
+   167:         {
+   168:            get_DHT11_data ( );
+   169:            byte_send ( dht_data [ 2 ] ) ;
+   170:            sicaklik = dht_data [ 2 ] ;
+   171:            byte_send ( ':' ) ;
+   172:            byte_send ( dht_data [ 0 ] ) ;
+   173:            nem = dht_data [ 0 ] ; 
+   174:            byte_send ( '-' );
+   175:            RA5 = ~ RA5 ;
+   176:            __delay_ms ( 1000 ) ;
+   177:            
+   178:         }
+   179:         
+   180:            
+   181: }

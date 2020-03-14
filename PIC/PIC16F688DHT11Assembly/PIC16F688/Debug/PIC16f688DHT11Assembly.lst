@@ -1,0 +1,40 @@
+     1: typedef unsigned char byte;
+     2: #include <htc.h>
+     3: #include "DHT11.h"
+     4: 
+     5: void main()
+     6: {
+     7: 
+     8: //Internal oscillator will be used...
+     9:         SCS = 1 ; 
+    10:         
+    11:         //8 MHZ...
+    12:         IRCF2 = 1 ;
+    13:         
+    14:         IRCF1 = 1;
+    15:         IRCF0 = 1 ;
+    16: 
+    17:         ANSEL  = 0 ;
+    18: 
+    19:         TRISA3 = 1;
+    20:         __delay_ms(100);
+    21: 
+    22:         TRISA0 = 0;
+    23:         TRISA5 = 0; //Main register...
+    24: 
+    25:         TRISA2 = 0; 
+    26:         TRISA4 = 0;
+    27:         TRISA1 = 1;//DHT11
+    28:         
+    29:         
+    30:         DHT11_get_data();
+    31: 
+    32: while(1)
+    33: {
+    34:         RA2 = ~RA2;
+    35:         DHT11_get_data();
+    36:         RA0 = 0;
+    37:         __delay_ms(500);
+    38: }
+    39: 
+    40: }

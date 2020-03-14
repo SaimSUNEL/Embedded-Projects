@@ -1,0 +1,13 @@
+_main: CODE, 380 0 53
+_UART_ReadByte: CODE, 489 0 11
+_FNC: CODE, 4 0 273
+_I2C_Stop: CODE, 522 0 10
+_I2C_ReadByte: CODE, 464 0 13
+_UART_SendByte: CODE, 500 0 11
+_EEPROM24C64_ClearAllData: CODE, 280 0 100
+_I2C_SendByte: CODE, 477 0 12
+_UART_Initialize: CODE, 433 0 18
+_I2C_NACK: CODE, 511 0 11
+_I2C_Initialize: CODE, 451 0 13
+_I2C_Start: CODE, 532 0 10
+Total: 535

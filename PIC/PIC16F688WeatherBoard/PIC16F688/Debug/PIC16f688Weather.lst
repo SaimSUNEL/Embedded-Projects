@@ -1,0 +1,136 @@
+     1: #define TRUE 1
+     2: #define FALSE 0
+     3: 
+     4: typedef unsigned char byte;
+     5: #include <htc.h>
+     6: #include <string.h>
+     7: #include <stdlib.h>
+     8: #include "MainRegister.h"
+     9: #include "CenterRegister.h"
+    10: #include "SicaklikSegment.h"
+    11: #include "GUN.h"
+    12: #include "TARIH.h"
+    13: #include "HAVADURUMU.h"
+    14: #include "LCD.h"
+    15: #include "INTERRUPT.h"
+    16: #include "UART.h"
+    17: #include "IOPINSELECT.h"
+    18: #include "EEPROM.h"
+    19: #include "HAVASTRUCTURE.h"
+    20: #include "Requests.h"
+    21: #include "DHT11.h"
+    22: #include "ADC.h"
+    23: 
+    24: 
+    25: /*
+    26: DHT11
+    27: ADC reading...
+    28: 
+    29: 
+    30: 
+    31: */
+    32: 
+    33: 
+    34: 
+    35: //byte regs[2];
+    36: //Weather status will be stored in EEPROM and will be read from there...
+    37: byte tt = TRUE;
+    38: byte refresh_counter ;
+    39: void main()
+    40: {
+    41:  //Internal oscillator will be used...
+    42:         SCS = 1 ; 
+    43:         
+    44:         //      //8 MHZ...
+    45:         IRCF2 = 1 ;
+    46:         
+    47:         IRCF1 = 1;
+    48:         IRCF0 = 1;//1 ;
+    49: 
+    50:         ANSEL  = 0 ;
+    51: 
+    52: 
+    53:         //RA3 analog input
+    54:         ANS3 =1;
+    55:         TRISA3 = 1;
+    56: 
+    57:         ADC_init();
+    58:         TRISA0 = 1;
+    59:         TRISA5 = 0; //Main register...
+    60: 
+    61:         TRISA2 = 0; 
+    62:         TRISA4 = 0;
+    63:         TRISA1 = 1;//DHT11
+    64:         TRISC0 = 0;
+    65:         TRISC1 = 0;
+    66:         TRISC2 = 0;
+    67:         PORTA = 0;
+    68: 
+    69: 
+    70: 
+    71:         choose_input_pin(0);
+    72:         
+    73:         
+    74: 
+    75:         ADC_read();
+    76:         LCD_init();
+    77:         UART_init();
+    78:         __delay_ms(20);
+    79:         lcd_write("Saim");
+    80:         //PEIE = 1;
+    81:         //GIE = 1;
+    82:         byte ss;
+    83:         makeRequest();
+    84:         byte prev_phrase = 0;
+    85:         signed char * temporary;
+    86:         while(1)
+    87:         {
+    88:                 show_currency_information();
+    89:                 DHT11_get_data();
+    90:                 if(tt)
+    91:                 {
+    92:                         ss = sicaklik;
+    93: 
+    94:                         tt = FALSE;
+    95:                 }
+    96:                 else
+    97:                 {
+    98:                         ss = nem;
+    99:                         tt = TRUE;
+   100:                 }
+   101:                         CurrentTempNemDisplay(ss, tt);
+   102: 
+   103: 
+   104:                 
+   105:                 for(byte k = 0; k < 6 ; k++)
+   106:                 {       
+   107:                         if(k == 0) temporary = (signed char*)&bugun;
+   108:                         else temporary = (signed char*)&gunler[k-1];
+   109:                         
+   110:                         SetHavaDurumuPin(prev_phrase, 0);
+   111:                         show_date_info(temporary);
+   112:                         DisplayGun(temporary[1]);//gunler[k].day);
+   113:                         DisplayAy(temporary[2]);//gunler[k].month);
+   114:                         DisplayYil(temporary[3]);//gunler[k].year);
+   115:                         EnYuksekDisplay(temporary[5]);//gunler[k].max_temp);
+   116:                         EnDusukDisplay(temporary[4]);//gunler[k].min_temp);
+   117:                         LoadGunInfo(temporary[0]);//gunler[k].week_day);
+   118:                         LoadGosterilenGunInfo(temporary[7]);//gunler[k].relative_index);
+   119:                         SetHavaDurumuPin(temporary[6], 1);//gunler[k].weather_phrase, 1);
+   120:                         prev_phrase = temporary[6];//gunler[k].weather_phrase;
+   121:                         
+   122:                         __delay_ms(3000);
+   123: }
+   124: refresh_counter++;
+   125: if(refresh_counter > 2)
+   126: {
+   127:         makeRequest();
+   128:         refresh_counter = 0;
+   129: }
+   130: 
+   131: 
+   132:                         }
+   133: 
+   134: 
+   135: }
+   136: 

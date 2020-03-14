@@ -1,0 +1,6 @@
+_EEPROM_24C040_WriteByte: CODE, 1700 0 68
+_SoftwareSPI_WriteByte: CODE, 1768 0 110
+_main: CODE, 1878 0 170
+_EEPROM_24C040_ReadByte: CODE, 1655 0 45
+_SoftwareSPI_Initialize: CODE, 1642 0 13
+Total: 406

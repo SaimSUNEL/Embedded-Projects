@@ -1,0 +1,31 @@
+     1: 
+     2: #include<htc.h>
+     3: 
+     4: void main()
+     5: {
+     6: TRISB = 0 ; //PORTB tümü output ....
+     7: PORTB = 0 ; //For safe ...      
+     8:         __delay_ms( 4000 ) ;
+     9: RB0 = 1 ;       
+    10:         
+    11:         
+    12:                 __delay_ms( 4000 ) ;
+    13:         
+    14: RB0 = 0 ;       
+    15: RB1 = 1 ;       
+    16:         
+    17:                 __delay_ms( 4000 ) ;
+    18: 
+    19: RB1 = 0 ;       
+    20:         RB2 = 1 ;
+    21:                 __delay_ms( 4000 ) ;
+    22:         
+    23:         RB2 = 0 ;       
+    24:         RB3 = 1 ;
+    25:                 __delay_ms( 4000 ) ;
+    26:         
+    27: while( 1 ) ;
+    28:         
+    29:         
+    30:         
+    31: }

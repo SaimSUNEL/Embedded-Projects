@@ -1,0 +1,19 @@
+build/default/debug/PoemCircuit.d  \
+ build/default/debug/PoemCircuit.p1:  \
+ PoemCircuit.c  \
+I2C.h  \
+UART.h  \
+SevenSegments.h  \
+DS1307.h  \
+EEPROM24C32.h  \
+EEPROM24C64.h  \
+INSELECT.h  \
+POEM.h  \
+INTERRUPT.h  \
+EEPROM.h  \
+LCD.h  \
+PCF8574.h  \
+DHT11Sensor.h  \
+ADC.h  \
+ALARM.h  \
+INTFUNCTIONS.h 

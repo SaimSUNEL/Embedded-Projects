@@ -1,0 +1,8 @@
+_lcd_command: CODE, 681 0 63
+_lcd_data: CODE, 744 0 63
+_main: CODE, 873 0 78
+_lcd_clear: CODE, 593 0 16
+_lcd_goto: CODE, 653 0 28
+_lcd_yaz: CODE, 951 0 1097
+_lcd_init: CODE, 807 0 66
+Total: 1411

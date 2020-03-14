@@ -1,0 +1,5 @@
+_get_DHT11_data: CODE, 1823 0 225
+_main: CODE, 1744 0 79
+_byte_send: CODE, 1700 0 12
+_Usart_ayarla: CODE, 1726 0 18
+Total: 334

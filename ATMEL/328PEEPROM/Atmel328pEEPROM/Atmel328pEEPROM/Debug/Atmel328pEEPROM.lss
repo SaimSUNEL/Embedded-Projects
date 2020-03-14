@@ -1,0 +1,224 @@
+
+Atmel328pEEPROM.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000001a  00800100  00000102  00000176  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000102  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  00000190  2**0
+                  CONTENTS, READONLY
+  3 .debug_aranges 00000030  00000000  00000000  000001c0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   0000022d  00000000  00000000  000001f0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 0000019f  00000000  00000000  0000041d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   0000017b  00000000  00000000  000005bc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000044  00000000  00000000  00000738  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    000001f1  00000000  00000000  0000077c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    0000006e  00000000  00000000  0000096d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 00000050  00000000  00000000  000009db  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   8:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  10:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  14:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  18:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  1c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  20:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  24:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  28:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  2c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  30:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  34:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  38:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  3c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  40:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  44:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  48:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  4c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  50:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  54:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  58:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  5c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  60:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  64:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	e2 e0       	ldi	r30, 0x02	; 2
+  7c:	f1 e0       	ldi	r31, 0x01	; 1
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	aa 31       	cpi	r26, 0x1A	; 26
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+  8a:	0e 94 53 00 	call	0xa6	; 0xa6 <main>
+  8e:	0c 94 7f 00 	jmp	0xfe	; 0xfe <_exit>
+
+00000092 <__bad_interrupt>:
+  92:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000096 <_Z10EEPROM_yazjh>:
+{
+	
+	
+	
+	//Yazýlacak adres
+	EEAR = adres ;
+  96:	92 bd       	out	0x22, r25	; 34
+  98:	81 bd       	out	0x21, r24	; 33
+	
+	//Yazýlacak veri
+	EEDR = bilgi ;
+  9a:	60 bd       	out	0x20, r22	; 32
+	
+	
+	EECR |= 1 << EEMPE ;
+  9c:	fa 9a       	sbi	0x1f, 2	; 31
+	
+	EECR |= 1 << EEPE ;
+  9e:	f9 9a       	sbi	0x1f, 1	; 31
+	
+	//Yazým iþlemi bitene kadar bekle...
+	while (  EECR & ( 1 << EEPE ) ) ;
+  a0:	f9 99       	sbic	0x1f, 1	; 31
+  a2:	fe cf       	rjmp	.-4      	; 0xa0 <_Z10EEPROM_yazjh+0xa>
+	
+}
+  a4:	08 95       	ret
+
+000000a6 <main>:
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  a6:	2f ef       	ldi	r18, 0xFF	; 255
+  a8:	83 ed       	ldi	r24, 0xD3	; 211
+  aa:	90 e3       	ldi	r25, 0x30	; 48
+  ac:	21 50       	subi	r18, 0x01	; 1
+  ae:	80 40       	sbci	r24, 0x00	; 0
+  b0:	90 40       	sbci	r25, 0x00	; 0
+  b2:	e1 f7       	brne	.-8      	; 0xac <main+0x6>
+  b4:	00 c0       	rjmp	.+0      	; 0xb6 <main+0x10>
+  b6:	00 00       	nop
+{
+    
+	_delay_ms ( 1000 ) ;
+	const char * saim = "Deneme             Deneme" ;
+	
+	for ( int a = 0 ; a < strlen (  ( char * ) saim )  ; a++ )
+  b8:	80 e0       	ldi	r24, 0x00	; 0
+  ba:	90 e0       	ldi	r25, 0x00	; 0
+  bc:	c0 e0       	ldi	r28, 0x00	; 0
+  be:	d0 e0       	ldi	r29, 0x00	; 0
+	{
+		EEPROM_yaz( a , saim [ a ] ) ;
+  c0:	fc 01       	movw	r30, r24
+  c2:	e0 50       	subi	r30, 0x00	; 0
+  c4:	ff 4f       	sbci	r31, 0xFF	; 255
+  c6:	60 81       	ld	r22, Z
+  c8:	0e 94 4b 00 	call	0x96	; 0x96 <_Z10EEPROM_yazjh>
+{
+    
+	_delay_ms ( 1000 ) ;
+	const char * saim = "Deneme             Deneme" ;
+	
+	for ( int a = 0 ; a < strlen (  ( char * ) saim )  ; a++ )
+  cc:	21 96       	adiw	r28, 0x01	; 1
+  ce:	ce 01       	movw	r24, r28
+  d0:	c9 31       	cpi	r28, 0x19	; 25
+  d2:	d1 05       	cpc	r29, r1
+  d4:	a9 f7       	brne	.-22     	; 0xc0 <main+0x1a>
+		EEPROM_yaz( a , saim [ a ] ) ;
+		
+	}
+	
+	
+	for ( int b = 0 ; b < strlen ( (char* ) saim ) ; b++  ) 
+  d6:	80 e0       	ldi	r24, 0x00	; 0
+  d8:	90 e0       	ldi	r25, 0x00	; 0
+{
+    
+	_delay_ms ( 1000 ) ;
+	const char * saim = "Deneme             Deneme" ;
+	
+	for ( int a = 0 ; a < strlen (  ( char * ) saim )  ; a++ )
+  da:	c0 e0       	ldi	r28, 0x00	; 0
+  dc:	d0 e0       	ldi	r29, 0x00	; 0
+	//Okunacak adres
+	
+	EEAR = adres ; 
+	
+	//Read enable 
+	EECR = 1 ; 
+  de:	11 e0       	ldi	r17, 0x01	; 1
+{
+	
+	
+	//Okunacak adres
+	
+	EEAR = adres ; 
+  e0:	92 bd       	out	0x22, r25	; 34
+  e2:	81 bd       	out	0x21, r24	; 33
+	
+	//Read enable 
+	EECR = 1 ; 
+  e4:	1f bb       	out	0x1f, r17	; 31
+	
+	
+	return EEDR ;
+  e6:	60 b5       	in	r22, 0x20	; 32
+	
+	
+	for ( int b = 0 ; b < strlen ( (char* ) saim ) ; b++  ) 
+	{
+		
+		EEPROM_yaz(  100 + b , EEPROM_oku( b )   );
+  e8:	ce 01       	movw	r24, r28
+  ea:	8c 59       	subi	r24, 0x9C	; 156
+  ec:	9f 4f       	sbci	r25, 0xFF	; 255
+  ee:	0e 94 4b 00 	call	0x96	; 0x96 <_Z10EEPROM_yazjh>
+		EEPROM_yaz( a , saim [ a ] ) ;
+		
+	}
+	
+	
+	for ( int b = 0 ; b < strlen ( (char* ) saim ) ; b++  ) 
+  f2:	21 96       	adiw	r28, 0x01	; 1
+  f4:	ce 01       	movw	r24, r28
+  f6:	c9 31       	cpi	r28, 0x19	; 25
+  f8:	d1 05       	cpc	r29, r1
+  fa:	91 f7       	brne	.-28     	; 0xe0 <main+0x3a>
+  fc:	ff cf       	rjmp	.-2      	; 0xfc <main+0x56>
+
+000000fe <_exit>:
+  fe:	f8 94       	cli
+
+00000100 <__stop_program>:
+ 100:	ff cf       	rjmp	.-2      	; 0x100 <__stop_program>

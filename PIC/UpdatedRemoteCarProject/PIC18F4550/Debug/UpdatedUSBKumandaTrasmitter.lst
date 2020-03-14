@@ -1,0 +1,369 @@
+     1: #ifndef MAIN_C
+     2: #define MAIN_C
+     3: // Global includes
+     4: #include <htc.h>
+     5: 
+     6: // Local includes
+     7: //#include "c:/tc/devdelay.c"
+     8: #include "c:/tc/usb.h"
+     9: #include "c:/tc/HardwareProfile.h"
+    10: #include "c:/tc/usb_function_hid.h"
+    11: #include "c:/tc/genericHID.h"
+    12: 
+    13:  //PIC 18F4550 fuse configuration:
+    14: // Config word 1 (Oscillator configuration)
+    15:  //20Mhz crystal input scaled to 48Mhz and configured for USB operation
+    16: __CONFIG(1, USBPLL & IESODIS & FCMDIS & XTPLL & CPUDIV1 & PLLDIV5);
+    17: // Config word 2
+    18: __CONFIG(2, VREGEN & PWRTDIS & BOREN & BORV20 & WDTDIS & WDTPS32K);
+    19: // Config word 3
+    20: __CONFIG(3, PBDIGITAL & LPT1DIS & MCLREN);
+    21: // Config word 4
+    22: __CONFIG(4, XINSTDIS & STVREN & LVPDIS & ICPORTDIS & DEBUGDIS);
+    23: // Config word 5, 6 and 7 (protection configuration)
+    24: __CONFIG(5, UNPROTECT);
+    25: __CONFIG(6, UNPROTECT);
+    26: __CONFIG(7, UNPROTECT);
+    27: 
+    28: // local prototypes
+    29: int aa;
+    30: 
+    31: void ProcessIO(void);
+    32: int index=0;
+    33: char gelen_veri[8];char uyan[]="01010101";
+    34: int bolum=0;
+    35: int a=0;
+    36: void uyandir()
+    37: {
+    38:         for(int a=0;a<8;a++)
+    39:         {PORTDbits.RD0=uyan[a]-48;
+    40:                  _delay( 10000 );
+    41:  _delay( 10000 );
+    42: _delay( 7450 );
+    43:  
+    44:                 
+    45:         }
+    46:         
+    47: PORTDbits.RD0=0;
+    48:          _delay( 10000 );
+    49:  _delay( 10000 );
+    50: _delay( 7450 );
+    51:         
+    52:         
+    53:         }
+    54:         char senk[]="00000000";
+    55:         char senk1[]="11111111";
+    56: 
+    57:         
+    58:         
+    59:         
+    60:         int ar=0;
+    61:         int index;
+    62: 
+    63:         
+    64:         
+    65:         kodla_gonder(int sayi)
+    66: 
+    67: { index = 0 ;
+    68:         while( index != 8 )
+    69:  {
+    70:      gelen_veri[ 7 - index ] = sayi % 2;
+    71:     bolum=sayi/2;
+    72:     sayi=bolum;
+    73:      index++;
+    74:  }
+    75: 
+    76:  
+    77:  PORTDbits.RD0 = 1;
+    78:  _delay( 10000 );
+    79:  _delay( 10000 );
+    80: _delay( 4450 );
+    81: 
+    82: 
+    83:  
+    84:  
+    85:  
+    86:  PORTDbits.RD0 = 0;
+    87:  
+    88:  _delay( 10000 );
+    89:  _delay( 10000 );
+    90: _delay( 4450 );
+    91:  
+    92:  for( aa = 0 ; aa < 8 ; aa++ )
+    93:  {
+    94:          PORTDbits.RD0 = gelen_veri[aa];
+    95:         _delay( 10000 );
+    96:  _delay( 10000 );
+    97: _delay( 1187 );
+    98:          PORTDbits.RD0 = ~PORTDbits.RD0; 
+    99:         _delay( 10000 );
+   100:  _delay( 10000 );
+   101: _delay( 1187 );
+   102:          
+   103:  }
+   104:  
+   105: 
+   106:  
+   107:  
+   108:  
+   109:  
+   110:  
+   111:  
+   112:   
+   113: 
+   114: 
+   115: 
+   116: 
+   117:  PORTDbits.RD0 = 0;
+   118:  
+   119:  _delay( 250 -1 );
+   120:  _delay( 250 -1 );
+   121: _delay( 250 -1 );
+   122:  
+   123:         _delay( 250 -1);
+   124: }
+   125: 
+   126: int sayi=0;
+   127: // Main function
+   128: void main(void)
+   129: {
+   130: //      ADCON1=0x06;
+   131: //PORTA=0x01;
+   132:          
+   133:          TRISB=0b11100000;
+   134:          PORTB=0;
+   135:          
+   136:         TRISC = 0b00000000;
+   137:         TRISD = 0b00000000;
+   138:         TRISE = 0b00000000;
+   139: 
+   140: PORTC=0;
+   141: PORTD=0;
+   142:         PORTE=0;
+   143:         USBOutHandle = 0;
+   144: USBInHandle = 0;
+   145:                 USBDeviceInit();
+   146: 
+   147:         
+   148: 
+   149: 
+   150: for(int jkl=0;jkl<64;jkl++){
+   151: 
+   152: ToSendDataBuffer[jkl]=0;
+   153: 
+   154: ReceivedDataBuffer[jkl]=0;
+   155: }
+   156: ToSendDataBuffer[1]='S';
+   157: ToSendDataBuffer[2]='a';
+   158: ToSendDataBuffer[3]='i';
+   159: ToSendDataBuffer[4]='m';
+   160: int say=0;
+   161:          while (1)
+   162:     
+   163:    {
+   164:            
+   165:            USBDeviceTasks();
+   166: if((USBDeviceState < CONFIGURED_STATE)||(USBSuspendControl==1))continue;
+   167: 
+   168: if(!HIDRxHandleBusy(USBOutHandle))
+   169:     {  
+   170: switch(ReceivedDataBuffer[0])
+   171: {
+   172: case '1':
+   173: //if(RB0==0)RB0=1;
+   174: //seri_porta_veri_gonder('1');
+   175: break;
+   176: 
+   177: case 'l':
+   178: uyandir();
+   179: uyandir();
+   180: uyandir();
+   181: 
+   182: kodla_gonder( 22 );
+   183: 
+   184:  break;
+   185: 
+   186: 
+   187: case '2':
+   188: //PORTBbits.RB1=1;
+   189: //seri_porta_veri_gonder('2');
+   190: uyandir();
+   191:                 uyandir();
+   192: uyandir();
+   193: 
+   194: kodla_gonder('2');
+   195: break;
+   196: case '3':
+   197: //PORTBbits.RB2=1;
+   198: //seri_porta_veri_gonder('3');
+   199: 
+   200: break;
+   201: 
+   202: case '4':
+   203: //PORTBbits.RB3=1;
+   204: uyandir();
+   205:                 uyandir();
+   206: uyandir();
+   207: 
+   208: kodla_gonder('4');
+   209: break;
+   210: case '5':
+   211: //PORTBbits.RB4=1;
+   212: //seri_porta_veri_gonder('5');
+   213: uyandir();
+   214:                 uyandir();
+   215: uyandir();
+   216: 
+   217: kodla_gonder('5');
+   218: break;
+   219: case '6':
+   220: PORTBbits.RB5=1;
+   221: break;
+   222: case '7':
+   223: //seri_porta_veri_gonder('7');
+   224: uyandir();
+   225:                 uyandir();
+   226: uyandir();
+   227: 
+   228: kodla_gonder('7');
+   229: break;
+   230: case '8':
+   231: PORTBbits.RB7=1;
+   232: break;
+   233: case 'a':
+   234: PORTBbits.RB0=0;
+   235: break;
+   236: case 'b':
+   237:         uyandir();
+   238:                 uyandir();
+   239: uyandir();
+   240: 
+   241: kodla_gonder('b');
+   242: break;
+   243: case 'c':
+   244: PORTBbits.RB2=0;
+   245: break;
+   246: case 'd':
+   247:         uyandir();
+   248:                 uyandir();
+   249: uyandir();
+   250: 
+   251: kodla_gonder('d');
+   252: break;
+   253: case 'e':
+   254:         uyandir();
+   255:                 uyandir();
+   256: uyandir();
+   257: 
+   258: kodla_gonder('e');
+   259: break;
+   260: case 'f':
+   261: PORTBbits.RB5=0;
+   262: break;
+   263: case 'g':
+   264:         uyandir();
+   265:                 uyandir();
+   266: uyandir();
+   267: 
+   268: kodla_gonder('g');
+   269: break;
+   270: case 'h':
+   271: PORTBbits.RB7=0;
+   272: break;
+   273: 
+   274: 
+   275: 
+   276: 
+   277: 
+   278: default:
+   279: ToSendDataBuffer[0]='G';
+   280: ToSendDataBuffer[1]='e';
+   281: ToSendDataBuffer[2]='c';
+   282: ToSendDataBuffer[3]='e';
+   283: ToSendDataBuffer[4]='r';
+   284: ToSendDataBuffer[5]='l';
+   285: ToSendDataBuffer[6]='i';
+   286: ToSendDataBuffer[7]=' ';
+   287: ToSendDataBuffer[8]='K';
+   288: ToSendDataBuffer[9]='o';
+   289: ToSendDataBuffer[10]='m';
+   290: ToSendDataBuffer[11]='u';
+   291: ToSendDataBuffer[12]='t';
+   292: ToSendDataBuffer[13]=' ';
+   293: ToSendDataBuffer[14]='D';
+   294: ToSendDataBuffer[15]='e';
+   295: ToSendDataBuffer[16]='g';
+   296: ToSendDataBuffer[17]='i';
+   297: ToSendDataBuffer[18]='l';
+   298: ToSendDataBuffer[19]='.';
+   299: ToSendDataBuffer[20]='.';
+   300: ToSendDataBuffer[21]='.';
+   301: if(!HIDTxHandleBusy(USBInHandle))
+   302: USBInHandle = HIDTxPacket(HID_EP,ToSendDataBuffer,64);
+   303: 
+   304: break;
+   305: 
+   306: 
+   307: 
+   308: }
+   309: 
+   310: 
+   311: USBOutHandle=HIDRxPacket(HID_EP,ReceivedDataBuffer,64);
+   312: 
+   313: 
+   314: 
+   315: }
+   316: /*
+   317:         if(RB7==1)
+   318:         {uyandir();
+   319:                 uyandir();
+   320:                 uyandir();
+   321:                 senkron();
+   322:                 kodla_gonder('S');
+   323:                 kodla_gonder('a');
+   324:                 kodla_gonder('i');
+   325:                 kodla_gonder('m');
+   326:                 kodla_gonder(' ');
+   327:                 kodla_gonder('S');
+   328:                 kodla_gonder('U');
+   329:                 kodla_gonder('N');
+   330:                 kodla_gonder('E');
+   331:                 kodla_gonder('L');
+   332:                 kodla_gonder('!');
+   333:                 kodla_gonder(22);
+   334:         DelayMs(500);
+   335:                 
+   336:                 }*/
+   337:            /*
+   338:                 if(RB6==1)
+   339:         {uyandir();
+   340:                 uyandir();
+   341:                 uyandir();
+   342:                 senkron();
+   343:                 
+   344:                 kodla_gonder('D');
+   345:                 kodla_gonder('e');
+   346:                 kodla_gonder('n');
+   347:                 kodla_gonder('e');
+   348:                 kodla_gonder('m');
+   349:                 kodla_gonder('e');
+   350:                 kodla_gonder(' ');
+   351:                 kodla_gonder('D');
+   352:                 kodla_gonder('e');
+   353:                 kodla_gonder('n');
+   354:                 kodla_gonder('e');
+   355:                 kodla_gonder('m');
+   356:                 kodla_gonder('e');
+   357:                 kodla_gonder(' ');
+   358:         kodla_gonder(33);
+   359:                 DelayMs(500);
+   360:                 
+   361:                 }
+   362:            
+   363:            */
+   364:    }
+   365:         
+   366:         
+   367:         }
+   368: 
+   369: #endif

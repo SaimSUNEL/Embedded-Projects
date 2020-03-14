@@ -1,0 +1,1885 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.82 build 9453 
+                                                                                               Wed Apr 08 14:19:03 2015
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 9453
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 9453"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F877
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_coz
+    43                           	FNCALL	_coz,_kodu_coz
+    44                           	FNCALL	_kodu_coz,_DelayMs
+    45                           	FNROOT	_main
+    46                           	global	_code
+    47                           	global	_a
+    48                           	global	_i
+    49                           	global	_j
+    50                           	global	_motor_suresi
+    51                           	global	_sonuc
+    52                           	global	_temp
+    53                           	global	_sayi
+    54                           	global	_motor_aktif
+    55                           	global	_motor_yon
+    56                           	global	_ortala
+    57                           	global	_array
+    58                           	global	_gelen_veri
+    59                           	global	_PORTB
+    60                           psect	text136,local,class=CODE,delta=2
+    61                           global __ptext136
+    62  0000                     __ptext136:
+    63  0006                     _PORTB	set	6
+    64                           	global	_PORTC
+    65  0007                     _PORTC	set	7
+    66                           	global	_CARRY
+    67  0018                     _CARRY	set	24
+    68                           	global	_GIE
+    69  005F                     _GIE	set	95
+    70                           	global	_RB0
+    71  0030                     _RB0	set	48
+    72                           	global	_RB1
+    73  0031                     _RB1	set	49
+    74                           	global	_RB2
+    75  0032                     _RB2	set	50
+    76                           	global	_RC0
+    77  0038                     _RC0	set	56
+    78                           	global	_RC1
+    79  0039                     _RC1	set	57
+    80                           	global	_RC2
+    81  003A                     _RC2	set	58
+    82                           	global	_RC3
+    83  003B                     _RC3	set	59
+    84                           	global	_RC7
+    85  003F                     _RC7	set	63
+    86                           	global	_TRISB
+    87  0086                     _TRISB	set	134
+    88                           	global	_TRISC
+    89  0087                     _TRISC	set	135
+    90                           	global	_EEADR
+    91  010D                     _EEADR	set	269
+    92                           	global	_EEDATA
+    93  010C                     _EEDATA	set	268
+    94                           	global	_EECON1
+    95  018C                     _EECON1	set	396
+    96                           	global	_EECON2
+    97  018D                     _EECON2	set	397
+    98                           	global	_RD
+    99  0C60                     _RD	set	3168
+   100                           	global	_WR
+   101  0C61                     _WR	set	3169
+   102                           	global	_WREN
+   103  0C62                     _WREN	set	3170
+   104                           	file	"RemoteCarAlici.as"
+   105                           	line	#
+   106                           psect cinit,class=CODE,delta=2
+   107                           global start_initialization
+   108  0520                     start_initialization:
+   109                           
+   110                           psect	bssCOMMON,class=COMMON,space=1
+   111                           global __pbssCOMMON
+   112  0079                     __pbssCOMMON:
+   113  0079                     _sayi:
+   114  0079                            ds      2
+   115                           
+   116  007B                     _motor_aktif:
+   117  007B                            ds      1
+   118                           
+   119  007C                     _motor_yon:
+   120  007C                            ds      1
+   121                           
+   122  007D                     _ortala:
+   123  007D                            ds      1
+   124                           
+   125                           psect	bssBANK0,class=BANK0,space=1
+   126                           global __pbssBANK0
+   127  0042                     __pbssBANK0:
+   128  0042                     _code:
+   129  0042                            ds      4
+   130                           
+   131  0046                     _a:
+   132  0046                            ds      2
+   133                           
+   134  0048                     _i:
+   135  0048                            ds      2
+   136                           
+   137  004A                     _j:
+   138  004A                            ds      2
+   139                           
+   140  004C                     _motor_suresi:
+   141  004C                            ds      2
+   142                           
+   143  004E                     _sonuc:
+   144  004E                            ds      2
+   145                           
+   146  0050                     _temp:
+   147  0050                            ds      2
+   148                           
+   149  0052                     _gelen_veri:
+   150  0052                            ds      8
+   151                           
+   152                           psect	bssBANK1,class=BANK1,space=1
+   153                           global __pbssBANK1
+   154  00A0                     __pbssBANK1:
+   155  00A0                     _array:
+   156  00A0                            ds      50
+   157                           
+   158                           psect clrtext,class=CODE,delta=2
+   159                           global clear_ram
+   160                           ;	Called with FSR containing the base address, and
+   161                           ;	W with the last address+1
+   162  0518                     clear_ram:
+   163  0518  0064               	clrwdt			;clear the watchdog before getting into this loop
+   164  0519                     clrloop:
+   165  0519  0180               	clrf	indf		;clear RAM location pointed to by FSR
+   166  051A  0A84               	incf	fsr,f		;increment pointer
+   167  051B  0604               	xorwf	fsr,w		;XOR with final address
+   168  051C  1903               	btfsc	status,2	;have we reached the end yet?
+   169  051D  3400               	retlw	0		;all done for this memory range, return
+   170  051E  0604               	xorwf	fsr,w		;XOR again to restore value
+   171  051F  2D19               	goto	clrloop		;do the next byte
+   172                           
+   173                           ; Clear objects allocated to COMMON
+   174                           psect cinit,class=CODE,delta=2
+   175  0520  01F9               	clrf	((__pbssCOMMON)+0)&07Fh
+   176  0521  01FA               	clrf	((__pbssCOMMON)+1)&07Fh
+   177  0522  01FB               	clrf	((__pbssCOMMON)+2)&07Fh
+   178  0523  01FC               	clrf	((__pbssCOMMON)+3)&07Fh
+   179  0524  01FD               	clrf	((__pbssCOMMON)+4)&07Fh
+   180                           ; Clear objects allocated to BANK0
+   181                           psect cinit,class=CODE,delta=2
+   182  0525  1383               	bcf	status, 7	;select IRP bank0
+   183  0526  3042               	movlw	low(__pbssBANK0)
+   184  0527  0084               	movwf	fsr
+   185  0528  305A               	movlw	low((__pbssBANK0)+018h)
+   186  0529  120A  118A  2518   	fcall	clear_ram
+              120A  118A         
+   187                           ; Clear objects allocated to BANK1
+   188                           psect cinit,class=CODE,delta=2
+   189  052E  30A0               	movlw	low(__pbssBANK1)
+   190  052F  0084               	movwf	fsr
+   191  0530  30D2               	movlw	low((__pbssBANK1)+032h)
+   192  0531  120A  118A  2518   	fcall	clear_ram
+              120A  118A         
+   193                           psect cinit,class=CODE,delta=2
+   194                           global end_of_initialization
+   195                           
+   196                           ;End of C runtime variable initialization code
+   197                           
+   198  0536                     end_of_initialization:
+   199  0536  0183               clrf status
+   200  0537  120A  118A  2D3A   ljmp _main	;jump to C main() function
+   201                           psect	cstackCOMMON,class=COMMON,space=1
+   202                           global __pcstackCOMMON
+   203  0070                     __pcstackCOMMON:
+   204                           	global	?_DelayMs
+   205  0070                     ?_DelayMs:	; 0 bytes @ 0x0
+   206                           	global	??_DelayMs
+   207  0070                     ??_DelayMs:	; 0 bytes @ 0x0
+   208                           	global	?_kodu_coz
+   209  0070                     ?_kodu_coz:	; 0 bytes @ 0x0
+   210                           	global	?_coz
+   211  0070                     ?_coz:	; 0 bytes @ 0x0
+   212                           	global	?_main
+   213  0070                     ?_main:	; 0 bytes @ 0x0
+   214  0070                     	ds	1
+   215                           	global	DelayMs@cnt
+   216  0071                     DelayMs@cnt:	; 1 bytes @ 0x1
+   217  0071                     	ds	1
+   218                           	global	DelayMs@i
+   219  0072                     DelayMs@i:	; 1 bytes @ 0x2
+   220  0072                     	ds	1
+   221                           	global	DelayMs@_dcnt
+   222  0073                     DelayMs@_dcnt:	; 1 bytes @ 0x3
+   223  0073                     	ds	1
+   224                           	global	??_coz
+   225  0074                     ??_coz:	; 0 bytes @ 0x4
+   226  0074                     	ds	1
+   227                           	global	coz@_dcnt
+   228  0075                     coz@_dcnt:	; 1 bytes @ 0x5
+   229  0075                     	ds	1
+   230                           	global	coz@_dcnt_1176
+   231  0076                     coz@_dcnt_1176:	; 1 bytes @ 0x6
+   232  0076                     	ds	1
+   233                           	global	coz@k
+   234  0077                     coz@k:	; 2 bytes @ 0x7
+   235  0077                     	ds	2
+   236                           	global	??_main
+   237  0079                     ??_main:	; 0 bytes @ 0x9
+   238                           psect	cstackBANK0,class=BANK0,space=1
+   239                           global __pcstackBANK0
+   240  0020                     __pcstackBANK0:
+   241                           	global	??_kodu_coz
+   242  0020                     ??_kodu_coz:	; 0 bytes @ 0x0
+   243  0020                     	ds	22
+   244                           	global	kodu_coz@_dcnt
+   245  0036                     kodu_coz@_dcnt:	; 1 bytes @ 0x16
+   246  0036                     	ds	1
+   247                           	global	kodu_coz@_dcnt_1168
+   248  0037                     kodu_coz@_dcnt_1168:	; 1 bytes @ 0x17
+   249  0037                     	ds	1
+   250                           	global	kodu_coz@_dcnt_1170
+   251  0038                     kodu_coz@_dcnt_1170:	; 1 bytes @ 0x18
+   252  0038                     	ds	1
+   253                           	global	kodu_coz@_dcnt_1172
+   254  0039                     kodu_coz@_dcnt_1172:	; 1 bytes @ 0x19
+   255  0039                     	ds	1
+   256                           	global	kodu_coz@b
+   257  003A                     kodu_coz@b:	; 2 bytes @ 0x1A
+   258  003A                     	ds	2
+   259                           	global	kodu_coz@a
+   260  003C                     kodu_coz@a:	; 2 bytes @ 0x1C
+   261  003C                     	ds	2
+   262                           	global	kodu_coz@b_1169
+   263  003E                     kodu_coz@b_1169:	; 2 bytes @ 0x1E
+   264  003E                     	ds	2
+   265                           	global	kodu_coz@b_1171
+   266  0040                     kodu_coz@b_1171:	; 2 bytes @ 0x20
+   267  0040                     	ds	2
+   268 ;;Data sizes: Strings 0, constant 0, data 0, bss 79, persistent 0 stack 0
+   269 ;;Auto spaces:   Size  Autos    Used
+   270 ;; COMMON          14      9      14
+   271 ;; BANK0           80     34      58
+   272 ;; BANK1           80      0      50
+   273 ;; BANK3           96      0       0
+   274 ;; BANK2           96      0       0
+   275                           
+   276 ;;
+   277 ;; Pointer list with targets:
+   278                           
+   279                           
+   280                           
+   281 ;;
+   282 ;; Critical Paths under _main in COMMON
+   283 ;;
+   284 ;;   _main->_coz
+   285 ;;   _kodu_coz->_DelayMs
+   286 ;;
+   287 ;; Critical Paths under _main in BANK0
+   288 ;;
+   289 ;;   _coz->_kodu_coz
+   290 ;;
+   291 ;; Critical Paths under _main in BANK1
+   292 ;;
+   293 ;;   None.
+   294 ;;
+   295 ;; Critical Paths under _main in BANK3
+   296 ;;
+   297 ;;   None.
+   298 ;;
+   299 ;; Critical Paths under _main in BANK2
+   300 ;;
+   301 ;;   None.
+   302                           
+   303 ;;
+   304 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   305 ;;
+   306                           
+   307 ;;
+   308 ;;Call Graph Tables:
+   309 ;;
+   310 ;; ---------------------------------------------------------------------------------
+   311 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   312 ;; ---------------------------------------------------------------------------------
+   313 ;; (0) _main                                                 0     0      0     458
+   314 ;;                                _coz
+   315 ;; ---------------------------------------------------------------------------------
+   316 ;; (1) _coz                                                  5     5      0     458
+   317 ;;                                              4 COMMON     5     5      0
+   318 ;;                           _kodu_coz
+   319 ;; ---------------------------------------------------------------------------------
+   320 ;; (2) _kodu_coz                                            34    34      0     344
+   321 ;;                                              0 BANK0     34    34      0
+   322 ;;                            _DelayMs
+   323 ;; ---------------------------------------------------------------------------------
+   324 ;; (3) _DelayMs                                              4     4      0      68
+   325 ;;                                              0 COMMON     4     4      0
+   326 ;; ---------------------------------------------------------------------------------
+   327 ;; Estimated maximum stack depth 3
+   328 ;; ---------------------------------------------------------------------------------
+   329                           
+   330 ;; Call Graph Graphs:
+   331                           
+   332 ;; _main (ROOT)
+   333 ;;   _coz
+   334 ;;     _kodu_coz
+   335 ;;       _DelayMs
+   336 ;;
+   337                           
+   338 ;; Address spaces:
+   339                           
+   340 ;;Name               Size   Autos  Total    Cost      Usage
+   341 ;;BITCOMMON            E      0       0       0        0.0%
+   342 ;;EEDATA             100      0       0       0        0.0%
+   343 ;;NULL                 0      0       0       0        0.0%
+   344 ;;CODE                 0      0       0       0        0.0%
+   345 ;;COMMON               E      9       E       1      100.0%
+   346 ;;BITSFR0              0      0       0       1        0.0%
+   347 ;;SFR0                 0      0       0       1        0.0%
+   348 ;;BITSFR1              0      0       0       2        0.0%
+   349 ;;SFR1                 0      0       0       2        0.0%
+   350 ;;STACK                0      0       3       2        0.0%
+   351 ;;ABS                  0      0      7A       3        0.0%
+   352 ;;BITBANK0            50      0       0       4        0.0%
+   353 ;;BITSFR3              0      0       0       4        0.0%
+   354 ;;SFR3                 0      0       0       4        0.0%
+   355 ;;BANK0               50     22      3A       5       72.5%
+   356 ;;BITSFR2              0      0       0       5        0.0%
+   357 ;;SFR2                 0      0       0       5        0.0%
+   358 ;;BITBANK1            50      0       0       6        0.0%
+   359 ;;BANK1               50      0      32       7       62.5%
+   360 ;;BITBANK3            60      0       0       8        0.0%
+   361 ;;BANK3               60      0       0       9        0.0%
+   362 ;;BITBANK2            60      0       0      10        0.0%
+   363 ;;BANK2               60      0       0      11        0.0%
+   364 ;;DATA                 0      0      7D      12        0.0%
+   365                           
+   366                           	global	_main
+   367                           psect	maintext,global,class=CODE,delta=2
+   368                           global __pmaintext
+   369  053A                     __pmaintext:
+   370                           
+   371 ;; *************** function _main *****************
+   372 ;; Defined at:
+   373 ;;		line 111 in file "C:\Users\Saim\Desktop\RemoteCar\alici.c"
+   374 ;; Parameters:    Size  Location     Type
+   375 ;;		None
+   376 ;; Auto vars:     Size  Location     Type
+   377 ;;		None
+   378 ;; Return value:  Size  Location     Type
+   379 ;;		None               void
+   380 ;; Registers used:
+   381 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   382 ;; Tracked objects:
+   383 ;;		On entry : 17F/0
+   384 ;;		On exit  : 0/0
+   385 ;;		Unchanged: 0/0
+   386 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   387 ;;      Params:         0       0       0       0       0
+   388 ;;      Locals:         0       0       0       0       0
+   389 ;;      Temps:          0       0       0       0       0
+   390 ;;      Totals:         0       0       0       0       0
+   391 ;;Total ram usage:        0 bytes
+   392 ;; Hardware stack levels required when called:    3
+   393 ;; This function calls:
+   394 ;;		_coz
+   395 ;; This function is called by:
+   396 ;;		Startup code after reset
+   397 ;; This function uses a non-reentrant model
+   398 ;;
+   399                           psect	maintext
+   400                           	file	"C:\Users\Saim\Desktop\RemoteCar\alici.c"
+   401                           	line	111
+   402                           	global	__size_of_main
+   403  001F                     	__size_of_main	equ	__end_of_main-_main
+   404                           	
+   405  053A                     _main:	
+   406                           	opt	stack 5
+   407                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   408                           	line	112
+   409                           	
+   410  053A                     l2893:	
+   411                           ;alici.c: 112: TRISB=0b00000001;
+   412  053A  3001               	movlw	(01h)
+   413  053B  1683               	bsf	status, 5	;RP0=1, select bank1
+   414  053C  1303               	bcf	status, 6	;RP1=0, select bank1
+   415  053D  0086               	movwf	(134)^080h	;volatile
+   416                           	line	113
+   417                           	
+   418  053E                     l2895:	
+   419                           ;alici.c: 113: PORTB=0;
+   420  053E  1283               	bcf	status, 5	;RP0=0, select bank0
+   421  053F  1303               	bcf	status, 6	;RP1=0, select bank0
+   422  0540  0186               	clrf	(6)	;volatile
+   423                           	line	115
+   424                           	
+   425  0541                     l2897:	
+   426                           ;alici.c: 115: TRISC=0;
+   427  0541  1683               	bsf	status, 5	;RP0=1, select bank1
+   428  0542  1303               	bcf	status, 6	;RP1=0, select bank1
+   429  0543  0187               	clrf	(135)^080h	;volatile
+   430                           	line	116
+   431                           	
+   432  0544                     l2899:	
+   433                           ;alici.c: 116: PORTC=0;
+   434  0544  1283               	bcf	status, 5	;RP0=0, select bank0
+   435  0545  1303               	bcf	status, 6	;RP1=0, select bank0
+   436  0546  0187               	clrf	(7)	;volatile
+   437  0547  2D48               	goto	l2901
+   438                           	line	121
+   439                           ;alici.c: 121: while (1)
+   440                           	
+   441  0548                     l728:	
+   442                           	line	130
+   443                           	
+   444  0548                     l2901:	
+   445                           ;alici.c: 122: {
+   446                           ;alici.c: 130: if(RB0==1)
+   447  0548  1283               	bcf	status, 5	;RP0=0, select bank0
+   448  0549  1303               	bcf	status, 6	;RP1=0, select bank0
+   449  054A  1C06               	btfss	(48/8),(48)&7
+   450  054B  2D4D               	goto	u3031
+   451  054C  2D4E               	goto	u3030
+   452  054D                     u3031:
+   453  054D  2D48               	goto	l2901
+   454  054E                     u3030:
+   455                           	line	132
+   456                           	
+   457  054E                     l2903:	
+   458                           ;alici.c: 131: {
+   459                           ;alici.c: 132: coz();
+   460  054E  120A  118A  257A   	fcall	_coz
+              120A  118A         
+   461  0553  2D48               	goto	l2901
+   462                           	line	133
+   463                           	
+   464  0554                     l729:	
+   465  0554  2D48               	goto	l2901
+   466                           	line	140
+   467                           	
+   468  0555                     l730:	
+   469                           	line	121
+   470  0555  2D48               	goto	l2901
+   471                           	
+   472  0556                     l731:	
+   473                           	line	143
+   474                           	
+   475  0556                     l732:	
+   476                           	global	start
+   477  0556  120A  118A  2800   	ljmp	start
+   478                           	opt stack 0
+   479                           GLOBAL	__end_of_main
+   480  0559                     	__end_of_main:
+   481 ;; =============== function _main ends ============
+   482                           
+   483                           	signat	_main,88
+   484                           	global	_coz
+   485                           psect	text137,local,class=CODE,delta=2
+   486                           global __ptext137
+   487  057A                     __ptext137:
+   488                           
+   489 ;; *************** function _coz *****************
+   490 ;; Defined at:
+   491 ;;		line 89 in file "C:\Users\Saim\Desktop\RemoteCar\alici.c"
+   492 ;; Parameters:    Size  Location     Type
+   493 ;;		None
+   494 ;; Auto vars:     Size  Location     Type
+   495 ;;  _dcnt           1    6[COMMON] unsigned char 
+   496 ;;  k               2    7[COMMON] int 
+   497 ;;  _dcnt           1    5[COMMON] unsigned char 
+   498 ;; Return value:  Size  Location     Type
+   499 ;;		None               void
+   500 ;; Registers used:
+   501 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   502 ;; Tracked objects:
+   503 ;;		On entry : 0/0
+   504 ;;		On exit  : 0/0
+   505 ;;		Unchanged: 0/0
+   506 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   507 ;;      Params:         0       0       0       0       0
+   508 ;;      Locals:         4       0       0       0       0
+   509 ;;      Temps:          1       0       0       0       0
+   510 ;;      Totals:         5       0       0       0       0
+   511 ;;Total ram usage:        5 bytes
+   512 ;; Hardware stack levels used:    1
+   513 ;; Hardware stack levels required when called:    2
+   514 ;; This function calls:
+   515 ;;		_kodu_coz
+   516 ;; This function is called by:
+   517 ;;		_main
+   518 ;; This function uses a non-reentrant model
+   519 ;;
+   520                           psect	text137
+   521                           	file	"C:\Users\Saim\Desktop\RemoteCar\alici.c"
+   522                           	line	89
+   523                           	global	__size_of_coz
+   524  008B                     	__size_of_coz	equ	__end_of_coz-_coz
+   525                           	
+   526  057A                     _coz:	
+   527                           	opt	stack 5
+   528                           ; Regs used in _coz: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   529                           	
+   530  057A                     l2859:	
+   531  057A  01F9               	clrf	(_sayi)
+   532  057B  01FA               	clrf	(_sayi+1)
+   533                           	line	90
+   534                           ;alici.c: 90: while(RB0==1)sayi++;
+   535  057C  2D84               	goto	l2863
+   536                           	
+   537  057D                     l713:	
+   538                           	
+   539  057D                     l2861:	
+   540  057D  3001               	movlw	low(01h)
+   541  057E  07F9               	addwf	(_sayi),f
+   542  057F  1803               	skipnc
+   543  0580  0AFA               	incf	(_sayi+1),f
+   544  0581  3000               	movlw	high(01h)
+   545  0582  07FA               	addwf	(_sayi+1),f
+   546  0583  2D84               	goto	l2863
+   547                           	
+   548  0584                     l712:	
+   549                           	
+   550  0584                     l2863:	
+   551  0584  1283               	bcf	status, 5	;RP0=0, select bank0
+   552  0585  1303               	bcf	status, 6	;RP1=0, select bank0
+   553  0586  1806               	btfsc	(48/8),(48)&7
+   554  0587  2D89               	goto	u2951
+   555  0588  2D8A               	goto	u2950
+   556  0589                     u2951:
+   557  0589  2D7D               	goto	l2861
+   558  058A                     u2950:
+   559  058A  2D8B               	goto	l2865
+   560                           	
+   561  058B                     l714:	
+   562                           	line	92
+   563                           	
+   564  058B                     l2865:	
+   565                           ;alici.c: 92: if(sayi>68 && sayi<76)
+   566  058B  087A               	movf	(_sayi+1),w
+   567  058C  3A80               	xorlw	80h
+   568  058D  00FF               	movwf	btemp+1
+   569  058E  3080               	movlw	(high(045h))^80h
+   570  058F  027F               	subwf	btemp+1,w
+   571  0590  1D03               	skipz
+   572  0591  2D94               	goto	u2965
+   573  0592  3045               	movlw	low(045h)
+   574  0593  0279               	subwf	(_sayi),w
+   575  0594                     u2965:
+   576                           
+   577  0594  1C03               	skipc
+   578  0595  2D97               	goto	u2961
+   579  0596  2D98               	goto	u2960
+   580  0597                     u2961:
+   581  0597  2E04               	goto	l725
+   582  0598                     u2960:
+   583                           	
+   584  0598                     l2867:	
+   585  0598  087A               	movf	(_sayi+1),w
+   586  0599  3A80               	xorlw	80h
+   587  059A  00FF               	movwf	btemp+1
+   588  059B  3080               	movlw	(high(04Ch))^80h
+   589  059C  027F               	subwf	btemp+1,w
+   590  059D  1D03               	skipz
+   591  059E  2DA1               	goto	u2975
+   592  059F  304C               	movlw	low(04Ch)
+   593  05A0  0279               	subwf	(_sayi),w
+   594  05A1                     u2975:
+   595                           
+   596  05A1  1803               	skipnc
+   597  05A2  2DA4               	goto	u2971
+   598  05A3  2DA5               	goto	u2970
+   599  05A4                     u2971:
+   600  05A4  2E04               	goto	l725
+   601  05A5                     u2970:
+   602                           	line	94
+   603                           	
+   604  05A5                     l2869:	
+   605                           ;alici.c: 93: {
+   606                           ;alici.c: 94: { unsigned char _dcnt; _dcnt = (1200-1)/((12*1000L)/(4*1000L))|1; while(--
+                                 _dcnt != 0) continue; };
+   607  05A5  308F               	movlw	(08Fh)
+   608  05A6  00F4               	movwf	(??_coz+0)+0
+   609  05A7  0874               	movf	(??_coz+0)+0,w
+   610  05A8  00F5               	movwf	(coz@_dcnt)
+   611  05A9  2DAB               	goto	l2871
+   612                           	
+   613  05AA                     l717:	
+   614  05AA  2DAB               	goto	l2871
+   615                           	
+   616  05AB                     l716:	
+   617                           	
+   618  05AB                     l2871:	
+   619  05AB  3001               	movlw	low(01h)
+   620  05AC  02F5               	subwf	(coz@_dcnt),f
+   621  05AD  1D03               	btfss	status,2
+   622  05AE  2DB0               	goto	u2981
+   623  05AF  2DB1               	goto	u2980
+   624  05B0                     u2981:
+   625  05B0  2DAB               	goto	l2871
+   626  05B1                     u2980:
+   627                           	
+   628  05B1                     l718:	
+   629                           	line	95
+   630                           ;alici.c: 95: if(RB0==0)
+   631  05B1  1283               	bcf	status, 5	;RP0=0, select bank0
+   632  05B2  1303               	bcf	status, 6	;RP1=0, select bank0
+   633  05B3  1806               	btfsc	(48/8),(48)&7
+   634  05B4  2DB6               	goto	u2991
+   635  05B5  2DB7               	goto	u2990
+   636  05B6                     u2991:
+   637  05B6  2E04               	goto	l725
+   638  05B7                     u2990:
+   639                           	line	97
+   640                           	
+   641  05B7                     l2873:	
+   642                           ;alici.c: 96: {
+   643                           ;alici.c: 97: for(int k=0;k<8;k++)
+   644  05B7  01F7               	clrf	(coz@k)
+   645  05B8  01F8               	clrf	(coz@k+1)
+   646                           	
+   647  05B9                     l2875:	
+   648  05B9  0878               	movf	(coz@k+1),w
+   649  05BA  3A80               	xorlw	80h
+   650  05BB  00FF               	movwf	btemp+1
+   651  05BC  3080               	movlw	(high(08h))^80h
+   652  05BD  027F               	subwf	btemp+1,w
+   653  05BE  1D03               	skipz
+   654  05BF  2DC2               	goto	u3005
+   655  05C0  3008               	movlw	low(08h)
+   656  05C1  0277               	subwf	(coz@k),w
+   657  05C2                     u3005:
+   658                           
+   659  05C2  1C03               	skipc
+   660  05C3  2DC5               	goto	u3001
+   661  05C4  2DC6               	goto	u3000
+   662  05C5                     u3001:
+   663  05C5  2DC8               	goto	l2879
+   664  05C6                     u3000:
+   665  05C6  2DF5               	goto	l2889
+   666                           	
+   667  05C7                     l2877:	
+   668  05C7  2DF5               	goto	l2889
+   669                           	line	98
+   670                           	
+   671  05C8                     l720:	
+   672                           	
+   673  05C8                     l2879:	
+   674                           ;alici.c: 98: {{ unsigned char _dcnt; _dcnt = (1495-1)/((12*1000L)/(4*1000L))|1; while(-
+                                 -_dcnt != 0) continue; };
+   675  05C8  30F3               	movlw	(0F3h)
+   676  05C9  00F4               	movwf	(??_coz+0)+0
+   677  05CA  0874               	movf	(??_coz+0)+0,w
+   678  05CB  00F6               	movwf	(coz@_dcnt_1176)
+   679  05CC  2DCE               	goto	l2881
+   680                           	
+   681  05CD                     l723:	
+   682  05CD  2DCE               	goto	l2881
+   683                           	
+   684  05CE                     l722:	
+   685                           	
+   686  05CE                     l2881:	
+   687  05CE  3001               	movlw	low(01h)
+   688  05CF  02F6               	subwf	(coz@_dcnt_1176),f
+   689  05D0  1D03               	btfss	status,2
+   690  05D1  2DD3               	goto	u3011
+   691  05D2  2DD4               	goto	u3010
+   692  05D3                     u3011:
+   693  05D3  2DCE               	goto	l2881
+   694  05D4                     u3010:
+   695  05D4  2DD5               	goto	l2883
+   696                           	
+   697  05D5                     l724:	
+   698                           	line	99
+   699                           	
+   700  05D5                     l2883:	
+   701                           ;alici.c: 99: gelen_veri[k]=RB0;
+   702  05D5  3000               	movlw	0
+   703  05D6  1283               	bcf	status, 5	;RP0=0, select bank0
+   704  05D7  1303               	bcf	status, 6	;RP1=0, select bank0
+   705  05D8  1806               	btfsc	(48/8),(48)&7
+   706  05D9  3001               	movlw	1
+   707  05DA  00F4               	movwf	(??_coz+0)+0
+   708  05DB  0877               	movf	(coz@k),w
+   709  05DC  3E52               	addlw	_gelen_veri&0ffh
+   710  05DD  0084               	movwf	fsr0
+   711  05DE  0874               	movf	(??_coz+0)+0,w
+   712  05DF  1383               	bcf	status, 7	;select IRP bank0
+   713  05E0  0080               	movwf	indf
+   714                           	line	97
+   715                           	
+   716  05E1                     l2885:	
+   717  05E1  3001               	movlw	low(01h)
+   718  05E2  07F7               	addwf	(coz@k),f
+   719  05E3  1803               	skipnc
+   720  05E4  0AF8               	incf	(coz@k+1),f
+   721  05E5  3000               	movlw	high(01h)
+   722  05E6  07F8               	addwf	(coz@k+1),f
+   723                           	
+   724  05E7                     l2887:	
+   725  05E7  0878               	movf	(coz@k+1),w
+   726  05E8  3A80               	xorlw	80h
+   727  05E9  00FF               	movwf	btemp+1
+   728  05EA  3080               	movlw	(high(08h))^80h
+   729  05EB  027F               	subwf	btemp+1,w
+   730  05EC  1D03               	skipz
+   731  05ED  2DF0               	goto	u3025
+   732  05EE  3008               	movlw	low(08h)
+   733  05EF  0277               	subwf	(coz@k),w
+   734  05F0                     u3025:
+   735                           
+   736  05F0  1C03               	skipc
+   737  05F1  2DF3               	goto	u3021
+   738  05F2  2DF4               	goto	u3020
+   739  05F3                     u3021:
+   740  05F3  2DC8               	goto	l2879
+   741  05F4                     u3020:
+   742  05F4  2DF5               	goto	l2889
+   743                           	
+   744  05F5                     l721:	
+   745                           	line	103
+   746                           	
+   747  05F5                     l2889:	
+   748                           ;alici.c: 100: }
+   749                           ;alici.c: 103: kodu_coz();
+   750  05F5  120A  118A  2605   	fcall	_kodu_coz
+              120A  118A         
+   751                           	line	104
+   752                           	
+   753  05FA                     l2891:	
+   754                           ;alici.c: 104: temp=sayi;
+   755  05FA  087A               	movf	(_sayi+1),w
+   756  05FB  1283               	bcf	status, 5	;RP0=0, select bank0
+   757  05FC  1303               	bcf	status, 6	;RP1=0, select bank0
+   758  05FD  01D1               	clrf	(_temp+1)	;volatile
+   759  05FE  07D1               	addwf	(_temp+1)	;volatile
+   760  05FF  0879               	movf	(_sayi),w
+   761  0600  01D0               	clrf	(_temp)	;volatile
+   762  0601  07D0               	addwf	(_temp)	;volatile
+   763                           
+   764  0602  2E04               	goto	l725
+   765                           	line	105
+   766                           	
+   767  0603                     l719:	
+   768  0603  2E04               	goto	l725
+   769                           	line	108
+   770                           	
+   771  0604                     l715:	
+   772                           	line	109
+   773                           	
+   774  0604                     l725:	
+   775  0604  0008               	return
+   776                           	opt stack 0
+   777                           GLOBAL	__end_of_coz
+   778  0605                     	__end_of_coz:
+   779 ;; =============== function _coz ends ============
+   780                           
+   781                           	signat	_coz,88
+   782                           	global	_kodu_coz
+   783                           psect	text138,local,class=CODE,delta=2
+   784                           global __ptext138
+   785  0605                     __ptext138:
+   786                           
+   787 ;; *************** function _kodu_coz *****************
+   788 ;; Defined at:
+   789 ;;		line 29 in file "C:\Users\Saim\Desktop\RemoteCar\alici.c"
+   790 ;; Parameters:    Size  Location     Type
+   791 ;;		None
+   792 ;; Auto vars:     Size  Location     Type
+   793 ;;  _dcnt           1   25[BANK0 ] unsigned char 
+   794 ;;  _dcnt           1   24[BANK0 ] unsigned char 
+   795 ;;  _dcnt           1   23[BANK0 ] unsigned char 
+   796 ;;  _dcnt           1   22[BANK0 ] unsigned char 
+   797 ;;  b               2   32[BANK0 ] int 
+   798 ;;  b               2   30[BANK0 ] int 
+   799 ;;  a               2   28[BANK0 ] int 
+   800 ;;  b               2   26[BANK0 ] int 
+   801 ;; Return value:  Size  Location     Type
+   802 ;;		None               void
+   803 ;; Registers used:
+   804 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   805 ;; Tracked objects:
+   806 ;;		On entry : 0/0
+   807 ;;		On exit  : 0/0
+   808 ;;		Unchanged: 0/0
+   809 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   810 ;;      Params:         0       0       0       0       0
+   811 ;;      Locals:         0      12       0       0       0
+   812 ;;      Temps:          0      22       0       0       0
+   813 ;;      Totals:         0      34       0       0       0
+   814 ;;Total ram usage:       34 bytes
+   815 ;; Hardware stack levels used:    1
+   816 ;; Hardware stack levels required when called:    1
+   817 ;; This function calls:
+   818 ;;		_DelayMs
+   819 ;; This function is called by:
+   820 ;;		_coz
+   821 ;; This function uses a non-reentrant model
+   822 ;;
+   823                           psect	text138
+   824                           	file	"C:\Users\Saim\Desktop\RemoteCar\alici.c"
+   825                           	line	29
+   826                           	global	__size_of_kodu_coz
+   827  01FB                     	__size_of_kodu_coz	equ	__end_of_kodu_coz-_kodu_coz
+   828                           	
+   829  0605                     _kodu_coz:	
+   830                           	opt	stack 5
+   831                           ; Regs used in _kodu_coz: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   832                           	line	30
+   833                           	
+   834  0605                     l2759:	
+   835                           ;alici.c: 30: sonuc=64*gelen_veri[1]+32*gelen_veri[2]+16*gelen_veri[3]+8*gelen_veri[4]+4
+                                 *gelen_veri[5]+2*gelen_veri[6]+gelen_veri[7];
+   836  0605  1283               	bcf	status, 5	;RP0=0, select bank0
+   837  0606  1303               	bcf	status, 6	;RP1=0, select bank0
+   838  0607  0858               	movf	0+(_gelen_veri)+06h,w
+   839  0608  00A0               	movwf	(??_kodu_coz+0)+0
+   840  0609  01A1               	clrf	(??_kodu_coz+0)+0+1
+   841  060A  3001               	movlw	01h
+   842  060B  00FF               	movwf	btemp+1
+   843  060C                     u2665:
+   844  060C  1003               	clrc
+   845  060D  0DA0               	rlf	(??_kodu_coz+0)+0,f
+   846  060E  0DA1               	rlf	(??_kodu_coz+0)+1,f
+   847  060F  0BFF               	decfsz	btemp+1,f
+   848  0610  2E0C               	goto	u2665
+   849  0611  0857               	movf	0+(_gelen_veri)+05h,w
+   850  0612  00A2               	movwf	(??_kodu_coz+2)+0
+   851  0613  01A3               	clrf	(??_kodu_coz+2)+0+1
+   852  0614  3002               	movlw	02h
+   853  0615  00FF               	movwf	btemp+1
+   854  0616                     u2675:
+   855  0616  1003               	clrc
+   856  0617  0DA2               	rlf	(??_kodu_coz+2)+0,f
+   857  0618  0DA3               	rlf	(??_kodu_coz+2)+1,f
+   858  0619  0BFF               	decfsz	btemp+1,f
+   859  061A  2E16               	goto	u2675
+   860  061B  0856               	movf	0+(_gelen_veri)+04h,w
+   861  061C  00A4               	movwf	(??_kodu_coz+4)+0
+   862  061D  01A5               	clrf	(??_kodu_coz+4)+0+1
+   863  061E  3003               	movlw	03h
+   864  061F  00FF               	movwf	btemp+1
+   865  0620                     u2685:
+   866  0620  1003               	clrc
+   867  0621  0DA4               	rlf	(??_kodu_coz+4)+0,f
+   868  0622  0DA5               	rlf	(??_kodu_coz+4)+1,f
+   869  0623  0BFF               	decfsz	btemp+1,f
+   870  0624  2E20               	goto	u2685
+   871  0625  0855               	movf	0+(_gelen_veri)+03h,w
+   872  0626  00A6               	movwf	(??_kodu_coz+6)+0
+   873  0627  01A7               	clrf	(??_kodu_coz+6)+0+1
+   874  0628  3004               	movlw	04h
+   875  0629  00FF               	movwf	btemp+1
+   876  062A                     u2695:
+   877  062A  1003               	clrc
+   878  062B  0DA6               	rlf	(??_kodu_coz+6)+0,f
+   879  062C  0DA7               	rlf	(??_kodu_coz+6)+1,f
+   880  062D  0BFF               	decfsz	btemp+1,f
+   881  062E  2E2A               	goto	u2695
+   882  062F  0854               	movf	0+(_gelen_veri)+02h,w
+   883  0630  00A8               	movwf	(??_kodu_coz+8)+0
+   884  0631  01A9               	clrf	(??_kodu_coz+8)+0+1
+   885  0632  3005               	movlw	05h
+   886  0633  00FF               	movwf	btemp+1
+   887  0634                     u2705:
+   888  0634  1003               	clrc
+   889  0635  0DA8               	rlf	(??_kodu_coz+8)+0,f
+   890  0636  0DA9               	rlf	(??_kodu_coz+8)+1,f
+   891  0637  0BFF               	decfsz	btemp+1,f
+   892  0638  2E34               	goto	u2705
+   893  0639  0853               	movf	0+(_gelen_veri)+01h,w
+   894  063A  00AA               	movwf	(??_kodu_coz+10)+0
+   895  063B  01AB               	clrf	(??_kodu_coz+10)+0+1
+   896  063C  3006               	movlw	06h
+   897  063D  00FF               	movwf	btemp+1
+   898  063E                     u2715:
+   899  063E  1003               	clrc
+   900  063F  0DAA               	rlf	(??_kodu_coz+10)+0,f
+   901  0640  0DAB               	rlf	(??_kodu_coz+10)+1,f
+   902  0641  0BFF               	decfsz	btemp+1,f
+   903  0642  2E3E               	goto	u2715
+   904  0643  0828               	movf	0+(??_kodu_coz+8)+0,w
+   905  0644  072A               	addwf	0+(??_kodu_coz+10)+0,w
+   906  0645  00AC               	movwf	(??_kodu_coz+12)+0
+   907  0646  0829               	movf	1+(??_kodu_coz+8)+0,w
+   908  0647  1803               	skipnc
+   909  0648  0A29               	incf	1+(??_kodu_coz+8)+0,w
+   910  0649  072B               	addwf	1+(??_kodu_coz+10)+0,w
+   911  064A  00AD               	movwf	1+(??_kodu_coz+12)+0
+   912  064B  0826               	movf	0+(??_kodu_coz+6)+0,w
+   913  064C  072C               	addwf	0+(??_kodu_coz+12)+0,w
+   914  064D  00AE               	movwf	(??_kodu_coz+14)+0
+   915  064E  0827               	movf	1+(??_kodu_coz+6)+0,w
+   916  064F  1803               	skipnc
+   917  0650  0A27               	incf	1+(??_kodu_coz+6)+0,w
+   918  0651  072D               	addwf	1+(??_kodu_coz+12)+0,w
+   919  0652  00AF               	movwf	1+(??_kodu_coz+14)+0
+   920  0653  0824               	movf	0+(??_kodu_coz+4)+0,w
+   921  0654  072E               	addwf	0+(??_kodu_coz+14)+0,w
+   922  0655  00B0               	movwf	(??_kodu_coz+16)+0
+   923  0656  0825               	movf	1+(??_kodu_coz+4)+0,w
+   924  0657  1803               	skipnc
+   925  0658  0A25               	incf	1+(??_kodu_coz+4)+0,w
+   926  0659  072F               	addwf	1+(??_kodu_coz+14)+0,w
+   927  065A  00B1               	movwf	1+(??_kodu_coz+16)+0
+   928  065B  0822               	movf	0+(??_kodu_coz+2)+0,w
+   929  065C  0730               	addwf	0+(??_kodu_coz+16)+0,w
+   930  065D  00B2               	movwf	(??_kodu_coz+18)+0
+   931  065E  0823               	movf	1+(??_kodu_coz+2)+0,w
+   932  065F  1803               	skipnc
+   933  0660  0A23               	incf	1+(??_kodu_coz+2)+0,w
+   934  0661  0731               	addwf	1+(??_kodu_coz+16)+0,w
+   935  0662  00B3               	movwf	1+(??_kodu_coz+18)+0
+   936  0663  0820               	movf	0+(??_kodu_coz+0)+0,w
+   937  0664  0732               	addwf	0+(??_kodu_coz+18)+0,w
+   938  0665  00B4               	movwf	(??_kodu_coz+20)+0
+   939  0666  0821               	movf	1+(??_kodu_coz+0)+0,w
+   940  0667  1803               	skipnc
+   941  0668  0A21               	incf	1+(??_kodu_coz+0)+0,w
+   942  0669  0733               	addwf	1+(??_kodu_coz+18)+0,w
+   943  066A  00B5               	movwf	1+(??_kodu_coz+20)+0
+   944  066B  0859               	movf	0+(_gelen_veri)+07h,w
+   945  066C  0734               	addwf	0+(??_kodu_coz+20)+0,w
+   946  066D  00CE               	movwf	(_sonuc)
+   947  066E  3000               	movlw	0
+   948  066F  1803               	skipnc
+   949  0670  3001               	movlw	1
+   950  0671  0735               	addwf	1+(??_kodu_coz+20)+0,w
+   951  0672  00CF               	movwf	1+(_sonuc)
+   952                           	line	31
+   953                           	
+   954  0673                     l2761:	
+   955                           ;alici.c: 31: array[a++]=sonuc;
+   956  0673  084E               	movf	(_sonuc),w
+   957  0674  00A0               	movwf	(??_kodu_coz+0)+0
+   958  0675  0846               	movf	(_a),w
+   959  0676  3EA0               	addlw	_array&0ffh
+   960  0677  0084               	movwf	fsr0
+   961  0678  0820               	movf	(??_kodu_coz+0)+0,w
+   962  0679  1383               	bcf	status, 7	;select IRP bank1
+   963  067A  0080               	movwf	indf
+   964                           	
+   965  067B                     l2763:	
+   966  067B  3001               	movlw	low(01h)
+   967  067C  07C6               	addwf	(_a),f
+   968  067D  1803               	skipnc
+   969  067E  0AC7               	incf	(_a+1),f
+   970  067F  3000               	movlw	high(01h)
+   971  0680  07C7               	addwf	(_a+1),f
+   972                           	line	32
+   973                           	
+   974  0681                     l2765:	
+   975                           ;alici.c: 32: if(sonuc=='2'){RB1=1; RC0 = 1; RC2 = 1; RC1 = 0; RC3 = 0; }
+   976  0681  3032               	movlw	032h
+   977  0682  064E               	xorwf	(_sonuc),w
+   978  0683  044F               	iorwf	(_sonuc+1),w
+   979  0684  1D03               	skipz
+   980  0685  2E87               	goto	u2721
+   981  0686  2E88               	goto	u2720
+   982  0687                     u2721:
+   983  0687  2E8E               	goto	l2769
+   984  0688                     u2720:
+   985                           	
+   986  0688                     l2767:	
+   987  0688  1486               	bsf	(49/8),(49)&7
+   988  0689  1407               	bsf	(56/8),(56)&7
+   989  068A  1507               	bsf	(58/8),(58)&7
+   990  068B  1087               	bcf	(57/8),(57)&7
+   991  068C  1187               	bcf	(59/8),(59)&7
+   992  068D  2E8E               	goto	l2769
+   993                           	
+   994  068E                     l677:	
+   995                           	line	33
+   996                           	
+   997  068E                     l2769:	
+   998                           ;alici.c: 33: if(sonuc==22)RB1=~RB1;
+   999  068E  3016               	movlw	016h
+  1000  068F  064E               	xorwf	(_sonuc),w
+  1001  0690  044F               	iorwf	(_sonuc+1),w
+  1002  0691  1D03               	skipz
+  1003  0692  2E94               	goto	u2731
+  1004  0693  2E95               	goto	u2730
+  1005  0694                     u2731:
+  1006  0694  2E97               	goto	l678
+  1007  0695                     u2730:
+  1008                           	
+  1009  0695                     l2771:	
+  1010  0695  3002               	movlw	1<<((49)&7)
+  1011  0696  0686               	xorwf	((49)/8),f
+  1012                           	
+  1013  0697                     l678:	
+  1014                           	line	34
+  1015                           ;alici.c: 34: if(sonuc==33)RB2=~RB2;
+  1016  0697  3021               	movlw	021h
+  1017  0698  064E               	xorwf	(_sonuc),w
+  1018  0699  044F               	iorwf	(_sonuc+1),w
+  1019  069A  1D03               	skipz
+  1020  069B  2E9D               	goto	u2741
+  1021  069C  2E9E               	goto	u2740
+  1022  069D                     u2741:
+  1023  069D  2EA0               	goto	l679
+  1024  069E                     u2740:
+  1025                           	
+  1026  069E                     l2773:	
+  1027  069E  3004               	movlw	1<<((50)&7)
+  1028  069F  0686               	xorwf	((50)/8),f
+  1029                           	
+  1030  06A0                     l679:	
+  1031                           	line	35
+  1032                           ;alici.c: 35: if(sonuc=='4'){
+  1033  06A0  3034               	movlw	034h
+  1034  06A1  064E               	xorwf	(_sonuc),w
+  1035  06A2  044F               	iorwf	(_sonuc+1),w
+  1036  06A3  1D03               	skipz
+  1037  06A4  2EA6               	goto	u2751
+  1038  06A5  2EA7               	goto	u2750
+  1039  06A6                     u2751:
+  1040  06A6  2EEB               	goto	l2791
+  1041  06A7                     u2750:
+  1042                           	line	36
+  1043                           	
+  1044  06A7                     l2775:	
+  1045                           ;alici.c: 36: for(int b=0;b<3;b++)
+  1046  06A7  01BA               	clrf	(kodu_coz@b)
+  1047  06A8  01BB               	clrf	(kodu_coz@b+1)
+  1048                           	
+  1049  06A9                     l2777:	
+  1050  06A9  083B               	movf	(kodu_coz@b+1),w
+  1051  06AA  3A80               	xorlw	80h
+  1052  06AB  00FF               	movwf	btemp+1
+  1053  06AC  3080               	movlw	(high(03h))^80h
+  1054  06AD  027F               	subwf	btemp+1,w
+  1055  06AE  1D03               	skipz
+  1056  06AF  2EB2               	goto	u2765
+  1057  06B0  3003               	movlw	low(03h)
+  1058  06B1  023A               	subwf	(kodu_coz@b),w
+  1059  06B2                     u2765:
+  1060                           
+  1061  06B2  1C03               	skipc
+  1062  06B3  2EB5               	goto	u2761
+  1063  06B4  2EB6               	goto	u2760
+  1064  06B5                     u2761:
+  1065  06B5  2EB8               	goto	l681
+  1066  06B6                     u2760:
+  1067  06B6  2EEB               	goto	l2791
+  1068                           	
+  1069  06B7                     l2779:	
+  1070  06B7  2EEB               	goto	l2791
+  1071                           	line	37
+  1072                           	
+  1073  06B8                     l681:	
+  1074                           	line	38
+  1075                           ;alici.c: 37: {
+  1076                           ;alici.c: 38: RC7 = 1;
+  1077  06B8  1283               	bcf	status, 5	;RP0=0, select bank0
+  1078  06B9  1303               	bcf	status, 6	;RP1=0, select bank0
+  1079  06BA  1787               	bsf	(63/8),(63)&7
+  1080                           	line	39
+  1081                           	
+  1082  06BB                     l2781:	
+  1083                           ;alici.c: 39: { unsigned char _dcnt; _dcnt = (1498)/((12*1000L)/(4*1000L))|1; while(--_d
+                                 cnt != 0) continue; };
+  1084  06BB  30F3               	movlw	(0F3h)
+  1085  06BC  00A0               	movwf	(??_kodu_coz+0)+0
+  1086  06BD  0820               	movf	(??_kodu_coz+0)+0,w
+  1087  06BE  00B6               	movwf	(kodu_coz@_dcnt)
+  1088  06BF  2EC1               	goto	l2783
+  1089                           	
+  1090  06C0                     l684:	
+  1091  06C0  2EC1               	goto	l2783
+  1092                           	
+  1093  06C1                     l683:	
+  1094                           	
+  1095  06C1                     l2783:	
+  1096  06C1  3001               	movlw	low(01h)
+  1097  06C2  02B6               	subwf	(kodu_coz@_dcnt),f
+  1098  06C3  1D03               	btfss	status,2
+  1099  06C4  2EC6               	goto	u2771
+  1100  06C5  2EC7               	goto	u2770
+  1101  06C6                     u2771:
+  1102  06C6  2EC1               	goto	l2783
+  1103  06C7                     u2770:
+  1104                           	
+  1105  06C7                     l685:	
+  1106                           	line	40
+  1107                           ;alici.c: 40: RC7 = 0;
+  1108  06C7  1387               	bcf	(63/8),(63)&7
+  1109                           	line	41
+  1110                           	
+  1111  06C8                     l2785:	
+  1112                           ;alici.c: 41: DelayMs(19);
+  1113  06C8  3013               	movlw	(013h)
+  1114  06C9  120A  118A  2559   	fcall	_DelayMs
+              120A  118A         
+  1115                           	line	42
+  1116                           ;alici.c: 42: DelayMs( 1 ); }
+  1117  06CE  3001               	movlw	(01h)
+  1118  06CF  120A  118A  2559   	fcall	_DelayMs
+              120A  118A         
+  1119                           	line	36
+  1120                           	
+  1121  06D4                     l2787:	
+  1122  06D4  3001               	movlw	low(01h)
+  1123  06D5  1283               	bcf	status, 5	;RP0=0, select bank0
+  1124  06D6  1303               	bcf	status, 6	;RP1=0, select bank0
+  1125  06D7  07BA               	addwf	(kodu_coz@b),f
+  1126  06D8  1803               	skipnc
+  1127  06D9  0ABB               	incf	(kodu_coz@b+1),f
+  1128  06DA  3000               	movlw	high(01h)
+  1129  06DB  07BB               	addwf	(kodu_coz@b+1),f
+  1130                           	
+  1131  06DC                     l2789:	
+  1132  06DC  083B               	movf	(kodu_coz@b+1),w
+  1133  06DD  3A80               	xorlw	80h
+  1134  06DE  00FF               	movwf	btemp+1
+  1135  06DF  3080               	movlw	(high(03h))^80h
+  1136  06E0  027F               	subwf	btemp+1,w
+  1137  06E1  1D03               	skipz
+  1138  06E2  2EE5               	goto	u2785
+  1139  06E3  3003               	movlw	low(03h)
+  1140  06E4  023A               	subwf	(kodu_coz@b),w
+  1141  06E5                     u2785:
+  1142                           
+  1143  06E5  1C03               	skipc
+  1144  06E6  2EE8               	goto	u2781
+  1145  06E7  2EE9               	goto	u2780
+  1146  06E8                     u2781:
+  1147  06E8  2EB8               	goto	l681
+  1148  06E9                     u2780:
+  1149  06E9  2EEB               	goto	l2791
+  1150                           	
+  1151  06EA                     l682:	
+  1152  06EA  2EEB               	goto	l2791
+  1153                           	line	46
+  1154                           	
+  1155  06EB                     l680:	
+  1156                           	line	47
+  1157                           	
+  1158  06EB                     l2791:	
+  1159                           ;alici.c: 46: }
+  1160                           ;alici.c: 47: if(sonuc=='5'){
+  1161  06EB  3035               	movlw	035h
+  1162  06EC  1283               	bcf	status, 5	;RP0=0, select bank0
+  1163  06ED  1303               	bcf	status, 6	;RP1=0, select bank0
+  1164  06EE  064E               	xorwf	(_sonuc),w
+  1165  06EF  044F               	iorwf	(_sonuc+1),w
+  1166  06F0  1D03               	skipz
+  1167  06F1  2EF3               	goto	u2791
+  1168  06F2  2EF4               	goto	u2790
+  1169  06F3                     u2791:
+  1170  06F3  2F38               	goto	l2809
+  1171  06F4                     u2790:
+  1172                           	line	48
+  1173                           	
+  1174  06F4                     l2793:	
+  1175                           ;alici.c: 48: for(int a=0;a<3;a++)
+  1176  06F4  01BC               	clrf	(kodu_coz@a)
+  1177  06F5  01BD               	clrf	(kodu_coz@a+1)
+  1178                           	
+  1179  06F6                     l2795:	
+  1180  06F6  083D               	movf	(kodu_coz@a+1),w
+  1181  06F7  3A80               	xorlw	80h
+  1182  06F8  00FF               	movwf	btemp+1
+  1183  06F9  3080               	movlw	(high(03h))^80h
+  1184  06FA  027F               	subwf	btemp+1,w
+  1185  06FB  1D03               	skipz
+  1186  06FC  2EFF               	goto	u2805
+  1187  06FD  3003               	movlw	low(03h)
+  1188  06FE  023C               	subwf	(kodu_coz@a),w
+  1189  06FF                     u2805:
+  1190                           
+  1191  06FF  1C03               	skipc
+  1192  0700  2F02               	goto	u2801
+  1193  0701  2F03               	goto	u2800
+  1194  0702                     u2801:
+  1195  0702  2F05               	goto	l687
+  1196  0703                     u2800:
+  1197  0703  2F38               	goto	l2809
+  1198                           	
+  1199  0704                     l2797:	
+  1200  0704  2F38               	goto	l2809
+  1201                           	line	49
+  1202                           	
+  1203  0705                     l687:	
+  1204                           	line	50
+  1205                           ;alici.c: 49: {
+  1206                           ;alici.c: 50: RC7=1;
+  1207  0705  1283               	bcf	status, 5	;RP0=0, select bank0
+  1208  0706  1303               	bcf	status, 6	;RP1=0, select bank0
+  1209  0707  1787               	bsf	(63/8),(63)&7
+  1210                           	line	51
+  1211                           	
+  1212  0708                     l2799:	
+  1213                           ;alici.c: 51: { unsigned char _dcnt; _dcnt = (998)/((12*1000L)/(4*1000L))|1; while(--_dc
+                                 nt != 0) continue; };
+  1214  0708  304D               	movlw	(04Dh)
+  1215  0709  00A0               	movwf	(??_kodu_coz+0)+0
+  1216  070A  0820               	movf	(??_kodu_coz+0)+0,w
+  1217  070B  00B7               	movwf	(kodu_coz@_dcnt_1168)
+  1218  070C  2F0E               	goto	l2801
+  1219                           	
+  1220  070D                     l690:	
+  1221  070D  2F0E               	goto	l2801
+  1222                           	
+  1223  070E                     l689:	
+  1224                           	
+  1225  070E                     l2801:	
+  1226  070E  3001               	movlw	low(01h)
+  1227  070F  02B7               	subwf	(kodu_coz@_dcnt_1168),f
+  1228  0710  1D03               	btfss	status,2
+  1229  0711  2F13               	goto	u2811
+  1230  0712  2F14               	goto	u2810
+  1231  0713                     u2811:
+  1232  0713  2F0E               	goto	l2801
+  1233  0714                     u2810:
+  1234                           	
+  1235  0714                     l691:	
+  1236                           	line	52
+  1237                           ;alici.c: 52: RC7=0;
+  1238  0714  1387               	bcf	(63/8),(63)&7
+  1239                           	line	53
+  1240                           	
+  1241  0715                     l2803:	
+  1242                           ;alici.c: 53: DelayMs(19);
+  1243  0715  3013               	movlw	(013h)
+  1244  0716  120A  118A  2559   	fcall	_DelayMs
+              120A  118A         
+  1245                           	line	54
+  1246                           ;alici.c: 54: DelayMs( 2 );
+  1247  071B  3002               	movlw	(02h)
+  1248  071C  120A  118A  2559   	fcall	_DelayMs
+              120A  118A         
+  1249                           	line	48
+  1250                           	
+  1251  0721                     l2805:	
+  1252  0721  3001               	movlw	low(01h)
+  1253  0722  1283               	bcf	status, 5	;RP0=0, select bank0
+  1254  0723  1303               	bcf	status, 6	;RP1=0, select bank0
+  1255  0724  07BC               	addwf	(kodu_coz@a),f
+  1256  0725  1803               	skipnc
+  1257  0726  0ABD               	incf	(kodu_coz@a+1),f
+  1258  0727  3000               	movlw	high(01h)
+  1259  0728  07BD               	addwf	(kodu_coz@a+1),f
+  1260                           	
+  1261  0729                     l2807:	
+  1262  0729  083D               	movf	(kodu_coz@a+1),w
+  1263  072A  3A80               	xorlw	80h
+  1264  072B  00FF               	movwf	btemp+1
+  1265  072C  3080               	movlw	(high(03h))^80h
+  1266  072D  027F               	subwf	btemp+1,w
+  1267  072E  1D03               	skipz
+  1268  072F  2F32               	goto	u2825
+  1269  0730  3003               	movlw	low(03h)
+  1270  0731  023C               	subwf	(kodu_coz@a),w
+  1271  0732                     u2825:
+  1272                           
+  1273  0732  1C03               	skipc
+  1274  0733  2F35               	goto	u2821
+  1275  0734  2F36               	goto	u2820
+  1276  0735                     u2821:
+  1277  0735  2F05               	goto	l687
+  1278  0736                     u2820:
+  1279  0736  2F38               	goto	l2809
+  1280                           	
+  1281  0737                     l688:	
+  1282  0737  2F38               	goto	l2809
+  1283                           	line	58
+  1284                           	
+  1285  0738                     l686:	
+  1286                           	line	59
+  1287                           	
+  1288  0738                     l2809:	
+  1289                           ;alici.c: 55: }
+  1290                           ;alici.c: 58: }
+  1291                           ;alici.c: 59: if(sonuc=='7'){ RC0 = 0; RC2 = 0; RC1 = 1; RC3 = 1; };
+  1292  0738  3037               	movlw	037h
+  1293  0739  1283               	bcf	status, 5	;RP0=0, select bank0
+  1294  073A  1303               	bcf	status, 6	;RP1=0, select bank0
+  1295  073B  064E               	xorwf	(_sonuc),w
+  1296  073C  044F               	iorwf	(_sonuc+1),w
+  1297  073D  1D03               	skipz
+  1298  073E  2F40               	goto	u2831
+  1299  073F  2F41               	goto	u2830
+  1300  0740                     u2831:
+  1301  0740  2F46               	goto	l2813
+  1302  0741                     u2830:
+  1303                           	
+  1304  0741                     l2811:	
+  1305  0741  1007               	bcf	(56/8),(56)&7
+  1306  0742  1107               	bcf	(58/8),(58)&7
+  1307  0743  1487               	bsf	(57/8),(57)&7
+  1308  0744  1587               	bsf	(59/8),(59)&7
+  1309  0745  2F46               	goto	l2813
+  1310                           	
+  1311  0746                     l692:	
+  1312                           	line	61
+  1313                           	
+  1314  0746                     l2813:	
+  1315                           ;alici.c: 61: if(sonuc=='b'){ RB1 = 0; RC0 = 0; RC2 = 0; }
+  1316  0746  3062               	movlw	062h
+  1317  0747  064E               	xorwf	(_sonuc),w
+  1318  0748  044F               	iorwf	(_sonuc+1),w
+  1319  0749  1D03               	skipz
+  1320  074A  2F4C               	goto	u2841
+  1321  074B  2F4D               	goto	u2840
+  1322  074C                     u2841:
+  1323  074C  2F51               	goto	l2817
+  1324  074D                     u2840:
+  1325                           	
+  1326  074D                     l2815:	
+  1327  074D  1086               	bcf	(49/8),(49)&7
+  1328  074E  1007               	bcf	(56/8),(56)&7
+  1329  074F  1107               	bcf	(58/8),(58)&7
+  1330  0750  2F51               	goto	l2817
+  1331                           	
+  1332  0751                     l693:	
+  1333                           	line	62
+  1334                           	
+  1335  0751                     l2817:	
+  1336                           ;alici.c: 62: if(sonuc =='d' || sonuc == 'e' ){
+  1337  0751  3064               	movlw	064h
+  1338  0752  064E               	xorwf	(_sonuc),w
+  1339  0753  044F               	iorwf	(_sonuc+1),w
+  1340  0754  1903               	skipnz
+  1341  0755  2F57               	goto	u2851
+  1342  0756  2F58               	goto	u2850
+  1343  0757                     u2851:
+  1344  0757  2F60               	goto	l2821
+  1345  0758                     u2850:
+  1346                           	
+  1347  0758                     l2819:	
+  1348  0758  3065               	movlw	065h
+  1349  0759  064E               	xorwf	(_sonuc),w
+  1350  075A  044F               	iorwf	(_sonuc+1),w
+  1351  075B  1D03               	skipz
+  1352  075C  2F5E               	goto	u2861
+  1353  075D  2F5F               	goto	u2860
+  1354  075E                     u2861:
+  1355  075E  2FA4               	goto	l2837
+  1356  075F                     u2860:
+  1357  075F  2F60               	goto	l2821
+  1358                           	
+  1359  0760                     l696:	
+  1360                           	line	63
+  1361                           	
+  1362  0760                     l2821:	
+  1363                           ;alici.c: 63: for(int b=0;b<4;b++)
+  1364  0760  01BE               	clrf	(kodu_coz@b_1169)
+  1365  0761  01BF               	clrf	(kodu_coz@b_1169+1)
+  1366                           	
+  1367  0762                     l2823:	
+  1368  0762  083F               	movf	(kodu_coz@b_1169+1),w
+  1369  0763  3A80               	xorlw	80h
+  1370  0764  00FF               	movwf	btemp+1
+  1371  0765  3080               	movlw	(high(04h))^80h
+  1372  0766  027F               	subwf	btemp+1,w
+  1373  0767  1D03               	skipz
+  1374  0768  2F6B               	goto	u2875
+  1375  0769  3004               	movlw	low(04h)
+  1376  076A  023E               	subwf	(kodu_coz@b_1169),w
+  1377  076B                     u2875:
+  1378                           
+  1379  076B  1C03               	skipc
+  1380  076C  2F6E               	goto	u2871
+  1381  076D  2F6F               	goto	u2870
+  1382  076E                     u2871:
+  1383  076E  2F71               	goto	l697
+  1384  076F                     u2870:
+  1385  076F  2FA4               	goto	l2837
+  1386                           	
+  1387  0770                     l2825:	
+  1388  0770  2FA4               	goto	l2837
+  1389                           	line	64
+  1390                           	
+  1391  0771                     l697:	
+  1392                           	line	65
+  1393                           ;alici.c: 64: {
+  1394                           ;alici.c: 65: RC7 = 1;
+  1395  0771  1283               	bcf	status, 5	;RP0=0, select bank0
+  1396  0772  1303               	bcf	status, 6	;RP1=0, select bank0
+  1397  0773  1787               	bsf	(63/8),(63)&7
+  1398                           	line	66
+  1399                           	
+  1400  0774                     l2827:	
+  1401                           ;alici.c: 66: { unsigned char _dcnt; _dcnt = (1998)/((12*1000L)/(4*1000L))|1; while(--_d
+                                 cnt != 0) continue; };
+  1402  0774  309B               	movlw	(09Bh)
+  1403  0775  00A0               	movwf	(??_kodu_coz+0)+0
+  1404  0776  0820               	movf	(??_kodu_coz+0)+0,w
+  1405  0777  00B8               	movwf	(kodu_coz@_dcnt_1170)
+  1406  0778  2F7A               	goto	l2829
+  1407                           	
+  1408  0779                     l700:	
+  1409  0779  2F7A               	goto	l2829
+  1410                           	
+  1411  077A                     l699:	
+  1412                           	
+  1413  077A                     l2829:	
+  1414  077A  3001               	movlw	low(01h)
+  1415  077B  02B8               	subwf	(kodu_coz@_dcnt_1170),f
+  1416  077C  1D03               	btfss	status,2
+  1417  077D  2F7F               	goto	u2881
+  1418  077E  2F80               	goto	u2880
+  1419  077F                     u2881:
+  1420  077F  2F7A               	goto	l2829
+  1421  0780                     u2880:
+  1422                           	
+  1423  0780                     l701:	
+  1424                           	line	67
+  1425                           ;alici.c: 67: RC7 = 0;
+  1426  0780  1387               	bcf	(63/8),(63)&7
+  1427                           	line	68
+  1428                           	
+  1429  0781                     l2831:	
+  1430                           ;alici.c: 68: DelayMs(19);
+  1431  0781  3013               	movlw	(013h)
+  1432  0782  120A  118A  2559   	fcall	_DelayMs
+              120A  118A         
+  1433                           	line	69
+  1434                           ;alici.c: 69: DelayMs( 1 ); }
+  1435  0787  3001               	movlw	(01h)
+  1436  0788  120A  118A  2559   	fcall	_DelayMs
+              120A  118A         
+  1437                           	line	63
+  1438                           	
+  1439  078D                     l2833:	
+  1440  078D  3001               	movlw	low(01h)
+  1441  078E  1283               	bcf	status, 5	;RP0=0, select bank0
+  1442  078F  1303               	bcf	status, 6	;RP1=0, select bank0
+  1443  0790  07BE               	addwf	(kodu_coz@b_1169),f
+  1444  0791  1803               	skipnc
+  1445  0792  0ABF               	incf	(kodu_coz@b_1169+1),f
+  1446  0793  3000               	movlw	high(01h)
+  1447  0794  07BF               	addwf	(kodu_coz@b_1169+1),f
+  1448                           	
+  1449  0795                     l2835:	
+  1450  0795  083F               	movf	(kodu_coz@b_1169+1),w
+  1451  0796  3A80               	xorlw	80h
+  1452  0797  00FF               	movwf	btemp+1
+  1453  0798  3080               	movlw	(high(04h))^80h
+  1454  0799  027F               	subwf	btemp+1,w
+  1455  079A  1D03               	skipz
+  1456  079B  2F9E               	goto	u2895
+  1457  079C  3004               	movlw	low(04h)
+  1458  079D  023E               	subwf	(kodu_coz@b_1169),w
+  1459  079E                     u2895:
+  1460                           
+  1461  079E  1C03               	skipc
+  1462  079F  2FA1               	goto	u2891
+  1463  07A0  2FA2               	goto	u2890
+  1464  07A1                     u2891:
+  1465  07A1  2F71               	goto	l697
+  1466  07A2                     u2890:
+  1467  07A2  2FA4               	goto	l2837
+  1468                           	
+  1469  07A3                     l698:	
+  1470  07A3  2FA4               	goto	l2837
+  1471                           	line	71
+  1472                           	
+  1473  07A4                     l694:	
+  1474                           	line	74
+  1475                           	
+  1476  07A4                     l2837:	
+  1477                           ;alici.c: 71: }
+  1478                           ;alici.c: 74: if(sonuc == 'e' ){
+  1479  07A4  3065               	movlw	065h
+  1480  07A5  1283               	bcf	status, 5	;RP0=0, select bank0
+  1481  07A6  1303               	bcf	status, 6	;RP1=0, select bank0
+  1482  07A7  064E               	xorwf	(_sonuc),w
+  1483  07A8  044F               	iorwf	(_sonuc+1),w
+  1484  07A9  1D03               	skipz
+  1485  07AA  2FAC               	goto	u2901
+  1486  07AB  2FAD               	goto	u2900
+  1487  07AC                     u2901:
+  1488  07AC  2FF1               	goto	l2855
+  1489  07AD                     u2900:
+  1490                           	line	75
+  1491                           	
+  1492  07AD                     l2839:	
+  1493                           ;alici.c: 75: for(int b=0;b<4;b++)
+  1494  07AD  01C0               	clrf	(kodu_coz@b_1171)
+  1495  07AE  01C1               	clrf	(kodu_coz@b_1171+1)
+  1496                           	
+  1497  07AF                     l2841:	
+  1498  07AF  0841               	movf	(kodu_coz@b_1171+1),w
+  1499  07B0  3A80               	xorlw	80h
+  1500  07B1  00FF               	movwf	btemp+1
+  1501  07B2  3080               	movlw	(high(04h))^80h
+  1502  07B3  027F               	subwf	btemp+1,w
+  1503  07B4  1D03               	skipz
+  1504  07B5  2FB8               	goto	u2915
+  1505  07B6  3004               	movlw	low(04h)
+  1506  07B7  0240               	subwf	(kodu_coz@b_1171),w
+  1507  07B8                     u2915:
+  1508                           
+  1509  07B8  1C03               	skipc
+  1510  07B9  2FBB               	goto	u2911
+  1511  07BA  2FBC               	goto	u2910
+  1512  07BB                     u2911:
+  1513  07BB  2FBE               	goto	l703
+  1514  07BC                     u2910:
+  1515  07BC  2FF1               	goto	l2855
+  1516                           	
+  1517  07BD                     l2843:	
+  1518  07BD  2FF1               	goto	l2855
+  1519                           	line	76
+  1520                           	
+  1521  07BE                     l703:	
+  1522                           	line	77
+  1523                           ;alici.c: 76: {
+  1524                           ;alici.c: 77: RC7 = 1;
+  1525  07BE  1283               	bcf	status, 5	;RP0=0, select bank0
+  1526  07BF  1303               	bcf	status, 6	;RP1=0, select bank0
+  1527  07C0  1787               	bsf	(63/8),(63)&7
+  1528                           	line	78
+  1529                           	
+  1530  07C1                     l2845:	
+  1531                           ;alici.c: 78: { unsigned char _dcnt; _dcnt = (1998)/((12*1000L)/(4*1000L))|1; while(--_d
+                                 cnt != 0) continue; };
+  1532  07C1  309B               	movlw	(09Bh)
+  1533  07C2  00A0               	movwf	(??_kodu_coz+0)+0
+  1534  07C3  0820               	movf	(??_kodu_coz+0)+0,w
+  1535  07C4  00B9               	movwf	(kodu_coz@_dcnt_1172)
+  1536  07C5  2FC7               	goto	l2847
+  1537                           	
+  1538  07C6                     l706:	
+  1539  07C6  2FC7               	goto	l2847
+  1540                           	
+  1541  07C7                     l705:	
+  1542                           	
+  1543  07C7                     l2847:	
+  1544  07C7  3001               	movlw	low(01h)
+  1545  07C8  02B9               	subwf	(kodu_coz@_dcnt_1172),f
+  1546  07C9  1D03               	btfss	status,2
+  1547  07CA  2FCC               	goto	u2921
+  1548  07CB  2FCD               	goto	u2920
+  1549  07CC                     u2921:
+  1550  07CC  2FC7               	goto	l2847
+  1551  07CD                     u2920:
+  1552                           	
+  1553  07CD                     l707:	
+  1554                           	line	79
+  1555                           ;alici.c: 79: RC7 = 0;
+  1556  07CD  1387               	bcf	(63/8),(63)&7
+  1557                           	line	80
+  1558                           	
+  1559  07CE                     l2849:	
+  1560                           ;alici.c: 80: DelayMs(19);
+  1561  07CE  3013               	movlw	(013h)
+  1562  07CF  120A  118A  2559   	fcall	_DelayMs
+              120A  118A         
+  1563                           	line	81
+  1564                           ;alici.c: 81: DelayMs( 1 ); }
+  1565  07D4  3001               	movlw	(01h)
+  1566  07D5  120A  118A  2559   	fcall	_DelayMs
+              120A  118A         
+  1567                           	line	75
+  1568                           	
+  1569  07DA                     l2851:	
+  1570  07DA  3001               	movlw	low(01h)
+  1571  07DB  1283               	bcf	status, 5	;RP0=0, select bank0
+  1572  07DC  1303               	bcf	status, 6	;RP1=0, select bank0
+  1573  07DD  07C0               	addwf	(kodu_coz@b_1171),f
+  1574  07DE  1803               	skipnc
+  1575  07DF  0AC1               	incf	(kodu_coz@b_1171+1),f
+  1576  07E0  3000               	movlw	high(01h)
+  1577  07E1  07C1               	addwf	(kodu_coz@b_1171+1),f
+  1578                           	
+  1579  07E2                     l2853:	
+  1580  07E2  0841               	movf	(kodu_coz@b_1171+1),w
+  1581  07E3  3A80               	xorlw	80h
+  1582  07E4  00FF               	movwf	btemp+1
+  1583  07E5  3080               	movlw	(high(04h))^80h
+  1584  07E6  027F               	subwf	btemp+1,w
+  1585  07E7  1D03               	skipz
+  1586  07E8  2FEB               	goto	u2935
+  1587  07E9  3004               	movlw	low(04h)
+  1588  07EA  0240               	subwf	(kodu_coz@b_1171),w
+  1589  07EB                     u2935:
+  1590                           
+  1591  07EB  1C03               	skipc
+  1592  07EC  2FEE               	goto	u2931
+  1593  07ED  2FEF               	goto	u2930
+  1594  07EE                     u2931:
+  1595  07EE  2FBE               	goto	l703
+  1596  07EF                     u2930:
+  1597  07EF  2FF1               	goto	l2855
+  1598                           	
+  1599  07F0                     l704:	
+  1600  07F0  2FF1               	goto	l2855
+  1601                           	line	83
+  1602                           	
+  1603  07F1                     l702:	
+  1604                           	line	86
+  1605                           	
+  1606  07F1                     l2855:	
+  1607                           ;alici.c: 83: }
+  1608                           ;alici.c: 86: if(sonuc=='g') {RC0 = 0; RC2 = 0; RC1 = 0; RC3 = 0; }
+  1609  07F1  3067               	movlw	067h
+  1610  07F2  1283               	bcf	status, 5	;RP0=0, select bank0
+  1611  07F3  1303               	bcf	status, 6	;RP1=0, select bank0
+  1612  07F4  064E               	xorwf	(_sonuc),w
+  1613  07F5  044F               	iorwf	(_sonuc+1),w
+  1614  07F6  1D03               	skipz
+  1615  07F7  2FF9               	goto	u2941
+  1616  07F8  2FFA               	goto	u2940
+  1617  07F9                     u2941:
+  1618  07F9  2FFF               	goto	l709
+  1619  07FA                     u2940:
+  1620                           	
+  1621  07FA                     l2857:	
+  1622  07FA  1007               	bcf	(56/8),(56)&7
+  1623  07FB  1107               	bcf	(58/8),(58)&7
+  1624  07FC  1087               	bcf	(57/8),(57)&7
+  1625  07FD  1187               	bcf	(59/8),(59)&7
+  1626  07FE  2FFF               	goto	l709
+  1627                           	
+  1628  07FF                     l708:	
+  1629                           	line	87
+  1630                           	
+  1631  07FF                     l709:	
+  1632  07FF  0008               	return
+  1633                           	opt stack 0
+  1634                           GLOBAL	__end_of_kodu_coz
+  1635  0800                     	__end_of_kodu_coz:
+  1636 ;; =============== function _kodu_coz ends ============
+  1637                           
+  1638                           	signat	_kodu_coz,88
+  1639                           	global	_DelayMs
+  1640                           psect	text139,local,class=CODE,delta=2
+  1641                           global __ptext139
+  1642  0559                     __ptext139:
+  1643                           
+  1644 ;; *************** function _DelayMs *****************
+  1645 ;; Defined at:
+  1646 ;;		line 5 in file "c:/tc/delay.c"
+  1647 ;; Parameters:    Size  Location     Type
+  1648 ;;  cnt             1    wreg     unsigned char 
+  1649 ;; Auto vars:     Size  Location     Type
+  1650 ;;  cnt             1    1[COMMON] unsigned char 
+  1651 ;;  _dcnt           1    3[COMMON] unsigned char 
+  1652 ;;  i               1    2[COMMON] unsigned char 
+  1653 ;; Return value:  Size  Location     Type
+  1654 ;;		None               void
+  1655 ;; Registers used:
+  1656 ;;		wreg, status,2, status,0
+  1657 ;; Tracked objects:
+  1658 ;;		On entry : 0/0
+  1659 ;;		On exit  : 0/0
+  1660 ;;		Unchanged: 0/0
+  1661 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1662 ;;      Params:         0       0       0       0       0
+  1663 ;;      Locals:         3       0       0       0       0
+  1664 ;;      Temps:          1       0       0       0       0
+  1665 ;;      Totals:         4       0       0       0       0
+  1666 ;;Total ram usage:        4 bytes
+  1667 ;; Hardware stack levels used:    1
+  1668 ;; This function calls:
+  1669 ;;		Nothing
+  1670 ;; This function is called by:
+  1671 ;;		_kodu_coz
+  1672 ;; This function uses a non-reentrant model
+  1673 ;;
+  1674                           psect	text139
+  1675                           	file	"c:/tc/delay.c"
+  1676                           	line	5
+  1677                           	global	__size_of_DelayMs
+  1678  0021                     	__size_of_DelayMs	equ	__end_of_DelayMs-_DelayMs
+  1679                           	
+  1680  0559                     _DelayMs:	
+  1681                           	opt	stack 5
+  1682                           ; Regs used in _DelayMs: [wreg+status,2+status,0]
+  1683                           ;DelayMs@cnt stored from wreg
+  1684  0559  00F1               	movwf	(DelayMs@cnt)
+  1685                           	line	14
+  1686                           ;delay.c: 13: unsigned char i;
+  1687                           ;delay.c: 14: do {
+  1688                           	
+  1689  055A                     l667:	
+  1690                           	line	15
+  1691                           	
+  1692  055A                     l2751:	
+  1693                           ;delay.c: 15: i = 4;
+  1694  055A  3004               	movlw	(04h)
+  1695  055B  00F0               	movwf	(??_DelayMs+0)+0
+  1696  055C  0870               	movf	(??_DelayMs+0)+0,w
+  1697  055D  00F2               	movwf	(DelayMs@i)
+  1698                           	line	16
+  1699                           ;delay.c: 16: do {
+  1700                           	
+  1701  055E                     l668:	
+  1702                           	line	17
+  1703                           ;delay.c: 17: { unsigned char _dcnt; _dcnt = (250)/((12*1000L)/(4*1000L))|1; while(--_dc
+                                 nt != 0) continue; };
+  1704  055E  3053               	movlw	(053h)
+  1705  055F  00F0               	movwf	(??_DelayMs+0)+0
+  1706  0560  0870               	movf	(??_DelayMs+0)+0,w
+  1707  0561  00F3               	movwf	(DelayMs@_dcnt)
+  1708  0562  2D64               	goto	l2753
+  1709                           	
+  1710  0563                     l670:	
+  1711  0563  2D64               	goto	l2753
+  1712                           	
+  1713  0564                     l669:	
+  1714                           	
+  1715  0564                     l2753:	
+  1716  0564  3001               	movlw	low(01h)
+  1717  0565  02F3               	subwf	(DelayMs@_dcnt),f
+  1718  0566  1D03               	btfss	status,2
+  1719  0567  2D69               	goto	u2631
+  1720  0568  2D6A               	goto	u2630
+  1721  0569                     u2631:
+  1722  0569  2D64               	goto	l2753
+  1723  056A                     u2630:
+  1724  056A  2D6B               	goto	l2755
+  1725                           	
+  1726  056B                     l671:	
+  1727                           	line	18
+  1728                           	
+  1729  056B                     l2755:	
+  1730                           ;delay.c: 18: } while(--i);
+  1731  056B  3001               	movlw	low(01h)
+  1732  056C  02F2               	subwf	(DelayMs@i),f
+  1733  056D  1D03               	btfss	status,2
+  1734  056E  2D70               	goto	u2641
+  1735  056F  2D71               	goto	u2640
+  1736  0570                     u2641:
+  1737  0570  2D5E               	goto	l668
+  1738  0571                     u2640:
+  1739  0571  2D72               	goto	l2757
+  1740                           	
+  1741  0572                     l672:	
+  1742                           	line	19
+  1743                           	
+  1744  0572                     l2757:	
+  1745                           ;delay.c: 19: } while(--cnt);
+  1746  0572  3001               	movlw	low(01h)
+  1747  0573  02F1               	subwf	(DelayMs@cnt),f
+  1748  0574  1D03               	btfss	status,2
+  1749  0575  2D77               	goto	u2651
+  1750  0576  2D78               	goto	u2650
+  1751  0577                     u2651:
+  1752  0577  2D5A               	goto	l667
+  1753  0578                     u2650:
+  1754  0578  2D79               	goto	l674
+  1755                           	
+  1756  0579                     l673:	
+  1757                           	line	21
+  1758                           	
+  1759  0579                     l674:	
+  1760  0579  0008               	return
+  1761                           	opt stack 0
+  1762                           GLOBAL	__end_of_DelayMs
+  1763  057A                     	__end_of_DelayMs:
+  1764 ;; =============== function _DelayMs ends ============
+  1765                           
+  1766                           	signat	_DelayMs,4216
+  1767                           psect	text140,local,class=CODE,delta=2
+  1768                           global __ptext140
+  1769  0000                     __ptext140:
+  1770                           	global	btemp
+  1771  007E                     	btemp set 07Eh
+  1772                           
+  1773                           	DABS	1,126,2	;btemp
+  1774                           	global	wtemp0
+  1775  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.82 build 9453 
+Symbol Table                                                                                   Wed Apr 08 14:19:03 2015
+
+                   _a 0046                     _i 0048                     _j 004A                    _RD 0C60  
+                  _WR 0C61                    fsr 0004                   l700 0779                   l701 0780  
+                 l702 07F1                   l703 07BE                   l704 07F0                   l720 05C8  
+                 l712 0584                   l705 07C7                   l721 05F5                   l713 057D  
+                 l706 07C6                   l722 05CE                   l714 058B                   l730 0555  
+                 l707 07CD                   l715 0604                   l723 05CD                   l731 0556  
+                 l708 07FF                   l724 05D5                   l716 05AB                   l732 0556  
+                 l709 07FF                   l717 05AA                   l725 0604                   l670 0563  
+                 l718 05B1                   l671 056B                   l719 0603                   l672 0572  
+                 l680 06EB                   l728 0548                   l673 0579                   l681 06B8  
+                 l729 0554                   l674 0579                   l690 070D                   l682 06EA  
+                 l667 055A                   l691 0714                   l683 06C1                   l668 055E  
+                 l692 0746                   l684 06C0                   l669 0564                   l693 0751  
+                 l685 06C7                   l677 068E                   l694 07A4                   l686 0738  
+                 l678 0697                   l687 0705                   l679 06A0                   l696 0760  
+                 l688 0737                   l697 0771                   l689 070E                   l698 07A3  
+                 l699 077A                   _GIE 005F                   _RB0 0030                   _RB1 0031  
+                 _RC0 0038                   _RB2 0032                   _RC1 0039                   _RC2 003A  
+                 _RC3 003B                   _RC7 003F                   _coz 057A                   fsr0 0004  
+                 indf 0000                  l2801 070E                  l2811 0741                  l2803 0715  
+                l2821 0760                  l2813 0746                  l2805 0721                  l2901 0548  
+                l2751 055A                  l2831 0781                  l2823 0762                  l2815 074D  
+                l2807 0729                  l2903 054E                  l2753 0564                  l2841 07AF  
+                l2833 078D                  l2825 0770                  l2817 0751                  l2809 0738  
+                l2761 0673                  l2755 056B                  l2851 07DA                  l2843 07BD  
+                l2835 0795                  l2827 0774                  l2819 0758                  l2771 0695  
+                l2763 067B                  ?_coz 0070                  l2757 0572                  l2853 07E2  
+                l2845 07C1                  l2829 077A                  l2837 07A4                  l2781 06BB  
+                l2773 069E                  l2765 0681                  l2861 057D                  l2847 07C7  
+                l2839 07AD                  l2855 07F1                  l2783 06C1                  l2775 06A7  
+                l2791 06EB                  l2767 0688                  l2759 0605                  l2871 05AB  
+                l2863 0584                  l2857 07FA                  l2849 07CE                  l2793 06F4  
+                l2785 06C8                  l2777 06A9                  l2769 068E                  l2881 05CE  
+                l2873 05B7                  l2865 058B                  l2795 06F6                  l2787 06D4  
+                l2779 06B7                  l2891 05FA                  l2883 05D5                  l2875 05B9  
+                l2867 0598                  l2859 057A                  l2797 0704                  l2789 06DC  
+                l2885 05E1                  l2877 05C7                  l2869 05A5                  l2893 053A  
+                l2799 0708                  l2887 05E7                  l2879 05C8                  l2895 053E  
+                l2889 05F5                  l2897 0541                  l2899 0544         kodu_coz@_dcnt 0036  
+                u3000 05C6                  u3001 05C5                  u3010 05D4                  u3011 05D3  
+                u3020 05F4                  u3021 05F3                  u3005 05C2                  u3030 054E  
+                u3031 054D                  u3025 05F0                  u2630 056A                  u2631 0569  
+                u2640 0571                  u2800 0703                  u2720 0688                  u2641 0570  
+                u2801 0702                  u2721 0687                  u2705 0634                  u2650 0578  
+                u2810 0714                  u2730 0695                  u2651 0577                  u2811 0713  
+                u2731 0694                  u2715 063E                  u2900 07AD                  u2820 0736  
+                u2740 069E                  u2901 07AC                  u2821 0735                  u2805 06FF  
+                u2741 069D                  u2910 07BC                  u2830 0741                  u2750 06A7  
+                u2911 07BB                  u2831 0740                  u2751 06A6                  u2920 07CD  
+                u2840 074D                  u2760 06B6                  u2921 07CC                  u2841 074C  
+                u2825 0732                  u2761 06B5                  u2665 060C                  u2930 07EF  
+                u2850 0758                  u2770 06C7                  u2931 07EE                  u2915 07B8  
+                u2851 0757                  u2771 06C6                  u2675 0616                  u2940 07FA  
+                u2860 075F                  u2780 06E9                  u2941 07F9                  u2861 075E  
+                u2781 06E8                  u2765 06B2                  u2685 0620                  u2870 076F  
+                u2790 06F4                  u2950 058A                  u2935 07EB                  u2871 076E  
+                u2791 06F3                  u2695 062A                  u2951 0589                  u2880 0780  
+                u2960 0598                  u2881 077F                  u2785 06E5                  u2961 0597  
+                u2890 07A2                  u2970 05A5                  u2891 07A1                  u2875 076B  
+                u2971 05A4                  u2980 05B1                  u2981 05B0                  u2965 0594  
+                u2990 05B7                  u2895 079E                  u2991 05B6                  u2975 05A1  
+                _WREN 0C62                  _code 0042                  _main 053A                  _sayi 0079  
+                _temp 0050                  coz@k 0077                  btemp 007E                  start 0000  
+     __end_of_DelayMs 057A        kodu_coz@b_1171 0040                 ??_coz 0074        kodu_coz@b_1169 003E  
+               ?_main 0070                 _EEADR 010D                 _CARRY 0018                 _PORTB 0006  
+               _PORTC 0007                 _TRISB 0086                 _TRISC 0087                 _array 00A0  
+               _sonuc 004E                 status 0003                 wtemp0 007E          __end_of_main 0559  
+              ??_main 0079                _EEDATA 010C                _EECON1 018C                _EECON2 018D  
+           ??_DelayMs 0070      __end_of_kodu_coz 0800                _ortala 007D                clrloop 0519  
+      __pcstackCOMMON 0070            __pbssBANK0 0042            __pbssBANK1 00A0            __pmaintext 053A  
+          _gelen_veri 0052               _DelayMs 0559             ?_kodu_coz 0070    kodu_coz@_dcnt_1170 0038  
+  kodu_coz@_dcnt_1172 0039    kodu_coz@_dcnt_1168 0037          __size_of_coz 008B  end_of_initialization 0536  
+          ??_kodu_coz 0020          DelayMs@_dcnt 0073   start_initialization 0520           __end_of_coz 0605  
+         __pbssCOMMON 0079         __pcstackBANK0 0020              ?_DelayMs 0070     __size_of_kodu_coz 01FB  
+           __ptext140 0000             __ptext136 0000             __ptext137 057A             __ptext138 0605  
+           __ptext139 0559              DelayMs@i 0072             _motor_yon 007C      __size_of_DelayMs 0021  
+       coz@_dcnt_1176 0076             kodu_coz@a 003C             kodu_coz@b 003A         __size_of_main 001F  
+            _kodu_coz 0605              clear_ram 0518              coz@_dcnt 0075            DelayMs@cnt 0071  
+        _motor_suresi 004C           _motor_aktif 007B  

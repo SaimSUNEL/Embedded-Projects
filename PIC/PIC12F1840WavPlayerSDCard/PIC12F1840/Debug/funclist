@@ -1,0 +1,8 @@
+_ReadMultiSector: CODE, 1398 0 32
+_main: CODE, 1796 0 252
+_InitSd: CODE, 1355 0 8
+_spi_yaz: CODE, 1385 0 13
+_sendSDCmd: CODE, 1430 0 131
+_spi_hazirla: CODE, 1363 0 10
+_initMedia: CODE, 1561 0 235
+Total: 681

@@ -1,0 +1,1679 @@
+
+
+Microchip Technology PIC18 LITE Macro Assembler V1.37 build -260352376 
+                                                                                               Sat Mar 14 17:36:32 2020
+
+Microchip Technology Omniscient Code Generator v1.37 (Free mode) build 201603110536
+     1                           	processor	18F4520
+     2                           	fnconf	rparam,??,?,0
+     3                           	opt	pw 120
+     4                           	opt	lm
+     5                           	psect	cinit,global,reloc=2,class=CODE,delta=1
+     6                           	psect	bssCOMRAM,global,class=COMRAM,space=1,delta=1
+     7                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1
+     8                           	psect	text0,global,reloc=2,class=CODE,delta=1
+     9                           	psect	text1,global,reloc=2,class=CODE,delta=1
+    10                           	psect	text2,global,reloc=2,class=CODE,delta=1
+    11                           	psect	text3,global,reloc=2,class=CODE,delta=1
+    12                           	psect	text4,global,reloc=2,class=CODE,delta=1
+    13                           	psect	intcode,global,reloc=2,class=CODE,delta=1
+    14                           	psect	intcode_body,global,reloc=2,class=CODE,delta=1
+    15                           	psect	text6,global,reloc=2,class=CODE,delta=1
+    16                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1
+    17                           	psect	rparam,global,class=COMRAM,space=1,delta=1
+    18                           	psect	temp,global,ovrld,common,class=COMRAM,space=1,delta=1
+    19  0000                     _ADRES	set	4035
+    20  0000                     _CCPR1	set	4030
+    21  0000                     _TMR1	set	4046
+    22  0000                     _ADCON1	set	4033
+    23  0000                     _PORTB	set	3969
+    24  0000                     _PORTBbits	set	3969
+    25  0000                     _RCREG	set	4014
+    26  0000                     _SPBRG	set	4015
+    27  0000                     _TRISA	set	3986
+    28  0000                     _TRISB	set	3987
+    29  0000                     _TXREG	set	4013
+    30  0000                     _ACQT0	set	32259
+    31  0000                     _ACQT1	set	32260
+    32  0000                     _ACQT2	set	32261
+    33  0000                     _ADCS0	set	32256
+    34  0000                     _ADCS1	set	32257
+    35  0000                     _ADCS2	set	32258
+    36  0000                     _ADFM	set	32263
+    37  0000                     _ADIF	set	31990
+    38  0000                     _ADON	set	32272
+    39  0000                     _BRGH	set	32098
+    40  0000                     _CCP1IE	set	31978
+    41  0000                     _CCP1IF	set	31986
+    42  0000                     _CCP1M0	set	32232
+    43  0000                     _CCP1M1	set	32233
+    44  0000                     _CCP1M2	set	32234
+    45  0000                     _CCP1M3	set	32235
+    46  0000                     _CHS0	set	32274
+    47  0000                     _CHS1	set	32275
+    48  0000                     _CHS2	set	32276
+    49  0000                     _CHS3	set	32277
+    50  0000                     _CREN	set	32092
+    51  0000                     _GIE	set	32663
+    52  0000                     _GO_DONE	set	32273
+    53  0000                     _PEIE	set	32662
+    54  0000                     _RCIF	set	31989
+    55  0000                     _RX9	set	32094
+    56  0000                     _SPEN	set	32095
+    57  0000                     _SYNC	set	32100
+    58  0000                     _T1CKPS0	set	32364
+    59  0000                     _T1CKPS1	set	32365
+    60  0000                     _T1OSCEN	set	32363
+    61  0000                     _T1RUN	set	32366
+    62  0000                     _TMR1CS	set	32361
+    63  0000                     _TMR1ON	set	32360
+    64  0000                     _TRISB7	set	31903
+    65  0000                     _TX9	set	32102
+    66  0000                     _TXEN	set	32101
+    67  0000                     _TXIF	set	31988
+    68  0000                     _VCFG0	set	32268
+    69  0000                     _VCFG1	set	32269
+    70                           
+    71                           ; #config settings
+    72                           
+    73                           	psect	cinit
+    74  000416                     __pcinit:
+    75                           	opt stack 0
+    76  000416                     start_initialization:
+    77                           	opt stack 0
+    78  000416                     __initialization:
+    79                           	opt stack 0
+    80                           
+    81                           ; Clear objects allocated to COMRAM (18 bytes)
+    82  000416  EE00  F01D         	lfsr	0,__pbssCOMRAM
+    83  00041A  0E12               	movlw	18
+    84  00041C                     clear_0:
+    85  00041C  6AEE               	clrf	postinc0,c
+    86  00041E  06E8               	decf	wreg,f,c
+    87  000420  E1FD               	bnz	clear_0
+    88  000422                     end_of_initialization:
+    89                           	opt stack 0
+    90  000422                     __end_of__initialization:
+    91                           	opt stack 0
+    92  000422  902F               	bcf	int$flags,0,c	;clear compiler interrupt flag (level 1)
+    93  000424  922F               	bcf	int$flags,1,c	;clear compiler interrupt flag (level 2)
+    94  000426  0100               	movlb	0
+    95  000428  EF0D  F000         	goto	_main	;jump to C main() function
+    96                           postinc0	equ	0xFEE
+    97                           wreg	equ	0xFE8
+    98                           
+    99                           	psect	bssCOMRAM
+   100  00001D                     __pbssCOMRAM:
+   101                           	opt stack 0
+   102  00001D                     _bir:
+   103                           	opt stack 0
+   104  00001D                     	ds	2
+   105  00001F                     _iki:
+   106                           	opt stack 0
+   107  00001F                     	ds	2
+   108  000021                     _sag:
+   109                           	opt stack 0
+   110  000021                     	ds	2
+   111  000023                     _sol:
+   112                           	opt stack 0
+   113  000023                     	ds	2
+   114  000025                     _temp:
+   115                           	opt stack 0
+   116  000025                     	ds	2
+   117  000027                     _temp2:
+   118                           	opt stack 0
+   119  000027                     	ds	2
+   120  000029                     _temp3:
+   121                           	opt stack 0
+   122  000029                     	ds	2
+   123  00002B                     _uc:
+   124                           	opt stack 0
+   125  00002B                     	ds	2
+   126  00002D                     _dogru:
+   127                           	opt stack 0
+   128  00002D                     	ds	1
+   129  00002E                     _servo_number:
+   130                           	opt stack 0
+   131  00002E                     	ds	1
+   132                           postinc0	equ	0xFEE
+   133                           wreg	equ	0xFE8
+   134                           
+   135                           	psect	cstackCOMRAM
+   136  000001                     __pcstackCOMRAM:
+   137                           	opt stack 0
+   138  000001                     ?___wmul:
+   139                           	opt stack 0
+   140  000001                     ___wmul@multiplier:
+   141                           	opt stack 0
+   142                           
+   143                           ; 2 bytes @ 0x0
+   144  000001                     	ds	2
+   145  000003                     ___wmul@multiplicand:
+   146                           	opt stack 0
+   147                           
+   148                           ; 2 bytes @ 0x2
+   149  000003                     	ds	2
+   150  000005                     ___wmul@product:
+   151                           	opt stack 0
+   152                           
+   153                           ; 2 bytes @ 0x4
+   154  000005                     	ds	2
+   155  000007                     ??_FNC:
+   156                           
+   157                           ; 1 bytes @ 0x6
+   158  000007                     	ds	14
+   159  000015                     ?_analogRead:
+   160                           	opt stack 0
+   161  000015                     seri_porta_veri_gonder@jk:
+   162                           	opt stack 0
+   163                           
+   164                           ; 1 bytes @ 0x14
+   165  000015                     	ds	2
+   166  000017                     ??_analogRead:
+   167                           
+   168                           ; 1 bytes @ 0x16
+   169  000017                     	ds	1
+   170  000018                     analogRead@pin:
+   171                           	opt stack 0
+   172                           
+   173                           ; 1 bytes @ 0x17
+   174  000018                     	ds	1
+   175  000019                     ??_main:
+   176                           
+   177                           ; 1 bytes @ 0x18
+   178  000019                     	ds	1
+   179  00001A                     main@angle:
+   180                           	opt stack 0
+   181                           
+   182                           ; 2 bytes @ 0x19
+   183  00001A                     	ds	2
+   184  00001C                     main@open:
+   185                           	opt stack 0
+   186                           
+   187                           ; 1 bytes @ 0x1B
+   188  00001C                     	ds	1
+   189                           postinc0	equ	0xFEE
+   190                           wreg	equ	0xFE8
+   191                           
+   192 ;;
+   193 ;;Main: autosize = 0, tempsize = 1, incstack = 0, save=0
+   194 ;;
+   195 ;; *************** function _main *****************
+   196 ;; Defined at:
+   197 ;;		line 230 in file "PICServo.c"
+   198 ;; Parameters:    Size  Location     Type
+   199 ;;		None
+   200 ;; Auto vars:     Size  Location     Type
+   201 ;;  angle           2   25[COMRAM] unsigned int 
+   202 ;;  open            1   27[COMRAM] unsigned char 
+   203 ;; Return value:  Size  Location     Type
+   204 ;;                  1    wreg      void 
+   205 ;; Registers used:
+   206 ;;		wreg, status,2, status,0, cstack
+   207 ;; Tracked objects:
+   208 ;;		On entry : 0/0
+   209 ;;		On exit  : 0/0
+   210 ;;		Unchanged: 0/0
+   211 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   212 ;;      Params:         0       0       0       0       0       0       0
+   213 ;;      Locals:         3       0       0       0       0       0       0
+   214 ;;      Temps:          1       0       0       0       0       0       0
+   215 ;;      Totals:         4       0       0       0       0       0       0
+   216 ;;Total ram usage:        4 bytes
+   217 ;; Hardware stack levels required when called:    3
+   218 ;; This function calls:
+   219 ;;		_ADC_hazirla
+   220 ;;		_analogRead
+   221 ;;		_seri_porta_veri_gonder
+   222 ;;		_seri_portu_ayarla
+   223 ;; This function is called by:
+   224 ;;		Startup code after reset
+   225 ;; This function uses a non-reentrant model
+   226 ;;
+   227                           
+   228                           	psect	text0
+   229  00001A                     __ptext0:
+   230                           	opt stack 0
+   231  00001A                     _main:
+   232                           	opt stack 28
+   233                           
+   234                           ;PICServo.c: 233: TRISA = 0b00000111;
+   235                           
+   236                           ;incstack = 0
+   237  00001A  0E07               	movlw	7
+   238  00001C  6E92               	movwf	3986,c	;volatile
+   239                           
+   240                           ;PICServo.c: 234: TRISB = 0;
+   241  00001E  0E00               	movlw	0
+   242  000020  6E93               	movwf	3987,c	;volatile
+   243                           
+   244                           ;PICServo.c: 235: TRISB7 = 1;
+   245  000022  8E93               	bsf	3987,7,c	;volatile
+   246                           
+   247                           ;PICServo.c: 236: PORTB = 0;
+   248  000024  0E00               	movlw	0
+   249  000026  6E81               	movwf	3969,c	;volatile
+   250                           
+   251                           ;PICServo.c: 240: ADC_hazirla();
+   252  000028  ECFE  F001         	call	_ADC_hazirla	;wreg free
+   253                           
+   254                           ;PICServo.c: 241: _delay( 50000 );
+   255  00002C  0E41               	movlw	65
+   256  00002E  6E19               	movwf	??_main& (0+255),c
+   257  000030  0EEE               	movlw	238
+   258  000032                     u457:
+   259  000032  2EE8               	decfsz	wreg,f,c
+   260  000034  D7FE               	goto	u457
+   261  000036  2E19               	decfsz	??_main& (0+255),f,c
+   262  000038  D7FC               	goto	u457
+   263  00003A  D000               	nop2	
+   264                           
+   265                           ;PICServo.c: 242: seri_portu_ayarla();
+   266  00003C  EC16  F002         	call	_seri_portu_ayarla	;wreg free
+   267                           
+   268                           ;PICServo.c: 243: _delay( 90000 );
+   269  000040  0E75               	movlw	117
+   270  000042  6E19               	movwf	??_main& (0+255),c
+   271  000044  0EE1               	movlw	225
+   272  000046                     u467:
+   273  000046  2EE8               	decfsz	wreg,f,c
+   274  000048  D7FE               	goto	u467
+   275  00004A  2E19               	decfsz	??_main& (0+255),f,c
+   276  00004C  D7FC               	goto	u467
+   277  00004E  F000               	nop	
+   278                           
+   279                           ;PICServo.c: 244: _delay( 90000 );
+   280  000050  0E75               	movlw	117
+   281  000052  6E19               	movwf	??_main& (0+255),c
+   282  000054  0EE1               	movlw	225
+   283  000056                     u477:
+   284  000056  2EE8               	decfsz	wreg,f,c
+   285  000058  D7FE               	goto	u477
+   286  00005A  2E19               	decfsz	??_main& (0+255),f,c
+   287  00005C  D7FC               	goto	u477
+   288  00005E  F000               	nop	
+   289                           
+   290                           ;PICServo.c: 245: GIE = 1;
+   291  000060  8EF2               	bsf	intcon,7,c	;volatile
+   292                           
+   293                           ;PICServo.c: 246: PEIE = 1;
+   294  000062  8CF2               	bsf	intcon,6,c	;volatile
+   295                           
+   296                           ;PICServo.c: 248: CCP1M3 = 1;
+   297  000064  86BD               	bsf	4029,3,c	;volatile
+   298                           
+   299                           ;PICServo.c: 249: CCP1M2 = 0;
+   300  000066  94BD               	bcf	4029,2,c	;volatile
+   301                           
+   302                           ;PICServo.c: 250: CCP1M1 = 1;
+   303  000068  82BD               	bsf	4029,1,c	;volatile
+   304                           
+   305                           ;PICServo.c: 251: CCP1M0 = 0;
+   306  00006A  90BD               	bcf	4029,0,c	;volatile
+   307                           
+   308                           ;PICServo.c: 252: CCP1IE = 1;
+   309  00006C  849D               	bsf	3997,2,c	;volatile
+   310                           
+   311                           ;PICServo.c: 256: T1RUN = 0;
+   312  00006E  9CCD               	bcf	4045,6,c	;volatile
+   313                           
+   314                           ;PICServo.c: 258: T1OSCEN = 0;
+   315  000070  96CD               	bcf	4045,3,c	;volatile
+   316                           
+   317                           ;PICServo.c: 259: TMR1CS = 0;
+   318  000072  92CD               	bcf	4045,1,c	;volatile
+   319                           
+   320                           ;PICServo.c: 261: T1CKPS1 = 0;
+   321  000074  9ACD               	bcf	4045,5,c	;volatile
+   322                           
+   323                           ;PICServo.c: 262: T1CKPS0 = 0;
+   324  000076  98CD               	bcf	4045,4,c	;volatile
+   325                           
+   326                           ;PICServo.c: 264: TMR1ON = 1 ;
+   327  000078  80CD               	bsf	4045,0,c	;volatile
+   328                           
+   329                           ;PICServo.c: 270: unsigned int angle = 3;
+   330  00007A  0E00               	movlw	0
+   331  00007C  6E1B               	movwf	main@angle+1,c
+   332  00007E  0E03               	movlw	3
+   333  000080  6E1A               	movwf	main@angle,c
+   334                           
+   335                           ;PICServo.c: 271: char open = 0;
+   336  000082  0E00               	movlw	0
+   337  000084  6E1C               	movwf	main@open,c
+   338                           
+   339                           ;PICServo.c: 272: seri_porta_veri_gonder( 'S' );
+   340  000086  0E53               	movlw	83
+   341  000088  EC20  F002         	call	_seri_porta_veri_gonder
+   342                           
+   343                           ;PICServo.c: 273: seri_porta_veri_gonder( 'a' );
+   344  00008C  0E61               	movlw	97
+   345  00008E  EC20  F002         	call	_seri_porta_veri_gonder
+   346                           
+   347                           ;PICServo.c: 274: bir.angle = 3;
+   348  000092  0E00               	movlw	0
+   349  000094  6E1E               	movwf	_bir+1,c
+   350  000096  0E03               	movlw	3
+   351  000098  6E1D               	movwf	_bir,c
+   352                           
+   353                           ;PICServo.c: 275: iki.angle = 3;
+   354  00009A  0E00               	movlw	0
+   355  00009C  6E20               	movwf	_iki+1,c
+   356  00009E  0E03               	movlw	3
+   357  0000A0  6E1F               	movwf	_iki,c
+   358                           
+   359                           ;PICServo.c: 276: uc.angle = 3;
+   360  0000A2  0E00               	movlw	0
+   361  0000A4  6E2C               	movwf	_uc+1,c
+   362  0000A6  0E03               	movlw	3
+   363  0000A8  6E2B               	movwf	_uc,c
+   364  0000AA                     l1131:
+   365                           
+   366                           ;PICServo.c: 278: {
+   367                           ;PICServo.c: 279: temp = analogRead( 0 );
+   368  0000AA  0E00               	movlw	0
+   369  0000AC  ECC3  F001         	call	_analogRead
+   370  0000B0  C015  F025         	movff	?_analogRead,_temp	;volatile
+   371  0000B4  C016  F026         	movff	?_analogRead+1,_temp+1	;volatile
+   372                           
+   373                           ;PICServo.c: 280: temp2 = analogRead( 1 );
+   374  0000B8  0E01               	movlw	1
+   375  0000BA  ECC3  F001         	call	_analogRead
+   376  0000BE  C015  F027         	movff	?_analogRead,_temp2	;volatile
+   377  0000C2  C016  F028         	movff	?_analogRead+1,_temp2+1	;volatile
+   378                           
+   379                           ;PICServo.c: 281: temp3 = analogRead( 2 );
+   380  0000C6  0E02               	movlw	2
+   381  0000C8  ECC3  F001         	call	_analogRead
+   382  0000CC  C015  F029         	movff	?_analogRead,_temp3	;volatile
+   383  0000D0  C016  F02A         	movff	?_analogRead+1,_temp3+1	;volatile
+   384                           
+   385                           ;PICServo.c: 290: if( temp < 30 )
+   386  0000D4  BE26               	btfsc	_temp+1,7,c	;volatile
+   387  0000D6  D006               	goto	l1139
+   388  0000D8  5026               	movf	_temp+1,w,c	;volatile
+   389  0000DA  E11C               	bnz	l1145
+   390  0000DC  0E1E               	movlw	30
+   391  0000DE  5C25               	subwf	_temp,w,c	;volatile
+   392  0000E0  B0D8               	btfsc	status,0,c
+   393  0000E2  D018               	goto	l1145
+   394  0000E4                     l1139:
+   395                           
+   396                           ;PICServo.c: 291: {
+   397                           ;PICServo.c: 292: bir.angle = bir.angle - 2;;
+   398  0000E4  0EFE               	movlw	254
+   399  0000E6  241D               	addwf	_bir,w,c
+   400  0000E8  6E1D               	movwf	_bir,c
+   401  0000EA  0EFF               	movlw	255
+   402  0000EC  201E               	addwfc	_bir+1,w,c
+   403  0000EE  6E1E               	movwf	_bir+1,c
+   404                           
+   405                           ;PICServo.c: 293: if( bir.angle < 3 ) bir.angle = 3;
+   406  0000F0  501E               	movf	_bir+1,w,c
+   407  0000F2  E108               	bnz	l1143
+   408  0000F4  0E03               	movlw	3
+   409  0000F6  5C1D               	subwf	_bir,w,c
+   410  0000F8  B0D8               	btfsc	status,0,c
+   411  0000FA  D004               	goto	l1143
+   412  0000FC  0E00               	movlw	0
+   413  0000FE  6E1E               	movwf	_bir+1,c
+   414  000100  0E03               	movlw	3
+   415  000102  6E1D               	movwf	_bir,c
+   416  000104                     l1143:
+   417                           
+   418                           ;PICServo.c: 294: _delay( 15000 );
+   419  000104  0E14               	movlw	20
+   420  000106  6E19               	movwf	??_main& (0+255),c
+   421  000108  0E7A               	movlw	122
+   422  00010A                     u487:
+   423  00010A  2EE8               	decfsz	wreg,f,c
+   424  00010C  D7FE               	goto	u487
+   425  00010E  2E19               	decfsz	??_main& (0+255),f,c
+   426  000110  D7FC               	goto	u487
+   427                           
+   428                           ;PICServo.c: 295: }
+   429  000112  D01D               	goto	l1153
+   430  000114                     l1145:
+   431                           
+   432                           ;PICServo.c: 296: else if( temp > 800 )
+   433  000114  BE26               	btfsc	_temp+1,7,c	;volatile
+   434  000116  D01B               	goto	l1153
+   435  000118  0E21               	movlw	33
+   436  00011A  5C25               	subwf	_temp,w,c	;volatile
+   437  00011C  0E03               	movlw	3
+   438  00011E  5826               	subwfb	_temp+1,w,c	;volatile
+   439  000120  A0D8               	btfss	status,0,c
+   440  000122  D015               	goto	l1153
+   441                           
+   442                           ;PICServo.c: 297: {
+   443                           ;PICServo.c: 298: bir.angle +=2;
+   444  000124  0E02               	movlw	2
+   445  000126  261D               	addwf	_bir,f,c
+   446  000128  0E00               	movlw	0
+   447  00012A  221E               	addwfc	_bir+1,f,c
+   448                           
+   449                           ;PICServo.c: 299: if( bir.angle > 190 ) bir.angle = 190;
+   450  00012C  501E               	movf	_bir+1,w,c
+   451  00012E  E104               	bnz	u370
+   452  000130  0EBF               	movlw	191
+   453  000132  5C1D               	subwf	_bir,w,c
+   454  000134  A0D8               	btfss	status,0,c
+   455  000136  D004               	goto	l1151
+   456  000138                     u370:
+   457  000138  0E00               	movlw	0
+   458  00013A  6E1E               	movwf	_bir+1,c
+   459  00013C  0EBE               	movlw	190
+   460  00013E  6E1D               	movwf	_bir,c
+   461  000140                     l1151:
+   462                           
+   463                           ;PICServo.c: 300: _delay( 15000 );
+   464  000140  0E14               	movlw	20
+   465  000142  6E19               	movwf	??_main& (0+255),c
+   466  000144  0E7A               	movlw	122
+   467  000146                     u497:
+   468  000146  2EE8               	decfsz	wreg,f,c
+   469  000148  D7FE               	goto	u497
+   470  00014A  2E19               	decfsz	??_main& (0+255),f,c
+   471  00014C  D7FC               	goto	u497
+   472  00014E                     l1153:
+   473                           
+   474                           ;PICServo.c: 301: }
+   475                           ;PICServo.c: 302: seri_porta_veri_gonder( temp3 );
+   476  00014E  5029               	movf	_temp3,w,c	;volatile
+   477  000150  EC20  F002         	call	_seri_porta_veri_gonder
+   478                           
+   479                           ;PICServo.c: 305: if( temp3 < 10 )
+   480  000154  BE2A               	btfsc	_temp3+1,7,c	;volatile
+   481  000156  D006               	goto	l1157
+   482  000158  502A               	movf	_temp3+1,w,c	;volatile
+   483  00015A  E121               	bnz	l1167
+   484  00015C  0E0A               	movlw	10
+   485  00015E  5C29               	subwf	_temp3,w,c	;volatile
+   486  000160  B0D8               	btfsc	status,0,c
+   487  000162  D01D               	goto	l1167
+   488  000164                     l1157:
+   489                           
+   490                           ;PICServo.c: 306: {
+   491                           ;PICServo.c: 308: if( open ){
+   492  000164  501C               	movf	main@open,w,c
+   493  000166  B4D8               	btfsc	status,2,c
+   494  000168  D008               	goto	l177
+   495                           
+   496                           ;PICServo.c: 309: open = 0;
+   497  00016A  0E00               	movlw	0
+   498  00016C  6E1C               	movwf	main@open,c
+   499                           
+   500                           ;PICServo.c: 310: uc.angle = 150 ;
+   501  00016E  0E00               	movlw	0
+   502  000170  6E2C               	movwf	_uc+1,c
+   503  000172  0E96               	movlw	150
+   504  000174  6E2B               	movwf	_uc,c
+   505                           
+   506                           ;PICServo.c: 311: PORTBbits.RB5 = 1;
+   507  000176  8A81               	bsf	3969,5,c	;volatile
+   508                           
+   509                           ;PICServo.c: 312: }
+   510  000178  D007               	goto	l1165
+   511  00017A                     l177:
+   512                           
+   513                           ;PICServo.c: 313: else
+   514                           ;PICServo.c: 314: {PORTBbits.RB5 = 0;
+   515  00017A  9A81               	bcf	3969,5,c	;volatile
+   516                           
+   517                           ;PICServo.c: 315: open = 1;
+   518  00017C  0E01               	movlw	1
+   519  00017E  6E1C               	movwf	main@open,c
+   520                           
+   521                           ;PICServo.c: 316: uc.angle = 3 ;
+   522  000180  0E00               	movlw	0
+   523  000182  6E2C               	movwf	_uc+1,c
+   524  000184  0E03               	movlw	3
+   525  000186  6E2B               	movwf	_uc,c
+   526  000188                     l1165:
+   527  000188  0E02               	movlw	2
+   528  00018A  ECC3  F001         	call	_analogRead
+   529  00018E  BE16               	btfsc	?_analogRead+1,7,c
+   530  000190  D7FB               	goto	l1165
+   531  000192  5016               	movf	?_analogRead+1,w,c
+   532  000194  E104               	bnz	l1167
+   533  000196  0E0F               	movlw	15
+   534  000198  5C15               	subwf	?_analogRead,w,c
+   535  00019A  A0D8               	btfss	status,0,c
+   536  00019C  D7F5               	goto	l1165
+   537  00019E                     l1167:
+   538                           
+   539                           ;PICServo.c: 320: }
+   540                           ;PICServo.c: 323: if( temp2 < 30 )
+   541  00019E  BE28               	btfsc	_temp2+1,7,c	;volatile
+   542  0001A0  D006               	goto	l1169
+   543  0001A2  5028               	movf	_temp2+1,w,c	;volatile
+   544  0001A4  E11C               	bnz	l1175
+   545  0001A6  0E1E               	movlw	30
+   546  0001A8  5C27               	subwf	_temp2,w,c	;volatile
+   547  0001AA  B0D8               	btfsc	status,0,c
+   548  0001AC  D018               	goto	l1175
+   549  0001AE                     l1169:
+   550                           
+   551                           ;PICServo.c: 324: {
+   552                           ;PICServo.c: 325: iki.angle = iki.angle - 2;
+   553  0001AE  0EFE               	movlw	254
+   554  0001B0  241F               	addwf	_iki,w,c
+   555  0001B2  6E1F               	movwf	_iki,c
+   556  0001B4  0EFF               	movlw	255
+   557  0001B6  2020               	addwfc	_iki+1,w,c
+   558  0001B8  6E20               	movwf	_iki+1,c
+   559                           
+   560                           ;PICServo.c: 326: if( iki.angle < 3 ) iki.angle = 3;
+   561  0001BA  5020               	movf	_iki+1,w,c
+   562  0001BC  E108               	bnz	l1173
+   563  0001BE  0E03               	movlw	3
+   564  0001C0  5C1F               	subwf	_iki,w,c
+   565  0001C2  B0D8               	btfsc	status,0,c
+   566  0001C4  D004               	goto	l1173
+   567  0001C6  0E00               	movlw	0
+   568  0001C8  6E20               	movwf	_iki+1,c
+   569  0001CA  0E03               	movlw	3
+   570  0001CC  6E1F               	movwf	_iki,c
+   571  0001CE                     l1173:
+   572                           
+   573                           ;PICServo.c: 328: _delay( 15000 );
+   574  0001CE  0E14               	movlw	20
+   575  0001D0  6E19               	movwf	??_main& (0+255),c
+   576  0001D2  0E7A               	movlw	122
+   577  0001D4                     u507:
+   578  0001D4  2EE8               	decfsz	wreg,f,c
+   579  0001D6  D7FE               	goto	u507
+   580  0001D8  2E19               	decfsz	??_main& (0+255),f,c
+   581  0001DA  D7FC               	goto	u507
+   582                           
+   583                           ;PICServo.c: 329: }
+   584  0001DC  D766               	goto	l1131
+   585  0001DE                     l1175:
+   586                           
+   587                           ;PICServo.c: 330: else if( temp2 > 800 )
+   588  0001DE  BE28               	btfsc	_temp2+1,7,c	;volatile
+   589  0001E0  D764               	goto	l1131
+   590  0001E2  0E21               	movlw	33
+   591  0001E4  5C27               	subwf	_temp2,w,c	;volatile
+   592  0001E6  0E03               	movlw	3
+   593  0001E8  5828               	subwfb	_temp2+1,w,c	;volatile
+   594  0001EA  A0D8               	btfss	status,0,c
+   595  0001EC  D75E               	goto	l1131
+   596                           
+   597                           ;PICServo.c: 331: {
+   598                           ;PICServo.c: 332: iki.angle = iki.angle + 2;
+   599  0001EE  0E02               	movlw	2
+   600  0001F0  241F               	addwf	_iki,w,c
+   601  0001F2  6E1F               	movwf	_iki,c
+   602  0001F4  0E00               	movlw	0
+   603  0001F6  2020               	addwfc	_iki+1,w,c
+   604  0001F8  6E20               	movwf	_iki+1,c
+   605                           
+   606                           ;PICServo.c: 333: if( iki.angle > 190 ) iki.angle = 190;
+   607  0001FA  5020               	movf	_iki+1,w,c
+   608  0001FC  E104               	bnz	u440
+   609  0001FE  0EBF               	movlw	191
+   610  000200  5C1F               	subwf	_iki,w,c
+   611  000202  A0D8               	btfss	status,0,c
+   612  000204  D004               	goto	l1181
+   613  000206                     u440:
+   614  000206  0E00               	movlw	0
+   615  000208  6E20               	movwf	_iki+1,c
+   616  00020A  0EBE               	movlw	190
+   617  00020C  6E1F               	movwf	_iki,c
+   618  00020E                     l1181:
+   619                           
+   620                           ;PICServo.c: 336: _delay( 15000 );
+   621  00020E  0E14               	movlw	20
+   622  000210  6E19               	movwf	??_main& (0+255),c
+   623  000212  0E7A               	movlw	122
+   624  000214                     u517:
+   625  000214  2EE8               	decfsz	wreg,f,c
+   626  000216  D7FE               	goto	u517
+   627  000218  2E19               	decfsz	??_main& (0+255),f,c
+   628  00021A  D7FC               	goto	u517
+   629  00021C  D746               	goto	l1131
+   630  00021E                     __end_of_main:
+   631                           	opt stack 0
+   632                           intcon	equ	0xFF2
+   633                           postinc0	equ	0xFEE
+   634                           wreg	equ	0xFE8
+   635                           status	equ	0xFD8
+   636                           
+   637 ;; *************** function _seri_portu_ayarla *****************
+   638 ;; Defined at:
+   639 ;;		line 32 in file "PICServo.c"
+   640 ;; Parameters:    Size  Location     Type
+   641 ;;		None
+   642 ;; Auto vars:     Size  Location     Type
+   643 ;;		None
+   644 ;; Return value:  Size  Location     Type
+   645 ;;                  1    wreg      void 
+   646 ;; Registers used:
+   647 ;;		wreg, status,2
+   648 ;; Tracked objects:
+   649 ;;		On entry : 0/0
+   650 ;;		On exit  : 0/0
+   651 ;;		Unchanged: 0/0
+   652 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   653 ;;      Params:         0       0       0       0       0       0       0
+   654 ;;      Locals:         0       0       0       0       0       0       0
+   655 ;;      Temps:          0       0       0       0       0       0       0
+   656 ;;      Totals:         0       0       0       0       0       0       0
+   657 ;;Total ram usage:        0 bytes
+   658 ;; Hardware stack levels used:    1
+   659 ;; Hardware stack levels required when called:    2
+   660 ;; This function calls:
+   661 ;;		Nothing
+   662 ;; This function is called by:
+   663 ;;		_main
+   664 ;; This function uses a non-reentrant model
+   665 ;;
+   666                           
+   667                           	psect	text1
+   668  00042C                     __ptext1:
+   669                           	opt stack 0
+   670  00042C                     _seri_portu_ayarla:
+   671                           	opt stack 28
+   672                           
+   673                           ;incstack = 0
+   674  00042C  0E19               	movlw	25
+   675  00042E  6EAF               	movwf	4015,c	;volatile
+   676                           
+   677                           ;PICServo.c: 34: BRGH=1;
+   678  000430  84AC               	bsf	4012,2,c	;volatile
+   679                           
+   680                           ;PICServo.c: 36: SPEN=1;
+   681  000432  8EAB               	bsf	4011,7,c	;volatile
+   682                           
+   683                           ;PICServo.c: 38: SYNC=0;
+   684  000434  98AC               	bcf	4012,4,c	;volatile
+   685                           
+   686                           ;PICServo.c: 40: TX9=0;
+   687  000436  9CAC               	bcf	4012,6,c	;volatile
+   688                           
+   689                           ;PICServo.c: 42: TXEN=1;
+   690  000438  8AAC               	bsf	4012,5,c	;volatile
+   691                           
+   692                           ;PICServo.c: 44: RX9=0;
+   693  00043A  9CAB               	bcf	4011,6,c	;volatile
+   694                           
+   695                           ;PICServo.c: 46: CREN=1;
+   696  00043C  88AB               	bsf	4011,4,c	;volatile
+   697  00043E  0012               	return		;funcret
+   698  000440                     __end_of_seri_portu_ayarla:
+   699                           	opt stack 0
+   700                           intcon	equ	0xFF2
+   701                           postinc0	equ	0xFEE
+   702                           wreg	equ	0xFE8
+   703                           status	equ	0xFD8
+   704                           
+   705 ;; *************** function _seri_porta_veri_gonder *****************
+   706 ;; Defined at:
+   707 ;;		line 26 in file "PICServo.c"
+   708 ;; Parameters:    Size  Location     Type
+   709 ;;  jk              1    wreg     unsigned char 
+   710 ;; Auto vars:     Size  Location     Type
+   711 ;;  jk              1   20[COMRAM] unsigned char 
+   712 ;; Return value:  Size  Location     Type
+   713 ;;                  1    wreg      void 
+   714 ;; Registers used:
+   715 ;;		wreg
+   716 ;; Tracked objects:
+   717 ;;		On entry : 0/0
+   718 ;;		On exit  : 0/0
+   719 ;;		Unchanged: 0/0
+   720 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   721 ;;      Params:         0       0       0       0       0       0       0
+   722 ;;      Locals:         1       0       0       0       0       0       0
+   723 ;;      Temps:          0       0       0       0       0       0       0
+   724 ;;      Totals:         1       0       0       0       0       0       0
+   725 ;;Total ram usage:        1 bytes
+   726 ;; Hardware stack levels used:    1
+   727 ;; Hardware stack levels required when called:    2
+   728 ;; This function calls:
+   729 ;;		Nothing
+   730 ;; This function is called by:
+   731 ;;		_main
+   732 ;; This function uses a non-reentrant model
+   733 ;;
+   734                           
+   735                           	psect	text2
+   736  000440                     __ptext2:
+   737                           	opt stack 0
+   738  000440                     _seri_porta_veri_gonder:
+   739                           	opt stack 28
+   740                           
+   741                           ;incstack = 0
+   742                           ;seri_porta_veri_gonder@jk stored from wreg
+   743  000440  6E15               	movwf	seri_porta_veri_gonder@jk,c
+   744  000442                     l117:
+   745  000442  A89E               	btfss	3998,4,c	;volatile
+   746  000444  D7FE               	goto	l117
+   747                           
+   748                           ;PICServo.c: 28: TXREG=jk;
+   749  000446  C015  FFAD         	movff	seri_porta_veri_gonder@jk,4013	;volatile
+   750  00044A  0012               	return		;funcret
+   751  00044C                     __end_of_seri_porta_veri_gonder:
+   752                           	opt stack 0
+   753                           intcon	equ	0xFF2
+   754                           postinc0	equ	0xFEE
+   755                           wreg	equ	0xFE8
+   756                           status	equ	0xFD8
+   757                           
+   758 ;; *************** function _analogRead *****************
+   759 ;; Defined at:
+   760 ;;		line 84 in file "PICServo.c"
+   761 ;; Parameters:    Size  Location     Type
+   762 ;;  pin             1    wreg     unsigned char 
+   763 ;; Auto vars:     Size  Location     Type
+   764 ;;  pin             1   23[COMRAM] unsigned char 
+   765 ;; Return value:  Size  Location     Type
+   766 ;;                  2   20[COMRAM] int 
+   767 ;; Registers used:
+   768 ;;		wreg, status,2, status,0
+   769 ;; Tracked objects:
+   770 ;;		On entry : 0/0
+   771 ;;		On exit  : 0/0
+   772 ;;		Unchanged: 0/0
+   773 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   774 ;;      Params:         2       0       0       0       0       0       0
+   775 ;;      Locals:         1       0       0       0       0       0       0
+   776 ;;      Temps:          1       0       0       0       0       0       0
+   777 ;;      Totals:         4       0       0       0       0       0       0
+   778 ;;Total ram usage:        4 bytes
+   779 ;; Hardware stack levels used:    1
+   780 ;; Hardware stack levels required when called:    2
+   781 ;; This function calls:
+   782 ;;		Nothing
+   783 ;; This function is called by:
+   784 ;;		_main
+   785 ;; This function uses a non-reentrant model
+   786 ;;
+   787                           
+   788                           	psect	text3
+   789  000386                     __ptext3:
+   790                           	opt stack 0
+   791  000386                     _analogRead:
+   792                           	opt stack 28
+   793                           
+   794                           ;incstack = 0
+   795                           ;analogRead@pin stored from wreg
+   796  000386  6E18               	movwf	analogRead@pin,c
+   797                           
+   798                           ;PICServo.c: 86: if( pin == 0)
+   799  000388  5018               	movf	analogRead@pin,w,c
+   800  00038A  A4D8               	btfss	status,2,c
+   801  00038C  D005               	goto	l1011
+   802                           
+   803                           ;PICServo.c: 87: {
+   804                           ;PICServo.c: 88: CHS3 = 0;
+   805  00038E  9AC2               	bcf	4034,5,c	;volatile
+   806                           
+   807                           ;PICServo.c: 89: CHS2 = 0;
+   808  000390  98C2               	bcf	4034,4,c	;volatile
+   809                           
+   810                           ;PICServo.c: 90: CHS1 = 0;
+   811  000392  96C2               	bcf	4034,3,c	;volatile
+   812                           
+   813                           ;PICServo.c: 91: CHS0 = 0;
+   814  000394  94C2               	bcf	4034,2,c	;volatile
+   815                           
+   816                           ;PICServo.c: 93: }
+   817  000396  D00F               	goto	l1019
+   818  000398                     l1011:
+   819                           
+   820                           ;PICServo.c: 94: else if( pin == 1)
+   821  000398  0418               	decf	analogRead@pin,w,c
+   822  00039A  A4D8               	btfss	status,2,c
+   823  00039C  D004               	goto	l1015
+   824                           
+   825                           ;PICServo.c: 95: {
+   826                           ;PICServo.c: 96: CHS3 = 0;
+   827  00039E  9AC2               	bcf	4034,5,c	;volatile
+   828                           
+   829                           ;PICServo.c: 97: CHS2 = 0;
+   830  0003A0  98C2               	bcf	4034,4,c	;volatile
+   831                           
+   832                           ;PICServo.c: 98: CHS1 = 0;
+   833  0003A2  96C2               	bcf	4034,3,c	;volatile
+   834  0003A4  D007               	goto	L1
+   835  0003A6                     l1015:
+   836                           
+   837                           ;PICServo.c: 102: else if( pin == 2)
+   838  0003A6  0E02               	movlw	2
+   839  0003A8  1818               	xorwf	analogRead@pin,w,c
+   840  0003AA  A4D8               	btfss	status,2,c
+   841  0003AC  D004               	goto	l1019
+   842                           
+   843                           ;PICServo.c: 103: {
+   844                           ;PICServo.c: 104: CHS3 = 0;
+   845  0003AE  9AC2               	bcf	4034,5,c	;volatile
+   846                           
+   847                           ;PICServo.c: 105: CHS2 = 0;
+   848  0003B0  98C2               	bcf	4034,4,c	;volatile
+   849                           
+   850                           ;PICServo.c: 106: CHS1 = 1;
+   851  0003B2  86C2               	bsf	4034,3,c	;volatile
+   852  0003B4                     L1:
+   853                           
+   854                           ;PICServo.c: 107: CHS0 = 1;
+   855  0003B4  84C2               	bsf	4034,2,c	;volatile
+   856  0003B6                     l1019:
+   857                           
+   858                           ;PICServo.c: 109: }
+   859                           ;PICServo.c: 113: _delay( 10000 );
+   860  0003B6  0E0D               	movlw	13
+   861  0003B8  6E17               	movwf	??_analogRead& (0+255),c
+   862  0003BA  0EFC               	movlw	252
+   863  0003BC                     u527:
+   864  0003BC  2EE8               	decfsz	wreg,f,c
+   865  0003BE  D7FE               	goto	u527
+   866  0003C0  2E17               	decfsz	??_analogRead& (0+255),f,c
+   867  0003C2  D7FC               	goto	u527
+   868                           
+   869                           ;PICServo.c: 114: GO_DONE = 1;
+   870  0003C4  82C2               	bsf	4034,1,c	;volatile
+   871  0003C6                     l140:
+   872  0003C6  B2C2               	btfsc	4034,1,c	;volatile
+   873  0003C8  D7FE               	goto	l140
+   874                           
+   875                           ;PICServo.c: 116: ADIF = 0;
+   876  0003CA  9C9E               	bcf	3998,6,c	;volatile
+   877                           
+   878                           ;PICServo.c: 117: return ADRES;
+   879  0003CC  CFC3 F015          	movff	4035,?_analogRead	;volatile
+   880  0003D0  CFC4 F016          	movff	4036,?_analogRead+1	;volatile
+   881  0003D4  0012               	return		;funcret
+   882  0003D6                     __end_of_analogRead:
+   883                           	opt stack 0
+   884                           intcon	equ	0xFF2
+   885                           postinc0	equ	0xFEE
+   886                           wreg	equ	0xFE8
+   887                           status	equ	0xFD8
+   888                           
+   889 ;; *************** function _ADC_hazirla *****************
+   890 ;; Defined at:
+   891 ;;		line 59 in file "PICServo.c"
+   892 ;; Parameters:    Size  Location     Type
+   893 ;;		None
+   894 ;; Auto vars:     Size  Location     Type
+   895 ;;		None
+   896 ;; Return value:  Size  Location     Type
+   897 ;;                  1    wreg      void 
+   898 ;; Registers used:
+   899 ;;		wreg, status,2
+   900 ;; Tracked objects:
+   901 ;;		On entry : 0/0
+   902 ;;		On exit  : 0/0
+   903 ;;		Unchanged: 0/0
+   904 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   905 ;;      Params:         0       0       0       0       0       0       0
+   906 ;;      Locals:         0       0       0       0       0       0       0
+   907 ;;      Temps:          0       0       0       0       0       0       0
+   908 ;;      Totals:         0       0       0       0       0       0       0
+   909 ;;Total ram usage:        0 bytes
+   910 ;; Hardware stack levels used:    1
+   911 ;; Hardware stack levels required when called:    2
+   912 ;; This function calls:
+   913 ;;		Nothing
+   914 ;; This function is called by:
+   915 ;;		_main
+   916 ;; This function uses a non-reentrant model
+   917 ;;
+   918                           
+   919                           	psect	text4
+   920  0003FC                     __ptext4:
+   921                           	opt stack 0
+   922  0003FC                     _ADC_hazirla:
+   923                           	opt stack 28
+   924                           
+   925                           ;PICServo.c: 62: ADON = 1;
+   926                           
+   927                           ;incstack = 0
+   928  0003FC  80C2               	bsf	4034,0,c	;volatile
+   929                           
+   930                           ;PICServo.c: 65: VCFG1 = 0;
+   931  0003FE  9AC1               	bcf	4033,5,c	;volatile
+   932                           
+   933                           ;PICServo.c: 66: VCFG0 = 0;
+   934  000400  98C1               	bcf	4033,4,c	;volatile
+   935                           
+   936                           ;PICServo.c: 73: ADCON1 = 0b000000110;
+   937  000402  0E06               	movlw	6
+   938  000404  6EC1               	movwf	4033,c	;volatile
+   939                           
+   940                           ;PICServo.c: 74: ADFM = 1;
+   941  000406  8EC0               	bsf	4032,7,c	;volatile
+   942                           
+   943                           ;PICServo.c: 75: ADCS2 = 1;
+   944  000408  84C0               	bsf	4032,2,c	;volatile
+   945                           
+   946                           ;PICServo.c: 76: ADCS1 = 0;
+   947  00040A  92C0               	bcf	4032,1,c	;volatile
+   948                           
+   949                           ;PICServo.c: 77: ADCS0 =0 ;
+   950  00040C  90C0               	bcf	4032,0,c	;volatile
+   951                           
+   952                           ;PICServo.c: 79: ACQT2 = 1;
+   953  00040E  8AC0               	bsf	4032,5,c	;volatile
+   954                           
+   955                           ;PICServo.c: 80: ACQT1 = 0;
+   956  000410  98C0               	bcf	4032,4,c	;volatile
+   957                           
+   958                           ;PICServo.c: 81: ACQT0 = 0;
+   959  000412  96C0               	bcf	4032,3,c	;volatile
+   960  000414  0012               	return		;funcret
+   961  000416                     __end_of_ADC_hazirla:
+   962                           	opt stack 0
+   963                           intcon	equ	0xFF2
+   964                           postinc0	equ	0xFEE
+   965                           wreg	equ	0xFE8
+   966                           status	equ	0xFD8
+   967                           
+   968 ;; *************** function _FNC *****************
+   969 ;; Defined at:
+   970 ;;		line 133 in file "PICServo.c"
+   971 ;; Parameters:    Size  Location     Type
+   972 ;;		None
+   973 ;; Auto vars:     Size  Location     Type
+   974 ;;		None
+   975 ;; Return value:  Size  Location     Type
+   976 ;;                  1    wreg      void 
+   977 ;; Registers used:
+   978 ;;		wreg, status,2, status,0, prodl, prodh, cstack
+   979 ;; Tracked objects:
+   980 ;;		On entry : 0/0
+   981 ;;		On exit  : 0/0
+   982 ;;		Unchanged: 0/0
+   983 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   984 ;;      Params:         0       0       0       0       0       0       0
+   985 ;;      Locals:         0       0       0       0       0       0       0
+   986 ;;      Temps:         14       0       0       0       0       0       0
+   987 ;;      Totals:        14       0       0       0       0       0       0
+   988 ;;Total ram usage:       14 bytes
+   989 ;; Hardware stack levels used:    1
+   990 ;; Hardware stack levels required when called:    1
+   991 ;; This function calls:
+   992 ;;		___wmul
+   993 ;; This function is called by:
+   994 ;;		Interrupt level 2
+   995 ;; This function uses a non-reentrant model
+   996 ;;
+   997                           
+   998                           	psect	intcode
+   999  000008                     __pintcode:
+  1000                           	opt stack 0
+  1001  000008                     _FNC:
+  1002                           	opt stack 28
+  1003                           
+  1004                           ;incstack = 0
+  1005  000008  822F               	bsf	btemp,1,c	;set compiler interrupt flag (level 2)
+  1006  00000A  CFFA F007          	movff	pclath,??_FNC
+  1007  00000E  CFFB F008          	movff	pclatu,??_FNC+1
+  1008  000012  ED0F  F001         	call	int_func,f	;refresh shadow registers
+  1009                           pclatu	equ	0xFFB
+  1010                           pclath	equ	0xFFA
+  1011                           intcon	equ	0xFF2
+  1012                           postinc0	equ	0xFEE
+  1013                           wreg	equ	0xFE8
+  1014                           status	equ	0xFD8
+  1015                           
+  1016                           	psect	intcode_body
+  1017  00021E                     __pintcode_body:
+  1018                           	opt stack 28
+  1019  00021E                     int_func:
+  1020                           	opt stack 28
+  1021  00021E  0006               	pop		; remove dummy address from shadow register refresh
+  1022  000220  CFE9 F009          	movff	fsr0l,??_FNC+2
+  1023  000224  CFEA F00A          	movff	fsr0h,??_FNC+3
+  1024  000228  CFE1 F00B          	movff	fsr1l,??_FNC+4
+  1025  00022C  CFE2 F00C          	movff	fsr1h,??_FNC+5
+  1026  000230  CFD9 F00D          	movff	fsr2l,??_FNC+6
+  1027  000234  CFDA F00E          	movff	fsr2h,??_FNC+7
+  1028  000238  CFF3 F00F          	movff	prodl,??_FNC+8
+  1029  00023C  CFF4 F010          	movff	prodh,??_FNC+9
+  1030  000240  CFF6 F011          	movff	tblptrl,??_FNC+10
+  1031  000244  CFF7 F012          	movff	tblptrh,??_FNC+11
+  1032  000248  CFF8 F013          	movff	tblptru,??_FNC+12
+  1033  00024C  CFF5 F014          	movff	tablat,??_FNC+13
+  1034                           
+  1035                           ;PICServo.c: 136: if( CCP1IF )
+  1036  000250  A49E               	btfss	3998,2,c	;volatile
+  1037  000252  D07B               	goto	i2l163
+  1038                           
+  1039                           ;PICServo.c: 137: {GIE = 0;
+  1040  000254  9EF2               	bcf	intcon,7,c	;volatile
+  1041                           
+  1042                           ;PICServo.c: 139: if( servo_number == 0 )
+  1043  000256  502E               	movf	_servo_number,w,c
+  1044  000258  A4D8               	btfss	status,2,c
+  1045  00025A  D023               	goto	i2l1047
+  1046                           
+  1047                           ;PICServo.c: 140: {
+  1048                           ;PICServo.c: 142: if( dogru )
+  1049  00025C  502D               	movf	_dogru,w,c
+  1050  00025E  B4D8               	btfsc	status,2,c
+  1051  000260  D00D               	goto	i2l154
+  1052                           
+  1053                           ;PICServo.c: 143: {
+  1054                           ;PICServo.c: 144: dogru = 0;
+  1055  000262  0E00               	movlw	0
+  1056  000264  6E2D               	movwf	_dogru,c
+  1057                           
+  1058                           ;PICServo.c: 146: PORTBbits.RB4 = 0;
+  1059  000266  9881               	bcf	3969,4,c	;volatile
+  1060                           
+  1061                           ;PICServo.c: 147: TMR1 = 0;
+  1062  000268  0E00               	movlw	0
+  1063  00026A  6ECF               	movwf	4047,c	;volatile
+  1064  00026C  0E00               	movlw	0
+  1065  00026E  6ECE               	movwf	4046,c	;volatile
+  1066                           
+  1067                           ;PICServo.c: 148: CCPR1 = 20000;
+  1068  000270  0E4E               	movlw	78
+  1069  000272  6EBF               	movwf	4031,c	;volatile
+  1070  000274  0E20               	movlw	32
+  1071  000276  6EBE               	movwf	4030,c	;volatile
+  1072                           
+  1073                           ;PICServo.c: 149: servo_number = 1;
+  1074  000278  0E01               	movlw	1
+  1075  00027A  D04D               	goto	L4
+  1076  00027C                     i2l154:
+  1077                           
+  1078                           ;PICServo.c: 153: else
+  1079                           ;PICServo.c: 154: {
+  1080                           ;PICServo.c: 155: PORTBbits.RB4 = 1;
+  1081  00027C  8881               	bsf	3969,4,c	;volatile
+  1082                           
+  1083                           ;PICServo.c: 156: TMR1 = 0;
+  1084  00027E  0E00               	movlw	0
+  1085  000280  6ECF               	movwf	4047,c	;volatile
+  1086  000282  0E00               	movlw	0
+  1087  000284  6ECE               	movwf	4046,c	;volatile
+  1088                           
+  1089                           ;PICServo.c: 157: CCPR1 = 540 + 20 * bir.angle;
+  1090  000286  C01D  F001         	movff	_bir,___wmul@multiplier
+  1091  00028A  C01E  F002         	movff	_bir+1,___wmul@multiplier+1
+  1092  00028E  0E00               	movlw	0
+  1093  000290  6E04               	movwf	___wmul@multiplicand+1,c
+  1094  000292  0E14               	movlw	20
+  1095  000294  6E03               	movwf	___wmul@multiplicand,c
+  1096  000296  ECEB  F001         	call	___wmul	;wreg free
+  1097  00029A  D04E               	goto	L3
+  1098  00029C                     i2l1045:
+  1099                           
+  1100                           ;PICServo.c: 158: dogru = 1;
+  1101  00029C  0E01               	movlw	1
+  1102  00029E  6E2D               	movwf	_dogru,c
+  1103                           
+  1104                           ;PICServo.c: 162: }
+  1105                           ;PICServo.c: 166: }
+  1106  0002A0  D052               	goto	i2l1073
+  1107  0002A2                     i2l1047:
+  1108                           
+  1109                           ;PICServo.c: 167: else if ( servo_number == 1 )
+  1110  0002A2  042E               	decf	_servo_number,w,c
+  1111  0002A4  A4D8               	btfss	status,2,c
+  1112  0002A6  D028               	goto	i2l1061
+  1113                           
+  1114                           ;PICServo.c: 168: {
+  1115                           ;PICServo.c: 169: if( dogru )
+  1116  0002A8  502D               	movf	_dogru,w,c
+  1117  0002AA  B4D8               	btfsc	status,2,c
+  1118  0002AC  D00D               	goto	i2l1055
+  1119                           
+  1120                           ;PICServo.c: 170: {
+  1121                           ;PICServo.c: 171: dogru = 0;
+  1122  0002AE  0E00               	movlw	0
+  1123  0002B0  6E2D               	movwf	_dogru,c
+  1124                           
+  1125                           ;PICServo.c: 172: PORTBbits.RB1 = 0;
+  1126  0002B2  9281               	bcf	3969,1,c	;volatile
+  1127                           
+  1128                           ;PICServo.c: 173: TMR1 = 0;
+  1129  0002B4  0E00               	movlw	0
+  1130  0002B6  6ECF               	movwf	4047,c	;volatile
+  1131  0002B8  0E00               	movlw	0
+  1132  0002BA  6ECE               	movwf	4046,c	;volatile
+  1133                           
+  1134                           ;PICServo.c: 174: CCPR1 = 20000;
+  1135  0002BC  0E4E               	movlw	78
+  1136  0002BE  6EBF               	movwf	4031,c	;volatile
+  1137  0002C0  0E20               	movlw	32
+  1138  0002C2  6EBE               	movwf	4030,c	;volatile
+  1139                           
+  1140                           ;PICServo.c: 175: servo_number = 2;
+  1141  0002C4  0E02               	movlw	2
+  1142  0002C6  D027               	goto	L4
+  1143  0002C8                     i2l1055:
+  1144                           
+  1145                           ;PICServo.c: 177: else
+  1146                           ;PICServo.c: 178: {
+  1147                           ;PICServo.c: 179: dogru = 1;
+  1148  0002C8  0E01               	movlw	1
+  1149  0002CA  6E2D               	movwf	_dogru,c
+  1150                           
+  1151                           ;PICServo.c: 180: PORTBbits.RB1 = 1;
+  1152  0002CC  8281               	bsf	3969,1,c	;volatile
+  1153                           
+  1154                           ;PICServo.c: 181: TMR1 = 0;
+  1155  0002CE  0E00               	movlw	0
+  1156  0002D0  6ECF               	movwf	4047,c	;volatile
+  1157  0002D2  0E00               	movlw	0
+  1158  0002D4  6ECE               	movwf	4046,c	;volatile
+  1159                           
+  1160                           ;PICServo.c: 182: CCPR1 = 540 + 20 * iki.angle ;
+  1161  0002D6  C01F  F001         	movff	_iki,___wmul@multiplier
+  1162  0002DA  C020  F002         	movff	_iki+1,___wmul@multiplier+1
+  1163  0002DE  0E00               	movlw	0
+  1164  0002E0  6E04               	movwf	___wmul@multiplicand+1,c
+  1165  0002E2  0E14               	movlw	20
+  1166  0002E4  6E03               	movwf	___wmul@multiplicand,c
+  1167  0002E6  ECEB  F001         	call	___wmul	;wreg free
+  1168  0002EA  0E1C               	movlw	28
+  1169  0002EC  2401               	addwf	?___wmul,w,c
+  1170  0002EE  6EBE               	movwf	4030,c	;volatile
+  1171  0002F0  0E02               	movlw	2
+  1172  0002F2  2002               	addwfc	?___wmul+1,w,c
+  1173  0002F4  6EBF               	movwf	4031,c	;volatile
+  1174                           
+  1175                           ;PICServo.c: 184: }
+  1176                           ;PICServo.c: 190: }
+  1177  0002F6  D027               	goto	i2l1073
+  1178  0002F8                     i2l1061:
+  1179                           
+  1180                           ;PICServo.c: 191: else
+  1181                           ;PICServo.c: 192: {
+  1182                           ;PICServo.c: 194: if( dogru )
+  1183  0002F8  502D               	movf	_dogru,w,c
+  1184  0002FA  B4D8               	btfsc	status,2,c
+  1185  0002FC  D00E               	goto	i2l161
+  1186                           
+  1187                           ;PICServo.c: 195: {
+  1188                           ;PICServo.c: 196: PORTBbits.RB3 = 0;
+  1189  0002FE  9681               	bcf	3969,3,c	;volatile
+  1190                           
+  1191                           ;PICServo.c: 197: TMR1 = 0 ;
+  1192  000300  0E00               	movlw	0
+  1193  000302  6ECF               	movwf	4047,c	;volatile
+  1194  000304  0E00               	movlw	0
+  1195  000306  6ECE               	movwf	4046,c	;volatile
+  1196                           
+  1197                           ;PICServo.c: 198: CCPR1 = 20000;
+  1198  000308  0E4E               	movlw	78
+  1199  00030A  6EBF               	movwf	4031,c	;volatile
+  1200  00030C  0E20               	movlw	32
+  1201  00030E  6EBE               	movwf	4030,c	;volatile
+  1202                           
+  1203                           ;PICServo.c: 200: dogru = 0;
+  1204  000310  0E00               	movlw	0
+  1205  000312  6E2D               	movwf	_dogru,c
+  1206                           
+  1207                           ;PICServo.c: 201: servo_number = 0;
+  1208  000314  0E00               	movlw	0
+  1209  000316                     L4:
+  1210  000316  6E2E               	movwf	_servo_number,c
+  1211                           
+  1212                           ;PICServo.c: 202: }
+  1213  000318  D016               	goto	i2l1073
+  1214  00031A                     i2l161:
+  1215                           
+  1216                           ;PICServo.c: 203: else
+  1217                           ;PICServo.c: 204: {
+  1218                           ;PICServo.c: 205: PORTBbits.RB3 = 1;
+  1219  00031A  8681               	bsf	3969,3,c	;volatile
+  1220                           
+  1221                           ;PICServo.c: 206: TMR1 = 0;
+  1222  00031C  0E00               	movlw	0
+  1223  00031E  6ECF               	movwf	4047,c	;volatile
+  1224  000320  0E00               	movlw	0
+  1225  000322  6ECE               	movwf	4046,c	;volatile
+  1226                           
+  1227                           ;PICServo.c: 207: CCPR1 = 540 + uc.angle*20 ;
+  1228  000324  C02B  F001         	movff	_uc,___wmul@multiplier
+  1229  000328  C02C  F002         	movff	_uc+1,___wmul@multiplier+1
+  1230  00032C  0E00               	movlw	0
+  1231  00032E  6E04               	movwf	___wmul@multiplicand+1,c
+  1232  000330  0E14               	movlw	20
+  1233  000332  6E03               	movwf	___wmul@multiplicand,c
+  1234  000334  ECEB  F001         	call	___wmul	;wreg free
+  1235  000338                     L3:
+  1236  000338  0E1C               	movlw	28
+  1237  00033A  2401               	addwf	?___wmul,w,c
+  1238  00033C  6EBE               	movwf	4030,c	;volatile
+  1239  00033E  0E02               	movlw	2
+  1240  000340  2002               	addwfc	?___wmul+1,w,c
+  1241  000342  6EBF               	movwf	4031,c	;volatile
+  1242  000344  D7AB               	goto	i2l1045
+  1243  000346                     i2l1073:
+  1244                           
+  1245                           ;PICServo.c: 211: }
+  1246                           ;PICServo.c: 215: }
+  1247                           ;PICServo.c: 220: CCP1IF = 0;
+  1248  000346  949E               	bcf	3998,2,c	;volatile
+  1249                           
+  1250                           ;PICServo.c: 223: GIE=1;
+  1251  000348  8EF2               	bsf	intcon,7,c	;volatile
+  1252  00034A                     i2l163:
+  1253  00034A  C014  FFF5         	movff	??_FNC+13,tablat
+  1254  00034E  C013  FFF8         	movff	??_FNC+12,tblptru
+  1255  000352  C012  FFF7         	movff	??_FNC+11,tblptrh
+  1256  000356  C011  FFF6         	movff	??_FNC+10,tblptrl
+  1257  00035A  C010  FFF4         	movff	??_FNC+9,prodh
+  1258  00035E  C00F  FFF3         	movff	??_FNC+8,prodl
+  1259  000362  C00E  FFDA         	movff	??_FNC+7,fsr2h
+  1260  000366  C00D  FFD9         	movff	??_FNC+6,fsr2l
+  1261  00036A  C00C  FFE2         	movff	??_FNC+5,fsr1h
+  1262  00036E  C00B  FFE1         	movff	??_FNC+4,fsr1l
+  1263  000372  C00A  FFEA         	movff	??_FNC+3,fsr0h
+  1264  000376  C009  FFE9         	movff	??_FNC+2,fsr0l
+  1265  00037A  C008  FFFB         	movff	??_FNC+1,pclatu
+  1266  00037E  C007  FFFA         	movff	??_FNC,pclath
+  1267  000382  922F               	bcf	btemp,1,c	;clear compiler interrupt flag (level 2)
+  1268  000384  0011               	retfie		f
+  1269  000386                     __end_of_FNC:
+  1270                           	opt stack 0
+  1271                           pclatu	equ	0xFFB
+  1272                           pclath	equ	0xFFA
+  1273                           tblptru	equ	0xFF8
+  1274                           tblptrh	equ	0xFF7
+  1275                           tblptrl	equ	0xFF6
+  1276                           tablat	equ	0xFF5
+  1277                           prodh	equ	0xFF4
+  1278                           prodl	equ	0xFF3
+  1279                           intcon	equ	0xFF2
+  1280                           postinc0	equ	0xFEE
+  1281                           fsr0h	equ	0xFEA
+  1282                           fsr0l	equ	0xFE9
+  1283                           wreg	equ	0xFE8
+  1284                           fsr1h	equ	0xFE2
+  1285                           fsr1l	equ	0xFE1
+  1286                           fsr2h	equ	0xFDA
+  1287                           fsr2l	equ	0xFD9
+  1288                           status	equ	0xFD8
+  1289                           
+  1290 ;; *************** function ___wmul *****************
+  1291 ;; Defined at:
+  1292 ;;		line 15 in file "C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\Umul16.c"
+  1293 ;; Parameters:    Size  Location     Type
+  1294 ;;  multiplier      2    0[COMRAM] unsigned int 
+  1295 ;;  multiplicand    2    2[COMRAM] unsigned int 
+  1296 ;; Auto vars:     Size  Location     Type
+  1297 ;;  product         2    4[COMRAM] unsigned int 
+  1298 ;; Return value:  Size  Location     Type
+  1299 ;;                  2    0[COMRAM] unsigned int 
+  1300 ;; Registers used:
+  1301 ;;		wreg, status,2, status,0, prodl, prodh
+  1302 ;; Tracked objects:
+  1303 ;;		On entry : 0/0
+  1304 ;;		On exit  : 0/0
+  1305 ;;		Unchanged: 0/0
+  1306 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  1307 ;;      Params:         4       0       0       0       0       0       0
+  1308 ;;      Locals:         2       0       0       0       0       0       0
+  1309 ;;      Temps:          0       0       0       0       0       0       0
+  1310 ;;      Totals:         6       0       0       0       0       0       0
+  1311 ;;Total ram usage:        6 bytes
+  1312 ;; Hardware stack levels used:    1
+  1313 ;; This function calls:
+  1314 ;;		Nothing
+  1315 ;; This function is called by:
+  1316 ;;		_FNC
+  1317 ;; This function uses a non-reentrant model
+  1318 ;;
+  1319                           
+  1320                           	psect	text6
+  1321  0003D6                     __ptext6:
+  1322                           	opt stack 0
+  1323  0003D6                     ___wmul:
+  1324                           	opt stack 28
+  1325                           
+  1326                           ;incstack = 0
+  1327  0003D6  5001               	movf	___wmul@multiplier,w,c
+  1328  0003D8  0203               	mulwf	___wmul@multiplicand,c
+  1329  0003DA  CFF3 F005          	movff	prodl,___wmul@product
+  1330  0003DE  CFF4 F006          	movff	prodh,___wmul@product+1
+  1331  0003E2  5001               	movf	___wmul@multiplier,w,c
+  1332  0003E4  0204               	mulwf	___wmul@multiplicand+1,c
+  1333  0003E6  50F3               	movf	prodl,w,c
+  1334  0003E8  2606               	addwf	___wmul@product+1,f,c
+  1335  0003EA  5002               	movf	___wmul@multiplier+1,w,c
+  1336  0003EC  0203               	mulwf	___wmul@multiplicand,c
+  1337  0003EE  50F3               	movf	prodl,w,c
+  1338  0003F0  2606               	addwf	___wmul@product+1,f,c
+  1339  0003F2  C005  F001         	movff	___wmul@product,?___wmul
+  1340  0003F6  C006  F002         	movff	___wmul@product+1,?___wmul+1
+  1341  0003FA  0012               	return	
+  1342  0003FC                     __end_of___wmul:
+  1343                           	opt stack 0
+  1344  0000                     pclatu	equ	0xFFB
+  1345                           pclath	equ	0xFFA
+  1346                           tblptru	equ	0xFF8
+  1347                           tblptrh	equ	0xFF7
+  1348                           tblptrl	equ	0xFF6
+  1349                           tablat	equ	0xFF5
+  1350                           prodh	equ	0xFF4
+  1351                           prodl	equ	0xFF3
+  1352                           intcon	equ	0xFF2
+  1353                           postinc0	equ	0xFEE
+  1354                           fsr0h	equ	0xFEA
+  1355                           fsr0l	equ	0xFE9
+  1356                           wreg	equ	0xFE8
+  1357                           fsr1h	equ	0xFE2
+  1358                           fsr1l	equ	0xFE1
+  1359                           fsr2h	equ	0xFDA
+  1360                           fsr2l	equ	0xFD9
+  1361                           status	equ	0xFD8
+  1362                           pclatu	equ	0xFFB
+  1363                           pclath	equ	0xFFA
+  1364                           tblptru	equ	0xFF8
+  1365                           tblptrh	equ	0xFF7
+  1366                           tblptrl	equ	0xFF6
+  1367                           tablat	equ	0xFF5
+  1368                           prodh	equ	0xFF4
+  1369                           prodl	equ	0xFF3
+  1370                           intcon	equ	0xFF2
+  1371                           postinc0	equ	0xFEE
+  1372                           fsr0h	equ	0xFEA
+  1373                           fsr0l	equ	0xFE9
+  1374                           wreg	equ	0xFE8
+  1375                           fsr1h	equ	0xFE2
+  1376                           fsr1l	equ	0xFE1
+  1377                           fsr2h	equ	0xFDA
+  1378                           fsr2l	equ	0xFD9
+  1379                           status	equ	0xFD8
+  1380                           
+  1381                           	psect	rparam
+  1382  0000                     pclatu	equ	0xFFB
+  1383                           pclath	equ	0xFFA
+  1384                           tblptru	equ	0xFF8
+  1385                           tblptrh	equ	0xFF7
+  1386                           tblptrl	equ	0xFF6
+  1387                           tablat	equ	0xFF5
+  1388                           prodh	equ	0xFF4
+  1389                           prodl	equ	0xFF3
+  1390                           intcon	equ	0xFF2
+  1391                           postinc0	equ	0xFEE
+  1392                           fsr0h	equ	0xFEA
+  1393                           fsr0l	equ	0xFE9
+  1394                           wreg	equ	0xFE8
+  1395                           fsr1h	equ	0xFE2
+  1396                           fsr1l	equ	0xFE1
+  1397                           fsr2h	equ	0xFDA
+  1398                           fsr2l	equ	0xFD9
+  1399                           status	equ	0xFD8
+  1400                           
+  1401                           	psect	temp
+  1402  00002F                     btemp:
+  1403                           	opt stack 0
+  1404  00002F                     	ds	1
+  1405  0000                     int$flags	set	btemp
+  1406                           pclatu	equ	0xFFB
+  1407                           pclath	equ	0xFFA
+  1408                           tblptru	equ	0xFF8
+  1409                           tblptrh	equ	0xFF7
+  1410                           tblptrl	equ	0xFF6
+  1411                           tablat	equ	0xFF5
+  1412                           prodh	equ	0xFF4
+  1413                           prodl	equ	0xFF3
+  1414                           intcon	equ	0xFF2
+  1415                           postinc0	equ	0xFEE
+  1416                           fsr0h	equ	0xFEA
+  1417                           fsr0l	equ	0xFE9
+  1418                           wreg	equ	0xFE8
+  1419                           fsr1h	equ	0xFE2
+  1420                           fsr1l	equ	0xFE1
+  1421                           fsr2h	equ	0xFDA
+  1422                           fsr2l	equ	0xFD9
+  1423                           status	equ	0xFD8
+
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        0
+    BSS         18
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM          126     28      46
+    BANK0           128      0       0
+    BANK1           256      0       0
+    BANK2           256      0       0
+    BANK3           256      0       0
+    BANK4           256      0       0
+    BANK5           256      0       0
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMRAM
+
+    _main->_analogRead
+
+Critical Paths under _FNC in COMRAM
+
+    _FNC->___wmul
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _FNC in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _FNC in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _FNC in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _FNC in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _FNC in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Critical Paths under _FNC in BANK5
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 4     4      0     107
+                                             24 COMRAM     4     4      0
+                        _ADC_hazirla
+                         _analogRead
+             _seri_porta_veri_gonder
+                  _seri_portu_ayarla
+ ---------------------------------------------------------------------------------
+ (1) _seri_portu_ayarla                                    0     0      0       0
+ ---------------------------------------------------------------------------------
+ (1) _seri_porta_veri_gonder                               1     1      0      15
+                                             20 COMRAM     1     1      0
+ ---------------------------------------------------------------------------------
+ (1) _analogRead                                           4     2      2      66
+                                             20 COMRAM     4     2      2
+ ---------------------------------------------------------------------------------
+ (1) _ADC_hazirla                                          0     0      0       0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 1
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (2) _FNC                                                 14    14      0     417
+                                              6 COMRAM    14    14      0
+                             ___wmul
+ ---------------------------------------------------------------------------------
+ (3) ___wmul                                               6     2      4     417
+                                              0 COMRAM     6     2      4
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 3
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _ADC_hazirla
+   _analogRead
+   _seri_porta_veri_gonder
+   _seri_portu_ayarla
+
+ _FNC (ROOT)
+   ___wmul
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BIGRAM             5FF      0       0      17        0.0%
+EEDATA             100      0       0       0        0.0%
+BITBANK5           100      0       0      16        0.0%
+BANK5              100      0       0      14        0.0%
+BITBANK4           100      0       0      12        0.0%
+BANK4              100      0       0      13        0.0%
+BITBANK3           100      0       0      10        0.0%
+BANK3              100      0       0      11        0.0%
+BITBANK2           100      0       0       8        0.0%
+BANK2              100      0       0       9        0.0%
+BITBANK1           100      0       0       6        0.0%
+BANK1              100      0       0       7        0.0%
+BITBANK0            80      0       0       4        0.0%
+BANK0               80      0       0       5        0.0%
+BITCOMRAM           7E      0       0       0        0.0%
+COMRAM              7E     1C      2E       1       36.5%
+BITSFR               0      0       0      40        0.0%
+SFR                  0      0       0      40        0.0%
+STACK                0      0       0       2        0.0%
+NULL                 0      0       0       0        0.0%
+ABS                  0      0      2E      15        0.0%
+DATA                 0      0      2E       3        0.0%
+CODE                 0      0       0       0        0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V1.37 build -260352376 
+Symbol Table                                                                                   Sat Mar 14 17:36:32 2020
+
+                             _uc 002B              ___wmul@multiplicand 0003  
+                            l140 03C6                              l117 0442  
+                            l177 017A                              _GIE 007F97  
+                            _FNC 0008                              u440 0206  
+                            u370 0138                              u507 01D4  
+                            u517 0214                              u527 03BC  
+                            u457 0032                              u467 0046  
+                            u477 0056                              u487 010A  
+                            u497 0146                              _RX9 007D5E  
+                            _TX9 007D66                              _bir 001D  
+                            _iki 001F                              _sag 0021  
+                            _sol 0023                              wreg 000FE8  
+                           ?_FNC 0001                             l1011 0398  
+                           l1015 03A6                             l1019 03B6  
+                           l1131 00AA                             l1151 0140  
+                           l1143 0104                             l1153 014E  
+                           l1145 0114                             l1139 00E4  
+                           l1181 020E                             l1173 01CE  
+                           l1165 0188                             l1157 0164  
+                           l1175 01DE                             l1167 019E  
+                           l1169 01AE                             _ADIF 007CF6  
+                           _ADFM 007E07                             _ADON 007E10  
+                           _CHS0 007E12                             _CHS1 007E13  
+                           _CHS2 007E14                             _CHS3 007E15  
+                           _BRGH 007D62                             _CREN 007D5C  
+                           _PEIE 007F96                             _RCIF 007CF5  
+                           _TMR1 000FCE                             _SPEN 007D5F  
+                           _TXIF 007CF4                             _TXEN 007D65  
+                           _SYNC 007D64                             _main 001A  
+                           _temp 0025                             fsr0h 000FEA  
+                           fsr1h 000FE2                             fsr0l 000FE9  
+                           fsr2h 000FDA                             fsr1l 000FE1  
+                           fsr2l 000FD9                             btemp 002F  
+                           pclat 000FFA                             prodh 000FF4  
+                           prodl 000FF3                             start 0016  
+                   ___param_bank 000010                            ??_FNC 0007  
+           __size_of_ADC_hazirla 001A                            _ADCS0 007E00  
+                          _ADCS1 007E01                            _ADCS2 007E02  
+                          ?_main 0001                            _ACQT0 007E03  
+                          _ACQT1 007E04                            _ACQT2 007E05  
+                          _ADRES 000FC3                            _CCPR1 000FBE  
+                          _T1RUN 007E6E                            i2l161 031A  
+                          i2l154 027C                            i2l163 034A  
+                          _VCFG0 007E0C                            _VCFG1 007E0D  
+                          _RCREG 000FAE                            _SPBRG 000FAF  
+                          _PORTB 000F81                            _TRISA 000F92  
+                          _TRISB 000F93                            _TXREG 000FAD  
+        ?_seri_porta_veri_gonder 0001                            _dogru 002D  
+                          _temp2 0027                            _temp3 0029  
+                          tablat 000FF5                            status 000FD8  
+                __initialization 0416                     __end_of_main 021E  
+                         ??_main 0019                    __activetblptr 000000  
+ __end_of_seri_porta_veri_gonder 044C                           _ADCON1 000FC1  
+                         _CCP1M0 007DE8                           _CCP1M1 007DE9  
+                         _CCP1M2 007DEA                           _CCP1M3 007DEB  
+                         _CCP1IE 007CEA                           _CCP1IF 007CF2  
+                         i2l1061 02F8                           i2l1045 029C  
+                         i2l1055 02C8                           i2l1047 02A2  
+                         i2l1073 0346                           _TMR1CS 007E69  
+                         _TMR1ON 007E68                           _TRISB7 007C9F  
+                         ___wmul 03D6                           clear_0 041C  
+                         tblptrh 000FF7                           tblptrl 000FF6  
+                         tblptru 000FF8                _seri_portu_ayarla 042C  
+                     __accesstop 0080          __end_of__initialization 0422  
+             ?_seri_portu_ayarla 0001                    ___rparam_used 000001  
+                 __pcstackCOMRAM 0001              ??_seri_portu_ayarla 0015  
+      __end_of_seri_portu_ayarla 0440                       _analogRead 0386  
+                        ?___wmul 0001                          _T1CKPS0 007E6C  
+                        _T1CKPS1 007E6D                          _T1OSCEN 007E6B  
+                        _GO_DONE 007E11                    ??_ADC_hazirla 0015  
+                        __Hparam 0000                          __Lparam 0000  
+                __size_of___wmul 0026                          __pcinit 0416  
+                        __ramtop 0600                          __ptext0 001A  
+                        __ptext1 042C                          __ptext2 0440  
+                        __ptext3 0386                          __ptext4 03FC  
+                        __ptext6 03D6                     __size_of_FNC 037E  
+     __size_of_seri_portu_ayarla 0014                   __pintcode_body 021E  
+           end_of_initialization 0422                    analogRead@pin 0018  
+                        int_func 021E                      ?_analogRead 0015  
+                        postinc0 000FEE              __end_of_ADC_hazirla 0416  
+                      _PORTBbits 000F81                   __end_of___wmul 03FC  
+            __size_of_analogRead 0050              start_initialization 0416  
+                    __end_of_FNC 0386                      _ADC_hazirla 03FC  
+                       ??___wmul 0005         ??_seri_porta_veri_gonder 0015  
+                    __pbssCOMRAM 001D                        __pintcode 0008  
+                 ___wmul@product 0005                     ??_analogRead 0017  
+__size_of_seri_porta_veri_gonder 000C                ___wmul@multiplier 0001  
+                      main@angle 001A               __end_of_analogRead 03D6  
+                       __Hrparam 0000                         __Lrparam 0000  
+         _seri_porta_veri_gonder 0440                    __size_of_main 0204  
+                   ?_ADC_hazirla 0001                         int$flags 002F  
+       seri_porta_veri_gonder@jk 0015                         main@open 001C  
+                       intlevel2 0000                     _servo_number 002E  

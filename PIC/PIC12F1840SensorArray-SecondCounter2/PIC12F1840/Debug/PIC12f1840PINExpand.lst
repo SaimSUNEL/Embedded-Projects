@@ -1,0 +1,495 @@
+     1: 
+     2: #include<htc.h>
+     3: 
+     4: #define SICAKLIK 2
+     5: #define NEM 3
+     6: #define NONE 5
+     7: 
+     8: 
+     9: /*
+    10: 
+    11: Data format: 8bit integral RH data + 8bit decimal RH data + 8bit integral T data + 8bit decimal T
+    12: data + 8bit check sum. If the data transmission is right, the check-sum should be the last 8bit of
+    13: "8bit integral RH data + 8bit decimal RH data + 8bit integral T data + 8bit decimal T data".
+    14: 
+    15: */
+    16: typedef unsigned char byte;
+    17: 
+    18: 
+    19: #include "EEPROM.h"
+    20: 
+    21: void set_bit(byte bit_number, byte val);
+    22: 
+    23: 
+    24: byte dht11_data[5];//40 bits
+    25: byte sicaklik, nem ;
+    26: byte low_time_count, high_time_count;
+    27: 
+    28: void DHT11_get_data()
+    29: {
+    30: for(byte a = 0 ; a < 5 ; a++) dht11_data[a] = 0;
+    31: 
+    32: RA5 = 0;
+    33: TRISA5 = 0;
+    34: __delay_ms(20);
+    35: TRISA5 = 1;
+    36: __delay_us(20);
+    37: while(RA5 == 1);
+    38: //DHT11 response signal
+    39: while(RA5 == 0);
+    40: while(RA5 == 1);
+    41: 
+    42: for(byte byte_index =0; byte_index < 5; byte_index ++)
+    43: {
+    44: 
+    45:         for(signed char bit_index = 7; bit_index >= 0 ; bit_index--)
+    46:         {
+    47:                 while(RA5 == 0) low_time_count++;
+    48:                 while(RA5 == 1) high_time_count++;
+    49:                 if(high_time_count > low_time_count)
+    50:                 {
+    51:                         dht11_data[byte_index] |= 1 << bit_index;
+    52:                 }
+    53: 
+    54:                 low_time_count = 0;
+    55:                 high_time_count = 0;
+    56:         }
+    57:  
+    58: 
+    59: 
+    60: }
+    61: 
+    62: sicaklik = dht11_data[2];
+    63: nem = dht11_data[0];
+    64: 
+    65: 
+    66: 
+    67: 
+    68: }
+    69: 
+    70: 
+    71: #define DATA RA1
+    72: #define CLOCK RA0
+    73: #define FIRST_DIGIT RA2
+    74: #define SECOND_DIGIT RA4
+    75: 
+    76: void send_pin_value(byte segment_number, byte value)
+    77: {
+    78:         
+    79:         
+    80: 
+    81:         for(byte index = 0; index < 8; index++)
+    82:                 {
+    83:                         DATA = ( value >> (7-index)) & 0x1;
+    84:                         
+    85:                         CLOCK = 1;
+    86:                         
+    87:                         __delay_us(100);
+    88:                         CLOCK = 0;
+    89:                         
+    90:                         __delay_us(100);
+    91: 
+    92:                 }
+    93: 
+    94: 
+    95:         if(segment_number == 1)
+    96:         {
+    97:                 FIRST_DIGIT = 1;
+    98:                 
+    99:                 __delay_us(100);
+   100:                 FIRST_DIGIT = 0;
+   101:                 
+   102:                 __delay_us(100);
+   103:         }
+   104:         else
+   105:         {
+   106:                 SECOND_DIGIT = 1;
+   107:                 
+   108:                 __delay_us(100);
+   109:                 SECOND_DIGIT = 0;
+   110:                 
+   111:                 __delay_us(100);
+   112:         }
+   113: 
+   114: 
+   115: }
+   116: 
+   117: byte count = 0;
+   118: 
+   119: 
+   120: byte rakamlar [] = {0b00111111, 0b00000110, 0b01011011, 0b01001111, 0b01100110, 0b01101101, 
+   121:                                         0b01111101, 0b00000111, 0b01111111, 0b01101111};
+   122: #define DATA1 1
+   123: #define CLOCK1 0
+   124: #define FIRST_DIGIT1 2
+   125: #define SECOND_DIGIT1 3
+   126: byte what_to_display = NONE;
+   127: 
+   128: void display_digit(byte segment_number, byte value)
+   129: {
+   130:         byte temp = rakamlar[value];
+   131:         if(what_to_display == SICAKLIK)
+   132:         {
+   133:                 if(segment_number == 1 )
+   134:                 {
+   135:                         temp |= (1 << 7);
+   136:                 }
+   137:         
+   138:         }
+   139:         else if(what_to_display == NEM)
+   140:         {
+   141:                 if(segment_number == 2 )
+   142:                 {
+   143:                         temp |= (1 << 7);
+   144:                 }
+   145:         
+   146:         }
+   147:         
+   148: 
+   149:         for(byte index = 0; index < 8; index++)
+   150:                 {
+   151:                         set_bit(DATA1, ( temp >> (7-index)) & 0x1);
+   152:                         
+   153:                         set_bit(CLOCK1, 1);
+   154:                         
+   155:                         __delay_us(100);
+   156:                         set_bit(CLOCK1, 0);
+   157:                         
+   158:                         __delay_us(100);
+   159: 
+   160:                 }
+   161: 
+   162: 
+   163:         if(segment_number == 1)
+   164:         {
+   165:                 set_bit(FIRST_DIGIT1, 1);
+   166:                 
+   167:                 __delay_us(100);
+   168:                 set_bit(FIRST_DIGIT1, 0);
+   169:                 
+   170:                 __delay_us(100);
+   171:         }
+   172:         else
+   173:         {
+   174:                 set_bit(SECOND_DIGIT1, 1);
+   175:                 
+   176:                 __delay_us(100);
+   177:                 set_bit(SECOND_DIGIT1, 0);
+   178:                 
+   179:                 __delay_us(100);
+   180:         }
+   181: 
+   182: 
+   183: }
+   184: 
+   185: 
+   186: void display_number(byte number)
+   187: {
+   188:         display_digit(1, number / 10);
+   189:         
+   190:         display_digit(2, number % 10);
+   191: }
+   192: 
+   193: 
+   194: #define COUNT_ACTIVE 9
+   195: #define COUNT_IDLE 8
+   196: 
+   197: byte count_status = COUNT_IDLE;
+   198: byte timer_count = 0;
+   199: byte second_count = 0;
+   200: void interrupt FNC()
+   201: {
+   202: if(TMR1IF == 1)
+   203: {
+   204:         timer_count ++;
+   205:         if(timer_count == 20)
+   206:         {
+   207:                 
+   208:                 timer_count = 0;
+   209:                 if(second_count == 0)
+   210:                 {
+   211:                         second_count = EEPROM_ReadByte(100);
+   212: 
+   213:                 }
+   214:                 
+   215:                 second_count ++;
+   216:                 if(second_count % 5 ==0)
+   217:                         EEPROM_WriteByte(100, second_count);
+   218:                 if(second_count == 99)
+   219:                 {
+   220:                         EEPROM_WriteByte(100, 0);
+   221:                         TMR1ON = 0;
+   222:                         count_status = COUNT_IDLE;
+   223:                 }
+   224:                 display_number(second_count);
+   225:         }
+   226: 
+   227: TMR1IF = 0;
+   228: }
+   229: else
+   230:  
+   231: if(IOCIF == 1)
+   232: {
+   233:         if(count_status == COUNT_IDLE)
+   234:         {
+   235:                 count_status = COUNT_ACTIVE;
+   236:                 TMR1 = 15535;
+   237:                 second_count = 0;
+   238:                 TMR1ON = 1;
+   239:         }
+   240:         else if(count_status == COUNT_ACTIVE)
+   241:         {
+   242:                 EEPROM_WriteByte(100, 0);
+   243: 
+   244:                 count_status = COUNT_IDLE;
+   245:                 TMR1ON = 0;
+   246: 
+   247:         }
+   248: 
+   249:         IOCIF = 0;
+   250:         IOCAF5 = 0;
+   251: }
+   252: 
+   253: }
+   254: 
+   255: 
+   256: byte first_pinheader_value = 0;
+   257: byte second_pinheader_value = 0;
+   258: void set_bit(byte bit_number, byte val)
+   259: {
+   260:         if(bit_number /8 == 0)
+   261:         {       
+   262:                 if(val == 1)
+   263:                 {
+   264:                         first_pinheader_value |= (1 << bit_number);
+   265:                         send_pin_value(1, first_pinheader_value);
+   266:                 }
+   267:                 else if(val == 0)
+   268:                 {
+   269:                         first_pinheader_value = (first_pinheader_value & (~( 1 << bit_number)));
+   270:                         send_pin_value(1, first_pinheader_value);
+   271: 
+   272:                 }
+   273:         }
+   274:         else
+   275:         {
+   276:                 if(val == 1)
+   277:                 {
+   278:                         second_pinheader_value |= (1 << (bit_number%8));
+   279:                         send_pin_value(2, second_pinheader_value);
+   280:                 }
+   281:                 else if(val == 0)
+   282:                 {
+   283:                         second_pinheader_value = (second_pinheader_value & (~( 1 << (bit_number%8))));
+   284:                         send_pin_value(2, second_pinheader_value);
+   285: 
+   286:                 }
+   287: 
+   288:         }
+   289: 
+   290: }
+   291: // 4, 5,6 pinler 0. bit-4 1. bit -5 
+   292: void input_selection(byte number)
+   293: {
+   294:         set_bit(4, (number&0x1));
+   295:         set_bit(5, (number>>1)&0x1);
+   296:         
+   297: 
+   298: 
+   299: }
+   300: 
+   301: void led_on (byte led)
+   302: {
+   303:         for(byte index = 0; index < 8; index++)
+   304:                 {
+   305:                         set_bit(DATA1, (led >> (7-index)) & 0x1);
+   306:                         
+   307:                         set_bit(CLOCK1, 1);
+   308:                         
+   309:                         __delay_us(100);
+   310:                         set_bit(CLOCK1, 0);
+   311:                         
+   312:                         __delay_us(100);
+   313: 
+   314:                 }
+   315: 
+   316: 
+   317:         
+   318:                 set_bit(7, 1);
+   319:                 
+   320:                 __delay_us(100);
+   321:                 set_bit(7, 0);
+   322:                 
+   323:                 __delay_us(100);
+   324:         
+   325: 
+   326: }
+   327: 
+   328: 
+   329: 
+   330: int ADC_read()
+   331: {
+   332:         int val;
+   333:         ADGO = 1;
+   334:         while(ADGO);
+   335: 
+   336:         val = (ADRESH << 8) | ADRESL;
+   337:         ADIF = 0;
+   338:         return val;
+   339: }
+   340: 
+   341: int sensor_measurements[4];
+   342: int voltage = 0;
+   343: int val;
+   344: byte sensor_min_max [][2] = {{0, 60}, {0, 60}, {0,60}, {0, 60} };
+   345: float sensor_scalar [] = {5.0/1024.0*100.0, 5.0/1024.0*100.0, 5.0/1024.0*100.0, 5.0/1024.0*100.0};
+   346: 
+   347: byte danger_sensor[] = {5, 5, 5, 5};
+   348: 
+   349: void main()
+   350: {
+   351: 
+   352: ANSELA = 0;
+   353: SPLLEN = 0;
+   354: //16 mhz internal oscillator
+   355: IRCF3 = 1;
+   356: IRCF2 = 1;
+   357: IRCF1 = 1;
+   358: IRCF0 = 1;
+   359: 
+   360: SCS1 = 1 ; //Internel oscillator
+   361: SCS0 = 0;
+   362: TRISA0 = 0; //A0 output
+   363: PORTA = 0;
+   364: 
+   365: 
+   366: TRISA3 = 1; //MCLR - A3 always input
+   367: TRISA5 = 1; //dth11 pin 
+   368: 
+   369: TRISA0 = 0;
+   370: TRISA1 = 0;
+   371: TRISA2 = 0;
+   372: TRISA4 = 1;
+   373: 
+   374: IOCAN = 0;
+   375: IOCAP = 0;
+   376: 
+   377: IOCAP3 = 1; //Rising edge on RA3 interrupt  IOCAF3 interrupt flag
+   378: IOCIE = 1;
+   379: IOCIF = 0;
+   380: IOCAF5 = 0;
+   381: 
+   382: 
+   383: TMR1H = 0;
+   384: TMR1L = 0;
+   385: 
+   386: 
+   387: //timer1 source fosc/4 
+   388: TMR1CS1 = 0;
+   389: TMR1CS0 = 0;
+   390: 
+   391: 
+   392: //Prescaler 1/4
+   393: T1CKPS1 = 1;
+   394: T1CKPS0 = 0;
+   395: 
+   396: 
+   397: //Each interrupt will be rised in every 50000 us, 50 ms
+   398: TMR1ON = 0;
+   399: TMR1 = 15535;
+   400: TMR1IF = 0;
+   401: TMR1IE = 1; //Timer1 interrupt enabled...
+   402: PEIE = 1;
+   403: GIE = 1;
+   404: 
+   405: ADPREF1 = 0;
+   406: ADPREF0 = 0;
+   407: //FOSC/64 freq for ADC 
+   408: ADCS2 = 1;
+   409: ADCS1 = 1;
+   410: ADCS0 = 0;
+   411: 
+   412: ANSA4 = 1;
+   413: //AN3 Channel
+   414: CHS1 = 1;
+   415: CHS0 = 1;
+   416: 
+   417: ADFM = 1;//Convertion result is right adjusted...
+   418: 
+   419: __delay_ms(250);
+   420: IOCAP3 = 1; //Rising edge on RA3 interrupt  IOCAF3 interrupt flag
+   421: IOCIE = 1;
+   422: IOCIF = 0;
+   423: 
+   424: ADON = 1; //ADC module is on...
+   425: 
+   426: 
+   427: EEPROM_WriteByte(5, 'S');
+   428: 
+   429: DHT11_get_data();
+   430: __delay_ms(100);
+   431: //display_number(12);
+   432: while(1)
+   433: {
+   434: 
+   435:         if(count_status == COUNT_IDLE)
+   436:         {
+   437: 
+   438:                 DHT11_get_data();
+   439: 
+   440:                 what_to_display = SICAKLIK;
+   441:                 display_number(sicaklik);
+   442:                 __delay_ms(1000);
+   443:                 what_to_display = NEM;
+   444:                 display_number(nem);
+   445: 
+   446:                 __delay_ms(1000);
+   447:         
+   448: 
+   449: 
+   450:         for(byte sensor_index = 0; sensor_index < 4; sensor_index++)
+   451:                 {
+   452:                         byte temp = 0, temp2 = 0;
+   453:                         temp |= 1 << (sensor_index+4); 
+   454:                         input_selection(sensor_index);
+   455:                         __delay_ms(30);
+   456:                         voltage = ADC_read();
+   457:                         voltage = (int)(voltage*sensor_scalar[sensor_index]);
+   458:                         sensor_measurements[sensor_index] = voltage;
+   459:                         what_to_display = NONE;
+   460:                         display_number(voltage);
+   461:                         temp2 = voltage - sensor_min_max[sensor_index][0];
+   462:                         temp2 =  (byte)(temp2 /((sensor_min_max[sensor_index][1] - sensor_min_max[sensor_index][0])/4.0));
+   463:                         for(byte i = 0; i < 4;i++)
+   464:                         {
+   465:                                 if(i < temp2) temp |= 1 << i;
+   466:                                 
+   467:                         }
+   468:                         if(temp2 >= 3)
+   469:                                 danger_sensor[sensor_index] = 1;
+   470:                                 else
+   471:                                 danger_sensor[sensor_index] = 5;
+   472: 
+   473:                         led_on(temp);
+   474:                         __delay_ms(2000);
+   475:                 }
+   476:                 byte alarm = 0;
+   477:                 for(byte i = 0; i < 4; i++)
+   478:                 {
+   479:                         if(danger_sensor[i] == 1)
+   480:                                 alarm = 1;
+   481:                 }
+   482:                 if(alarm == 1)
+   483:                 {
+   484:                         set_bit(6, 1);
+   485:                 }
+   486:                 else 
+   487:                         set_bit(6, 0);
+   488:                 led_on(0);
+   489:         }
+   490: 
+   491: 
+   492: 
+   493: }// while(1)
+   494: 
+   495: }// main

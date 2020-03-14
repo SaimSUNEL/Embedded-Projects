@@ -1,0 +1,1502 @@
+
+
+Microchip Technology PIC LITE Macro Assembler V1.37 build -260352376 
+                                                                                               Tue Jan 07 21:08:17 2020
+
+Microchip Technology Omniscient Code Generator v1.37 (Free mode) build 201603110536
+     1                           	processor	12F1840
+     2                           	opt	pw 120
+     3                           	opt	lm
+     4                           	psect	idataBANK0,global,class=CODE,delta=2
+     5                           	psect	cinit,global,class=CODE,merge=1,delta=2
+     6                           	psect	bssBANK0,global,class=BANK0,space=1,delta=1
+     7                           	psect	dataBANK0,global,class=BANK0,space=1,delta=1
+     8                           	psect	clrtext,global,class=CODE,delta=2
+     9                           	psect	cstackCOMMON,global,class=COMMON,space=1,delta=1
+    10                           	psect	maintext,global,class=CODE,merge=1,split=1,delta=2
+    11                           	psect	text1,local,class=CODE,merge=1,delta=2
+    12                           	psect	text2,local,class=CODE,merge=1,delta=2
+    13                           	psect	text3,local,class=CODE,merge=1,delta=2
+    14                           	psect	text4,local,class=CODE,merge=1,delta=2
+    15                           	dabs	1,0x7E,2
+    16  0000                     	;# 
+    17  0001                     	;# 
+    18  0002                     	;# 
+    19  0003                     	;# 
+    20  0004                     	;# 
+    21  0005                     	;# 
+    22  0006                     	;# 
+    23  0007                     	;# 
+    24  0008                     	;# 
+    25  0009                     	;# 
+    26  000A                     	;# 
+    27  000B                     	;# 
+    28  000C                     	;# 
+    29  0011                     	;# 
+    30  0012                     	;# 
+    31  0015                     	;# 
+    32  0016                     	;# 
+    33  0016                     	;# 
+    34  0017                     	;# 
+    35  0018                     	;# 
+    36  0019                     	;# 
+    37  001A                     	;# 
+    38  001B                     	;# 
+    39  001C                     	;# 
+    40  001E                     	;# 
+    41  001F                     	;# 
+    42  008C                     	;# 
+    43  0091                     	;# 
+    44  0092                     	;# 
+    45  0095                     	;# 
+    46  0096                     	;# 
+    47  0097                     	;# 
+    48  0098                     	;# 
+    49  0099                     	;# 
+    50  009A                     	;# 
+    51  009B                     	;# 
+    52  009B                     	;# 
+    53  009C                     	;# 
+    54  009D                     	;# 
+    55  009E                     	;# 
+    56  010C                     	;# 
+    57  0111                     	;# 
+    58  0112                     	;# 
+    59  0115                     	;# 
+    60  0116                     	;# 
+    61  0117                     	;# 
+    62  0118                     	;# 
+    63  0119                     	;# 
+    64  011A                     	;# 
+    65  011B                     	;# 
+    66  011D                     	;# 
+    67  011D                     	;# 
+    68  018C                     	;# 
+    69  0191                     	;# 
+    70  0191                     	;# 
+    71  0192                     	;# 
+    72  0193                     	;# 
+    73  0193                     	;# 
+    74  0193                     	;# 
+    75  0194                     	;# 
+    76  0195                     	;# 
+    77  0196                     	;# 
+    78  0197                     	;# 
+    79  0199                     	;# 
+    80  019A                     	;# 
+    81  019B                     	;# 
+    82  019B                     	;# 
+    83  019B                     	;# 
+    84  019B                     	;# 
+    85  019C                     	;# 
+    86  019C                     	;# 
+    87  019D                     	;# 
+    88  019E                     	;# 
+    89  019F                     	;# 
+    90  020C                     	;# 
+    91  0211                     	;# 
+    92  0211                     	;# 
+    93  0212                     	;# 
+    94  0212                     	;# 
+    95  0213                     	;# 
+    96  0213                     	;# 
+    97  0214                     	;# 
+    98  0214                     	;# 
+    99  0215                     	;# 
+   100  0215                     	;# 
+   101  0215                     	;# 
+   102  0216                     	;# 
+   103  0216                     	;# 
+   104  0217                     	;# 
+   105  0217                     	;# 
+   106  0291                     	;# 
+   107  0291                     	;# 
+   108  0292                     	;# 
+   109  0293                     	;# 
+   110  0294                     	;# 
+   111  0295                     	;# 
+   112  0295                     	;# 
+   113  0296                     	;# 
+   114  0391                     	;# 
+   115  0392                     	;# 
+   116  0393                     	;# 
+   117  039A                     	;# 
+   118  039C                     	;# 
+   119  039D                     	;# 
+   120  039E                     	;# 
+   121  039F                     	;# 
+   122  0FE4                     	;# 
+   123  0FE5                     	;# 
+   124  0FE6                     	;# 
+   125  0FE7                     	;# 
+   126  0FE8                     	;# 
+   127  0FE9                     	;# 
+   128  0FEA                     	;# 
+   129  0FEB                     	;# 
+   130  0FED                     	;# 
+   131  0FEE                     	;# 
+   132  0FEF                     	;# 
+   133                           
+   134                           	psect	idataBANK0
+   135  061F                     __pidataBANK0:	
+   136                           
+   137                           ;initializer for _bilgi
+   138  061F  344E               	retlw	78
+   139  0620  3469               	retlw	105
+   140  0621  3473               	retlw	115
+   141  0622  3461               	retlw	97
+   142  0623  3420               	retlw	32
+   143  0060                     _RA0	set	96
+   144  0062                     _RA2	set	98
+   145  0063                     _RA3	set	99
+   146  0064                     _RA4	set	100
+   147  0065                     _RA5	set	101
+   148  04CB                     _IRCF0	set	1227
+   149  04CC                     _IRCF1	set	1228
+   150  04CD                     _IRCF2	set	1229
+   151  04CE                     _IRCF3	set	1230
+   152  04C8                     _SCS0	set	1224
+   153  04C9                     _SCS1	set	1225
+   154  04CF                     _SPLLEN	set	1231
+   155  0460                     _TRISA0	set	1120
+   156  0462                     _TRISA2	set	1122
+   157  0463                     _TRISA3	set	1123
+   158  0464                     _TRISA4	set	1124
+   159  0465                     _TRISA5	set	1125
+   160  018C                     _ANSELA	set	396
+   161                           
+   162                           	psect	cinit
+   163  07E8                     start_initialization:	
+   164                           ; #config settings
+   165                           
+   166  07E8                     __initialization:	
+   167                           
+   168                           ; Clear objects allocated to BANK0
+   169  07E8  3020               	movlw	low __pbssBANK0
+   170  07E9  0084               	movwf	4
+   171  07EA  3000               	movlw	high __pbssBANK0
+   172  07EB  0085               	movwf	5
+   173  07EC  3013               	movlw	19
+   174  07ED  3186  2624         	fcall	clear_ram0
+   175                           
+   176                           ; Initialize objects allocated to BANK0
+   177  07EF  301F               	movlw	low __pidataBANK0
+   178  07F0  0084               	movwf	4
+   179  07F1  3086               	movlw	(high __pidataBANK0)| (0+128)
+   180  07F2  0085               	movwf	5
+   181  07F3  0012               	moviw fsr0++
+   182  07F4  00B3               	movwf	__pdataBANK0& (0+127)
+   183  07F5  0012               	moviw fsr0++
+   184  07F6  00B4               	movwf	(__pdataBANK0+1)& (0+127)
+   185  07F7  0012               	moviw fsr0++
+   186  07F8  00B5               	movwf	(__pdataBANK0+2)& (0+127)
+   187  07F9  0012               	moviw fsr0++
+   188  07FA  00B6               	movwf	(__pdataBANK0+3)& (0+127)
+   189  07FB  0012               	moviw fsr0++
+   190  07FC  00B7               	movwf	(__pdataBANK0+4)& (0+127)
+   191  07FD                     end_of_initialization:	
+   192                           ;End of C runtime variable initialization code
+   193                           
+   194  07FD                     __end_of__initialization:	
+   195  07FD  0020               	movlb	0
+   196  07FE  3186  2E6E         	ljmp	_main	;jump to C main() function
+   197                           
+   198                           	psect	bssBANK0
+   199  0020                     __pbssBANK0:	
+   200  0020                     _bilgi2:	
+   201  0020                     	ds	5
+   202  0025                     _measured_adc_value:	
+   203  0025                     	ds	2
+   204  0027                     _nisa:	
+   205  0027                     	ds	2
+   206  0029                     _DISPLAY_POEM:	
+   207  0029                     	ds	1
+   208  002A                     _LCD_LED_ON:	
+   209  002A                     	ds	1
+   210  002B                     _SPI_CPHA:	
+   211  002B                     	ds	1
+   212  002C                     _SPI_CPOL:	
+   213  002C                     	ds	1
+   214  002D                     _dakika:	
+   215  002D                     	ds	1
+   216  002E                     _gelen:	
+   217  002E                     	ds	1
+   218  002F                     _saat:	
+   219  002F                     	ds	1
+   220  0030                     _saniye:	
+   221  0030                     	ds	1
+   222  0031                     _start:	
+   223  0031                     	ds	1
+   224  0032                     _value:	
+   225  0032                     	ds	1
+   226                           
+   227                           	psect	dataBANK0
+   228  0033                     __pdataBANK0:	
+   229  0033                     _bilgi:	
+   230  0033                     	ds	5
+   231                           
+   232                           	psect	clrtext
+   233  0624                     clear_ram0:	
+   234                           ;	Called with FSR0 containing the base address, and
+   235                           ;	WREG with the size to clear
+   236                           
+   237  0624  0064               	clrwdt	;clear the watchdog before getting into this loop
+   238  0625                     clrloop0:	
+   239  0625  0180               	clrf	0	;clear RAM location pointed to by FSR
+   240  0626  3101               	addfsr 0,1
+   241  0627  0B89               	decfsz	9,f	;Have we reached the end of clearing yet?
+   242  0628  2E25               	goto	clrloop0	;have we reached the end yet?
+   243  0629  3400               	retlw	0	;all done for this memory range, return
+   244                           
+   245                           	psect	cstackCOMMON
+   246  0070                     __pcstackCOMMON:	
+   247  0070                     ?_DELAY:	
+   248  0070                     ??_DELAY:	
+   249                           ; 1 bytes @ 0x0
+   250                           
+   251  0070                     ?_DELAY100:	
+   252                           ; 1 bytes @ 0x0
+   253                           
+   254  0070                     ??_DELAY100:	
+   255                           ; 1 bytes @ 0x0
+   256                           
+   257  0070                     ?_SoftwareSPI_send_data:	
+   258                           ; 1 bytes @ 0x0
+   259                           
+   260  0070                     ??_SoftwareSPI_send_data:	
+   261                           ; 1 bytes @ 0x0
+   262                           
+   263  0070                     ?_SoftwareSPI_initialize:	
+   264                           ; 1 bytes @ 0x0
+   265                           
+   266  0070                     ?_main:	
+   267                           ; 1 bytes @ 0x0
+   268                           
+   269  0070                     SoftwareSPI_initialize@CPOL:	
+   270                           ; 1 bytes @ 0x0
+   271                           
+   272                           
+   273                           ; 1 bytes @ 0x0
+   274  0070                     	ds	1
+   275  0071                     ??_SoftwareSPI_initialize:	
+   276                           
+   277                           ; 1 bytes @ 0x1
+   278  0071                     	ds	1
+   279  0072                     DELAY@number:	
+   280  0072                     SoftwareSPI_send_data@mode:	
+   281                           ; 1 bytes @ 0x2
+   282                           
+   283  0072                     SoftwareSPI_initialize@CPHA:	
+   284                           ; 1 bytes @ 0x2
+   285                           
+   286                           
+   287                           ; 1 bytes @ 0x2
+   288  0072                     	ds	1
+   289  0073                     DELAY@k:	
+   290  0073                     DELAY100@number:	
+   291                           ; 1 bytes @ 0x3
+   292                           
+   293  0073                     SoftwareSPI_send_data@prev_clk:	
+   294                           ; 1 bytes @ 0x3
+   295                           
+   296                           
+   297                           ; 1 bytes @ 0x3
+   298  0073                     	ds	1
+   299  0074                     DELAY100@k:	
+   300  0074                     SoftwareSPI_send_data@received_data:	
+   301                           ; 1 bytes @ 0x4
+   302                           
+   303                           
+   304                           ; 1 bytes @ 0x4
+   305  0074                     	ds	1
+   306  0075                     SoftwareSPI_send_data@data:	
+   307                           
+   308                           ; 1 bytes @ 0x5
+   309  0075                     	ds	1
+   310  0076                     SoftwareSPI_send_data@i:	
+   311                           
+   312                           ; 1 bytes @ 0x6
+   313  0076                     	ds	1
+   314  0077                     ??_main:	
+   315                           
+   316                           ; 1 bytes @ 0x7
+   317  0077                     	ds	3
+   318  007A                     main@k:	
+   319                           
+   320                           ; 2 bytes @ 0xA
+   321  007A                     	ds	2
+   322  007C                     main@i:	
+   323                           
+   324                           ; 1 bytes @ 0xC
+   325  007C                     	ds	1
+   326  007D                     main@i_77:	
+   327                           
+   328                           ; 1 bytes @ 0xD
+   329  007D                     	ds	1
+   330                           
+   331                           	psect	maintext
+   332  066E                     __pmaintext:	
+   333 ;;
+   334 ;;Main: autosize = 0, tempsize = 3, incstack = 0, save=0
+   335 ;;
+   336 ;; *************** function _main *****************
+   337 ;; Defined at:
+   338 ;;		line 33 in file "SoftwareSPITest.c"
+   339 ;; Parameters:    Size  Location     Type
+   340 ;;		None
+   341 ;; Auto vars:     Size  Location     Type
+   342 ;;  i               1   13[COMMON] unsigned char 
+   343 ;;  i               1   12[COMMON] unsigned char 
+   344 ;;  k               2   10[COMMON] int 
+   345 ;; Return value:  Size  Location     Type
+   346 ;;                  1    wreg      void 
+   347 ;; Registers used:
+   348 ;;		wreg, fsr0l, fsr0h, fsr1l, fsr1h, status,2, status,0, pclath, cstack
+   349 ;; Tracked objects:
+   350 ;;		On entry : B1F/0
+   351 ;;		On exit  : 0/0
+   352 ;;		Unchanged: 0/0
+   353 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+   354 ;;      Params:         0       0       0       0
+   355 ;;      Locals:         4       0       0       0
+   356 ;;      Temps:          3       0       0       0
+   357 ;;      Totals:         7       0       0       0
+   358 ;;Total ram usage:        7 bytes
+   359 ;; Hardware stack levels required when called:    1
+   360 ;; This function calls:
+   361 ;;		_DELAY
+   362 ;;		_DELAY100
+   363 ;;		_SoftwareSPI_initialize
+   364 ;;		_SoftwareSPI_send_data
+   365 ;; This function is called by:
+   366 ;;		Startup code after reset
+   367 ;; This function uses a non-reentrant model
+   368 ;;
+   369                           
+   370                           
+   371                           ;psect for function _main
+   372  066E                     _main:	
+   373                           
+   374                           ;SoftwareSPITest.c: 35: ANSELA = 0;
+   375                           
+   376                           ;incstack = 0
+   377                           ; Regs used in _main: [wreg-fsr1h+status,2+status,0+pclath+cstack]
+   378  066E  0023               	movlb	3	; select bank3
+   379  066F  018C               	clrf	12	;volatile
+   380                           
+   381                           ;SoftwareSPITest.c: 37: SPLLEN = 0;
+   382  0670  0021               	movlb	1	; select bank1
+   383  0671  1399               	bcf	25,7	;volatile
+   384                           
+   385                           ;SoftwareSPITest.c: 42: IRCF3 = 1;
+   386  0672  1719               	bsf	25,6	;volatile
+   387                           
+   388                           ;SoftwareSPITest.c: 43: IRCF2 = 1;
+   389  0673  1699               	bsf	25,5	;volatile
+   390                           
+   391                           ;SoftwareSPITest.c: 44: IRCF1 = 1;
+   392  0674  1619               	bsf	25,4	;volatile
+   393                           
+   394                           ;SoftwareSPITest.c: 45: IRCF0 = 0;
+   395  0675  1199               	bcf	25,3	;volatile
+   396                           
+   397                           ;SoftwareSPITest.c: 47: SCS1 = 1 ;
+   398  0676  1499               	bsf	25,1	;volatile
+   399                           
+   400                           ;SoftwareSPITest.c: 48: SCS0 = 0;
+   401  0677  1019               	bcf	25,0	;volatile
+   402                           
+   403                           ;SoftwareSPITest.c: 49: TRISA2 = 0;
+   404  0678  110C               	bcf	12,2	;volatile
+   405                           
+   406                           ;SoftwareSPITest.c: 50: RA2 = 1;
+   407  0679  0020               	movlb	0	; select bank0
+   408  067A  150C               	bsf	12,2	;volatile
+   409                           
+   410                           ;SoftwareSPITest.c: 51: DELAY(120);
+   411  067B  3078               	movlw	120
+   412  067C  3186  262A  3186   	fcall	_DELAY
+   413                           
+   414                           ;SoftwareSPITest.c: 53: TRISA0 = 0;
+   415  067F  0021               	movlb	1	; select bank1
+   416  0680  100C               	bcf	12,0	;volatile
+   417                           
+   418                           ;SoftwareSPITest.c: 54: SoftwareSPI_initialize(0, 0);
+   419  0681  01F0               	clrf	SoftwareSPI_initialize@CPOL
+   420  0682  3000               	movlw	0
+   421  0683  3186  2656  3186   	fcall	_SoftwareSPI_initialize
+   422                           
+   423                           ;SoftwareSPITest.c: 55: DELAY(100);
+   424  0686  3064               	movlw	100
+   425  0687  3186  262A  3186   	fcall	_DELAY
+   426                           
+   427                           ;SoftwareSPITest.c: 61: for(byte i= 0; i < 5; i++)
+   428  068A  01FC               	clrf	main@i
+   429  068B  3005               	movlw	5
+   430  068C  027C               	subwf	main@i,w
+   431  068D  1803               	btfsc	3,0
+   432  068E  2ECE               	goto	l887
+   433  068F                     l98:	
+   434                           
+   435                           ;SoftwareSPITest.c: 62: {
+   436                           ;SoftwareSPITest.c: 64: RA2 = 0;
+   437  068F  0020               	movlb	0	; select bank0
+   438  0690  110C               	bcf	12,2	;volatile
+   439                           
+   440                           ;SoftwareSPITest.c: 66: SoftwareSPI_send_data( 0x06 );
+   441  0691  3006               	movlw	6
+   442  0692  3187  2717  3186   	fcall	_SoftwareSPI_send_data
+   443                           
+   444                           ;SoftwareSPITest.c: 68: RA2=1;
+   445  0695  0020               	movlb	0	; select bank0
+   446  0696  150C               	bsf	12,2	;volatile
+   447                           
+   448                           ;SoftwareSPITest.c: 69: _delay((unsigned long)((1)*(8000000/4000.0)));
+   449  0697  3003               	movlw	3
+   450  0698  00F8               	movwf	??_main+1
+   451  0699  3097               	movlw	151
+   452  069A  00F7               	movwf	??_main
+   453  069B                     u577:	
+   454  069B  0BF7               	decfsz	??_main,f
+   455  069C  2E9B               	goto	u577
+   456  069D  0BF8               	decfsz	??_main+1,f
+   457  069E  2E9B               	goto	u577
+   458  069F  3200               	nop2
+   459                           
+   460                           ;SoftwareSPITest.c: 70: RA2=0;
+   461  06A0  0020               	movlb	0	; select bank0
+   462  06A1  110C               	bcf	12,2	;volatile
+   463                           
+   464                           ;SoftwareSPITest.c: 71: SoftwareSPI_send_data( 0x02 );
+   465  06A2  3002               	movlw	2
+   466  06A3  3187  2717  3186   	fcall	_SoftwareSPI_send_data
+   467                           
+   468                           ;SoftwareSPITest.c: 72: SoftwareSPI_send_data( i );
+   469  06A6  087C               	movf	main@i,w
+   470  06A7  3187  2717  3186   	fcall	_SoftwareSPI_send_data
+   471                           
+   472                           ;SoftwareSPITest.c: 73: SoftwareSPI_send_data( bilgi[i] );
+   473  06AA  087C               	movf	main@i,w
+   474  06AB  3E33               	addlw	(low (_bilgi| 0))& (0+255)
+   475  06AC  0086               	movwf	6
+   476  06AD  0187               	clrf	7
+   477  06AE  0801               	movf	1,w
+   478  06AF  3187  2717  3186   	fcall	_SoftwareSPI_send_data
+   479                           
+   480                           ;SoftwareSPITest.c: 74: RA2=1;
+   481  06B2  0020               	movlb	0	; select bank0
+   482  06B3  150C               	bsf	12,2	;volatile
+   483                           
+   484                           ;SoftwareSPITest.c: 75: _delay((unsigned long)((5)*(8000000/4000.0)));
+   485  06B4  300D               	movlw	13
+   486  06B5  00F8               	movwf	??_main+1
+   487  06B6  30FB               	movlw	251
+   488  06B7  00F7               	movwf	??_main
+   489  06B8                     u587:	
+   490  06B8  0BF7               	decfsz	??_main,f
+   491  06B9  2EB8               	goto	u587
+   492  06BA  0BF8               	decfsz	??_main+1,f
+   493  06BB  2EB8               	goto	u587
+   494  06BC  3200               	nop2
+   495                           
+   496                           ;SoftwareSPITest.c: 76: _delay((unsigned long)((5)*(8000000/4000.0)));
+   497  06BD  300D               	movlw	13
+   498  06BE  00F8               	movwf	??_main+1
+   499  06BF  30FB               	movlw	251
+   500  06C0  00F7               	movwf	??_main
+   501  06C1                     u597:	
+   502  06C1  0BF7               	decfsz	??_main,f
+   503  06C2  2EC1               	goto	u597
+   504  06C3  0BF8               	decfsz	??_main+1,f
+   505  06C4  2EC1               	goto	u597
+   506  06C5  3200               	nop2
+   507  06C6  3001               	movlw	1
+   508  06C7  00F7               	movwf	??_main
+   509  06C8  0877               	movf	??_main,w
+   510  06C9  07FC               	addwf	main@i,f
+   511  06CA  3005               	movlw	5
+   512  06CB  027C               	subwf	main@i,w
+   513  06CC  1C03               	skipc
+   514  06CD  2E8F               	goto	l98
+   515  06CE                     l887:	
+   516                           
+   517                           ;SoftwareSPITest.c: 77: }
+   518                           ;SoftwareSPITest.c: 79: for(byte i = 0; i < 5; i++)
+   519  06CE  01FD               	clrf	main@i_77
+   520  06CF  3005               	movlw	5
+   521  06D0  027D               	subwf	main@i_77,w
+   522  06D1  1803               	btfsc	3,0
+   523  06D2  2F04               	goto	l905
+   524  06D3                     l100:	
+   525                           
+   526                           ;SoftwareSPITest.c: 80: {
+   527                           ;SoftwareSPITest.c: 81: RA2=0;
+   528  06D3  0020               	movlb	0	; select bank0
+   529  06D4  110C               	bcf	12,2	;volatile
+   530                           
+   531                           ;SoftwareSPITest.c: 83: SoftwareSPI_send_data( 0x03 );
+   532  06D5  3003               	movlw	3
+   533  06D6  3187  2717  3186   	fcall	_SoftwareSPI_send_data
+   534                           
+   535                           ;SoftwareSPITest.c: 84: SoftwareSPI_send_data( i );
+   536  06D9  087D               	movf	main@i_77,w
+   537  06DA  3187  2717  3186   	fcall	_SoftwareSPI_send_data
+   538                           
+   539                           ;SoftwareSPITest.c: 85: gelen = SoftwareSPI_send_data(0x0);
+   540  06DD  3000               	movlw	0
+   541  06DE  3187  2717  3186   	fcall	_SoftwareSPI_send_data
+   542  06E1  00F7               	movwf	??_main
+   543  06E2  0877               	movf	??_main,w
+   544  06E3  0020               	movlb	0	; select bank0
+   545  06E4  00AE               	movwf	_gelen
+   546                           
+   547                           ;SoftwareSPITest.c: 86: bilgi2[i] = gelen;
+   548  06E5  082E               	movf	_gelen,w
+   549  06E6  00F7               	movwf	??_main
+   550  06E7  087D               	movf	main@i_77,w
+   551  06E8  3E20               	addlw	(low (_bilgi2| 0))& (0+255)
+   552  06E9  0086               	movwf	6
+   553  06EA  0187               	clrf	7
+   554  06EB  0877               	movf	??_main,w
+   555  06EC  0081               	movwf	1
+   556                           
+   557                           ;SoftwareSPITest.c: 87: _delay((unsigned long)((100)*(8000000/4000.0)));
+   558  06ED  3002               	movlw	2
+   559  06EE  00F9               	movwf	??_main+2
+   560  06EF  3004               	movlw	4
+   561  06F0  00F8               	movwf	??_main+1
+   562  06F1  30BA               	movlw	186
+   563  06F2  00F7               	movwf	??_main
+   564  06F3                     u607:	
+   565  06F3  0BF7               	decfsz	??_main,f
+   566  06F4  2EF3               	goto	u607
+   567  06F5  0BF8               	decfsz	??_main+1,f
+   568  06F6  2EF3               	goto	u607
+   569  06F7  0BF9               	decfsz	??_main+2,f
+   570  06F8  2EF3               	goto	u607
+   571  06F9  0000               	nop
+   572                           
+   573                           ;SoftwareSPITest.c: 88: RA2=1;
+   574  06FA  0020               	movlb	0	; select bank0
+   575  06FB  150C               	bsf	12,2	;volatile
+   576  06FC  3001               	movlw	1
+   577  06FD  00F7               	movwf	??_main
+   578  06FE  0877               	movf	??_main,w
+   579  06FF  07FD               	addwf	main@i_77,f
+   580  0700  3005               	movlw	5
+   581  0701  027D               	subwf	main@i_77,w
+   582  0702  1C03               	skipc
+   583  0703  2ED3               	goto	l100
+   584  0704                     l905:	
+   585                           
+   586                           ;SoftwareSPITest.c: 89: }
+   587                           ;SoftwareSPITest.c: 92: _delay((unsigned long)((5)*(8000000/4000.0)));
+   588  0704  300D               	movlw	13
+   589  0705  00F8               	movwf	??_main+1
+   590  0706  30FB               	movlw	251
+   591  0707  00F7               	movwf	??_main
+   592  0708                     u617:	
+   593  0708  0BF7               	decfsz	??_main,f
+   594  0709  2F08               	goto	u617
+   595  070A  0BF8               	decfsz	??_main+1,f
+   596  070B  2F08               	goto	u617
+   597  070C  3200               	nop2
+   598                           
+   599                           ;SoftwareSPITest.c: 102: int k = 0;
+   600  070D  01FA               	clrf	main@k
+   601  070E  01FB               	clrf	main@k+1
+   602  070F                     l909:	
+   603                           ;SoftwareSPITest.c: 103: while(1)
+   604                           
+   605                           
+   606                           ;SoftwareSPITest.c: 104: {
+   607                           ;SoftwareSPITest.c: 107: RA0 = ~RA0;
+   608  070F  3001               	movlw	1
+   609  0710  0020               	movlb	0	; select bank0
+   610  0711  068C               	xorwf	12,f
+   611                           
+   612                           ;SoftwareSPITest.c: 109: DELAY100(10);
+   613  0712  300A               	movlw	10
+   614  0713  3186  263E  3186   	fcall	_DELAY100
+   615  0716  2F0F               	goto	l909
+   616  0717                     __end_of_main:	
+   617                           
+   618                           	psect	text1
+   619  0717                     __ptext1:	
+   620 ;; *************** function _SoftwareSPI_send_data *****************
+   621 ;; Defined at:
+   622 ;;		line 36 in file "SoftwareSPI.h"
+   623 ;; Parameters:    Size  Location     Type
+   624 ;;  data            1    wreg     unsigned char 
+   625 ;; Auto vars:     Size  Location     Type
+   626 ;;  data            1    5[COMMON] unsigned char 
+   627 ;;  i               1    6[COMMON] char 
+   628 ;;  received_dat    1    4[COMMON] unsigned char 
+   629 ;;  prev_clk        1    3[COMMON] unsigned char 
+   630 ;;  mode            1    2[COMMON] unsigned char 
+   631 ;; Return value:  Size  Location     Type
+   632 ;;                  1    wreg      unsigned char 
+   633 ;; Registers used:
+   634 ;;		wreg, fsr0l, fsr0h, status,2, status,0
+   635 ;; Tracked objects:
+   636 ;;		On entry : 0/0
+   637 ;;		On exit  : 0/0
+   638 ;;		Unchanged: 0/0
+   639 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+   640 ;;      Params:         0       0       0       0
+   641 ;;      Locals:         5       0       0       0
+   642 ;;      Temps:          2       0       0       0
+   643 ;;      Totals:         7       0       0       0
+   644 ;;Total ram usage:        7 bytes
+   645 ;; Hardware stack levels used:    1
+   646 ;; This function calls:
+   647 ;;		Nothing
+   648 ;; This function is called by:
+   649 ;;		_main
+   650 ;; This function uses a non-reentrant model
+   651 ;;
+   652                           
+   653                           
+   654                           ;psect for function _SoftwareSPI_send_data
+   655  0717                     _SoftwareSPI_send_data:	
+   656                           
+   657                           ;incstack = 0
+   658                           ; Regs used in _SoftwareSPI_send_data: [wreg-fsr0h+status,2+status,0]
+   659                           ;SoftwareSPI_send_data@data stored from wreg
+   660  0717  00F5               	movwf	SoftwareSPI_send_data@data
+   661                           
+   662                           ;SoftwareSPI.h: 38: byte received_data = 0;
+   663  0718  01F4               	clrf	SoftwareSPI_send_data@received_data
+   664                           
+   665                           ;SoftwareSPI.h: 39: byte mode = (SPI_CPHA <<1)+SPI_CPOL;
+   666  0719  0020               	movlb	0	; select bank0
+   667  071A  352B               	lslf	_SPI_CPHA,w
+   668  071B  072C               	addwf	_SPI_CPOL,w
+   669  071C  00F0               	movwf	??_SoftwareSPI_send_data
+   670  071D  0870               	movf	??_SoftwareSPI_send_data,w
+   671  071E  00F2               	movwf	SoftwareSPI_send_data@mode
+   672                           
+   673                           ;SoftwareSPI.h: 40: byte prev_clk = RA5;
+   674  071F  3000               	movlw	0
+   675  0720  1A8C               	btfsc	12,5	;volatile
+   676  0721  3001               	movlw	1
+   677  0722  00F3               	movwf	SoftwareSPI_send_data@prev_clk
+   678                           
+   679                           ;SoftwareSPI.h: 42: for(signed char i=7; i!=-1; i--)
+   680  0723  3007               	movlw	7
+   681  0724  00F0               	movwf	??_SoftwareSPI_send_data
+   682  0725  0870               	movf	??_SoftwareSPI_send_data,w
+   683  0726  00F6               	movwf	SoftwareSPI_send_data@i
+   684  0727  2FC9               	goto	L1
+   685  0728                     l765:	
+   686                           ;SoftwareSPI.h: 45: {
+   687                           ;SoftwareSPI.h: 46: case 0:
+   688                           
+   689                           ;SoftwareSPI.h: 43: {
+   690                           ;SoftwareSPI.h: 44: switch(mode)
+   691                           
+   692                           
+   693                           ;SoftwareSPI.h: 47: RA4 = (data >> i) & 0x1;
+   694  0728  0875               	movf	SoftwareSPI_send_data@data,w
+   695  0729  00F0               	movwf	??_SoftwareSPI_send_data
+   696  072A  0A76               	incf	SoftwareSPI_send_data@i,w
+   697  072B  2F2D               	goto	u324
+   698  072C                     u325:	
+   699  072C  36F0               	lsrf	??_SoftwareSPI_send_data,f
+   700  072D                     u324:	
+   701  072D  0B89               	decfsz	9,f
+   702  072E  2F2C               	goto	u325
+   703  072F  1C70               	btfss	??_SoftwareSPI_send_data,0
+   704  0730  2F34               	goto	u330
+   705  0731  0020               	movlb	0	; select bank0
+   706  0732  160C               	bsf	12,4	;volatile
+   707  0733  2F36               	goto	l767
+   708  0734                     u330:	
+   709  0734  0020               	movlb	0	; select bank0
+   710  0735  120C               	bcf	12,4	;volatile
+   711  0736                     l767:	
+   712                           
+   713                           ;SoftwareSPI.h: 49: _delay((unsigned long)((5)*(8000000/4000000.0)));
+   714  0736  3003               	movlw	3
+   715  0737  00F0               	movwf	??_SoftwareSPI_send_data
+   716  0738                     u627:	
+   717  0738  0BF0               	decfsz	??_SoftwareSPI_send_data,f
+   718  0739  2F38               	goto	u627
+   719                           
+   720                           ;SoftwareSPI.h: 50: RA5 = 1;
+   721  073A  0020               	movlb	0	; select bank0
+   722  073B  168C               	bsf	12,5	;volatile
+   723                           
+   724                           ;SoftwareSPI.h: 51: _delay((unsigned long)((5)*(8000000/4000000.0)));
+   725  073C  3003               	movlw	3
+   726  073D  00F0               	movwf	??_SoftwareSPI_send_data
+   727  073E                     u637:	
+   728  073E  0BF0               	decfsz	??_SoftwareSPI_send_data,f
+   729  073F  2F3E               	goto	u637
+   730                           
+   731                           ;SoftwareSPI.h: 52: received_data |= RA3 << i;
+   732  0740  3000               	movlw	0
+   733  0741  0020               	movlb	0	; select bank0
+   734  0742  198C               	btfsc	12,3	;volatile
+   735  0743  3001               	movlw	1
+   736  0744  00F0               	movwf	??_SoftwareSPI_send_data
+   737  0745  0A76               	incf	SoftwareSPI_send_data@i,w
+   738  0746  2F48               	goto	u354
+   739  0747                     u355:	
+   740  0747  35F0               	lslf	??_SoftwareSPI_send_data,f
+   741  0748                     u354:	
+   742  0748  0B89               	decfsz	9,f
+   743  0749  2F47               	goto	u355
+   744  074A  0870               	movf	??_SoftwareSPI_send_data,w
+   745  074B  00F1               	movwf	??_SoftwareSPI_send_data+1
+   746  074C  0871               	movf	??_SoftwareSPI_send_data+1,w
+   747  074D  04F4               	iorwf	SoftwareSPI_send_data@received_data,f
+   748                           
+   749                           ;SoftwareSPI.h: 53: RA5 = 0;
+   750  074E  128C               	bcf	12,5	;volatile
+   751                           
+   752                           ;SoftwareSPI.h: 54: break;
+   753  074F  2FC5               	goto	l809
+   754  0750                     l775:	
+   755                           ;SoftwareSPI.h: 56: case 1:
+   756                           
+   757                           
+   758                           ;SoftwareSPI.h: 57: RA4 = (data >> i) & 0x1;
+   759  0750  0875               	movf	SoftwareSPI_send_data@data,w
+   760  0751  00F0               	movwf	??_SoftwareSPI_send_data
+   761  0752  0A76               	incf	SoftwareSPI_send_data@i,w
+   762  0753  2F55               	goto	u364
+   763  0754                     u365:	
+   764  0754  36F0               	lsrf	??_SoftwareSPI_send_data,f
+   765  0755                     u364:	
+   766  0755  0B89               	decfsz	9,f
+   767  0756  2F54               	goto	u365
+   768  0757  1C70               	btfss	??_SoftwareSPI_send_data,0
+   769  0758  2F5C               	goto	u370
+   770  0759  0020               	movlb	0	; select bank0
+   771  075A  160C               	bsf	12,4	;volatile
+   772  075B  2F5E               	goto	l777
+   773  075C                     u370:	
+   774  075C  0020               	movlb	0	; select bank0
+   775  075D  120C               	bcf	12,4	;volatile
+   776  075E                     l777:	
+   777                           
+   778                           ;SoftwareSPI.h: 59: RA5 = 1;
+   779  075E  168C               	bsf	12,5	;volatile
+   780                           
+   781                           ;SoftwareSPI.h: 60: _delay((unsigned long)((5)*(8000000/4000000.0)));
+   782  075F  3003               	movlw	3
+   783  0760  00F0               	movwf	??_SoftwareSPI_send_data
+   784  0761                     u647:	
+   785  0761  0BF0               	decfsz	??_SoftwareSPI_send_data,f
+   786  0762  2F61               	goto	u647
+   787                           
+   788                           ;SoftwareSPI.h: 62: received_data |= RA3 << i;
+   789  0763  3000               	movlw	0
+   790  0764  0020               	movlb	0	; select bank0
+   791  0765  198C               	btfsc	12,3	;volatile
+   792  0766  3001               	movlw	1
+   793  0767  00F0               	movwf	??_SoftwareSPI_send_data
+   794  0768  0A76               	incf	SoftwareSPI_send_data@i,w
+   795  0769  2F6B               	goto	u394
+   796  076A                     u395:	
+   797  076A  35F0               	lslf	??_SoftwareSPI_send_data,f
+   798  076B                     u394:	
+   799  076B  0B89               	decfsz	9,f
+   800  076C  2F6A               	goto	u395
+   801  076D  0870               	movf	??_SoftwareSPI_send_data,w
+   802  076E  00F1               	movwf	??_SoftwareSPI_send_data+1
+   803  076F  0871               	movf	??_SoftwareSPI_send_data+1,w
+   804  0770  04F4               	iorwf	SoftwareSPI_send_data@received_data,f
+   805                           
+   806                           ;SoftwareSPI.h: 63: RA5 = 0;
+   807  0771  128C               	bcf	12,5	;volatile
+   808                           
+   809                           ;SoftwareSPI.h: 65: _delay((unsigned long)((5)*(8000000/4000000.0)));
+   810  0772  3003               	movlw	3
+   811  0773  00F0               	movwf	??_SoftwareSPI_send_data
+   812  0774                     u657:	
+   813  0774  0BF0               	decfsz	??_SoftwareSPI_send_data,f
+   814  0775  2F74               	goto	u657
+   815                           
+   816                           ;SoftwareSPI.h: 66: break;
+   817  0776  2FC5               	goto	l809
+   818  0777                     l785:	
+   819                           ;SoftwareSPI.h: 68: case 2:
+   820                           
+   821                           
+   822                           ;SoftwareSPI.h: 69: RA4 = (data >> i) & 0x1;
+   823  0777  0875               	movf	SoftwareSPI_send_data@data,w
+   824  0778  00F0               	movwf	??_SoftwareSPI_send_data
+   825  0779  0A76               	incf	SoftwareSPI_send_data@i,w
+   826  077A  2F7C               	goto	u404
+   827  077B                     u405:	
+   828  077B  36F0               	lsrf	??_SoftwareSPI_send_data,f
+   829  077C                     u404:	
+   830  077C  0B89               	decfsz	9,f
+   831  077D  2F7B               	goto	u405
+   832  077E  1C70               	btfss	??_SoftwareSPI_send_data,0
+   833  077F  2F83               	goto	u410
+   834  0780  0020               	movlb	0	; select bank0
+   835  0781  160C               	bsf	12,4	;volatile
+   836  0782  2F85               	goto	l787
+   837  0783                     u410:	
+   838  0783  0020               	movlb	0	; select bank0
+   839  0784  120C               	bcf	12,4	;volatile
+   840  0785                     l787:	
+   841                           
+   842                           ;SoftwareSPI.h: 72: _delay((unsigned long)((5)*(8000000/4000000.0)));
+   843  0785  3003               	movlw	3
+   844  0786  00F0               	movwf	??_SoftwareSPI_send_data
+   845  0787                     u667:	
+   846  0787  0BF0               	decfsz	??_SoftwareSPI_send_data,f
+   847  0788  2F87               	goto	u667
+   848                           
+   849                           ;SoftwareSPI.h: 73: received_data |= RA3 << i;
+   850  0789  3000               	movlw	0
+   851  078A  0020               	movlb	0	; select bank0
+   852  078B  198C               	btfsc	12,3	;volatile
+   853  078C  3001               	movlw	1
+   854  078D  00F0               	movwf	??_SoftwareSPI_send_data
+   855  078E  0A76               	incf	SoftwareSPI_send_data@i,w
+   856  078F  2F91               	goto	u434
+   857  0790                     u435:	
+   858  0790  35F0               	lslf	??_SoftwareSPI_send_data,f
+   859  0791                     u434:	
+   860  0791  0B89               	decfsz	9,f
+   861  0792  2F90               	goto	u435
+   862  0793  0870               	movf	??_SoftwareSPI_send_data,w
+   863  0794  00F1               	movwf	??_SoftwareSPI_send_data+1
+   864  0795  0871               	movf	??_SoftwareSPI_send_data+1,w
+   865  0796  04F4               	iorwf	SoftwareSPI_send_data@received_data,f
+   866                           
+   867                           ;SoftwareSPI.h: 75: RA5 = 0;
+   868  0797  128C               	bcf	12,5	;volatile
+   869                           
+   870                           ;SoftwareSPI.h: 77: _delay((unsigned long)((5)*(8000000/4000000.0)));
+   871  0798  3003               	movlw	3
+   872  0799  00F0               	movwf	??_SoftwareSPI_send_data
+   873  079A                     u677:	
+   874  079A  0BF0               	decfsz	??_SoftwareSPI_send_data,f
+   875  079B  2F9A               	goto	u677
+   876                           
+   877                           ;SoftwareSPI.h: 79: RA5 = 1;
+   878  079C  0020               	movlb	0	; select bank0
+   879  079D  168C               	bsf	12,5	;volatile
+   880                           
+   881                           ;SoftwareSPI.h: 80: break;
+   882  079E  2FC5               	goto	l809
+   883  079F                     l795:	
+   884                           ;SoftwareSPI.h: 82: case 3:
+   885                           
+   886                           
+   887                           ;SoftwareSPI.h: 83: RA4 = (data >> i) & 0x1;
+   888  079F  0875               	movf	SoftwareSPI_send_data@data,w
+   889  07A0  00F0               	movwf	??_SoftwareSPI_send_data
+   890  07A1  0A76               	incf	SoftwareSPI_send_data@i,w
+   891  07A2  2FA4               	goto	u444
+   892  07A3                     u445:	
+   893  07A3  36F0               	lsrf	??_SoftwareSPI_send_data,f
+   894  07A4                     u444:	
+   895  07A4  0B89               	decfsz	9,f
+   896  07A5  2FA3               	goto	u445
+   897  07A6  1C70               	btfss	??_SoftwareSPI_send_data,0
+   898  07A7  2FAB               	goto	u450
+   899  07A8  0020               	movlb	0	; select bank0
+   900  07A9  160C               	bsf	12,4	;volatile
+   901  07AA  2FAD               	goto	l797
+   902  07AB                     u450:	
+   903  07AB  0020               	movlb	0	; select bank0
+   904  07AC  120C               	bcf	12,4	;volatile
+   905  07AD                     l797:	
+   906                           
+   907                           ;SoftwareSPI.h: 84: RA5 = 0;
+   908  07AD  128C               	bcf	12,5	;volatile
+   909                           
+   910                           ;SoftwareSPI.h: 86: _delay((unsigned long)((5)*(8000000/4000000.0)));
+   911  07AE  3003               	movlw	3
+   912  07AF  00F0               	movwf	??_SoftwareSPI_send_data
+   913  07B0                     u687:	
+   914  07B0  0BF0               	decfsz	??_SoftwareSPI_send_data,f
+   915  07B1  2FB0               	goto	u687
+   916                           
+   917                           ;SoftwareSPI.h: 88: received_data |= RA3 << i;
+   918  07B2  3000               	movlw	0
+   919  07B3  0020               	movlb	0	; select bank0
+   920  07B4  198C               	btfsc	12,3	;volatile
+   921  07B5  3001               	movlw	1
+   922  07B6  00F0               	movwf	??_SoftwareSPI_send_data
+   923  07B7  0A76               	incf	SoftwareSPI_send_data@i,w
+   924  07B8  2FBA               	goto	u474
+   925  07B9                     u475:	
+   926  07B9  35F0               	lslf	??_SoftwareSPI_send_data,f
+   927  07BA                     u474:	
+   928  07BA  0B89               	decfsz	9,f
+   929  07BB  2FB9               	goto	u475
+   930  07BC  0870               	movf	??_SoftwareSPI_send_data,w
+   931  07BD  00F1               	movwf	??_SoftwareSPI_send_data+1
+   932  07BE  0871               	movf	??_SoftwareSPI_send_data+1,w
+   933  07BF  04F4               	iorwf	SoftwareSPI_send_data@received_data,f
+   934                           
+   935                           ;SoftwareSPI.h: 89: RA5 = 1;
+   936  07C0  168C               	bsf	12,5	;volatile
+   937                           
+   938                           ;SoftwareSPI.h: 90: _delay((unsigned long)((5)*(8000000/4000000.0)));
+   939  07C1  3003               	movlw	3
+   940  07C2  00F0               	movwf	??_SoftwareSPI_send_data
+   941  07C3                     u697:	
+   942  07C3  0BF0               	decfsz	??_SoftwareSPI_send_data,f
+   943  07C4  2FC3               	goto	u697
+   944  07C5                     l809:	
+   945                           ;SoftwareSPI.h: 94: }
+   946                           
+   947                           ;SoftwareSPI.h: 92: break;
+   948                           
+   949  07C5  30FF               	movlw	255
+   950  07C6  00F0               	movwf	??_SoftwareSPI_send_data
+   951  07C7  0870               	movf	??_SoftwareSPI_send_data,w
+   952  07C8  07F6               	addwf	SoftwareSPI_send_data@i,f
+   953  07C9                     L1:	
+   954  07C9  0A76               	incf	SoftwareSPI_send_data@i,w
+   955  07CA  1903               	btfsc	3,2
+   956  07CB  2FDB               	goto	l811
+   957  07CC  0872               	movf	SoftwareSPI_send_data@mode,w
+   958                           
+   959                           ; Switch size 1, requested type "space"
+   960                           ; Number of cases is 4, Range of values is 0 to 3
+   961                           ; switch strategies available:
+   962                           ; Name         Instructions Cycles
+   963                           ; simple_byte           13     7 (average)
+   964                           ; direct_byte           14     6 (fixed)
+   965                           ; jumptable            260     6 (fixed)
+   966                           ;	Chosen strategy is simple_byte
+   967  07CD  3A00               	xorlw	0	; case 0
+   968  07CE  1903               	skipnz
+   969  07CF  2F28               	goto	l765
+   970  07D0  3A01               	xorlw	1	; case 1
+   971  07D1  1903               	skipnz
+   972  07D2  2F50               	goto	l775
+   973  07D3  3A03               	xorlw	3	; case 2
+   974  07D4  1903               	skipnz
+   975  07D5  2F77               	goto	l785
+   976  07D6  3A01               	xorlw	1	; case 3
+   977  07D7  1903               	skipnz
+   978  07D8  2F9F               	goto	l795
+   979  07D9  2FC5               	goto	l809
+   980  07DA  2FC5               	goto	l809
+   981  07DB                     l811:	
+   982                           
+   983                           ;SoftwareSPI.h: 96: }
+   984                           ;SoftwareSPI.h: 97: _delay((unsigned long)((5)*(8000000/4000000.0)));
+   985  07DB  3003               	movlw	3
+   986  07DC  00F0               	movwf	??_SoftwareSPI_send_data
+   987  07DD                     u707:	
+   988  07DD  0BF0               	decfsz	??_SoftwareSPI_send_data,f
+   989  07DE  2FDD               	goto	u707
+   990                           
+   991                           ;SoftwareSPI.h: 98: RA5 = prev_clk;
+   992  07DF  1C73               	btfss	SoftwareSPI_send_data@prev_clk,0
+   993  07E0  2FE4               	goto	u490
+   994  07E1  0020               	movlb	0	; select bank0
+   995  07E2  168C               	bsf	12,5	;volatile
+   996  07E3  2FE6               	goto	u504
+   997  07E4                     u490:	
+   998  07E4  0020               	movlb	0	; select bank0
+   999  07E5  128C               	bcf	12,5	;volatile
+  1000  07E6                     u504:	
+  1001                           
+  1002                           ;SoftwareSPI.h: 99: return received_data;
+  1003  07E6  0874               	movf	SoftwareSPI_send_data@received_data,w
+  1004  07E7  0008               	return
+  1005  07E8                     __end_of_SoftwareSPI_send_data:	
+  1006                           
+  1007                           	psect	text2
+  1008  0656                     __ptext2:	
+  1009 ;; *************** function _SoftwareSPI_initialize *****************
+  1010 ;; Defined at:
+  1011 ;;		line 103 in file "SoftwareSPI.h"
+  1012 ;; Parameters:    Size  Location     Type
+  1013 ;;  CPHA            1    wreg     unsigned char 
+  1014 ;;  CPOL            1    0[COMMON] unsigned char 
+  1015 ;; Auto vars:     Size  Location     Type
+  1016 ;;  CPHA            1    2[COMMON] unsigned char 
+  1017 ;; Return value:  Size  Location     Type
+  1018 ;;                  1    wreg      void 
+  1019 ;; Registers used:
+  1020 ;;		wreg, status,2, status,0
+  1021 ;; Tracked objects:
+  1022 ;;		On entry : 0/0
+  1023 ;;		On exit  : 0/0
+  1024 ;;		Unchanged: 0/0
+  1025 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  1026 ;;      Params:         1       0       0       0
+  1027 ;;      Locals:         1       0       0       0
+  1028 ;;      Temps:          1       0       0       0
+  1029 ;;      Totals:         3       0       0       0
+  1030 ;;Total ram usage:        3 bytes
+  1031 ;; Hardware stack levels used:    1
+  1032 ;; This function calls:
+  1033 ;;		Nothing
+  1034 ;; This function is called by:
+  1035 ;;		_main
+  1036 ;; This function uses a non-reentrant model
+  1037 ;;
+  1038                           
+  1039                           
+  1040                           ;psect for function _SoftwareSPI_initialize
+  1041  0656                     _SoftwareSPI_initialize:	
+  1042                           
+  1043                           ;incstack = 0
+  1044                           ; Regs used in _SoftwareSPI_initialize: [wreg+status,2+status,0]
+  1045                           ;SoftwareSPI_initialize@CPHA stored from wreg
+  1046  0656  00F2               	movwf	SoftwareSPI_initialize@CPHA
+  1047                           
+  1048                           ;SoftwareSPI.h: 105: TRISA4 = 0;
+  1049  0657  0021               	movlb	1	; select bank1
+  1050  0658  120C               	bcf	12,4	;volatile
+  1051                           
+  1052                           ;SoftwareSPI.h: 106: TRISA3 = 1;
+  1053  0659  158C               	bsf	12,3	;volatile
+  1054                           
+  1055                           ;SoftwareSPI.h: 107: TRISA5 = 0;
+  1056  065A  128C               	bcf	12,5	;volatile
+  1057                           
+  1058                           ;SoftwareSPI.h: 108: SPI_CPHA = CPHA
+  1059                           ;SoftwareSPI.h: 109: ;
+  1060  065B  0872               	movf	SoftwareSPI_initialize@CPHA,w
+  1061  065C  00F1               	movwf	??_SoftwareSPI_initialize
+  1062  065D  0871               	movf	??_SoftwareSPI_initialize,w
+  1063  065E  0020               	movlb	0	; select bank0
+  1064  065F  00AB               	movwf	_SPI_CPHA
+  1065                           
+  1066                           ;SoftwareSPI.h: 110: SPI_CPOL = CPOL;
+  1067  0660  0870               	movf	SoftwareSPI_initialize@CPOL,w
+  1068  0661  00F1               	movwf	??_SoftwareSPI_initialize
+  1069  0662  0871               	movf	??_SoftwareSPI_initialize,w
+  1070  0663  00AC               	movwf	_SPI_CPOL
+  1071                           
+  1072                           ;SoftwareSPI.h: 112: if(SPI_CPOL == 0)
+  1073  0664  082C               	movf	_SPI_CPOL,w
+  1074  0665  1D03               	btfss	3,2
+  1075  0666  2E69               	goto	l825
+  1076                           
+  1077                           ;SoftwareSPI.h: 113: {
+  1078                           ;SoftwareSPI.h: 114: RA5 = 0;
+  1079  0667  128C               	bcf	12,5	;volatile
+  1080                           
+  1081                           ;SoftwareSPI.h: 115: }
+  1082  0668  0008               	return
+  1083  0669                     l825:	
+  1084                           
+  1085                           ;SoftwareSPI.h: 116: else if(SPI_CPOL == 1)
+  1086  0669  032C               	decf	_SPI_CPOL,w
+  1087  066A  1D03               	btfss	3,2
+  1088  066B  0008               	return
+  1089                           
+  1090                           ;SoftwareSPI.h: 117: {
+  1091                           ;SoftwareSPI.h: 118: RA5 = 1;
+  1092  066C  168C               	bsf	12,5	;volatile
+  1093  066D  0008               	return
+  1094  066E                     __end_of_SoftwareSPI_initialize:	
+  1095                           
+  1096                           	psect	text3
+  1097  063E                     __ptext3:	
+  1098 ;; *************** function _DELAY100 *****************
+  1099 ;; Defined at:
+  1100 ;;		line 20 in file "SoftwareSPITest.c"
+  1101 ;; Parameters:    Size  Location     Type
+  1102 ;;  number          1    wreg     unsigned char 
+  1103 ;; Auto vars:     Size  Location     Type
+  1104 ;;  number          1    3[COMMON] unsigned char 
+  1105 ;;  k               1    4[COMMON] unsigned char 
+  1106 ;; Return value:  Size  Location     Type
+  1107 ;;                  1    wreg      void 
+  1108 ;; Registers used:
+  1109 ;;		wreg, status,2, status,0
+  1110 ;; Tracked objects:
+  1111 ;;		On entry : 0/0
+  1112 ;;		On exit  : 0/0
+  1113 ;;		Unchanged: 0/0
+  1114 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  1115 ;;      Params:         0       0       0       0
+  1116 ;;      Locals:         2       0       0       0
+  1117 ;;      Temps:          3       0       0       0
+  1118 ;;      Totals:         5       0       0       0
+  1119 ;;Total ram usage:        5 bytes
+  1120 ;; Hardware stack levels used:    1
+  1121 ;; This function calls:
+  1122 ;;		Nothing
+  1123 ;; This function is called by:
+  1124 ;;		_main
+  1125 ;; This function uses a non-reentrant model
+  1126 ;;
+  1127                           
+  1128                           
+  1129                           ;psect for function _DELAY100
+  1130  063E                     _DELAY100:	
+  1131                           
+  1132                           ;incstack = 0
+  1133                           ; Regs used in _DELAY100: [wreg+status,2+status,0]
+  1134                           ;DELAY100@number stored from wreg
+  1135  063E  00F3               	movwf	DELAY100@number
+  1136                           
+  1137                           ;SoftwareSPITest.c: 22: for(byte k=0; k != number; k++)
+  1138  063F  01F4               	clrf	DELAY100@k
+  1139  0640                     l753:	
+  1140  0640  0874               	movf	DELAY100@k,w
+  1141  0641  0673               	xorwf	DELAY100@number,w
+  1142  0642  1903               	btfsc	3,2
+  1143  0643  0008               	return
+  1144                           
+  1145                           ;SoftwareSPITest.c: 23: _delay((unsigned long)((100)*(8000000/4000.0)));
+  1146  0644  3002               	movlw	2
+  1147  0645  00F2               	movwf	??_DELAY100+2
+  1148  0646  3004               	movlw	4
+  1149  0647  00F1               	movwf	??_DELAY100+1
+  1150  0648  30BA               	movlw	186
+  1151  0649  00F0               	movwf	??_DELAY100
+  1152  064A                     u717:	
+  1153  064A  0BF0               	decfsz	??_DELAY100,f
+  1154  064B  2E4A               	goto	u717
+  1155  064C  0BF1               	decfsz	??_DELAY100+1,f
+  1156  064D  2E4A               	goto	u717
+  1157  064E  0BF2               	decfsz	??_DELAY100+2,f
+  1158  064F  2E4A               	goto	u717
+  1159  0650  0000               	nop
+  1160  0651  3001               	movlw	1
+  1161  0652  00F0               	movwf	??_DELAY100
+  1162  0653  0870               	movf	??_DELAY100,w
+  1163  0654  07F4               	addwf	DELAY100@k,f
+  1164  0655  2E40               	goto	l753
+  1165  0656                     __end_of_DELAY100:	
+  1166                           
+  1167                           	psect	text4
+  1168  062A                     __ptext4:	
+  1169 ;; *************** function _DELAY *****************
+  1170 ;; Defined at:
+  1171 ;;		line 15 in file "SoftwareSPITest.c"
+  1172 ;; Parameters:    Size  Location     Type
+  1173 ;;  number          1    wreg     unsigned char 
+  1174 ;; Auto vars:     Size  Location     Type
+  1175 ;;  number          1    2[COMMON] unsigned char 
+  1176 ;;  k               1    3[COMMON] unsigned char 
+  1177 ;; Return value:  Size  Location     Type
+  1178 ;;                  1    wreg      void 
+  1179 ;; Registers used:
+  1180 ;;		wreg, status,2, status,0
+  1181 ;; Tracked objects:
+  1182 ;;		On entry : 0/0
+  1183 ;;		On exit  : 0/0
+  1184 ;;		Unchanged: 0/0
+  1185 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  1186 ;;      Params:         0       0       0       0
+  1187 ;;      Locals:         2       0       0       0
+  1188 ;;      Temps:          2       0       0       0
+  1189 ;;      Totals:         4       0       0       0
+  1190 ;;Total ram usage:        4 bytes
+  1191 ;; Hardware stack levels used:    1
+  1192 ;; This function calls:
+  1193 ;;		Nothing
+  1194 ;; This function is called by:
+  1195 ;;		_main
+  1196 ;; This function uses a non-reentrant model
+  1197 ;;
+  1198                           
+  1199                           
+  1200                           ;psect for function _DELAY
+  1201  062A                     _DELAY:	
+  1202                           
+  1203                           ;incstack = 0
+  1204                           ; Regs used in _DELAY: [wreg+status,2+status,0]
+  1205                           ;DELAY@number stored from wreg
+  1206  062A  00F2               	movwf	DELAY@number
+  1207                           
+  1208                           ;SoftwareSPITest.c: 17: for(byte k=0; k != number; k++)
+  1209  062B  01F3               	clrf	DELAY@k
+  1210  062C                     l745:	
+  1211  062C  0873               	movf	DELAY@k,w
+  1212  062D  0672               	xorwf	DELAY@number,w
+  1213  062E  1903               	btfsc	3,2
+  1214  062F  0008               	return
+  1215                           
+  1216                           ;SoftwareSPITest.c: 18: _delay((unsigned long)((1)*(8000000/4000.0)));
+  1217  0630  3003               	movlw	3
+  1218  0631  00F1               	movwf	??_DELAY+1
+  1219  0632  3097               	movlw	151
+  1220  0633  00F0               	movwf	??_DELAY
+  1221  0634                     u727:	
+  1222  0634  0BF0               	decfsz	??_DELAY,f
+  1223  0635  2E34               	goto	u727
+  1224  0636  0BF1               	decfsz	??_DELAY+1,f
+  1225  0637  2E34               	goto	u727
+  1226  0638  3200               	nop2
+  1227  0639  3001               	movlw	1
+  1228  063A  00F0               	movwf	??_DELAY
+  1229  063B  0870               	movf	??_DELAY,w
+  1230  063C  07F3               	addwf	DELAY@k,f
+  1231  063D  2E2C               	goto	l745
+  1232  063E                     __end_of_DELAY:	
+  1233  007E                     btemp	set	126	;btemp
+  1234  007E                     wtemp	set	126
+  1235  007E                     wtemp0	set	126
+  1236  0080                     wtemp1	set	128
+  1237  0082                     wtemp2	set	130
+  1238  0084                     wtemp3	set	132
+  1239  0086                     wtemp4	set	134
+  1240  0088                     wtemp5	set	136
+  1241  007F                     wtemp6	set	127
+  1242  007E                     ttemp	set	126
+  1243  007E                     ttemp0	set	126
+  1244  0081                     ttemp1	set	129
+  1245  0084                     ttemp2	set	132
+  1246  0087                     ttemp3	set	135
+  1247  007F                     ttemp4	set	127
+  1248  007E                     ltemp	set	126
+  1249  007E                     ltemp0	set	126
+  1250  0082                     ltemp1	set	130
+  1251  0086                     ltemp2	set	134
+  1252  0080                     ltemp3	set	128
+
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        5
+    BSS         19
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMMON           14     14      14
+    BANK0            80      0      24
+    BANK1            80      0       0
+    BANK2            80      0       0
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMMON
+
+    _main->_SoftwareSPI_send_data
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 7     7      0     753
+                                              7 COMMON     7     7      0
+                              _DELAY
+                           _DELAY100
+             _SoftwareSPI_initialize
+              _SoftwareSPI_send_data
+ ---------------------------------------------------------------------------------
+ (1) _SoftwareSPI_send_data                                7     7      0     383
+                                              0 COMMON     7     7      0
+ ---------------------------------------------------------------------------------
+ (1) _SoftwareSPI_initialize                               3     2      1      97
+                                              0 COMMON     3     2      1
+ ---------------------------------------------------------------------------------
+ (1) _DELAY100                                             5     5      0      46
+                                              0 COMMON     5     5      0
+ ---------------------------------------------------------------------------------
+ (1) _DELAY                                                4     4      0      46
+                                              0 COMMON     4     4      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 1
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _DELAY
+   _DELAY100
+   _SoftwareSPI_initialize
+   _SoftwareSPI_send_data
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BIGRAM              F0      0       0       0        0.0%
+EEDATA             100      0       0       0        0.0%
+NULL                 0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+BITCOMMON            E      0       0       1        0.0%
+BITSFR0              0      0       0       1        0.0%
+SFR0                 0      0       0       1        0.0%
+COMMON               E      E       E       2      100.0%
+BITSFR1              0      0       0       2        0.0%
+SFR1                 0      0       0       2        0.0%
+BITSFR2              0      0       0       3        0.0%
+SFR2                 0      0       0       3        0.0%
+STACK                0      0       0       3        0.0%
+BITSFR3              0      0       0       4        0.0%
+SFR3                 0      0       0       4        0.0%
+ABS                  0      0      26       4        0.0%
+BITBANK0            50      0       0       5        0.0%
+BITSFR4              0      0       0       5        0.0%
+SFR4                 0      0       0       5        0.0%
+BANK0               50      0      18       6       30.0%
+BITSFR5              0      0       0       6        0.0%
+SFR5                 0      0       0       6        0.0%
+BITBANK1            50      0       0       7        0.0%
+BITSFR6              0      0       0       7        0.0%
+SFR6                 0      0       0       7        0.0%
+BANK1               50      0       0       8        0.0%
+BITSFR7              0      0       0       8        0.0%
+SFR7                 0      0       0       8        0.0%
+BITBANK2            50      0       0       9        0.0%
+BITSFR8              0      0       0       9        0.0%
+SFR8                 0      0       0       9        0.0%
+BANK2               50      0       0      10        0.0%
+BITSFR9              0      0       0      10        0.0%
+SFR9                 0      0       0      10        0.0%
+BITSFR10             0      0       0      11        0.0%
+SFR10                0      0       0      11        0.0%
+DATA                 0      0      26      11        0.0%
+BITSFR11             0      0       0      12        0.0%
+SFR11                0      0       0      12        0.0%
+BITSFR12             0      0       0      13        0.0%
+SFR12                0      0       0      13        0.0%
+BITSFR13             0      0       0      14        0.0%
+SFR13                0      0       0      14        0.0%
+BITSFR14             0      0       0      15        0.0%
+SFR14                0      0       0      15        0.0%
+BITSFR15             0      0       0      16        0.0%
+SFR15                0      0       0      16        0.0%
+BITSFR16             0      0       0      17        0.0%
+SFR16                0      0       0      17        0.0%
+BITSFR17             0      0       0      18        0.0%
+SFR17                0      0       0      18        0.0%
+BITSFR18             0      0       0      19        0.0%
+SFR18                0      0       0      19        0.0%
+BITSFR19             0      0       0      20        0.0%
+SFR19                0      0       0      20        0.0%
+BITSFR20             0      0       0      21        0.0%
+SFR20                0      0       0      21        0.0%
+BITSFR21             0      0       0      22        0.0%
+SFR21                0      0       0      22        0.0%
+BITSFR22             0      0       0      23        0.0%
+SFR22                0      0       0      23        0.0%
+BITSFR23             0      0       0      24        0.0%
+SFR23                0      0       0      24        0.0%
+BITSFR24             0      0       0      25        0.0%
+SFR24                0      0       0      25        0.0%
+BITSFR25             0      0       0      26        0.0%
+SFR25                0      0       0      26        0.0%
+BITSFR26             0      0       0      27        0.0%
+SFR26                0      0       0      27        0.0%
+BITSFR27             0      0       0      28        0.0%
+SFR27                0      0       0      28        0.0%
+BITSFR28             0      0       0      29        0.0%
+SFR28                0      0       0      29        0.0%
+BITSFR29             0      0       0      30        0.0%
+SFR29                0      0       0      30        0.0%
+BITSFR30             0      0       0      31        0.0%
+SFR30                0      0       0      31        0.0%
+BITSFR31             0      0       0      32        0.0%
+SFR31                0      0       0      32        0.0%
+
+
+Microchip Technology PIC Macro Assembler V1.37 build -260352376 
+Symbol Table                                                                                   Tue Jan 07 21:08:17 2020
+
+                                l98 068F                                 l100 06D3  
+                               l811 07DB                                 l745 062C  
+                               l753 0640                                 l825 0669  
+                               l809 07C5                                 l905 0704  
+                               l765 0728                                 l909 070F  
+                               l775 0750                                 l767 0736  
+                               l785 0777                                 l777 075E  
+                               l795 079F                                 l787 0785  
+                               l797 07AD                                 l887 06CE  
+                               _RA0 0060                                 _RA2 0062  
+                               _RA3 0063                                 _RA4 0064  
+                               _RA5 0065                                 u410 0783  
+                               u330 0734                                 u404 077C  
+                               u324 072D                                 u405 077B  
+                               u325 072C                                 u504 07E6  
+                               u450 07AB                                 u434 0791  
+                               u370 075C                                 u354 0748  
+                               u435 0790                                 u355 0747  
+                               u444 07A4                                 u364 0755  
+                               u445 07A3                                 u365 0754  
+                               u607 06F3                                 u617 0708  
+                               u490 07E4                                 u474 07BA  
+                               u394 076B                                 u707 07DD  
+                               u475 07B9                                 u395 076A  
+                               u627 0738                                 u717 064A  
+                               u637 073E                                 u727 0634  
+                               u647 0761                                 u657 0774  
+                               u577 069B                                 u667 0787  
+                               u587 06B8                                 u677 079A  
+                               u597 06C1                                 u687 07B0  
+                               u697 07C3                                 wreg 0009  
+                              _SCS0 04C8                                _SCS1 04C9  
+                              _main 066E                                _saat 002F  
+                              _nisa 0027                                fsr0h 0005  
+                              fsr1h 0007                                fsr0l 0004  
+                              indf0 0000                                indf1 0001  
+                              fsr1l 0006                                btemp 007E  
+                  __end_of_DELAY100 0656                                ltemp 007E  
+                              start 0002                                ttemp 007E  
+                              wtemp 007E          SoftwareSPI_initialize@CPHA 0072  
+        SoftwareSPI_initialize@CPOL 0070                               ?_main 0070  
+                             _DELAY 062A                               _IRCF0 04CB  
+                             _IRCF1 04CC                               _IRCF2 04CD  
+                             _IRCF3 04CE                               _bilgi 0033  
+                             _gelen 002E                               _value 0032  
+                             _start 0031                               main@i 007C  
+                             main@k 007A                               ltemp0 007E  
+                             ltemp1 0082                               ltemp2 0086  
+                             ltemp3 0080                               ttemp0 007E  
+                             ttemp1 0081                               ttemp2 0084  
+                             ttemp3 0087                               ttemp4 007F  
+                             status 0003                               wtemp0 007E  
+                             wtemp1 0080                               wtemp2 0082  
+                             wtemp3 0084                               wtemp4 0086  
+                             wtemp5 0088                               wtemp6 007F  
+                   __initialization 07E8                        __end_of_main 0717  
+                            DELAY@k 0073                              ??_main 0077  
+                            ?_DELAY 0070                           DELAY100@k 0074  
+                            _ANSELA 018C                              _SPLLEN 04CF  
+                            _TRISA0 0460                              _TRISA2 0462  
+                            _TRISA3 0463                              _TRISA4 0464  
+                            _TRISA5 0465                              _dakika 002D  
+                            _bilgi2 0020             ??_SoftwareSPI_send_data 0070  
+                            _saniye 0030                           ?_DELAY100 0070  
+           __end_of__initialization 07FD                       __end_of_DELAY 063E  
+                    __pcstackCOMMON 0070                        __pidataBANK0 061F  
+                _measured_adc_value 0025                             ??_DELAY 0070  
+         SoftwareSPI_send_data@data 0075           SoftwareSPI_send_data@mode 0072  
+                        ??_DELAY100 0070                          __pbssBANK0 0020  
+                        __pmaintext 066E                        _DISPLAY_POEM 0029  
+          ??_SoftwareSPI_initialize 0071       SoftwareSPI_send_data@prev_clk 0073  
+                           __ptext1 0717                             __ptext2 0656  
+                           __ptext3 063E                             __ptext4 062A  
+                           clrloop0 0625                end_of_initialization 07FD  
+    __size_of_SoftwareSPI_send_data 00D1       __end_of_SoftwareSPI_send_data 07E8  
+                 __size_of_DELAY100 0018                      DELAY100@number 0073  
+   __size_of_SoftwareSPI_initialize 0018                 start_initialization 07E8  
+            SoftwareSPI_send_data@i 0076                         __pdataBANK0 0033  
+            _SoftwareSPI_initialize 0656                           ___latbits 0001  
+SoftwareSPI_send_data@received_data 0074                      __size_of_DELAY 0014  
+                          _DELAY100 063E                           clear_ram0 0624  
+                          _SPI_CPHA 002B                            _SPI_CPOL 002C  
+                       DELAY@number 0072               _SoftwareSPI_send_data 0717  
+                     __size_of_main 00A9                          _LCD_LED_ON 002A  
+           ?_SoftwareSPI_initialize 0070                            main@i_77 007D  
+    __end_of_SoftwareSPI_initialize 066E              ?_SoftwareSPI_send_data 0070  

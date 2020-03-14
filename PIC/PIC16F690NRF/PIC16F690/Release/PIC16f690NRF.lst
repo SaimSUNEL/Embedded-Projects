@@ -1,0 +1,125 @@
+     1: #include<htc.h>
+     2: typedef unsigned char byte;
+     3: /*
+     4: Problem of power source !!!!!!!!!
+     5: 
+     6: 
+     7: 
+     8: */
+     9: /*
+    10: RC0 - CE 
+    11: RC6 - CS
+    12: RC5 - IRQ
+    13: 
+    14: RB7 - tx
+    15: RB5 - rx
+    16: 
+    17: RB6 - SCK
+    18: RC7 - SDO
+    19: RB4 - SDI
+    20: 
+    21: 
+    22: */
+    23: #include "OneWireShiftRegister.h"
+    24: #include "7Segments.h"
+    25: 
+    26: 
+    27: 
+    28: typedef unsigned char byte;
+    29: 
+    30: #define  RF24_CE    RC0   //9. pin chipEnable nRF24L01+ 
+    31: #define  RF24_CS    RC6  //10.pin  chipselect nRF24L01+ 
+    32: 
+    33: #define  RF24_IRQ   RC5   //8. pin interrupt nRF24L01+ 
+    34: 
+    35: #include "UART.h"
+    36: #include "SPI.h"
+    37: #include "NRF.h"
+    38: 
+    39: byte read[5];
+    40: 
+    41: void main()
+    42: {
+    43: 
+    44: ANSEL = 0;
+    45: ANSELH = 0;
+    46: //4 MHZ internal
+    47: IRCF2 = 1;
+    48: IRCF1 = 1;
+    49: IRCF0 = 0;
+    50: SCS = 1;
+    51: 
+    52: TRISC5 = 1;//IRQ pin...
+    53: TRISC6 = 0;//CSN pin..
+    54: TRISC4 = 0;//CE pin..
+    55: RC4 = 0;
+    56: RC6 = 0;
+    57: PORTC = 0;
+    58: 
+    59: //RB7 tx output
+    60: //RB5 rx input
+    61: TRISB7 = 0;
+    62: TRISB5 = 1;
+    63: 
+    64: 
+    65: TRISC3 = 0; //7 segments
+    66: RC3 = 0;
+    67: 
+    68: 
+    69: 
+    70: TRISC0 = 0;
+    71: RC0 = 0;
+    72: 
+    73: SPI_Initialize();
+    74: 
+    75: __delay_ms(150);
+    76: 
+    77: UART_Initialize();
+    78: __delay_ms(20);
+    79: 
+    80: 
+    81: UART_SendString("Initializing NRF...\n\0");
+    82: 
+    83: NRF_Initialize();
+    84: UART_SendString("NRF initialized...\n\0");
+    85: 
+    86: __delay_ms(10);
+    87: SendData[0] = 'S';
+    88: SendData[1] = 'a';
+    89: SendData[2] = 'i';
+    90: SendData[3] = 'm';
+    91: SendData[4] = ' ';
+    92: SendData[5] = 'S';
+    93: SendData[6] = 'U';
+    94: SendData[7] = 'N';
+    95: 
+    96: UART_SendString("Deneme\n\0");
+    97: CE = 0;
+    98: byte status;
+    99: display_number(12);
+   100: byte mode = 0;
+   101: while(1)
+   102: {
+   103: NRF_ReceiveData();
+   104: UART_SendString("Received : ");
+   105: UART_SendString(ReceiveData);
+   106: 
+   107: if(ReceiveData[0]=='1')
+   108: RC4 = 1;
+   109: else RC4 = 0;
+   110: display_number(ReceiveData[1]);
+   111: 
+   112: 
+   113: 
+   114: /*
+   115: NRF_ReceiveData();
+   116: UART_SendString("Data receivecd....\0");
+   117: ReceiveData[15] = '\0';
+   118: UART_SendString(ReceiveData);
+   119: */
+   120: 
+   121: __delay_ms(10 );
+   122: }
+   123: 
+   124: }
+   125: 

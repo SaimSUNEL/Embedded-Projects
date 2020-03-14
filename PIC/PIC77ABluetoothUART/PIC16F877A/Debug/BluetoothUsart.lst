@@ -1,0 +1,111 @@
+     1: 
+     2: #include<htc.h>
+     3: #define BAUD 9600 //Osilatore hesaba göre secilir
+     4: #define FOSC 4000000L //osc
+     5: #define DIVIDER ((int)(FOSC/(16UL * BAUD) -1))
+     6: unsigned char seri_porttan_veri_al()
+     7: {
+     8: while( !RCIF );
+     9: return RCREG;
+    10: }
+    11: void seri_porta_veri_gonder(unsigned char jk)
+    12:  { while( !TXIF );
+    13:          TXREG=jk;
+    14: 
+    15:         
+    16:          }
+    17: void seri_portu_ayarla()
+    18: {SPBRG=DIVIDER; //DIVIDER;
+    19:         BRGH=1;
+    20:         
+    21:         
+    22:         SYNC=0;
+    23:         
+    24:         TX9=0;
+    25:         
+    26:         TXEN=1;
+    27:         
+    28:         RX9=0;
+    29:         
+    30:         CREN=1;
+    31:         
+    32:         
+    33:         
+    34:         SPEN=1;/*
+    35:         RC6=1;
+    36:         
+    37:         RC7=1;
+    38: */
+    39:         }
+    40: 
+    41: 
+    42: unsigned char gelen;
+    43: #define DelayMs __delay_ms
+    44: 
+    45: 
+    46: void main()
+    47: 
+    48: {  // TRISC = 0b10000000;
+    49:         PORTC = 0;
+    50:         PORTB = 0;
+    51:         TRISB = 0;
+    52:         seri_portu_ayarla();
+    53:         
+    54: 
+    55:         while( 1 )
+    56:         {  
+    57:                 gelen = seri_porttan_veri_al();
+    58:         
+    59:         
+    60:                 RC0 = ~RC0;
+    61:                 DelayMs( 250 );
+    62:                 if( gelen == 'w' )
+    63:                 {
+    64:                         RB0 = ~RB0;
+    65:                 }
+    66:                 if( gelen == 's' )
+    67:                 {
+    68:                         RB1 = ~RB1;
+    69:                 }
+    70:                 if( gelen == 'd' )
+    71:                 {
+    72:                 RB2 = ~RB2;
+    73:                 }
+    74:                 if( gelen == 'a' )
+    75:                 {
+    76:                         RB3 = !RB3;
+    77:                 }
+    78:                 
+    79:                 seri_porta_veri_gonder( 'V' );
+    80:                 DelayMs( 20 );
+    81:                 seri_porta_veri_gonder( 'e' );
+    82:                 DelayMs( 20 );
+    83:                 seri_porta_veri_gonder( 'r' );
+    84:                 DelayMs( 20 );
+    85:                 seri_porta_veri_gonder( 'i' );
+    86:                 DelayMs( 20 );
+    87:                 seri_porta_veri_gonder( ' ' );
+    88:                 DelayMs( 20 );
+    89:                 seri_porta_veri_gonder( 'G' );
+    90:                 DelayMs( 20 );
+    91:                 seri_porta_veri_gonder( 'e' );
+    92:                 DelayMs( 20 );seri_porta_veri_gonder( 'l' );
+    93:                 DelayMs( 20 );seri_porta_veri_gonder( 'd' );
+    94:                 DelayMs( 20 );seri_porta_veri_gonder( 'i' );
+    95:                 DelayMs( 20 );
+    96:                 seri_porta_veri_gonder( '-');
+    97:                 DelayMs( 20 );
+    98:                 seri_porta_veri_gonder( gelen );
+    99:                 DelayMs( 20 );
+   100:         }
+   101:         
+   102:         
+   103:         
+   104:         
+   105:         
+   106:         
+   107:         
+   108:         
+   109:         
+   110:         
+   111: }

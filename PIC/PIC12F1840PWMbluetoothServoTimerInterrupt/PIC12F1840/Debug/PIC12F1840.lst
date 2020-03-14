@@ -1,0 +1,226 @@
+     1: 
+     2: #include <htc.h>
+     3: 
+     4: 
+     5: struct _servo 
+     6: {
+     7:         
+     8:         
+     9: unsigned int angle ;
+    10:         
+    11: }
+    12: bir , iki , uc;
+    13: 
+    14: 
+    15: 
+    16: 
+    17:         unsigned char code ;
+    18:         unsigned char speed ;
+    19: unsigned char seri_porttan_veri_al()
+    20: {
+    21: while( !RCIF );
+    22: return RCREG;
+    23: }
+    24: void seri_porta_veri_gonder(unsigned char jk)
+    25:  { while( !TXIF );
+    26:          TXREG=jk;
+    27: 
+    28:         
+    29:          }
+    30: void seri_portu_ayarla()
+    31: {SPBRG=51;//8 MHZ için BRGH = 1 iken 51 9600 baud rate
+    32:         BRGH=1;
+    33:         
+    34:         SPEN=1;
+    35:         
+    36:         SYNC=0;
+    37:         
+    38:         TX9=0;
+    39:         
+    40:         TXEN=1;
+    41:         
+    42:         RX9=0;
+    43:         
+    44:         CREN=1;
+    45:         
+    46:         
+    47:         /*
+    48:         RC6=1;
+    49:         
+    50:         RC7=1;
+    51: */
+    52:         }
+    53: 
+    54:         
+    55:         #define false 0
+    56:         #define true 1
+    57:         
+    58: char servo_number = 0;
+    59: char dogru = false;
+    60: 
+    61: 
+    62: void interrupt FNC(  )
+    63: {
+    64: GIE = 0 ;               
+    65:                 
+    66:                 
+    67: if( servo_number == 0 )
+    68:         {
+    69:                 
+    70:         if( dogru ) 
+    71:         {
+    72:                 dogru = false;
+    73:         
+    74:                 RA4 = 0;
+    75:                 
+    76: //65535
+    77:                 TMR1 = 45535;
+    78:                 
+    79:                 servo_number = 1;
+    80:                 
+    81:                 
+    82:                 }
+    83:         else
+    84:         {
+    85:                 RA4 = 1;
+    86:         
+    87:                 
+    88:                 TMR1 = 65535 - ( 540 + 9 * bir.angle ) ;
+    89:         
+    90:                 dogru = true;
+    91:                         }
+    92:                 
+    93:                 
+    94:         
+    95:         }       
+    96:         else if ( servo_number == 1 )
+    97:         {
+    98:         if( dogru ) 
+    99:         {
+   100:         dogru = false;
+   101:         RA5 = 0;
+   102:         
+   103:         
+   104:                 TMR1 = 45535 ;
+   105:         
+   106:                 servo_number = 0;
+   107:                 }
+   108:         else
+   109:         {
+   110:                 dogru = true;
+   111:         RA5 = 1;
+   112:                 
+   113:                 TMR1 = 65535 - ( 540 + 9 * iki.angle ) ;
+   114:                 
+   115:                 }
+   116:                 
+   117:                 
+   118:                 
+   119:                 
+   120:                         
+   121: 
+   122:         
+   123:                 
+   124:                 
+   125:                         
+   126:         //Interruptlarý aç...
+   127: 
+   128: 
+   129: }
+   130:         
+   131:                         
+   132:         
+   133:         
+   134:         
+   135:         
+   136:                 
+   137: TMR1IF = 0 ;
+   138: GIE = 1 ;       
+   139: }
+   140: 
+   141:         
+   142:         
+   143:         
+   144:         
+   145:         
+   146:         
+   147: 
+   148: //INTOSC seçilmesi CONFIG WORD
+   149: void main()
+   150: {
+   151:         bir.angle = 3;
+   152: iki.angle = 3;
+   153:         
+   154:         SCS1 = 0 ;
+   155:         SCS0 = 0 ;
+   156:         
+   157:         IRCF3 = 1 ;
+   158:         IRCF2 = 1 ;
+   159:         IRCF1 = 1 ;
+   160:         IRCF0 = 0 ;
+   161:         SPLLEN = 0 ;  //4x PLL enable...not enabled...
+   162:         
+   163:         
+   164:         TRISA0 = 0 ;
+   165:         RA0 = 0 ;
+   166:         TRISA1 = 0 ;
+   167:         RA1 = 0 ;
+   168:         ANSELA = 0 ;
+   169:         TRISA2 = 0 ; //PWM pini...
+   170:         
+   171:         TRISA4 = 0 ; //Servo bir 
+   172:         TRISA5 = 0 ; //Servo iki
+   173:         
+   174:         
+   175:         PR2 = 0b01111100 ;  // 8 MHz için 1000 hz 
+   176: T2CON = 0b00000111 ;
+   177: CCPR1L = 0b00111110 ;
+   178: CCP1CON = 0b00011100 ;
+   179: CCPR1L = 0 ;
+   180: TRISA1 = 1 ;
+   181: seri_portu_ayarla() ;
+   182:         //TMR2ON 
+   183: 
+   184:         int temp ;
+   185:         
+   186:         TMR1CS1 = 0 ; //Timer clock source fosc( 8 MHZ )
+   187:         TMR1CS0 = 1 ;
+   188:         
+   189:         T1CKPS1 = 1 ;//Timer 1 presc 1/8
+   190:         T1CKPS0 = 1 ; 
+   191:          // 1 MHZ clock 1 us for each increment...
+   192:         TMR1 = 65535 - 20000 ;
+   193:         TMR1ON = 1 ;
+   194:         TMR1IE = 1 ;
+   195:         GIE = 1 ; 
+   196:         PEIE = 1 ;
+   197:         
+   198:         
+   199:         
+   200:         
+   201:         
+   202:         
+   203:         
+   204:         while( 1 ) 
+   205:         { 
+   206:                 code = seri_porttan_veri_al (  ) ;
+   207:                 speed = seri_porttan_veri_al (   )  ;
+   208:                 if( code == 12 ) 
+   209:                 {
+   210:                         temp = speed * 4 ;
+   211:                         DC1B1 = temp >> 1 ;
+   212:                         DC1B0 = temp ;
+   213:                         CCPR1L = temp >> 2 ;
+   214:                         
+   215:                         
+   216:                 }
+   217:                 else if ( code == 10 ) 
+   218:                         bir.angle = speed ;
+   219:                 else iki.angle = speed ;
+   220:                 
+   221:                 
+   222:                 
+   223:         }
+   224:         
+   225:         
+   226: }

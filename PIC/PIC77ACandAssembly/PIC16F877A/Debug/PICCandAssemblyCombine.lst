@@ -1,0 +1,131 @@
+     1: 
+     2: 
+     3: 
+     4: 
+     5: 
+     6: #include<htc.h>
+     7: #include "c:\\tc\\delay.c" 
+     8: 
+     9: asm("org 0x000");
+    10: asm("goto 0x60");
+    11: 
+    12: 
+    13: 
+    14: 
+    15: 
+    16: 
+    17: 
+    18: 
+    19: 
+    20: void  FNC () @ 0x60
+    21: {
+    22:         RC5 = ~RC5;
+    23:         GIE = 0;
+    24:         
+    25:         if( RCIF )
+    26:         {
+    27:         PORTB ++;
+    28: RCIF = 0;       
+    29:                 
+    30:         PORTD = RCREG;
+    31:                 }
+    32: 
+    33:         GIE = 1;
+    34: 
+    35:                 asm( "retfie" );
+    36:                 
+    37:                 } 
+    38: 
+    39: 
+    40: 
+    41: 
+    42: 
+    43: 
+    44: unsigned char seri_porttan_veri_al() @ 0x0200
+    45: {
+    46: while( !RCIF );
+    47: return RCREG;
+    48: }
+    49: void seri_porta_veri_gonder(unsigned char jk) @ 0x250
+    50:  { while( !TXIF );
+    51:          TXREG=jk;
+    52: 
+    53:         
+    54:          }
+    55: 
+    56:         
+    57:         
+    58: /*
+    59: void INT() @ 0x04
+    60:          {
+    61:                  FNC();
+    62:          }
+    63:         */
+    64: 
+    65: 
+    66: void seri_portu_ayarla() @ 0x300
+    67: {SPBRG=25; //DIVIDER;
+    68:         BRGH=1;
+    69:         
+    70:         
+    71:         SYNC=0;
+    72:         
+    73:         TX9=0;
+    74:         
+    75:    TXEN=1;
+    76:         
+    77:         RX9=0;
+    78:         
+    79:         CREN=1;
+    80:         
+    81:         
+    82:         
+    83:         SPEN=1;/*
+    84:         RC6=1;
+    85:         
+    86:         RC7=1;
+    87: */
+    88:         }
+    89: 
+    90: void main() @ 0x500
+    91: {
+    92:         
+    93:  char gelen;
+    94: //INT();
+    95: 
+    96: 
+    97:         FNC();
+    98:         TRISB = 0;
+    99:         TRISC = 0b10000000;
+   100:         PORTB = 0;
+   101:         PORTC = 0;
+   102:         seri_portu_ayarla();
+   103: 
+   104:         
+   105:         DelayMs( 500 );
+   106:     seri_porta_veri_gonder( 'S');
+   107:         seri_porta_veri_gonder( 'a');
+   108:         seri_porta_veri_gonder( 'i');
+   109:         seri_porta_veri_gonder( 'm');
+   110:         
+   111:         
+   112:         
+   113:         
+   114:         PEIE = 1;
+   115:         GIE = 1;
+   116:     RCIE = 1;   
+   117:     TXIE = 0;
+   118:         while( 1 )
+   119:         {
+   120:                 gelen = seri_porttan_veri_al();
+   121:                 
+   122:         }
+   123:         
+   124:         
+   125:         
+   126: }
+   127: 
+   128: 
+   129: 
+   130: 
+   131: 

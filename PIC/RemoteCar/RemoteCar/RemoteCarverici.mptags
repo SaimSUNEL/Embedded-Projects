@@ -1,0 +1,25 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+!_TAG_REVISION_NAME	MCHPTags	//
+!_TAG_REVISION_VERSION	6.0.1	//
+BAUD::9600	C:\Users\Saim\Desktop\RemoteCar\verici.c	11;"	d	line:11	file:
+DIVIDER::((int)(FOSC/(16UL*BAUD)-1))	C:\Users\Saim\Desktop\RemoteCar\verici.c	13;"	d	line:13	file:
+FOSC::4000000L	C:\Users\Saim\Desktop\RemoteCar\verici.c	12;"	d	line:12	file:
+bolum	C:\Users\Saim\Desktop\RemoteCar\verici.c	43;"	v	line:43
+gelen	C:\Users\Saim\Desktop\RemoteCar\verici.c	122;"	l	line:122
+gelen_veri	C:\Users\Saim\Desktop\RemoteCar\verici.c	42;"	v	line:42
+index	C:\Users\Saim\Desktop\RemoteCar\verici.c	41;"	v	line:41
+kodla_gonder	C:\Users\Saim\Desktop\RemoteCar\verici.c	82;"	f	line:82	signature:(int sayi)
+main	C:\Users\Saim\Desktop\RemoteCar\verici.c	114;"	f	line:114	signature:(void)
+senk	C:\Users\Saim\Desktop\RemoteCar\verici.c	58;"	v	line:58
+senk1	C:\Users\Saim\Desktop\RemoteCar\verici.c	59;"	v	line:59
+senkron	C:\Users\Saim\Desktop\RemoteCar\verici.c	60;"	f	line:60
+seri_porta_veri_gonder	C:\Users\Saim\Desktop\RemoteCar\verici.c	19;"	f	line:19	signature:(unsigned char jk)
+seri_porttan_veri_al	C:\Users\Saim\Desktop\RemoteCar\verici.c	14;"	f	line:14
+seri_portu_ayarla	C:\Users\Saim\Desktop\RemoteCar\verici.c	25;"	f	line:25
+uyan	C:\Users\Saim\Desktop\RemoteCar\verici.c	42;"	v	line:42
+uyandir	C:\Users\Saim\Desktop\RemoteCar\verici.c	44;"	f	line:44

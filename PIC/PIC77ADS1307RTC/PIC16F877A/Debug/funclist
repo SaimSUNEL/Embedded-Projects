@@ -1,0 +1,25 @@
+_DS1307_saat_ayarla: CODE, 1147 0 93
+___awdiv: CODE, 1612 0 116
+_seri_porta_veri_gonder: CODE, 480 0 46
+_DS1307_dakika_ayarla: CODE, 1054 0 93
+_DS1307_saniye_ayarla: CODE, 1240 0 93
+_main: CODE, 1728 0 320
+_Send_NACK: CODE, 396 0 13
+_I2C_oku: CODE, 383 0 13
+_I2C_Stop: CODE, 346 0 12
+_I2C_gonder: CODE, 358 0 12
+_DS1307_ay: CODE, 526 0 85
+_DS1307_yil: CODE, 696 0 85
+_DS1307_gun: CODE, 611 0 85
+_DS1307_saat: CODE, 963 0 91
+_seri_port: CODE, 370 0 13
+_DS1307_ay_ayarla: CODE, 1426 0 93
+_DS1307_dakika: CODE, 872 0 91
+_DS1307_saniye: CODE, 781 0 91
+_DS1307_yil_ayarla: CODE, 1519 0 93
+_DS1307_gun_ayarla: CODE, 1333 0 93
+_seri_portu_ayarla: CODE, 436 0 20
+_I2C_Start: CODE, 334 0 12
+_I2C_Master_ayarla: CODE, 422 0 14
+___bmul: CODE, 456 0 24
+Total: 1701

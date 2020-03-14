@@ -1,0 +1,5 @@
+_SoftwareSerial_gonder: CODE, 1813 0 60
+_main: CODE, 1945 0 103
+_SerialSoftware_ayarla: CODE, 1804 0 9
+_SoftwareSerial_receive: CODE, 1873 0 72
+Total: 244

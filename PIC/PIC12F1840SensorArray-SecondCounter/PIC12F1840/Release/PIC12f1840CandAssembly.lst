@@ -1,0 +1,223 @@
+     1: #include <htc.h>
+     2: 
+     3: #include<stdlib.h>
+     4: #include<stdio.h>
+     5: #include<string.h>
+     6: typedef unsigned char byte;
+     7: #include "OneWireShiftRegister.h"
+     8: #include "OneWireLCD.h"
+     9: #include "7Segments.h"
+    10: #include "LED.h"
+    11: #include "INPUTHEADER.h"
+    12: #include "DHT11.h"
+    13: #include "ADC.h"
+    14: #include "UART.h"
+    15: #include "EEPROM.h"
+    16: #include "INT0.h"
+    17: #include "TIMER1.h"
+    18: #include "INTERRUPT.h"
+    19: #include "ALARM.h"
+    20: #include "InternalTemperature.h"
+    21: 
+    22: 
+    23: byte dht11_data[5];//40 bits
+    24: byte sicaklik, nem ;
+    25: byte low_time_count, high_time_count;
+    26: 
+    27: byte deneme;
+    28: 
+    29: byte oku1, oku2;
+    30: 
+    31: int sensor_measurements[4];
+    32: int voltage = 0;
+    33: int val;
+    34: byte sensor_min_max [][2] = {{0, 60}, {0, 60}, {0,60}, {0, 60} };
+    35: float sensor_scalar [] = {5.0/1024.0*100.0, 5.0/1024.0*100.0, 5.0/1024.0*100.0, 5.0/1024.0*100.0};
+    36: 
+    37: byte danger_sensor[] = {5, 5, 5, 5};
+    38: 
+    39: byte kommand [60];
+    40: 
+    41: void main()
+    42: {
+    43: 
+    44: ANSELA = 0;
+    45: SPLLEN = 0;
+    46: //16 mhz internal oscillator
+    47: IRCF3 = 1;
+    48: IRCF2 = 1;
+    49: IRCF1 = 1;
+    50: IRCF0 = 1;
+    51: 
+    52: SCS1 = 1 ; //Internel oscillator
+    53: SCS0 = 0;
+    54: TRISA0 = 0; //A0 output
+    55: PORTA = 0;
+    56: 
+    57: 
+    58: 
+    59: TRISA3 = 1; //MCLR - A3 always input
+    60: TRISA4 = 1; //dth11 pin, analog inputs, digital inputs...
+    61: 
+    62: TRISA0 = 0;
+    63: TRISA1 = 1; //RX pin.
+    64: TRISA2 = 0;
+    65: TRISA5 = 0;
+    66: 
+    67: RA2 = 1;
+    68: RA5 = 1;
+    69: 
+    70: for(int j = 0 ; j < 60 ; j++)
+    71: {
+    72:         kommand[j] = j;
+    73: }
+    74: 
+    75: //while(1);
+    76: 
+    77: 
+    78: __delay_ms(100);
+    79: LCD_init();
+    80: ADC_init();
+    81: UART_init();
+    82: INT0_init();
+    83: TIMER1_init();
+    84: //TEMPINDICATOR_init();
+    85: __delay_ms(100);
+    86: 
+    87: PEIE = 1;
+    88: GIE = 1;
+    89: 
+    90: int rakam = 0;
+    91: 
+    92: lcd_write("This is a try");
+    93: __delay_ms(1000);
+    94: lcd_clear();
+    95: while(1)
+    96: {
+    97: lcd_goto(1, 1);
+    98: rakam ++;
+    99: lcd_write_number(rakam);
+   100: display_number(rakam);
+   101: 
+   102: __delay_ms(1000);
+   103: lcd_write("     ");
+   104: 
+   105: //oku1 = TempIndicator_read();
+   106: 
+   107: }
+   108: 
+   109: 
+   110: //set_segment_shift(SECOND_DIGIT, rakamlar[1]);
+   111: 
+   112: 
+   113: 
+   114: /*
+   115: lcd_write("Saim SUNEL");
+   116: set_segment_shift(FIRST_DIGIT, rakamlar[0]);
+   117: set_segment_shift(SECOND_DIGIT, rakamlar[1]);
+   118: led_on(15);
+   119: input_selection(4);
+   120: __delay_ms(50);
+   121: DHT11_get_data();
+   122: input_selection(0);
+   123: __delay_ms(20);
+   124: UART_byte_send(ADC_read());
+   125: input_selection(4);
+   126: __delay_ms(20);
+   127: DHT11_get_data();
+   128: input_selection(1);
+   129: __delay_ms(20);
+   130: UART_byte_send(ADC_read());
+   131: */
+   132: 
+   133: 
+   134: 
+   135: 
+   136: /*
+   137: byte rakam = 0;
+   138: while(1)
+   139: {
+   140: 
+   141: 
+   142: 
+   143: if(count_status == COUNT_IDLE)
+   144:         {
+   145:                 input_selection(4); //DHT index...
+   146:                 __delay_ms(10);
+   147:                 DHT11_get_data();
+   148: 
+   149:                 what_to_display = SICAKLIK;
+   150:                 GIE = 0;
+   151:                 display_number(sicaklik);
+   152:                 GIE = 1;
+   153:                 __delay_ms(1000);
+   154:                 while(count_status == COUNT_ACTIVE);
+   155:                 what_to_display = NEM;
+   156:                 GIE = 0;
+   157:                 display_number(nem);
+   158:                 GIE = 1;
+   159:                 __delay_ms(1000);
+   160:                 while(count_status == COUNT_ACTIVE) ;
+   161: 
+   162: 
+   163: 
+   164:         for(byte sensor_index = 0; sensor_index < 4; sensor_index++)
+   165:                 {
+   166:                         byte temp = 0, temp2 = 0;
+   167:                         temp |= 1 << (sensor_index+4); 
+   168:                         input_selection(sensor_index);
+   169:                         __delay_ms(30);
+   170:                         voltage = ADC_read();
+   171:                         voltage = (int)(voltage*sensor_scalar[sensor_index]);
+   172:                         sensor_measurements[sensor_index] = voltage;
+   173:                         what_to_display = NONE;
+   174:                         GIE= 0;
+   175:                         display_number(voltage);
+   176:                         GIE = 1;
+   177:                         temp2 = voltage - sensor_min_max[sensor_index][0];
+   178:                         temp2 =  (byte)(temp2 /((sensor_min_max[sensor_index][1] - sensor_min_max[sensor_index][0])/4.0));
+   179:                         for(byte i = 0; i < 4;i++)
+   180:                         {
+   181:                                 if(i < temp2) temp |= 1 << i;
+   182:                                 
+   183:                         }
+   184:                         if(temp2 >= 3)
+   185:                                 danger_sensor[sensor_index] = 1;
+   186:                                 else
+   187:                                 danger_sensor[sensor_index] = 5;
+   188:                         //As soon as the emergency is detected, warn till normal values are reached...
+   189:                         if(danger_sensor[sensor_index] == 1)
+   190:                                 alarm_on();
+   191: 
+   192:                         led_on(temp);
+   193:                         __delay_ms(2000);
+   194:                         while(count_status == COUNT_ACTIVE);
+   195: 
+   196:                 }
+   197:                 byte alarm = 0;
+   198:                 for(byte i = 0; i < 4; i++)
+   199:                 {
+   200:                         if(danger_sensor[i] == 1)
+   201:                                 alarm = 1;
+   202:                 }
+   203:                 if(alarm == 1)
+   204:                 {
+   205:                         alarm_on();
+   206:                         //set_bit(6, 1);
+   207:                 }
+   208:                 else alarm_off();
+   209:                         //set_bit(6, 0);
+   210:                 
+   211: 
+   212:                 led_on(0);
+   213:         }
+   214: 
+   215: 
+   216: 
+   217: 
+   218: 
+   219: }
+   220: 
+   221: */
+   222: 
+   223: }

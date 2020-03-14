@@ -1,0 +1,2091 @@
+
+# 1 "../PIC16f688Weather.c"
+
+
+
+typedef unsigned char byte;
+
+# 90 "C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\pic16f688.h"
+volatile unsigned char INDF @ 0x000;
+
+
+
+volatile unsigned char TMR0 @ 0x001;
+
+
+
+volatile unsigned char PCL @ 0x002;
+
+
+
+volatile unsigned char STATUS @ 0x003;
+
+volatile bit CARRY @ ((unsigned)&STATUS*8)+0;
+volatile bit DC @ ((unsigned)&STATUS*8)+1;
+volatile bit ZERO @ ((unsigned)&STATUS*8)+2;
+volatile bit nPD @ ((unsigned)&STATUS*8)+3;
+volatile bit nTO @ ((unsigned)&STATUS*8)+4;
+volatile bit IRP @ ((unsigned)&STATUS*8)+7;
+volatile bit RP0 @ ((unsigned)&STATUS*8)+5;
+volatile bit RP1 @ ((unsigned)&STATUS*8)+6;
+
+volatile union {
+struct {
+unsigned C : 1;
+unsigned DC : 1;
+unsigned Z : 1;
+unsigned nPD : 1;
+unsigned nTO : 1;
+unsigned RP : 2;
+unsigned IRP : 1;
+};
+struct {
+unsigned : 5;
+unsigned RP0 : 1;
+unsigned RP1 : 1;
+};
+} STATUSbits @ 0x003;
+
+
+
+volatile unsigned char FSR @ 0x004;
+
+
+
+volatile unsigned char PORTA @ 0x005;
+
+volatile bit RA0 @ ((unsigned)&PORTA*8)+0;
+volatile bit RA1 @ ((unsigned)&PORTA*8)+1;
+volatile bit RA2 @ ((unsigned)&PORTA*8)+2;
+volatile bit RA3 @ ((unsigned)&PORTA*8)+3;
+volatile bit RA4 @ ((unsigned)&PORTA*8)+4;
+volatile bit RA5 @ ((unsigned)&PORTA*8)+5;
+
+volatile union {
+struct {
+unsigned RA0 : 1;
+unsigned RA1 : 1;
+unsigned RA2 : 1;
+unsigned RA3 : 1;
+unsigned RA4 : 1;
+unsigned RA5 : 1;
+};
+} PORTAbits @ 0x005;
+
+
+
+volatile unsigned char PORTC @ 0x007;
+
+volatile bit RC0 @ ((unsigned)&PORTC*8)+0;
+volatile bit RC1 @ ((unsigned)&PORTC*8)+1;
+volatile bit RC2 @ ((unsigned)&PORTC*8)+2;
+volatile bit RC3 @ ((unsigned)&PORTC*8)+3;
+volatile bit RC4 @ ((unsigned)&PORTC*8)+4;
+volatile bit RC5 @ ((unsigned)&PORTC*8)+5;
+
+volatile union {
+struct {
+unsigned RC0 : 1;
+unsigned RC1 : 1;
+unsigned RC2 : 1;
+unsigned RC3 : 1;
+unsigned RC4 : 1;
+unsigned RC5 : 1;
+};
+} PORTCbits @ 0x007;
+
+
+
+volatile unsigned char PCLATH @ 0x00A;
+
+
+volatile union {
+struct {
+unsigned PCLATH : 5;
+};
+} PCLATHbits @ 0x00A;
+
+
+
+volatile unsigned char INTCON @ 0x00B;
+
+volatile bit RAIF @ ((unsigned)&INTCON*8)+0;
+volatile bit INTF @ ((unsigned)&INTCON*8)+1;
+volatile bit T0IF @ ((unsigned)&INTCON*8)+2;
+volatile bit RAIE @ ((unsigned)&INTCON*8)+3;
+volatile bit INTE @ ((unsigned)&INTCON*8)+4;
+volatile bit T0IE @ ((unsigned)&INTCON*8)+5;
+volatile bit PEIE @ ((unsigned)&INTCON*8)+6;
+volatile bit GIE @ ((unsigned)&INTCON*8)+7;
+volatile bit TMR0IF @ ((unsigned)&INTCON*8)+2;
+volatile bit TMR0IE @ ((unsigned)&INTCON*8)+5;
+
+volatile union {
+struct {
+unsigned RAIF : 1;
+unsigned INTF : 1;
+unsigned T0IF : 1;
+unsigned RAIE : 1;
+unsigned INTE : 1;
+unsigned T0IE : 1;
+unsigned PEIE : 1;
+unsigned GIE : 1;
+};
+struct {
+unsigned : 2;
+unsigned TMR0IF : 1;
+unsigned : 2;
+unsigned TMR0IE : 1;
+};
+} INTCONbits @ 0x00B;
+
+
+
+volatile unsigned char PIR1 @ 0x00C;
+
+volatile bit TMR1IF @ ((unsigned)&PIR1*8)+0;
+volatile bit TXIF @ ((unsigned)&PIR1*8)+1;
+volatile bit OSFIF @ ((unsigned)&PIR1*8)+2;
+volatile bit C1IF @ ((unsigned)&PIR1*8)+3;
+volatile bit C2IF @ ((unsigned)&PIR1*8)+4;
+volatile bit RCIF @ ((unsigned)&PIR1*8)+5;
+volatile bit ADIF @ ((unsigned)&PIR1*8)+6;
+volatile bit EEIF @ ((unsigned)&PIR1*8)+7;
+volatile bit T1IF @ ((unsigned)&PIR1*8)+0;
+
+volatile union {
+struct {
+unsigned TMR1IF : 1;
+unsigned TXIF : 1;
+unsigned OSFIF : 1;
+unsigned C1IF : 1;
+unsigned C2IF : 1;
+unsigned RCIF : 1;
+unsigned ADIF : 1;
+unsigned EEIF : 1;
+};
+struct {
+unsigned T1IF : 1;
+};
+} PIR1bits @ 0x00C;
+
+
+
+
+volatile unsigned char TMR1L @ 0x00E;
+
+
+
+volatile unsigned char TMR1H @ 0x00F;
+
+
+
+volatile unsigned int TMR1 @ 0x00E;
+
+
+volatile unsigned char T1CON @ 0x010;
+
+volatile bit TMR1ON @ ((unsigned)&T1CON*8)+0;
+volatile bit TMR1CS @ ((unsigned)&T1CON*8)+1;
+volatile bit nT1SYNC @ ((unsigned)&T1CON*8)+2;
+volatile bit T1OSCEN @ ((unsigned)&T1CON*8)+3;
+volatile bit TMR1GE @ ((unsigned)&T1CON*8)+6;
+volatile bit T1GINV @ ((unsigned)&T1CON*8)+7;
+volatile bit T1CKPS0 @ ((unsigned)&T1CON*8)+4;
+volatile bit T1CKPS1 @ ((unsigned)&T1CON*8)+5;
+
+volatile union {
+struct {
+unsigned TMR1ON : 1;
+unsigned TMR1CS : 1;
+unsigned nT1SYNC : 1;
+unsigned T1OSCEN : 1;
+unsigned T1CKPS : 2;
+unsigned TMR1GE : 1;
+unsigned T1GINV : 1;
+};
+struct {
+unsigned : 4;
+unsigned T1CKPS0 : 1;
+unsigned T1CKPS1 : 1;
+};
+} T1CONbits @ 0x010;
+
+
+
+volatile unsigned char BAUDCTL @ 0x011;
+
+volatile bit ABDEN @ ((unsigned)&BAUDCTL*8)+0;
+volatile bit WUE @ ((unsigned)&BAUDCTL*8)+1;
+volatile bit BRG16 @ ((unsigned)&BAUDCTL*8)+3;
+volatile bit SCKP @ ((unsigned)&BAUDCTL*8)+4;
+volatile bit RCIDL @ ((unsigned)&BAUDCTL*8)+6;
+volatile bit ABDOVF @ ((unsigned)&BAUDCTL*8)+7;
+
+volatile union {
+struct {
+unsigned ABDEN : 1;
+unsigned WUE : 1;
+unsigned : 1;
+unsigned BRG16 : 1;
+unsigned SCKP : 1;
+unsigned : 1;
+unsigned RCIDL : 1;
+unsigned ABDOVF : 1;
+};
+} BAUDCTLbits @ 0x011;
+
+
+
+volatile unsigned char SPBRGH @ 0x012;
+
+
+
+volatile unsigned char SPBRG @ 0x013;
+
+
+
+volatile unsigned char RCREG @ 0x014;
+
+
+
+volatile unsigned char TXREG @ 0x015;
+
+
+
+volatile unsigned char TXSTA @ 0x016;
+
+volatile bit TX9D @ ((unsigned)&TXSTA*8)+0;
+volatile bit TRMT @ ((unsigned)&TXSTA*8)+1;
+volatile bit BRGH @ ((unsigned)&TXSTA*8)+2;
+volatile bit SENDB @ ((unsigned)&TXSTA*8)+3;
+volatile bit SYNC @ ((unsigned)&TXSTA*8)+4;
+volatile bit TXEN @ ((unsigned)&TXSTA*8)+5;
+volatile bit TX9 @ ((unsigned)&TXSTA*8)+6;
+volatile bit CSRC @ ((unsigned)&TXSTA*8)+7;
+
+volatile union {
+struct {
+unsigned TX9D : 1;
+unsigned TRMT : 1;
+unsigned BRGH : 1;
+unsigned SENDB : 1;
+unsigned SYNC : 1;
+unsigned TXEN : 1;
+unsigned TX9 : 1;
+unsigned CSRC : 1;
+};
+} TXSTAbits @ 0x016;
+
+
+
+volatile unsigned char RCSTA @ 0x017;
+
+volatile bit RX9D @ ((unsigned)&RCSTA*8)+0;
+volatile bit OERR @ ((unsigned)&RCSTA*8)+1;
+volatile bit FERR @ ((unsigned)&RCSTA*8)+2;
+volatile bit ADDEN @ ((unsigned)&RCSTA*8)+3;
+volatile bit CREN @ ((unsigned)&RCSTA*8)+4;
+volatile bit SREN @ ((unsigned)&RCSTA*8)+5;
+volatile bit RX9 @ ((unsigned)&RCSTA*8)+6;
+volatile bit SPEN @ ((unsigned)&RCSTA*8)+7;
+
+volatile union {
+struct {
+unsigned RX9D : 1;
+unsigned OERR : 1;
+unsigned FERR : 1;
+unsigned ADDEN : 1;
+unsigned CREN : 1;
+unsigned SREN : 1;
+unsigned RX9 : 1;
+unsigned SPEN : 1;
+};
+} RCSTAbits @ 0x017;
+
+
+
+volatile unsigned char WDTCON @ 0x018;
+
+volatile bit SWDTEN @ ((unsigned)&WDTCON*8)+0;
+volatile bit WDTPS0 @ ((unsigned)&WDTCON*8)+1;
+volatile bit WDTPS1 @ ((unsigned)&WDTCON*8)+2;
+volatile bit WDTPS2 @ ((unsigned)&WDTCON*8)+3;
+volatile bit WDTPS3 @ ((unsigned)&WDTCON*8)+4;
+
+volatile union {
+struct {
+unsigned SWDTEN : 1;
+unsigned WDTPS : 4;
+};
+struct {
+unsigned : 1;
+unsigned WDTPS0 : 1;
+unsigned WDTPS1 : 1;
+unsigned WDTPS2 : 1;
+unsigned WDTPS3 : 1;
+};
+} WDTCONbits @ 0x018;
+
+
+
+volatile unsigned char CMCON0 @ 0x019;
+
+volatile bit CIS @ ((unsigned)&CMCON0*8)+3;
+volatile bit C1INV @ ((unsigned)&CMCON0*8)+4;
+volatile bit C2INV @ ((unsigned)&CMCON0*8)+5;
+volatile bit C1OUT @ ((unsigned)&CMCON0*8)+6;
+volatile bit C2OUT @ ((unsigned)&CMCON0*8)+7;
+volatile bit CM0 @ ((unsigned)&CMCON0*8)+0;
+volatile bit CM1 @ ((unsigned)&CMCON0*8)+1;
+volatile bit CM2 @ ((unsigned)&CMCON0*8)+2;
+
+volatile union {
+struct {
+unsigned CM : 3;
+unsigned CIS : 1;
+unsigned C1INV : 1;
+unsigned C2INV : 1;
+unsigned C1OUT : 1;
+unsigned C2OUT : 1;
+};
+struct {
+unsigned CM0 : 1;
+unsigned CM1 : 1;
+unsigned CM2 : 1;
+};
+} CMCON0bits @ 0x019;
+
+
+
+volatile unsigned char CMCON1 @ 0x01A;
+
+volatile bit C2SYNC @ ((unsigned)&CMCON1*8)+0;
+volatile bit T1GSS @ ((unsigned)&CMCON1*8)+1;
+
+volatile union {
+struct {
+unsigned C2SYNC : 1;
+unsigned T1GSS : 1;
+};
+} CMCON1bits @ 0x01A;
+
+
+
+volatile unsigned char ADRESH @ 0x01E;
+
+
+
+volatile unsigned char ADCON0 @ 0x01F;
+
+volatile bit ADON @ ((unsigned)&ADCON0*8)+0;
+volatile bit GO_nDONE @ ((unsigned)&ADCON0*8)+1;
+volatile bit VCFG @ ((unsigned)&ADCON0*8)+6;
+volatile bit ADFM @ ((unsigned)&ADCON0*8)+7;
+volatile bit GO @ ((unsigned)&ADCON0*8)+1;
+volatile bit CHS0 @ ((unsigned)&ADCON0*8)+2;
+volatile bit CHS1 @ ((unsigned)&ADCON0*8)+3;
+volatile bit CHS2 @ ((unsigned)&ADCON0*8)+4;
+volatile bit nDONE @ ((unsigned)&ADCON0*8)+1;
+volatile bit GO_DONE @ ((unsigned)&ADCON0*8)+1;
+
+volatile union {
+struct {
+unsigned ADON : 1;
+unsigned GO_nDONE : 1;
+unsigned CHS : 3;
+unsigned : 1;
+unsigned VCFG : 1;
+unsigned ADFM : 1;
+};
+struct {
+unsigned : 1;
+unsigned : 1;
+unsigned : 3;
+unsigned : 1;
+unsigned : 1;
+unsigned : 1;
+};
+struct {
+unsigned : 1;
+unsigned GO : 1;
+unsigned CHS0 : 1;
+unsigned CHS1 : 1;
+unsigned CHS2 : 1;
+};
+struct {
+unsigned : 1;
+unsigned nDONE : 1;
+};
+struct {
+unsigned : 1;
+unsigned GO_DONE : 1;
+};
+} ADCON0bits @ 0x01F;
+
+# 514
+volatile unsigned char OPTION_REG @ 0x081;
+
+volatile bit PSA @ ((unsigned)&OPTION_REG*8)+3;
+volatile bit T0SE @ ((unsigned)&OPTION_REG*8)+4;
+volatile bit T0CS @ ((unsigned)&OPTION_REG*8)+5;
+volatile bit INTEDG @ ((unsigned)&OPTION_REG*8)+6;
+volatile bit nRAPU @ ((unsigned)&OPTION_REG*8)+7;
+volatile bit PS0 @ ((unsigned)&OPTION_REG*8)+0;
+volatile bit PS1 @ ((unsigned)&OPTION_REG*8)+1;
+volatile bit PS2 @ ((unsigned)&OPTION_REG*8)+2;
+
+volatile union {
+struct {
+unsigned PS : 3;
+unsigned PSA : 1;
+unsigned T0SE : 1;
+unsigned T0CS : 1;
+unsigned INTEDG : 1;
+unsigned nRAPU : 1;
+};
+struct {
+unsigned PS0 : 1;
+unsigned PS1 : 1;
+unsigned PS2 : 1;
+};
+} OPTION_REGbits @ 0x081;
+
+
+
+volatile unsigned char TRISA @ 0x085;
+
+volatile bit TRISA0 @ ((unsigned)&TRISA*8)+0;
+volatile bit TRISA1 @ ((unsigned)&TRISA*8)+1;
+volatile bit TRISA2 @ ((unsigned)&TRISA*8)+2;
+volatile bit TRISA3 @ ((unsigned)&TRISA*8)+3;
+volatile bit TRISA4 @ ((unsigned)&TRISA*8)+4;
+volatile bit TRISA5 @ ((unsigned)&TRISA*8)+5;
+
+volatile union {
+struct {
+unsigned TRISA0 : 1;
+unsigned TRISA1 : 1;
+unsigned TRISA2 : 1;
+unsigned TRISA3 : 1;
+unsigned TRISA4 : 1;
+unsigned TRISA5 : 1;
+};
+} TRISAbits @ 0x085;
+
+
+
+volatile unsigned char TRISC @ 0x087;
+
+volatile bit TRISC0 @ ((unsigned)&TRISC*8)+0;
+volatile bit TRISC1 @ ((unsigned)&TRISC*8)+1;
+volatile bit TRISC2 @ ((unsigned)&TRISC*8)+2;
+volatile bit TRISC3 @ ((unsigned)&TRISC*8)+3;
+volatile bit TRISC4 @ ((unsigned)&TRISC*8)+4;
+volatile bit TRISC5 @ ((unsigned)&TRISC*8)+5;
+
+volatile union {
+struct {
+unsigned TRISC0 : 1;
+unsigned TRISC1 : 1;
+unsigned TRISC2 : 1;
+unsigned TRISC3 : 1;
+unsigned TRISC4 : 1;
+unsigned TRISC5 : 1;
+};
+} TRISCbits @ 0x087;
+
+
+
+volatile unsigned char PIE1 @ 0x08C;
+
+volatile bit TMR1IE @ ((unsigned)&PIE1*8)+0;
+volatile bit TXIE @ ((unsigned)&PIE1*8)+1;
+volatile bit OSFIE @ ((unsigned)&PIE1*8)+2;
+volatile bit C1IE @ ((unsigned)&PIE1*8)+3;
+volatile bit C2IE @ ((unsigned)&PIE1*8)+4;
+volatile bit RCIE @ ((unsigned)&PIE1*8)+5;
+volatile bit ADIE @ ((unsigned)&PIE1*8)+6;
+volatile bit EEIE @ ((unsigned)&PIE1*8)+7;
+volatile bit T1IE @ ((unsigned)&PIE1*8)+0;
+
+volatile union {
+struct {
+unsigned TMR1IE : 1;
+unsigned TXIE : 1;
+unsigned OSFIE : 1;
+unsigned C1IE : 1;
+unsigned C2IE : 1;
+unsigned RCIE : 1;
+unsigned ADIE : 1;
+unsigned EEIE : 1;
+};
+struct {
+unsigned T1IE : 1;
+};
+} PIE1bits @ 0x08C;
+
+
+
+volatile unsigned char PCON @ 0x08E;
+
+volatile bit nBOR @ ((unsigned)&PCON*8)+0;
+volatile bit nPOR @ ((unsigned)&PCON*8)+1;
+volatile bit SBODEN @ ((unsigned)&PCON*8)+4;
+volatile bit ULPWUE @ ((unsigned)&PCON*8)+5;
+volatile bit nBOD @ ((unsigned)&PCON*8)+0;
+
+volatile union {
+struct {
+unsigned nBOR : 1;
+unsigned nPOR : 1;
+unsigned : 2;
+unsigned SBODEN : 1;
+unsigned ULPWUE : 1;
+};
+struct {
+unsigned nBOD : 1;
+};
+} PCONbits @ 0x08E;
+
+
+
+volatile unsigned char OSCCON @ 0x08F;
+
+volatile bit SCS @ ((unsigned)&OSCCON*8)+0;
+volatile bit LTS @ ((unsigned)&OSCCON*8)+1;
+volatile bit HTS @ ((unsigned)&OSCCON*8)+2;
+volatile bit OSTS @ ((unsigned)&OSCCON*8)+3;
+volatile bit IRCF0 @ ((unsigned)&OSCCON*8)+4;
+volatile bit IRCF1 @ ((unsigned)&OSCCON*8)+5;
+volatile bit IRCF2 @ ((unsigned)&OSCCON*8)+6;
+
+volatile union {
+struct {
+unsigned SCS : 1;
+unsigned LTS : 1;
+unsigned HTS : 1;
+unsigned OSTS : 1;
+unsigned IOSCF : 3;
+};
+struct {
+unsigned : 4;
+unsigned IRCF0 : 1;
+unsigned IRCF1 : 1;
+unsigned IRCF2 : 1;
+};
+} OSCCONbits @ 0x08F;
+
+
+
+volatile unsigned char OSCTUNE @ 0x090;
+
+volatile bit TUN0 @ ((unsigned)&OSCTUNE*8)+0;
+volatile bit TUN1 @ ((unsigned)&OSCTUNE*8)+1;
+volatile bit TUN2 @ ((unsigned)&OSCTUNE*8)+2;
+volatile bit TUN3 @ ((unsigned)&OSCTUNE*8)+3;
+volatile bit TUN4 @ ((unsigned)&OSCTUNE*8)+4;
+
+volatile union {
+struct {
+unsigned TUN : 5;
+};
+struct {
+unsigned TUN0 : 1;
+unsigned TUN1 : 1;
+unsigned TUN2 : 1;
+unsigned TUN3 : 1;
+unsigned TUN4 : 1;
+};
+} OSCTUNEbits @ 0x090;
+
+
+
+volatile unsigned char ANSEL @ 0x091;
+
+volatile bit ANS0 @ ((unsigned)&ANSEL*8)+0;
+volatile bit ANS1 @ ((unsigned)&ANSEL*8)+1;
+volatile bit ANS2 @ ((unsigned)&ANSEL*8)+2;
+volatile bit ANS3 @ ((unsigned)&ANSEL*8)+3;
+volatile bit ANS4 @ ((unsigned)&ANSEL*8)+4;
+volatile bit ANS5 @ ((unsigned)&ANSEL*8)+5;
+volatile bit ANS6 @ ((unsigned)&ANSEL*8)+6;
+volatile bit ANS7 @ ((unsigned)&ANSEL*8)+7;
+
+volatile union {
+struct {
+unsigned ANS0 : 1;
+unsigned ANS1 : 1;
+unsigned ANS2 : 1;
+unsigned ANS3 : 1;
+unsigned ANS4 : 1;
+unsigned ANS5 : 1;
+unsigned ANS6 : 1;
+unsigned ANS7 : 1;
+};
+} ANSELbits @ 0x091;
+
+
+
+volatile unsigned char WPUA @ 0x095;
+volatile unsigned char WPU @ 0x095;
+
+volatile bit WPUA0 @ ((unsigned)&WPUA*8)+0;
+volatile bit WPUA1 @ ((unsigned)&WPUA*8)+1;
+volatile bit WPUA2 @ ((unsigned)&WPUA*8)+2;
+volatile bit WPUA4 @ ((unsigned)&WPUA*8)+4;
+volatile bit WPUA5 @ ((unsigned)&WPUA*8)+5;
+volatile bit WPU0 @ ((unsigned)&WPUA*8)+0;
+volatile bit WPU1 @ ((unsigned)&WPUA*8)+1;
+volatile bit WPU2 @ ((unsigned)&WPUA*8)+2;
+volatile bit WPU4 @ ((unsigned)&WPUA*8)+4;
+volatile bit WPU5 @ ((unsigned)&WPUA*8)+5;
+
+volatile union {
+struct {
+unsigned WPUA0 : 1;
+unsigned WPUA1 : 1;
+unsigned WPUA2 : 1;
+unsigned : 1;
+unsigned WPUA4 : 1;
+unsigned WPUA5 : 1;
+};
+struct {
+unsigned WPU0 : 1;
+unsigned WPU1 : 1;
+unsigned WPU2 : 1;
+unsigned : 1;
+unsigned WPU4 : 1;
+unsigned WPU5 : 1;
+};
+} WPUAbits @ 0x095;
+
+
+
+volatile unsigned char IOCA @ 0x096;
+volatile unsigned char IOC @ 0x096;
+
+volatile bit IOCA0 @ ((unsigned)&IOCA*8)+0;
+volatile bit IOCA1 @ ((unsigned)&IOCA*8)+1;
+volatile bit IOCA2 @ ((unsigned)&IOCA*8)+2;
+volatile bit IOCA3 @ ((unsigned)&IOCA*8)+3;
+volatile bit IOCA4 @ ((unsigned)&IOCA*8)+4;
+volatile bit IOCA5 @ ((unsigned)&IOCA*8)+5;
+volatile bit IOC0 @ ((unsigned)&IOCA*8)+0;
+volatile bit IOC1 @ ((unsigned)&IOCA*8)+1;
+volatile bit IOC2 @ ((unsigned)&IOCA*8)+2;
+volatile bit IOC3 @ ((unsigned)&IOCA*8)+3;
+volatile bit IOC4 @ ((unsigned)&IOCA*8)+4;
+volatile bit IOC5 @ ((unsigned)&IOCA*8)+5;
+
+volatile union {
+struct {
+unsigned IOCA0 : 1;
+unsigned IOCA1 : 1;
+unsigned IOCA2 : 1;
+unsigned IOCA3 : 1;
+unsigned IOCA4 : 1;
+unsigned IOCA5 : 1;
+};
+struct {
+unsigned IOC0 : 1;
+unsigned IOC1 : 1;
+unsigned IOC2 : 1;
+unsigned IOC3 : 1;
+unsigned IOC4 : 1;
+unsigned IOC5 : 1;
+};
+} IOCAbits @ 0x096;
+
+
+
+volatile unsigned char EEDATH @ 0x097;
+
+
+volatile union {
+struct {
+unsigned : 6;
+};
+} EEDATHbits @ 0x097;
+
+
+
+volatile unsigned char EEADRH @ 0x098;
+
+
+volatile union {
+struct {
+unsigned : 4;
+};
+} EEADRHbits @ 0x098;
+
+
+
+volatile unsigned char VRCON @ 0x099;
+
+volatile bit VRR @ ((unsigned)&VRCON*8)+5;
+volatile bit VREN @ ((unsigned)&VRCON*8)+7;
+volatile bit VR0 @ ((unsigned)&VRCON*8)+0;
+volatile bit VR1 @ ((unsigned)&VRCON*8)+1;
+volatile bit VR2 @ ((unsigned)&VRCON*8)+2;
+volatile bit VR3 @ ((unsigned)&VRCON*8)+3;
+
+volatile union {
+struct {
+unsigned VR : 4;
+unsigned : 1;
+unsigned VRR : 1;
+unsigned : 1;
+unsigned VREN : 1;
+};
+struct {
+unsigned VR0 : 1;
+unsigned VR1 : 1;
+unsigned VR2 : 1;
+unsigned VR3 : 1;
+};
+} VRCONbits @ 0x099;
+
+
+
+volatile unsigned char EEDAT @ 0x09A;
+volatile unsigned char EEDATA @ 0x09A;
+
+
+
+volatile unsigned char EEADR @ 0x09B;
+
+
+
+volatile unsigned char EECON1 @ 0x09C;
+
+volatile bit RD @ ((unsigned)&EECON1*8)+0;
+volatile bit WR @ ((unsigned)&EECON1*8)+1;
+volatile bit WREN @ ((unsigned)&EECON1*8)+2;
+volatile bit WRERR @ ((unsigned)&EECON1*8)+3;
+volatile bit EEPGD @ ((unsigned)&EECON1*8)+7;
+
+volatile union {
+struct {
+unsigned RD : 1;
+unsigned WR : 1;
+unsigned WREN : 1;
+unsigned WRERR : 1;
+unsigned : 3;
+unsigned EEPGD : 1;
+};
+} EECON1bits @ 0x09C;
+
+
+
+volatile unsigned char EECON2 @ 0x09D;
+
+
+
+volatile unsigned char ADRESL @ 0x09E;
+
+
+
+volatile unsigned char ADCON1 @ 0x09F;
+
+volatile bit ADCS0 @ ((unsigned)&ADCON1*8)+4;
+volatile bit ADCS1 @ ((unsigned)&ADCON1*8)+5;
+volatile bit ADCS2 @ ((unsigned)&ADCON1*8)+6;
+
+volatile union {
+struct {
+unsigned : 4;
+unsigned ADCS : 3;
+};
+struct {
+unsigned : 4;
+unsigned ADCS0 : 1;
+unsigned ADCS1 : 1;
+unsigned ADCS2 : 1;
+};
+} ADCON1bits @ 0x09F;
+
+
+# 27 "C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\pic.h"
+#pragma inline(_nop)
+extern void _nop(void);
+
+# 80
+extern unsigned int flash_read(unsigned short addr);
+
+# 41 "C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\eeprom_routines.h"
+extern unsigned char eeprom_write(unsigned char addr, unsigned char value);
+extern unsigned char eeprom_read(unsigned char addr);
+extern void eecpymem(volatile unsigned char *to, eeprom unsigned char *from, unsigned char size);
+extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsigned char size);
+
+
+# 153 "C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\pic.h"
+#pragma inline(_delay)
+extern void _delay(unsigned long);
+
+# 4 "C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\string.h"
+typedef int ptrdiff_t;
+typedef unsigned size_t;
+typedef unsigned short wchar_t;
+
+
+extern int errno;
+
+# 22
+extern void * memcpy(void *, const void *, size_t);
+extern void * memmove(void *, const void *, size_t);
+extern void * memset(void *, int, size_t);
+
+# 35
+extern char * strcat(char *, const char *);
+extern char * strcpy(char *, const char *);
+extern char * strncat(char *, const char *, size_t);
+extern char * strncpy(char *, const char *, size_t);
+extern char * strdup(const char *);
+extern char * strtok(char *, const char *);
+
+
+extern int memcmp(const void *, const void *, size_t);
+extern int strcmp(const char *, const char *);
+extern int stricmp(const char *, const char *);
+extern int strncmp(const char *, const char *, size_t);
+extern int strnicmp(const char *, const char *, size_t);
+extern void * memchr(const void *, int, size_t);
+extern size_t strcspn(const char *, const char *);
+extern char * strpbrk(const char *, const char *);
+extern size_t strspn(const char *, const char *);
+extern char * strstr(const char *, const char *);
+extern char * stristr(const char *, const char *);
+extern char * strerror(int);
+extern size_t strlen(const char *);
+extern char * strchr(const char *, int);
+extern char * strichr(const char *, int);
+extern char * strrchr(const char *, int);
+extern char * strrichr(const char *, int);
+
+# 27 "C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\stdlib.h"
+typedef struct {
+int rem;
+int quot;
+} div_t;
+typedef struct {
+unsigned rem;
+unsigned quot;
+} udiv_t;
+typedef struct {
+long quot;
+long rem;
+} ldiv_t;
+typedef struct {
+unsigned long quot;
+unsigned long rem;
+} uldiv_t;
+
+# 65
+extern double atof(const char *);
+extern double strtod(const char *, const char **);
+extern int atoi(const char *);
+extern unsigned xtoi(const char *);
+extern long atol(const char *);
+extern long strtol(const char *, char **, int);
+
+extern int rand(void);
+extern void srand(unsigned int);
+extern void * calloc(size_t, size_t);
+extern div_t div(int numer, int denom);
+extern udiv_t udiv(unsigned numer, unsigned denom);
+extern ldiv_t ldiv(long numer, long denom);
+extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+extern unsigned int _rotl(unsigned int value, unsigned int shift);
+extern unsigned int _rotr(unsigned int value, unsigned int shift);
+
+# 106
+extern void * malloc(size_t);
+extern void free(void *);
+extern void * realloc(void *, size_t);
+
+# 122
+extern void abort(void);
+extern void exit(int);
+extern int atexit(void (*)(void));
+extern char * getenv(const char *);
+extern char ** environ;
+extern int system(char *);
+extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+extern int abs(int);
+extern long labs(long);
+
+# 145
+extern char * itoa(char * buf, int val, int base);
+extern char * utoa(char * buf, unsigned val, int base);
+extern char * ltoa(char * buf, long val, int base);
+extern char * ultoa(char * buf, unsigned long val, int base);
+
+# 8 "../MainRegister.h"
+byte current_value;
+
+# 15
+void MainRegisterLoadData(unsigned char data)
+{
+
+for(signed char a = 7; a > -1;a--)
+{
+RC1 = (data>>a)&0x1;
+_delay((unsigned long)((2)*(8000000/4000000.0)));
+RC0 = 1;
+_delay((unsigned long)((5)*(8000000/4000000.0)));
+RC0 = 0;
+
+_delay((unsigned long)((5)*(8000000/4000000.0)));
+}
+RC2 = 1;
+_delay((unsigned long)((5)*(8000000/4000000.0)));
+RC2 = 0;
+_delay((unsigned long)((5)*(8000000/4000000.0)));
+
+
+}
+
+
+
+void MainRegisterSetPin(byte pin_number, byte value)
+{
+
+
+
+if(value)
+{
+current_value |= 1 <<pin_number;
+}
+else
+{
+current_value &= ~(1<<pin_number);
+
+}
+
+MainRegisterLoadData(current_value);
+_delay((unsigned long)((200)*(8000000/4000000.0)));
+}
+
+# 9 "../CenterRegister.h"
+byte CenterData[2];
+
+void LoadDataCenter(byte center_no, byte center_data)
+{
+
+for(signed char index = 7; index > -1; index--)
+{
+MainRegisterSetPin(2, (center_data>>index) & 0x1);
+_delay((unsigned long)((50)*(8000000/4000000.0)));
+MainRegisterSetPin(1, 0x1);
+_delay((unsigned long)((30)*(8000000/4000000.0)));
+MainRegisterSetPin(1, 0);
+_delay((unsigned long)((20)*(8000000/4000000.0)));
+}
+MainRegisterSetPin(center_no, 1);
+_delay((unsigned long)((50)*(8000000/4000000.0)));
+MainRegisterSetPin(center_no, 0);
+_delay((unsigned long)((50)*(8000000/4000000.0)));
+}
+
+
+void CenterSetPin(byte pin_number, byte pin_value)
+{
+byte index = pin_number / 8;
+byte shift_amount = pin_number % 8;
+
+if(pin_value)
+{
+CenterData[index] |= 1 << (shift_amount);
+}
+else CenterData[index] &= ~(1 << (shift_amount));
+
+LoadDataCenter(4+index, CenterData[index]);
+
+}
+
+# 11 "../SicaklikSegment.h"
+byte rakamlar []= { 0b01000000, 0b11111001, 0b00100100, 0b00110000, 0b00011001, 0b00010010, 0b00000010, 0b01111000, 0, 0b00010000 };
+byte endusuk1, endusuk2, enyuksek1, enyuksek2;
+
+void TempLoadDigit(byte digit_number, byte value)
+{
+
+for(signed char index=7 ; index > -1; index--)
+{
+CenterSetPin(1, (value >> index) & 0x1);
+_delay((unsigned long)((50)*(8000000/4000000.0)));
+CenterSetPin(0, 0x1);
+_delay((unsigned long)((20)*(8000000/4000000.0)));
+CenterSetPin(0, 0);
+}
+CenterSetPin(digit_number, 1);
+_delay((unsigned long)((50)*(8000000/4000000.0)));
+CenterSetPin(digit_number, 0);
+
+_delay((unsigned long)((200)*(8000000/4000000.0)));
+
+}
+
+void EnDusukDisplay(byte number)
+{
+endusuk1 = rakamlar[number/10];
+endusuk2 = rakamlar[number%10];
+
+
+TempLoadDigit(4, endusuk1);
+TempLoadDigit(5, endusuk2);
+}
+void EnYuksekDisplay(byte number)
+{
+enyuksek1 = rakamlar[number/10];
+enyuksek2 = rakamlar[number%10];
+
+
+TempLoadDigit(6, enyuksek1);
+TempLoadDigit(7, enyuksek2);
+}
+byte curr_digit1, curr_digit2;
+void CurrentTempNemDisplay(byte number, byte is_temp)
+{
+curr_digit1 = rakamlar[number/10];
+curr_digit2 = rakamlar[number%10];
+
+if(!is_temp)
+{
+
+# 59
+#asm
+banksel _curr_digit2
+bsf _curr_digit2, 7
+#endasm 
+}
+
+else {
+
+# 66
+#asm
+banksel _curr_digit1
+bsf _curr_digit1, 7
+#endasm 
+
+}
+TempLoadDigit(14, curr_digit1);
+TempLoadDigit(15, curr_digit2);
+
+}
+
+# 19 "../GUN.h"
+byte gunData, gosterilenGun;
+
+void LoadGunInfo(byte gun)
+{
+gunData = 1 << gun;
+TempLoadDigit(3, gunData);
+
+}
+
+void LoadGosterilenGunInfo(byte g)
+{
+gosterilenGun = 1 << g;
+TempLoadDigit(2, gosterilenGun);
+
+
+}
+
+# 15 "../TARIH.h"
+byte tarihData;
+void TarihRegisterSetPin(byte pin, byte value)
+{
+if(value)
+tarihData |= 1 << pin;
+else
+tarihData &= ~(1<<pin);
+
+LoadDataCenter(3, tarihData);
+}
+
+byte gunDisplay1, gunDisplay2, ayDisplay1, ayDisplay2, yilDisplay1, yilDisplay2;
+void TarihSetDisplay(byte display_number, byte value)
+{
+
+for(signed char index = 7; index > -1; index--)
+{
+TarihRegisterSetPin(1, (value>>index) & 0x1);
+_delay((unsigned long)((50)*(8000000/4000000.0)));
+TarihRegisterSetPin(0, 0x1);
+_delay((unsigned long)((30)*(8000000/4000000.0)));
+TarihRegisterSetPin(0, 0);
+_delay((unsigned long)((20)*(8000000/4000000.0)));
+}
+TarihRegisterSetPin(display_number, 1);
+_delay((unsigned long)((100)*(8000000/4000000.0)));
+TarihRegisterSetPin(display_number, 0);
+_delay((unsigned long)((150)*(8000000/4000000.0)));
+
+
+}
+
+void DisplayGun(byte number)
+{
+gunDisplay1 = rakamlar[number/10];
+gunDisplay2 = rakamlar[number%10];
+TarihSetDisplay(2, gunDisplay1);
+TarihSetDisplay(3, gunDisplay2);
+
+}
+
+void DisplayAy(byte number)
+{
+ayDisplay1 = rakamlar[number/10];
+ayDisplay2 = rakamlar[number%10];
+TarihSetDisplay(4, ayDisplay1);
+TarihSetDisplay(5, ayDisplay2);
+
+}
+
+void DisplayYil(byte number)
+{
+yilDisplay1 = rakamlar[number/10];
+yilDisplay2 = rakamlar[number%10];
+TarihSetDisplay(6, yilDisplay1);
+TarihSetDisplay(7, yilDisplay2);
+
+}
+
+# 7 "../HAVADURUMU.h"
+byte havaREG[3];
+void SetHavaDurumuPin(byte pin_number, byte pin_value)
+{
+
+byte index = pin_number / 8;
+byte shift_amount = pin_number % 8;
+if(pin_value)
+havaREG[index] |= 1 << shift_amount;
+else
+havaREG[index] &= ~(1 << shift_amount);
+
+TempLoadDigit(8+index, havaREG[index]);
+
+# 56
+}
+
+# 4 "../LCD.h"
+byte LCDData;
+
+void shift_reg_set_pin_lcd(byte pin_number, byte pin_value)
+{
+
+if(pin_value)
+{
+LCDData |= 1 << (pin_number);
+}
+else LCDData &= ~(1 << (pin_number));
+
+LoadDataCenter(7, LCDData);
+
+}
+
+# 41
+byte _x=1, _y = 1;
+
+void lcd_data(unsigned char);
+void lcd_init(void);
+void lcd_write(const char *s);
+void lcd_clear(void);
+void lcd_goto(unsigned char,unsigned char);
+void lcd_command(unsigned char c);
+void lcd_yaz(byte data);
+
+
+
+
+byte _temp_;
+void lcd_info(unsigned char c, byte data_type)
+{
+if(data_type == 2)
+shift_reg_set_pin_lcd(1, 0);
+else shift_reg_set_pin_lcd(1, 1);
+
+shift_reg_set_pin_lcd(2, 1);
+
+
+
+_temp_ = (c&0xF0) >> 1 ;
+
+LCDData = LCDData & 0x87;
+LCDData |= _temp_;
+
+# 74
+LoadDataCenter(7, LCDData);
+
+
+
+_delay((unsigned long)((4)*(8000000/4000.0)));
+shift_reg_set_pin_lcd(2, 0);
+
+
+_delay((unsigned long)((4)*(8000000/4000.0)));
+shift_reg_set_pin_lcd(2, 1);
+
+_temp_ = ((c & 0x0F)<<3) ;
+
+LCDData = LCDData & 0x87;
+LCDData |= _temp_;
+
+# 94
+LoadDataCenter(7, LCDData);
+
+# 104
+_delay((unsigned long)((4)*(8000000/4000.0)));
+shift_reg_set_pin_lcd(2, 0);
+
+
+_delay((unsigned long)((10)*(8000000/4000.0)));
+}
+
+void lcd_clear(void)
+{
+
+_y = 1; _x = 1;
+lcd_info(0x01, 2);
+_delay((unsigned long)((2)*(8000000/4000.0)));
+
+}
+
+void lcd_write(const char *s)
+{
+_delay((unsigned long)((1)*(8000000/4000.0)));
+while(*s){
+
+lcd_info(*s++, 1);
+_x++;
+if(_x == 17)
+{
+_x = 1;
+_y++;
+if(_y == 3)
+{
+_y = 1;
+}
+
+lcd_goto(_y, _x);
+}
+
+_delay((unsigned long)((1)*(8000000/4000.0)));}
+_delay((unsigned long)((3)*(8000000/4000.0)));
+}
+void lcd_goto(unsigned char p_1,unsigned char p_2)
+{
+_y = p_1;
+_x = p_2;
+if(p_1==1)
+{lcd_info(0x80+((p_2-1)%16), 2);
+}else{
+lcd_info(0xC0+((p_2-1)%16), 2);
+}
+_delay((unsigned long)((1)*(8000000/4000.0)));
+}
+
+
+void LCD_init()
+{
+shift_reg_set_pin_lcd(1, 0);
+
+shift_reg_set_pin_lcd(2, 0);
+
+
+lcd_info(0x02, 2);
+_delay((unsigned long)((10)*(8000000/4000.0)));
+lcd_info(0x28, 2);
+_delay((unsigned long)((10)*(8000000/4000.0)));
+
+lcd_info(0x06, 2);
+
+lcd_info(0x0C, 2);
+
+lcd_clear();
+
+lcd_info(0x80, 2);
+_delay((unsigned long)((10)*(8000000/4000.0)));
+
+}
+
+# 182
+void lcd_yaz(byte data)
+{
+
+# 189
+}
+
+byte number_array[5];
+void lcd_write_number(char * p, char * delimiter, int number)
+{
+lcd_write(p);
+lcd_write(delimiter);
+lcd_write(number_array);
+}
+
+# 4 "../INTERRUPT.h"
+byte current_buffer_index = 0;
+byte current_buffer[50];
+byte available_byte_count = 0;
+
+# 5 "../UART.h"
+void UART_byte_send ( byte data )
+{
+while ( !TXIF ) ;
+TXREG = data ;
+
+
+}
+
+byte UART_byte_receive ( )
+{
+while ( !RCIF ) ;
+return RCREG ;
+
+}
+
+
+
+void UART_init ( )
+{
+
+TRISC5 = 1 ;
+
+TRISC4 = 0 ;
+
+
+SYNC = 0 ;
+
+BRGH = 1;
+BRG16 = 0 ;
+SPBRG = 51;
+
+CREN = 1 ;
+
+SPEN = 1 ;
+TXEN = 1 ;
+
+
+RCIE = 0;
+RCREG;
+
+
+
+
+}
+
+
+void UARTReadString()
+{
+byte * curr = current_buffer;
+byte index = 0 ;
+byte data;
+while( (data = UART_byte_receive()) != '\n')
+{
+curr[index] = data;
+index++;
+_delay((unsigned long)((2)*(8000000/4000.0)));
+
+UART_byte_send(data);
+_delay((unsigned long)((2)*(8000000/4000.0)));
+}
+curr[index] = data;
+UART_byte_send(data);
+_delay((unsigned long)((2)*(8000000/4000.0)));
+
+
+
+}
+
+# 83
+void UARTSendString(byte * p )
+{
+while(*p != '\n')
+{
+UART_byte_send(*p);
+_delay((unsigned long)((1)*(8000000/4000.0)));
+p++;
+
+}
+UART_byte_send(*p);
+
+
+
+
+}
+
+# 7 "../IOPINSELECT.h"
+void choose_input_pin(byte number)
+{
+CenterSetPin(11, number & 0x1);
+CenterSetPin(12, (number >> 1) & 0x1);
+CenterSetPin(13, (number >> 2) & 0x1);
+
+
+
+}
+
+# 11 "../EEPROM.h"
+void EEPROM_WriteByte(byte address, byte value)
+{
+EEPGD = 0;
+EEDAT = value;
+EEADR = address;
+
+WREN = 1;
+
+EECON2 = 0x55;
+EECON2 = 0xaa;
+
+WR = 1;
+
+while(WR);
+
+
+
+EEIF = 0;
+WREN = 0;
+}
+
+byte EEPROM_ReadByte(byte address)
+{
+EEPGD = 0;
+EEADR = address;
+RD = 1;
+while(RD);
+EEIF = 0;
+return EEDAT;
+}
+
+# 3 "../HAVASTRUCTURE.h"
+struct HAVA {
+char week_day;
+char day;
+char month;
+char year;
+signed char min_temp;
+signed char max_temp;
+char weather_phrase;
+char relative_index;
+};
+
+
+struct BUGUNSTRUCTURE {
+char week_day;
+char day;
+char month;
+char year;
+signed char min_temp;
+signed char max_temp;
+char weather_phrase;
+char relative_index;
+
+
+
+};
+
+
+
+struct HAVA gunler[5];
+
+char CURRENCY[6];
+
+char kl[2];
+byte number_array[5];
+extern struct BUGUNSTRUCTURE bugun;
+void show_date_info(signed char * day)
+{
+lcd_clear();
+lcd_goto(1, 1);
+
+const char * p;
+switch(day[0])
+{
+case 0:
+p = "Pazar";
+break;
+case 1:
+p = "Pazarte.";
+break;
+
+case 2:
+p = "Sali";
+break;
+case 3:
+p = "Carsamba";
+break;
+case 4:
+p = "Persembe";
+break;
+case 5:
+p = "Cuma";
+break;
+case 6:
+p = "Cumarte.";
+break;
+}
+lcd_write(p);
+if(day[0] == ((char*)&bugun)[0])
+lcd_write("(B)");
+signed char k = 0, l;
+k = day[4];
+l = day[5];
+byte temp_count ;
+if(k/10 == 0) temp_count = 1;
+else temp_count = 2;
+
+if(k < 0) temp_count++;
+
+if(l/10 == 0) temp_count += 1;
+else temp_count += 2;
+
+if(l< 0) temp_count++;
+
+lcd_goto(1, 16-temp_count);
+itoa((char *)number_array, k, 10);
+lcd_write(number_array);
+
+lcd_write("-");
+itoa((char *)number_array, l, 10);
+lcd_write(number_array);
+
+
+lcd_goto(2, 1);
+k = 57;
+l=1;
+while(EEPROM_ReadByte(k) != day[6])k++;
+k++;
+while(1)
+{
+kl[0] = EEPROM_ReadByte(k++);
+if(kl[0] ==0) break;
+lcd_write(kl);
+}
+
+
+}
+
+void show_currency_info(char * cur, char * value)
+{
+lcd_write(cur);
+
+
+
+
+}
+void show_currency_information()
+{
+lcd_clear();
+const unsigned char * p [] = { "Dolar:", "EURO:", "AUD:"};
+for(byte k = 0; k < 3 ; k++)
+{
+itoa((char *)number_array, CURRENCY[2*k], 10);
+lcd_write(p[k]);
+lcd_write(number_array);
+lcd_write(".");
+itoa((char *)number_array, CURRENCY[2*k+1], 10);
+lcd_write(number_array);
+lcd_write(" ");
+}
+
+}
+
+# 140
+void saveToEEPROM(byte address, char * p, byte size)
+{
+byte i = 0;
+for(; i < size; i++)
+{
+EEPROM_WriteByte(address+i, p[i]-48);
+_delay((unsigned long)((2)*(8000000/4000.0)));
+}
+
+}
+void loadFromEPPROM(byte address, char * p, byte size)
+{
+byte i = 0;
+for(; i < size; i++)
+{
+p[i] = EEPROM_ReadByte(address+i);
+_delay((unsigned long)((2)*(8000000/4000.0)));
+}
+
+
+}
+byte compareData(byte address, char * p, byte size)
+{
+byte i=0;
+for(;i< size; i++)
+{
+if(EEPROM_ReadByte(address+i) != p[i]-48)
+return 0;
+}
+
+return 1;
+}
+
+# 8 "../Requests.h"
+struct BUGUNSTRUCTURE bugun;
+
+
+byte COMMAND[3]= {'C', '\r', '\n'} ;
+
+byte buff_index;
+
+void resetBuffer()
+{
+
+memset(current_buffer, 0, 50);
+current_buffer_index = 0 ;
+_delay((unsigned long)((200)*(8000000/4000.0)));
+}
+
+
+int time_counter;
+byte time_exceed = 0;
+
+void common_request_function(byte komut, char * point, byte start, byte size_of)
+{
+time_counter = 0;
+time_exceed = 0;
+
+COMMAND[0] = komut;
+
+UARTSendString(COMMAND);
+_delay((unsigned long)((100)*(8000000/4000.0)));
+if(!RCIF)
+{
+loadFromEPPROM(start, point, size_of);
+
+}
+else
+{
+UARTReadString();
+buff_index = 0;
+
+for(;buff_index < size_of; buff_index++)
+{
+point[buff_index] = current_buffer[buff_index]-48;
+}
+
+if (compareData(0, current_buffer, size_of) == 0)
+saveToEEPROM(0, current_buffer, size_of);
+}
+
+
+
+resetBuffer();
+
+}
+
+
+void ask_5_day_weather()
+{
+
+common_request_function('C', (char*)gunler, 0, 40);
+
+}
+
+void ask_currency()
+{
+common_request_function('M', CURRENCY, 51, 6);
+
+}
+
+
+
+
+void ask_current_situation()
+{
+common_request_function('S', (char *)&bugun, 40, 8);
+
+}
+
+
+
+void retrive_weather_situations()
+{
+time_counter = 0;
+time_exceed = 0;
+if(EEPROM_ReadByte(57) == 0) return;
+COMMAND[0] = 'L';
+
+UARTSendString(COMMAND);
+_delay((unsigned long)((50)*(8000000/4000.0)));
+if(!RCIF)return;
+
+
+
+
+char received_data;
+byte index=0;
+while((received_data = UART_byte_receive()) != '#')
+{
+EEPROM_WriteByte(57+index, received_data);
+_delay((unsigned long)((2)*(8000000/4000.0)));
+UART_byte_send(received_data);
+_delay((unsigned long)((2)*(8000000/4000.0)));
+index++;
+}
+UART_byte_send(received_data);
+
+
+}
+
+
+void makeRequest()
+{
+retrive_weather_situations();
+ask_5_day_weather();
+ask_currency();
+ask_current_situation();
+
+
+}
+
+# 2 "../DHT11.h"
+byte sicaklik, nem ;
+byte low_time_count, high_time_count;
+byte dht11_data[5];
+byte temp;
+byte bit_index;
+byte var;
+byte byte_index;
+void DHT11_get_data()
+{
+
+# 11
+#asm
+
+
+movlw _dht11_data
+movwf _FSR
+banksel _temp
+movlw 5
+movwf _temp
+kkk:
+clrf indf
+incf _FSR
+decfsz _temp
+goto kkk
+
+
+
+banksel _byte_index
+movlw 5
+movwf _byte_index
+
+movlw _dht11_data
+movwf _FSR
+
+
+banksel _PORTA
+bcf _PORTA, 1
+
+
+banksel _TRISA
+bcf 0x5, 1
+
+#endasm 
+_delay((unsigned long)((20)*(8000000/4000.0)));
+
+# 44
+#asm
+
+banksel _TRISA
+bsf 0x5, 1
+#endasm 
+_delay((unsigned long)((25)*(8000000/4000000.0)));
+
+# 50
+#asm
+banksel _PORTA
+
+loop5:
+btfsc _PORTA, 1
+goto loop5
+
+
+
+loop6:
+btfss _PORTA, 1
+goto loop6
+
+
+
+loop7:
+btfsc _PORTA, 1
+goto loop7
+
+
+
+
+main_loop:
+
+#endasm 
+
+# 85
+#asm
+  banksel _bit_index
+  bsf _bit_index, 7
+
+  banksel _var
+  movlw 0x8
+  movwf _var
+
+  for1:
+
+    loop1:
+  banksel _low_time_count;
+  INCF _low_time_count;
+  banksel _PORTA;
+  btfss _PORTA, 1;
+  goto loop1;
+
+
+
+    loop2:
+  banksel _high_time_count;
+  INCF _high_time_count;
+  banksel _PORTA;
+  btfsc _PORTA, 1;
+  goto loop2;
+
+
+#endasm 
+
+# 119
+#asm
+
+
+          banksel _high_time_count
+  movf _high_time_count, W
+  banksel _low_time_count
+  subwf _low_time_count, W
+
+  btfsc 0x3, 0;
+  goto devam;
+
+
+
+        banksel _bit_index
+  movf _bit_index, W
+  banksel _temp
+  IORWF _temp, f
+
+
+
+             devam:
+
+  banksel _low_time_count
+  CLRF _low_time_count
+  banksel _high_time_count
+  CLRF _high_time_count
+
+#endasm
+# 150
+#asm
+      banksel _bit_index
+  bcf 0x3, 0
+  RRF _bit_index, f
+  banksel _var
+  decfsz _var
+  goto for1
+
+
+#endasm 
+
+# 169
+#asm
+  banksel _temp
+movf _temp, W
+movwf indf
+incf _FSR
+
+
+banksel _temp
+  CLRF _temp
+
+banksel _byte_index
+decfsz _byte_index
+goto main_loop;
+
+
+decf _FSR
+decf _FSR
+decf _FSR
+movf indf, W
+banksel _sicaklik
+movwf _sicaklik
+decf _FSR
+decf _FSR
+movf indf, W
+banksel _nem
+movwf _nem
+#endasm 
+}
+
+# 12 "../ADC.h"
+void ADC_init()
+{
+
+# 14
+#asm
+
+banksel _ADCON1
+movlw 0x60
+movwf 0x1f
+
+banksel _ADCON0
+movlw 0x81
+movwf 0x1f
+
+#endasm 
+_delay((unsigned long)((15)*(8000000/4000.0)));
+
+
+}
+int ADC_Result;
+
+void ADC_read()
+{
+
+
+ANS0 = 1;
+_delay((unsigned long)((3)*(8000000/4000.0)));
+int val;
+
+
+# 40
+#asm
+ banksel _ADCON0
+ bsf _ADCON0, 1
+ wait:
+ btfsc _ADCON0, 1
+ goto wait
+ movlw _ADC_Result
+ movwf _FSR
+ banksel _ADRESL
+ movf 0x1e, W
+ movwf indf
+ incf _FSR
+ banksel _ADRESH
+ movf _ADRESH, W
+ movwf indf
+
+#endasm 
+# 61
+ ADIF = 0;
+ANS0 = 0;
+_delay((unsigned long)((3)*(8000000/4000.0)));
+
+}
+
+# 37 "../PIC16f688Weather.c"
+byte tt = 1;
+byte refresh_counter ;
+void main()
+{
+
+SCS = 1 ;
+
+
+IRCF2 = 1 ;
+
+IRCF1 = 1;
+IRCF0 = 1;
+
+ANSEL = 0 ;
+
+
+
+ANS3 =1;
+TRISA3 = 1;
+
+ADC_init();
+TRISA0 = 1;
+TRISA5 = 0;
+
+TRISA2 = 0;
+TRISA4 = 0;
+TRISA1 = 1;
+TRISC0 = 0;
+TRISC1 = 0;
+TRISC2 = 0;
+PORTA = 0;
+
+
+
+choose_input_pin(0);
+
+
+
+ADC_read();
+LCD_init();
+UART_init();
+_delay((unsigned long)((20)*(8000000/4000.0)));
+lcd_write("Saim");
+
+
+byte ss;
+makeRequest();
+byte prev_phrase = 0;
+signed char * temporary;
+while(1)
+{
+show_currency_information();
+DHT11_get_data();
+if(tt)
+{
+ss = sicaklik;
+
+tt = 0;
+}
+else
+{
+ss = nem;
+tt = 1;
+}
+CurrentTempNemDisplay(ss, tt);
+
+
+
+for(byte k = 0; k < 6 ; k++)
+{
+if(k == 0) temporary = (signed char*)&bugun;
+else temporary = (signed char*)&gunler[k-1];
+
+SetHavaDurumuPin(prev_phrase, 0);
+show_date_info(temporary);
+DisplayGun(temporary[1]);
+DisplayAy(temporary[2]);
+DisplayYil(temporary[3]);
+EnYuksekDisplay(temporary[5]);
+EnDusukDisplay(temporary[4]);
+LoadGunInfo(temporary[0]);
+LoadGosterilenGunInfo(temporary[7]);
+SetHavaDurumuPin(temporary[6], 1);
+prev_phrase = temporary[6];
+
+_delay((unsigned long)((3000)*(8000000/4000.0)));
+}
+refresh_counter++;
+if(refresh_counter > 2)
+{
+makeRequest();
+refresh_counter = 0;
+}
+
+
+}
+
+
+}
+

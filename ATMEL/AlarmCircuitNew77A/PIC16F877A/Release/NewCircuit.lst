@@ -1,0 +1,116 @@
+     1: //Önemli iþlemler yapýlýrken Interruptlar kapatýlacak...
+     2: //Türkçe karakterler olacak bazý yerlerde....
+     3: typedef unsigned char byte;
+     4: #define TRUE 1
+     5: #define FALSE 0
+     6: #define EQUAL 2
+     7: #define BIGGER 3
+     8: #define LESS 4
+     9: 
+    10: #define SET_LOCATION 1
+    11: #define READ 2
+    12: #define FINISH 3
+    13: 
+    14: #include<htc.h>
+    15: #include<time.h>
+    16: #include<stdio.h>
+    17: 
+    18: #include "I2C.h"
+    19: #include "DS1307.h"
+    20: #include "lcd.h"
+    21: #include "DHT11.h"
+    22: #include "EEPROM.h"  
+    23: #include "ALARM.h"
+    24: #include "UART.h"
+    25: 
+    26: #include "INTERRUPT.h"
+    27: #include "SEVENSEGMENTS.h"  
+    28: #include "24C32EEPROM.h"
+    29: #include "MESSAGE.h"
+    30: #include "BLUETOOTH.h"
+    31: ALARM temp ;
+    32: ALARM closest_alarm;
+    33: 
+    34: void main()
+    35: {
+    36: 
+    37: 
+    38: 
+    39: TRISD7 = 0;
+    40: TRISD6 = 0;
+    41: 
+    42: 
+    43:    //All pin on port b are output
+    44:    TRISB = 0;
+    45:    PORTB = 0;
+    46:     //Initialize the LCD device
+    47:    lcd_init();
+    48: __delay_ms(100);
+    49: DHT11_initialize();
+    50: lcd_clear();
+    51: lcd_goto(1,1); 
+    52: lcd_write("DTH11 tamam...");
+    53: __delay_ms(1000);
+    54:   
+    55:    //Configure I2C 100khz master
+    56: 
+    57:   Segments_initialize();
+    58:  I2C_initialize();
+    59: lcd_clear();
+    60: lcd_goto(1,1); 
+    61: lcd_write("I2C tamam...");
+    62: __delay_ms(1000);
+    63:  EEPROM_initialize();
+    64: 
+    65:    UART_initialize();
+    66: lcd_clear();
+    67: lcd_goto(1,1);
+    68: lcd_write("UART tamam...");
+    69: __delay_ms(1000);
+    70: //EEPROM_write_byte(0, 0);   
+    71: 
+    72: RCIE = 1 ; //UART receive interrupt is enabled...As soon as the message arrives we will process it..
+    73: PEIE = 1; //Peripheral interrupt enable for UART
+    74: GIE=1; //Global Interrupt Enable for enabling all interrupts...
+    75: 
+    76: 
+    77: closest_alarm = get_closest_alarm();
+    78: lcd_clear();
+    79: show_information();
+    80: 
+    81: 
+    82: //EEPROM24C32_resetle();
+    83: 
+    84: //lcd_write("");
+    85: 
+    86: 
+    87: //DS1307_set_time( 3, 43, 33);
+    88: //DS1307_set_date(5, 11, 109);
+    89: 
+    90:    while(1)
+    91:    {
+    92: 
+    93: GIE=1;
+    94: __delay_ms(750);
+    95: GIE=0;
+    96: saati_goster();
+    97: tarihi_goster();
+    98: alarm_check();
+    99: 
+   100: 
+   101: if(zaman[SANIYE] % 10 == 0)
+   102: {
+   103: DHT11_get_data();
+   104: display_number( sicaklik  );
+   105: }
+   106: 
+   107: if(is_alarm_aktif == TRUE)
+   108: { 
+   109:         is_alarm_aktif = FALSE;
+   110:         closest_alarm = get_closest_alarm();
+   111:         show_information();
+   112: }
+   113:  
+   114:    }
+   115:    
+   116: }

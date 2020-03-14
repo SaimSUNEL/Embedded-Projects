@@ -1,0 +1,213 @@
+     1: 
+     2: #include<htc.h>
+     3: 
+     4: //Time için gerekli defineleri unutma...
+     5: /*
+     6: INTE: RB0/INT External Interrupt Enable bit
+     7: 1 = Enables the RB0/INT external interrupt
+     8: 0 = Disables the RB0/INT external interrupt
+     9: 
+    10: 
+    11: INTF: RB0/INT External Interrupt Flag bit
+    12: 1 = The RB0/INT external interrupt occurred (must be cleared in software)
+    13: 0 = The RB0/INT external interrupt did not occur
+    14: 
+    15: 
+    16: 
+    17: INTEDG: Interrupt Edge Select bit
+    18: 1 = Interrupt on rising edge of RB0/INT pin
+    19: 0 = Interrupt on falling edge of RB0/INT pin
+    20: 
+    21: 
+    22: */
+    23: 
+    24: void seri_port(unsigned char jk) 
+    25:  { while( !TXIF );
+    26:          TXREG=jk;
+    27: 
+    28:         
+    29:          }
+    30:          
+    31:          unsigned char seri_porttan_veri_al() 
+    32: {
+    33: while( !RCIF );
+    34:         //if( RCREG == 's' )asm( "ljmp 0x1eda" );
+    35: 
+    36: return RCREG;
+    37: }
+    38: 
+    39: 
+    40: void seri_porta_veri_gonder( int number )
+    41: {
+    42:         seri_port( 'd' );
+    43:         seri_port( (number >> 8) );
+    44:         seri_port( number );
+    45:         
+    46:         
+    47: }
+    48: 
+    49: 
+    50:          
+    51:          
+    52: void seri_portu_ayarla()  
+    53: {SPBRG=25; //DIVIDER; 9600 for 4 MHZ...
+    54:         BRGH=0;
+    55:         
+    56:         
+    57:         SYNC=0;
+    58:         
+    59:         
+    60:         TX9=0;
+    61:         
+    62:         TXEN=1;
+    63:         
+    64:         RX9=0;
+    65:         
+    66:         CREN=1;
+    67:         
+    68:         
+    69:         
+    70:         SPEN=1;/*
+    71:         RC6=1;
+    72:         
+    73:         RC7=1;
+    74: */
+    75:         }
+    76:         
+    77: 
+    78: 
+    79: 
+    80: char bit_index ;
+    81: 
+    82: unsigned int code = 0 , temp = 0 ;
+    83: 
+    84: //Scan kodun tamamen alýnýp alýnmadýðýný kontrol etmek için...
+    85: 
+    86: #define false 0 
+    87: #define true 1
+    88: unsigned char data_temp  = 0 ;
+    89: unsigned char pressed_key = 0 ; 
+    90: volatile char is_data_ready = false ; 
+    91: char index =0;
+    92: 
+    93: volatile char ignored = false ; 
+    94: 
+    95: 
+    96: void interrupt FNC()
+    97: {GIE = 0 ; // Bütün interruptlar kapatýldý...
+    98:         INTF = 0 ;
+    99: 
+   100: data_temp |= RB1 << index ;
+   101:         
+   102: index ++ ;
+   103: 
+   104: if( index == 11 )
+   105: {
+   106: 
+   107: index = 0 ;
+   108: pressed_key = data_temp >> 1  ;
+   109: if( pressed_key == 240 ){ ignored = true ; }
+   110: else if ( ignored ){ ignored = false ;  }
+   111: else 
+   112: {
+   113: switch( pressed_key )
+   114: {
+   115:     case 28:
+   116:                 pressed_key = 'a' ;
+   117:         RD7 = ~RD7 ;    
+   118:         
+   119:         break;
+   120:     case 50:pressed_key = 'b' ;break;
+   121:  case 33 :pressed_key = 'c' ;break;
+   122: case 35 :pressed_key = 'd' ;break;
+   123: case 36 :pressed_key = 'e' ;break;
+   124: case 43 :pressed_key = 'f' ;break;
+   125: 
+   126: case 52 :pressed_key = 'g' ;break;
+   127: case 84 :pressed_key = 'ð' ;break;
+   128: case 51 :pressed_key = 'h' ;break;
+   129: case 67 :pressed_key = 'ý' ;break;
+   130: case 82 :pressed_key = 'i' ;break;
+   131: case 59 :pressed_key = 'j' ;break;
+   132: case 66 :pressed_key = 'k' ;break;
+   133: 
+   134: case 41 : pressed_key = ' ' ; break;
+   135: case 75 :pressed_key = 'l' ;break;
+   136: case 58 :pressed_key = 'm' ;break;
+   137: 
+   138: case 49 :pressed_key = 'n' ;break;
+   139: case 68 :pressed_key = 'o' ;break;
+   140: case 65 :pressed_key = 'ö' ;break;
+   141: 
+   142: case 77 :pressed_key = 'p' ;break;
+   143: case 45 :pressed_key = 'r' ;break;
+   144: case 27 :pressed_key = 's' ;break;
+   145: case 76 :pressed_key = 'þ' ;break;
+   146: case 44 :pressed_key = 't' ;break;
+   147: case 60 :pressed_key = 'u' ;break;
+   148: case 91 :pressed_key = 'ü' ;break;
+   149: case 42 :pressed_key = 'v' ;break;
+   150: case 53 :pressed_key = 'y' ;break;
+   151: case 26 :pressed_key = 'z' ;break;
+   152: case 112 :pressed_key = '0' ;break;
+   153: case 105 :pressed_key = '1' ;break;
+   154: case 114 :pressed_key = '2' ;break;
+   155: case 122 :pressed_key = '3' ;break;
+   156: case 107 :pressed_key = '4' ;break;
+   157: case 115  :pressed_key = '5' ;break;
+   158: case 116 :pressed_key = '6' ;break;
+   159: 
+   160: case 108 :pressed_key = '7' ;break;
+   161: case 117 :pressed_key = '8' ;break;
+   162: case 125 :pressed_key = '9' ;break;
+   163: 
+   164: 
+   165: }       
+   166: 
+   167: seri_port( pressed_key );
+   168: RB5 = ~RB5 ;
+   169: }
+   170: 
+   171:         data_temp = 0 ;
+   172: }
+   173: 
+   174:                 
+   175: 
+   176:         }
+   177:         
+   178:         
+   179:         
+   180:         /*
+   181:         PS2 bir tuþa basýldýðýnda clock sinyali 0 olur bir data da low olur ( start ) bit
+   182:         Bundan sonra clockun her düþen kenarý datanýn tam ortasýna gelecek þekilde 8 bitlik key scan kodu output edilir...
+   183:         8. bitten sonra bir bit parity 
+   184:         Parityden sonra clock tekrar düþen kenarda data 1 olur ( stop bit )
+   185:         
+   186:         
+   187:         
+   188:         
+   189:         */
+   190: 
+   191: void main()
+   192: {
+   193: TRISB5 = 0 ; //RB5 pini led için output...
+   194:         TRISB1 = 1 ; // RB1 pini keyboardýn data pinine baðlý... Input...
+   195:         RB1 = 0 ;
+   196:         TRISB0 = 1; //RB0 pini PS2 nin clock bacaðýna baðlý     ... Input
+   197:         INTEDG = 0; //On falling edge on RBo will generate interrupt ( 1 on rising edge )
+   198:         INTF=0;
+   199:         INTE = 1; //RB0 external interrupt enabled...
+   200:         TRISD7 = 0 ;
+   201:         GIE = 1 ; //For global Interrupts...
+   202:     PEIE = 1 ; // Peripheral Interrupts enables...      
+   203:         
+   204:         while( 1 )
+   205:         {
+   206:                 //while( data_received == 0 ); //While there is no code received wait until it gets received...
+   207:                         
+   208:                 
+   209:                 
+   210:                 
+   211:                 
+   212:         }
+   213: }

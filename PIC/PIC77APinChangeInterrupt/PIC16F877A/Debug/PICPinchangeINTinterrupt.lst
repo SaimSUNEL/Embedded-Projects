@@ -1,0 +1,54 @@
+     1: 
+     2: #include<htc.h>
+     3: 
+     4: void interrupt FN()
+     5: {
+     6:         if ( RBIF )
+     7:         {
+     8:         PORTB;
+     9:                 RBIF = 0;
+    10:                 RD1 = ~RD1;
+    11:                 
+    12:                 
+    13:                 asm( "retfie");
+    14:                 
+    15:                 
+    16:         }
+    17:         
+    18:         
+    19:         
+    20:         if( INTF )
+    21:         {
+    22:                 INTF = 0;
+    23:                 RD0 = ~RD0;
+    24:                 asm( "retfie" );
+    25:         }
+    26:         
+    27:         
+    28: }
+    29: 
+    30: 
+    31: 
+    32: void main()
+    33: {
+    34:         TRISD = 0;
+    35:         PORTD = 0;
+    36:         
+    37:         TRISB = 0b11110001;
+    38: PORTB = 0;
+    39: GIE = 1;
+    40: PEIE = 1;
+    41: 
+    42:         RBIE = 1; //pinchange interrupt enable....
+    43:         
+    44:         
+    45: INTEDG = 1;//rising edge or falling edge..
+    46:         INTE    = 1; //Enable Interrupt
+    47:         
+    48: 
+    49: while( 1 );     
+    50:         
+    51:         
+    52:         
+    53:         
+    54: }

@@ -1,0 +1,162 @@
+     1: 
+     2: #include<htc.h>
+     3: 
+     4: #define OUTPUT_ENABLE RB0 
+     5: #define DATA RB1
+     6: #define SRCLR RB2
+     7: #define CLK RB3
+     8: #define STORE_CLK RB4
+     9: //SER = DATA 
+    10: int index ;
+    11: 
+    12: int speed = 30 ;
+    13: 
+    14: 
+    15: int pow ( int val  , int us )
+    16: {
+    17:         if ( val == 0 ) return 1 ;
+    18:                 
+    19:         int temp = val ;
+    20:         
+    21:         for ( int b = 0 ; b  < us ; b++ )
+    22:         {
+    23:         temp *= val ;   
+    24:                 }       
+    25:         
+    26:                 return temp ;
+    27: }
+    28: 
+    29: 
+    30: 
+    31: 
+    32: 
+    33: 
+    34: void load_reg ( unsigned char data ) 
+    35: {
+    36:         
+    37:         for ( index = 7 ; index >= 0 ; index -- )
+    38:         {
+    39:                 
+    40:                 DATA = ( data >> index ) &  0x1 ;
+    41:                 CLK = 1 ;
+    42:                 __delay_us ( 10 ) ;
+    43:                 CLK = 0 ;
+    44:                 
+    45:         }
+    46:         
+    47:         STORE_CLK = 1 ;
+    48:         __delay_us ( 10 ) ;
+    49:         STORE_CLK = 0 ;
+    50: }
+    51: 
+    52: 
+    53: void choose_reg ( int number ) 
+    54: {
+    55:         PORTC = number ;
+    56: __delay_us ( 10 ) ;
+    57: PORTC = 15 ;
+    58:         
+    59:         
+    60:         
+    61: }
+    62: void set_speed ( int val ) 
+    63: {
+    64:         
+    65:         int onluk = val / 8 ;
+    66:         int kalan = val % 8 ;
+    67:         
+    68:         load_reg ( 255 ) ;
+    69:         int a=0; 
+    70:         for ( a = 0 ; a < onluk ; a++ )
+    71:         {
+    72:                 choose_reg ( a ) ;              
+    73:         }
+    74:         
+    75: load_reg ( pow ( 2, kalan  ) -1 ) ;
+    76: 
+    77:         choose_reg ( a ) ;
+    78: load_reg ( 0 ) ;
+    79: for ( int g = a +1 ; g < 10 ; g++ )
+    80: {choose_reg ( g ) ;
+    81: 
+    82:         }
+    83:         
+    84:         
+    85:         
+    86:         
+    87: }
+    88: 
+    89: int sicaklik = 0 ;
+    90: void main ( ) 
+    91: {
+    92:         
+    93:         
+    94:         //FOSC/64 conversion clock
+    95:         ADCS2 = 1 ;
+    96:         ADCS1 = 1 ;
+    97:         ADCS0 = 0 ;
+    98:         
+    99:         //AN0 channel selected...
+   100:         CHS2 = 0 ;
+   101:         CHS1 = 0 ;
+   102:         CHS0 = 0 ;
+   103:         //Result right justified
+   104:         ADFM = 1 ;
+   105:         //All port a pins are analog
+   106:         PCFG3 = 0;
+   107:         PCFG2 = 0 ;
+   108:         PCFG1 = 0 ;
+   109:         PCFG0 = 0 ;
+   110:         
+   111:         ADON = 1 ;
+   112:         
+   113:         
+   114:         
+   115:         
+   116:         TRISB = 0 ;
+   117:         PORTB = 0 ;
+   118:         TRISC = 0 ;
+   119:         PORTC =15;
+   120:         
+   121:         
+   122:         //Output enable when 0 enabled...
+   123:         OUTPUT_ENABLE = 0 ;
+   124:         //Shift reg clear , when 0 shift reg is cleared
+   125:         SRCLR = 1 ;
+   126:         
+   127:         
+   128:         int value = 0 ;
+   129:         char increase = 1 ;
+   130:         
+   131: while ( 1 ) 
+   132: {
+   133: 
+   134:         GO_DONE = 1 ;
+   135:          while ( GO_DONE ) ;
+   136:                  
+   137:         sicaklik = ( ADRESH << 8 )  + ADRESL ;
+   138:         sicaklik = (int ) ( sicaklik * ( 5000.0 /1024.0 ) ) ;
+   139:          sicaklik = (int ) ( sicaklik /10.0  ) ;
+   140:          
+   141:          set_speed ( sicaklik ) ;
+   142:          
+   143:         /*
+   144:         if ( increase ) 
+   145:         {
+   146:         set_speed ( value++ ) ;
+   147:         if  ( value == 56 ) increase =  0 ;
+   148:         }
+   149:         else 
+   150:         {
+   151:                 set_speed ( value -- ) ;
+   152:                 if ( value == 0 ) increase = 1 ;
+   153:         }
+   154:                 
+   155:         
+   156: */
+   157:         __delay_ms  ( 250 ) ;
+   158: }
+   159:         
+   160:         
+   161:         
+   162: }

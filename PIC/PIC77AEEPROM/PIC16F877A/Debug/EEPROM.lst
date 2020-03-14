@@ -1,0 +1,92 @@
+     1: 
+     2: #include<htc.h>
+     3: 
+     4: char veri[ 20 ];
+     5: 
+     6: 
+     7: void eeprom_hazirla()
+     8: {
+     9:         //EEIF = 0;//EEPROM write operation flag bit...
+    10:         /*
+    11:         Control bits, RD and WR, initiate read and write or
+    12: erase, respectively. These bits cannot be cleared, only
+    13: set, in software.
+    14:         */
+    15:         
+    16:         
+    17: //      EEDATA holds the 8 bit-data for read/write
+    18:         //we can access the program memory by using these registers...
+    19:         //EEADR holds the address of the eeprom location being accessed... range 00h - ffh
+    20:         //EEPGD determines whether the access will be a program or data memory access...
+    21:         //Access data memory
+    22:         
+    23:         //WR = 1; it writes set 0 by the hardware RD = 1; reads set zero by the hardware...
+    24:         
+    25:         
+    26:         EEPGD = 0;
+    27:         
+    28:         EEIE = 0;//EEPROM write operation interrupt bit...
+    29: }
+    30: 
+    31: void eeprom_yaz( char adres , unsigned char veri )
+    32: {       WREN = 1;
+    33:         
+    34:         EEADR = adres;
+    35:         EEDATA =veri;
+    36:         
+    37:         EECON2 = 0x055;//Nedensiz
+    38:         EECON2 = 0xAA;//...
+    39:         WR = 1;
+    40:         while( WR );
+    41:         EEIF= 0;
+    42: WREN = 0;       
+    43: }
+    44: 
+    45: unsigned char eeprom_oku( char adres )
+    46: {
+    47:         
+    48: EEADR = adres;
+    49:         EEDATA = 0;
+    50:  RD = 1;
+    51: return EEDATA;
+    52:                 
+    53:         
+    54:         
+    55: }       
+    56: int gelen;
+    57: void main()
+    58: {
+    59:         eeprom_hazirla();
+    60:         
+    61:         eeprom_yaz( 0 , 'S' );
+    62:         eeprom_yaz( 0 , 'S' );
+    63:         //gelen = eeprom_oku( 100 );
+    64:         
+    65:         for( int a = 0; a < 20 ; a++ )
+    66:         {
+    67:         eeprom_yaz( a , ( a + 25 ) );
+    68:         
+    69:         }       
+    70:         /*
+    71: for(int k = 0 ; k < 20 ; k++ )
+    72: {
+    73:         veri[ k ] = eeprom_oku( k );
+    74:         
+    75:         
+    76:         
+    77: }
+    78:         */
+    79: eeprom_yaz( 100 , 's' );
+    80: eeprom_yaz( 102 , 'g' );        
+    81: eeprom_yaz( 103 , 'r' );
+    82:         eeprom_yaz( 104 , 'd' );
+    83:         eeprom_yaz( 105 , 's' );
+    84:         eeprom_yaz( 106 , ' ' );
+    85: eeprom_yaz( 107 , 'g' );
+    86:         eeprom_yaz( 108 , 'h' );
+    87:         eeprom_yaz( 109 , 'j' );
+    88:         eeprom_yaz( 110 , 'k' );
+    89:         while(1);
+    90:         
+    91:         
+    92: }

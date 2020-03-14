@@ -1,0 +1,431 @@
+     1: 
+     2: #include<htc.h>
+     3: #define DelayMs __delay_ms
+     4: /*
+     5: ----Two pins are used for data transfer:
+     6: • Serial clock (SCL) – RC3/SCK/SCL
+     7: • Serial data (SDA) – RC4/SDI/SDA
+     8: ---The user must configure these pins as inputs or outputs
+     9: through the TRISC<4:3> bits.
+    10: ----SSPBUF is the buffer register to which data bytes
+    11: are written to or read from.
+    12: 
+    13: 
+    14: ----SSPADD register holds the slave device address
+    15: when the SSP is configured in I2C Slave mode. When
+    16: the SSP is configured in Master mode, the lower
+    17: seven bits of SSPADD act as the baud rate generator
+    18: reload value.
+    19: 
+    20: 
+    21: ----D/A: Data/Address bit
+    22: In Master mode:
+    23: Reserved.
+    24: In Slave mode:
+    25: 1 = Indicates that the last byte received or transmitted was data
+    26: 0 = Indicates that the last byte received or transmitted was address
+    27: ----bit 4 P: Stop bit
+    28: 1 = Indicates that a Stop bit has been detected last
+    29: 0 = Stop bit was not detected last
+    30: Note: This bit is cleared on Reset and when SSPEN is cleared.
+    31: -----bit 3 S: Start bit
+    32: 1 = Indicates that a Start bit has been detected la
+    33: 
+    34: 
+    35: 
+    36: ----R/W: Read/Write bit information (I2C mode only)
+    37: In Slave mode:
+    38: 1 = Read
+    39: 0 = Write
+    40: Note: This bit holds the R/W bit information following the last address match. This bit is
+    41: only valid from the address match to the next Start bit, Stop bit or not ACK bit.
+    42: In Master mode:
+    43: 1 = Transmit is in progress
+    44: 0 = Transmit is not in progress
+    45: 
+    46: -----BF: Buffer Full Status bit
+    47: In Transmit mode:
+    48: 1 = Receive complete, SSPBUF is full
+    49: 0 = Receive not complete, SSPBUF is empty
+    50: In Receive mode:
+    51: 1 = Data Transmit in progress (does not include the ACK and Stop bits), SSPBUF is full
+    52: 0 = Data Transmit complete (does not include the ACK and Stop bits), SSPBUF is empty
+    53: 
+    54: ----CKP: SCK Release Control bit
+    55: In Slave mode:
+    56: 1 = Release clock
+    57: 0 = Holds clock low (clock stretch). (Used to ensure data setup time.)
+    58: In Master mode:
+    59: Unused in this mode.
+    60: 
+    61: 
+    62: 
+    63: 
+    64: 
+    65: 
+    66: 
+    67: 
+    68: 
+    69: ------GCEN: General Call Enable bit (Slave mode only)
+    70: 1 = Enable interrupt when a general call address (0000h) is received in the SSPSR
+    71: 0 = General call address disabled
+    72: bit 6 ACKSTAT: Acknowledge Status bit (Master Transmit mode only)
+    73: 1 = Acknowledge was not received from slave
+    74: 0 = Acknowledge was received from slave
+    75: bit 5 ACKDT: Acknowledge Data bit (Master Receive mode only)
+    76: 1 = Not Acknowledge
+    77: 0 = Acknowledge
+    78: Note: Value that will be transmitted when the user initiates an Acknowledge sequence at
+    79: the end of a receive.
+    80: bit 4 ACKEN: Acknowledge Sequence Enable bit (Master Receive mode only)
+    81: 1 = Initiate Acknowledge sequence on SDA and SCL pins and transmit ACKDT data bit.
+    82: Automatically cleared by hardware.
+    83: 0 = Acknowledge sequence Idle
+    84: bit 3 RCEN: Receive Enable bit (Master mode only)
+    85: 1 = Enables Receive mode for I2C
+    86: 0 = Receive Idle
+    87: bit 2 PEN: Stop Condition Enable bit (Master mode only)
+    88: 1 = Initiate Stop condition on SDA and SCL pins. Automatically cleared by hardware.
+    89: 0 = Stop condition Idle
+    90: bit 1 RSEN: Repeated Start Condition Enabled bit (Master mode only)
+    91: 1 = Initiate Repeated Start condition on SDA and SCL pins. Automatically cleared by hardware.
+    92: 0 = Repeated Start condition Idle
+    93: bit 0 SEN: Start Condition Enabled/Stretch Enabled bit
+    94: In Master mode:
+    95: 1 = Initiate Start condition on SDA and SCL pins. Automatically cleared by hardware.
+    96: 0 = Start condition Idle
+    97: In Slave mode:
+    98: 1 = Clock stretching is enabled for both slave transmit and slave receive (stretch enabled)
+    99: 0 = Clock stretching is enabled for slave transmit only (PIC16F87X compatibility)
+   100: 
+   101: 
+   102: 
+   103: 
+   104: 
+   105: 
+   106: 
+   107: 
+   108: 
+   109: 
+   110: ---Selection of any I2C mode, with the SSPEN bit set,
+   111: forces the SCL and SDA pins to be open-drain, provided
+   112: these pins are programmed to inputs by setting
+   113: the appropriate TRISC bits. To ensure proper operation
+   114: of the module, pull-up resistors must be provided
+   115: externally to the SCL and SDA pins.
+   116: 
+   117: 
+   118: 
+   119: 
+   120: 
+   121: 
+   122: 
+   123: 
+   124: 
+   125: ----In Slave mode, the SCL and SDA pins must be configured
+   126: as inputs (TRISC<4:3> set).The MSSP module
+   127: will override the input state with the output data when
+   128: required (slave-transmitter)
+   129: 
+   130: 
+   131: 
+   132: 
+   133: ----Once the MSSP module has been enabled, it waits for
+   134: a Start condition to occur. Following the Start condition,
+   135: the 8 bits are shifted into the SSPSR register. All incoming
+   136: bits are sampled with the rising edge of the clock
+   137: (SCL) line. The value of register SSPSR<7:1> is compared
+   138: to the value of the SSPADD register. The
+   139: address is compared on the falling edge of the eighth
+   140: clock (SCL) pulse. If the addresses match, and the BF
+   141: and SSPOV bits are clear, the following events occur:
+   142: 1. The SSPSR register value is loaded into the
+   143: SSPBUF register.
+   144: 2. The Buffer Full bit, BF, is set.
+   145: 3. An ACK pulse is generated.
+   146: 4. MSSP Interrupt Flag bit, SSPIF (PIR1<3>), is
+   147: set (interrupt is generated if enabled) on the
+   148: falling edge of the ninth SCL pulse.
+   149: 
+   150: 
+   151: 
+   152: Each time a byte of data is written to SSPBUF to
+   153: be transmitted to the master device. The BF bit
+   154: will be cleared automatically when all bits have
+   155: been shifted from SSPBUF to the master device.
+   156: 
+   157: When an address byte is received with the LSb
+   158: cleared. This will be the first byte sent by the
+   159: master device during an I2C write operation.
+   160: • Each time a data byte is received during an I2C
+   161: write to the slave device.
+   162: 
+   163: 
+   164: The user must read SSPBUF and clear the
+   165: SSPOV bit to properly clear an overflow condition. If
+   166: the user reads SSPBUF to clear the BF bit, but does
+   167: not clear the SSPOV bit, the next byte of data received
+   168: will be loaded into SSPBUF but the module will not
+   169: generate an ACK pulse.
+   170: 
+   171: 
+   172: 
+   173: 
+   174: 
+   175: The SSP module performs clock stretching automatically when data is read by the
+   176: master device. The CKP bit will be cleared by the
+   177: module after the address byte and each subsequent
+   178: data byte is read. After SSPBUF is loaded, the CKP bit
+   179: must be set in software to release the clock and allow
+   180: the next byte to be transferred.
+   181: 
+   182: 
+   183: The address of the slave node must be written to the
+   184: SSPADD register (see Figure 3). For 7-Bit Addressing
+   185: mode, bits<7:1> determine the slave address value.
+   186: The LSb of the address byte is not used for address
+   187: matching; this bit determines whether the transaction
+   188: on the bus will be a read or write. Therefore, the value
+   189: written to SSPADD will always have an even value
+   190: (LSb = 0). Effectively, each slave node uses two
+   191: addresses; one for write operations and another for
+   192: read operations.
+   193: 
+   194: 
+   195: 
+   196: The SSPIF bit indicates an I2C event on the bus has
+   197: completed.
+   198: 
+   199: The SSPIF bit may be polled in software or
+   200: can be configured as an interrupt source. Each time the
+   201: SSPIF bit is set, the I2C event must be identified by
+   202: testing various bits in the SSPSTAT register.
+   203: 
+   204: 
+   205: 
+   206: 
+   207: 
+   208: 
+   209: */
+   210: 
+   211: 
+   212: 
+   213: 
+   214: 
+   215: void I2C_start()
+   216:  {
+   217:          
+   218:          
+   219:          SEN = 1;
+   220:          while( SEN );
+   221:          
+   222:          
+   223:  }
+   224:  void send_NACK()
+   225:  {
+   226:          ACKDT = 1;
+   227:          ACKEN = 1;
+   228:          while( ACKEN );
+   229:          
+   230:          
+   231:          
+   232:  }
+   233:  void send_ACK()
+   234:  {
+   235:          
+   236:          
+   237:          ACKDT = 0;
+   238:          ACKEN = 1;
+   239:          while( ACKEN );
+   240:          
+   241:  }
+   242:  
+   243:  
+   244:  void bekle()
+   245:  {
+   246:          
+   247:           while(R_W || SEN || RSEN || PEN || RCEN || ACKEN){
+   248:         DelayMs(1);
+   249:  }
+   250:  
+   251:  }
+   252:  void I2C_stop()
+   253:  {
+   254:          
+   255:          PEN = 1;
+   256:          while( PEN );
+   257:                 SSPIF = 0;      
+   258:  }
+   259: I2C_send( char c )
+   260: {
+   261: R_W = 0;
+   262:         BF = 0;
+   263:         bekle();
+   264:                 SSPIF = 0;      
+   265:         SSPBUF = c;
+   266:         while( BF );
+   267:         
+   268:         RB0 = ~RB0;
+   269: }
+   270: 
+   271: 
+   272: 
+   273: unsigned char I2C_read( )
+   274: {
+   275:         
+   276:         RCEN = 1;
+   277:         bekle();
+   278:         while( RCEN );
+   279:         
+   280:         
+   281:         while( !SSPIF  );
+   282:                         SSPIF = 0;      
+   283:         return SSPBUF;
+   284:         
+   285:         
+   286: }
+   287: 
+   288: 
+   289: void I2C_initialize()
+   290: {
+   291:         
+   292:         /*
+   293:         SSPEN: Synchronous Serial Port Enable bit
+   294: 1 = Enables the serial port and configures the SDA and SCL pins as the serial port pins
+   295: 0 = Disables the serial port and configures these pins as I/O port pins
+   296:         
+   297:         
+   298:         */
+   299:         
+   300:         SSPEN = 1;
+   301:         
+   302:         
+   303:         
+   304:         /*
+   305:         SMP: Slew Rate Control bit
+   306: In Master or Slave mode:
+   307: 1 = Slew rate control disabled for standard speed mode (100 kHz and 1 MHz)
+   308: 0 = Slew rate control enabled for high-speed mode (400 kHz)
+   309:         
+   310:         */
+   311:         SMP = 1;
+   312:         /*
+   313:         
+   314:         SSPM3:SSPM0: Synchronous Serial Port Mode Select bits
+   315: 1111 = I2C Slave mode, 10-bit address with Start and Stop bit interrupts enabled
+   316: 1110 = I2C Slave mode, 7-bit address with Start and Stop bit interrupts enabled
+   317: 1011 = I2C Firmware Controlled Master mode (Slave Idle)
+   318: 1000 = I2C Master mode, clock = FOSC/(4 * (SSPADD + 1))
+   319: 0111 = I2C Slave mode, 10-bit address
+   320: 0110 = I2C Slave mode, 7-bit address
+   321:         
+   322:         
+   323:         */
+   324:         SSPADD = 9;// ? for 4MHZ 100KHZ
+   325:         SSPM3 = 1;
+   326:         SSPM2 = 0;
+   327:         SSPM1 = 0;
+   328:         SSPM0 = 0;
+   329:         
+   330:         
+   331:         
+   332:         
+   333:         
+   334: }
+   335: char gelen;
+   336: unsigned char EEPROM_24C32A_oku( int adres )
+   337: {
+   338:         
+   339:          I2C_start();
+   340:          I2C_send( 0b10100000 );
+   341:          I2C_send( adres >> 8 );
+   342:          I2C_send( 0xff & adres  );
+   343:          I2C_stop();
+   344:          I2C_start();
+   345:          I2C_send( 0b10100001 );
+   346:          gelen  =  I2C_read();
+   347:      send_NACK();
+   348:          I2C_stop(); 
+   349:         DelayMs( 5 );
+   350:         return gelen;
+   351:         
+   352: }
+   353: 
+   354: void EEPROM_24C32A_yaz( int adres , char deger )
+   355: {
+   356:         
+   357:         I2C_start();
+   358:                 
+   359:         I2C_send ( 0b10100000 );//I2C_send( 0x40 );
+   360: DelayMs( 10 );  
+   361: 
+   362:         
+   363:                 
+   364:                 //I2C_read( 0x08 );
+   365:         I2C_send( adres >> 8 );
+   366:         DelayMs( 1 );
+   367:         I2C_send( ( 0xFF & adres ) );
+   368:         DelayMs( 10 );
+   369:         I2C_send( deger );
+   370:         //I2C_send( 0b10100000 );
+   371:         I2C_stop();
+   372:         DelayMs( 20 );
+   373:         
+   374:         
+   375: }
+   376: 
+   377: char data[ 20 ];
+   378: 
+   379: void main()
+   380: {
+   381:         
+   382:         
+   383:         TRISC = 0b00011000;
+   384:         PORTC = 0;
+   385:         TRISB = 0;
+   386:         PORTB = 0;
+   387:         I2C_initialize();
+   388:         
+   389: DelayMs( 1000 );
+   390:         
+   391:         
+   392:                 DelayMs( 100 );
+   393:          EEPROM_24C32A_yaz( 0 , ' ' );
+   394:          EEPROM_24C32A_yaz( 1  , 'S' );
+   395:          EEPROM_24C32A_yaz( 2  , 'A' );
+   396:          EEPROM_24C32A_yaz( 3  , 'I' );
+   397:          EEPROM_24C32A_yaz( 4  , 'M' );
+   398:          EEPROM_24C32A_yaz( 5  , ' ' );
+   399:          EEPROM_24C32A_yaz( 6  , 'S' );
+   400:          EEPROM_24C32A_yaz( 7  , 'U' );
+   401:          EEPROM_24C32A_yaz( 8  , 'N' );
+   402:          EEPROM_24C32A_yaz( 9  , 'E' );
+   403:          EEPROM_24C32A_yaz( 10  , 'L' );
+   404:          EEPROM_24C32A_yaz( 11  , ' ' );
+   405: 
+   406:     
+   407:         
+   408: for( int a = 0 ; a < 20 ; a++ )
+   409: {
+   410:         data [ a ] =  EEPROM_24C32A_oku( a );
+   411:                 
+   412: }
+   413: 
+   414: 
+   415: 
+   416: 
+   417:         int adres = 0;
+   418:         while( 1 )
+   419:         {
+   420:                 
+   421:         
+   422:         
+   423:         
+   424:         
+   425:                 
+   426:                 
+   427:                 
+   428:                 DelayMs( 500 );
+   429:                 
+   430:                 }
+   431: }

@@ -1,0 +1,60 @@
+     1: #include<htc.h>
+     2: typedef unsigned char byte;
+     3: #define CSE RC6
+     4: 
+     5: #include "SoftwareSPI.h"
+     6: 
+     7: #define SPI_WriteByte SoftwareSPI_WriteByte
+     8: 
+     9: 
+    10: #include "EEPROM_24C040.h"
+    11: 
+    12: 
+    13: 
+    14: byte read[5];
+    15: 
+    16: void main()
+    17: {
+    18: 
+    19: ANSEL = 0;
+    20: 
+    21: //4 MHZ internal
+    22: IRCF2 = 1;
+    23: IRCF1 = 1;
+    24: IRCF0 = 0;
+    25: SCS = 1;
+    26: TRISC5 = 0;
+    27: TRISC6 = 0;
+    28: PORTC = 0;
+    29: 
+    30: TRISC0 = 0;
+    31: RC0 = 0;
+    32: 
+    33: CSE = 1; // LOW enables EEPROM...
+    34: SoftwareSPI_Initialize();
+    35: 
+    36: __delay_ms(150);
+    37: 
+    38: EEPROM_24C040_WriteByte(1, 'A');
+    39: EEPROM_24C040_WriteByte(2, 'I');
+    40: EEPROM_24C040_WriteByte(3, 'M');
+    41: EEPROM_24C040_WriteByte(511, 'G');
+    42: 
+    43: 
+    44: read[0] = EEPROM_24C040_ReadByte(0);
+    45: read[1] = EEPROM_24C040_ReadByte(1);
+    46: read[2] = EEPROM_24C040_ReadByte(2);
+    47: read[3] = EEPROM_24C040_ReadByte(3);
+    48: read[4] = EEPROM_24C040_ReadByte(511);
+    49: 
+    50: 
+    51: while(1)
+    52: {
+    53: RC0 = ~RC0;
+    54: RC1 = ~RC1;
+    55: __delay_ms(1000);
+    56: 
+    57: 
+    58: }
+    59: 
+    60: }

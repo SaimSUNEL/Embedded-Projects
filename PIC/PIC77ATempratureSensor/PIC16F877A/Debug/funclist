@@ -1,0 +1,14 @@
+___awdiv: CODE, 1296 0 118
+_lcd_command: CODE, 932 0 63
+_strlen: CODE, 878 0 54
+_lcd_data: CODE, 995 0 63
+___awmod: CODE, 1194 0 102
+_main: CODE, 1753 0 295
+_karakter_yaz: CODE, 1414 0 150
+_lcd_clear: CODE, 780 0 16
+_lcd_write: CODE, 796 0 40
+_pow: CODE, 1124 0 70
+___wmul: CODE, 836 0 42
+_lcd_init: CODE, 1058 0 66
+_rakam_yaz: CODE, 1564 0 189
+Total: 1268
