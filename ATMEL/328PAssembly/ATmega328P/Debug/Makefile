@@ -10,12 +10,12 @@ TARGET = Debug
 SHELL = C:\Windows\system32\cmd.exe
 
 ## Tools general options
-ASMFLAGS=-fO -i"..\..\..\..\..\..\Program Files (x86)\Labcenter Electronics\Proteus 8 Professional\VSM Studio\Tools\AVRASM\appnotes\m328Pdef.inc"
+ASMFLAGS=-fO -i"..\..\..\..\..\..\..\Program Files (x86)\Labcenter Electronics\Proteus 8 Professional\VSM Studio\Tools\AVRASM\appnotes\m328Pdef.inc"
 
 ## Processing Tools
 ASM=avrasm2.exe
-#  C:/Users/Saim/PIC-ATMELProjects/328PAssembly/ATmega328P/Debug/Debug.obj: TOOL=ASM
-#     C:/Users/Saim/PIC-ATMELProjects/328PAssembly/ATmega328P/code.asm
+#  C:/Users/Saim/PIC-ATMELProjects/ATMEL/328PAssembly/ATmega328P/Debug/Debug.obj: TOOL=ASM
+#     C:/Users/Saim/PIC-ATMELProjects/ATMEL/328PAssembly/ATmega328P/code.asm
 
 # Build tree:
 all:	Debug

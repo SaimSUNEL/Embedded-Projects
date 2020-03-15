@@ -17,9 +17,9 @@ LDFLAGS=/x /p12f1840
 ASM=MPASMWIN.exe
 LD=mplink.exe
 LIB=mplib.exe
-#  C:/Users/Saim/PIC-ATMELProjects/PIC12F1840Assembly/PIC12F1840/Debug/Debug.cof: TOOL=LD
-#     C:/Users/Saim/PIC-ATMELProjects/PIC12F1840Assembly/PIC12F1840/Debug/PICF18~1.o: TOOL=ASM
-#        C:/Users/Saim/PIC-ATMELProjects/PIC12F1840Assembly/PIC12F1840/PICf1840Assembly.asm
+#  C:/Users/Saim/PIC-ATMELProjects/PIC/PIC12F1840Assembly/PIC12F1840/Debug/Debug.cof: TOOL=LD
+#     C:/Users/Saim/PIC-ATMELProjects/PIC/PIC12F1840Assembly/PIC12F1840/Debug/PICF18~1.o: TOOL=ASM
+#        C:/Users/Saim/PIC-ATMELProjects/PIC/PIC12F1840Assembly/PIC12F1840/PICf1840Assembly.asm
 
 # Build tree:
 all:	Debug
