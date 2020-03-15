@@ -881,230 +881,177 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _EECON1bits `VS99  1 e@396 ]
 "1167 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\pic16f877a.h
 [v _EECON2 `Vuc  1 e@397 ]
-"28 c:\\tc\\delay.h
-[v __dcnt `l  1 e ]
-"2 c:\\tc\\delay.c
-[v _i `uc  1 e ]
 [p mainexit ]
-"5 c:\\tc\\delay.c
-[v _DelayMs `(v  1 ef1`uc ]
-{
-[e :U _DelayMs ]
-[v _cnt `uc  1 r1 ]
-[f ]
-"7
-[e :U 104 ]
-{
-"8
-{
-[e = __dcnt | / -> -> 996 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 105  ]
-[e :U 106 ]
-[e $U 105  ]
-[e :U 105 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 106  ]
-[e :U 107 ]
-}
-"9
-}
-[e $ != -> =- _cnt -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 104  ]
-[e :U 103 ]
-"14
-[e :U 110 ]
-{
-"15
-[e = _i -> -> 4 `i `uc ]
-"16
-[e :U 113 ]
-{
-"17
-{
-[e = __dcnt | / -> -> 250 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 114  ]
-[e :U 115 ]
-[e $U 114  ]
-[e :U 114 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 115  ]
-[e :U 116 ]
-}
-"18
-}
-[e $ != -> =- _i -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 113  ]
-[e :U 112 ]
-"19
-}
-[e $ != -> =- _cnt -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 110  ]
-[e :U 109 ]
-"21
-[e :UE 101 ]
-}
-"16 ../PetriNet.c
+"154 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\pic.h
+[v __delay `(v  0 ef1`ul ]
+[p i __delay ]
+"18 ../PetriNet.c
 [v _main `(v  1 ef ]
 {
 [e :U _main ]
 [f ]
-"18
-[e = _TRISB -> -> 0 `i `uc ]
-"19
-[e = _PORTB -> -> 0 `i `uc ]
 "20
-[e = _TRISC -> -> 0 `i `uc ]
+[e = _TRISB -> -> 0 `i `uc ]
 "21
-[e = _PORTC -> -> 0 `i `uc ]
+[e = _PORTB -> -> 0 `i `uc ]
 "22
-[e = _TRISD -> -> 0 `i `uc ]
+[e = _TRISC -> -> 0 `i `uc ]
 "23
-[e = _TRISA -> -> 0 `i `uc ]
+[e = _PORTC -> -> 0 `i `uc ]
 "24
-[e = _PORTA -> -> 0 `i `uc ]
+[e = _TRISD -> -> 0 `i `uc ]
 "25
+[e = _TRISA -> -> 0 `i `uc ]
+"26
+[e = _PORTA -> -> 0 `i `uc ]
+"27
 [e = _PORTD -> -> 0 `i `uc ]
-"29
-[e :U 119 ]
-"30
+"31
+[e :U 103 ]
+"32
 {
-"37
-[e = _PORTB -> | -> 4 `i -> 8 `i `uc ]
 "39
+[e = _PORTB -> | -> 4 `i -> 8 `i `uc ]
+"41
 [e = _PORTD -> | -> 4 `i -> 8 `i `uc ]
-"44
+"46
 [e = _PORTC -> -> 1 `i `uc ]
-"45
-[e = _PORTA -> -> 1 `i `uc ]
 "47
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"48
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
+[e = _PORTA -> -> 1 `i `uc ]
 "49
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "50
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "51
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "52
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"55
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"53
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"54
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"57
 [e = _PORTB -> -> 0 `i `uc ]
-"56
+"58
 [e = _PORTD -> -> 0 `i `uc ]
-"59
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
 "61
-[e = _PORTB -> | -> 4 `i -> 8 `i `uc ]
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "63
-[e = _PORTD -> | -> 4 `i -> 8 `i `uc ]
-"64
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"68
-[e = _PORTB -> -> 0 `i `uc ]
-"69
-[e = _PORTD -> -> 0 `i `uc ]
-"72
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"76
 [e = _PORTB -> | -> 4 `i -> 8 `i `uc ]
-"78
+"65
 [e = _PORTD -> | -> 4 `i -> 8 `i `uc ]
-"82
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"85
-[e = _PORTB -> -> 2 `i `uc ]
-"86
-[e = _PORTD -> -> 2 `i `uc ]
+"66
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"70
+[e = _PORTB -> -> 0 `i `uc ]
+"71
+[e = _PORTD -> -> 0 `i `uc ]
+"74
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"78
+[e = _PORTB -> | -> 4 `i -> 8 `i `uc ]
+"80
+[e = _PORTD -> | -> 4 `i -> 8 `i `uc ]
+"84
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "87
-[e = _PORTC -> -> 2 `i `uc ]
-"88
-[e = _PORTA -> -> 2 `i `uc ]
-"91
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"92
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"93
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"94
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"95
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"96
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"97
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"98
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"100
-[e = _PORTB -> -> 1 `i `uc ]
-"101
-[e = _PORTD -> -> 1 `i `uc ]
-"102
-[e = _PORTC -> | -> 4 `i -> 8 `i `uc ]
-"103
-[e = _PORTA -> | -> 4 `i -> 8 `i `uc ]
-"104
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"105
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"106
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"107
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"108
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"109
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"110
-[e = _PORTC -> -> 0 `i `uc ]
-"111
-[e = _PORTA -> -> 0 `i `uc ]
-"114
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"116
-[e = _PORTC -> | -> 4 `i -> 8 `i `uc ]
-"117
-[e = _PORTA -> | -> 4 `i -> 8 `i `uc ]
-"119
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"120
-[e = _PORTC -> -> 0 `i `uc ]
-"121
-[e = _PORTA -> -> 0 `i `uc ]
-"123
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"125
-[e = _PORTC -> | -> 4 `i -> 8 `i `uc ]
-"126
-[e = _PORTA -> | -> 4 `i -> 8 `i `uc ]
-"127
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"128
 [e = _PORTB -> -> 2 `i `uc ]
-"129
+"88
 [e = _PORTD -> -> 2 `i `uc ]
-"130
+"89
 [e = _PORTC -> -> 2 `i `uc ]
-"131
+"90
 [e = _PORTA -> -> 2 `i `uc ]
+"93
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"94
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"95
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"96
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"97
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"98
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"99
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"100
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"102
+[e = _PORTB -> -> 1 `i `uc ]
+"103
+[e = _PORTD -> -> 1 `i `uc ]
+"104
+[e = _PORTC -> | -> 4 `i -> 8 `i `uc ]
+"105
+[e = _PORTA -> | -> 4 `i -> 8 `i `uc ]
+"106
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"107
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"108
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"109
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"110
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"111
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"112
+[e = _PORTC -> -> 0 `i `uc ]
+"113
+[e = _PORTA -> -> 0 `i `uc ]
+"116
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"118
+[e = _PORTC -> | -> 4 `i -> 8 `i `uc ]
+"119
+[e = _PORTA -> | -> 4 `i -> 8 `i `uc ]
+"121
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"122
+[e = _PORTC -> -> 0 `i `uc ]
+"123
+[e = _PORTA -> -> 0 `i `uc ]
+"125
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"127
+[e = _PORTC -> | -> 4 `i -> 8 `i `uc ]
+"128
+[e = _PORTA -> | -> 4 `i -> 8 `i `uc ]
+"129
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"130
+[e = _PORTB -> -> 2 `i `uc ]
+"131
+[e = _PORTD -> -> 2 `i `uc ]
 "132
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
+[e = _PORTC -> -> 2 `i `uc ]
 "133
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
+[e = _PORTA -> -> 2 `i `uc ]
 "134
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "135
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "136
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "137
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "138
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "139
-[e ( _DelayMs (1 -> -> 250 `i `uc ]
-"144
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"140
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"141
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"146
 }
-[e :U 118 ]
-"29
-[e $U 119  ]
-[e :U 120 ]
-"152
-[e :UE 117 ]
+[e :U 102 ]
+"31
+[e $U 103  ]
+[e :U 104 ]
+"154
+[e :UE 101 ]
 }

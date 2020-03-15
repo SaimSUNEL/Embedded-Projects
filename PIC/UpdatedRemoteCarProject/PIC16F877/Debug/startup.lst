@@ -1,7 +1,7 @@
 
 
 HI-TECH Software PIC Macro Assembler V9.82 build 9453 
-                                                                                                           Sat Mar 14 18:42:02 2020
+                                                                                                           Sun Mar 15 12:48:57 2020
 
 
      1                           
@@ -67,12 +67,12 @@ HI-TECH Software PIC Macro Assembler V9.82 build 9453
     61  0000                     _exit
     62                           	psect	end_init
     63                           	global start_initialization
-    64  0000  120A  118A  2B62   	ljmp start_initialization	;jump to C runtime clear & initialization
+    64  0000  120A  118A  2D13   	ljmp start_initialization	;jump to C runtime clear & initialization
 
 
 HI-TECH Software PICC Macro Assembler V9.82 build 9453 
-Symbol Table                                                                                               Sat Mar 14 18:42:02 2020
+Symbol Table                                                                                               Sun Mar 15 12:48:57 2020
 
-               _main 037A                 _exit 0000                 start 0000  start_initialization 0362  
+               _main 052D                 _exit 0000                 start 0000  start_initialization 0513  
            intlevel0 0000             intlevel1 0000             intlevel2 0000             intlevel3 0000  
            intlevel4 0000             intlevel5 0000             reset_vec 0000  

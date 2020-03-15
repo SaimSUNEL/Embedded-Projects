@@ -1090,36 +1090,8 @@ extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsign
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
-# 28 "c:\\tc\\delay.h"
-long _dcnt;
-
-# 44
-extern void DelayMs(unsigned char);
-
-# 2 "c:\\Tc\\delay.c"
-unsigned char i;
-void
-DelayMs(unsigned char cnt)
-{
-
-do {
-{ _dcnt = (996)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
-} while(--cnt);
-
-
-
-
-do {
-i = 4;
-do {
-{ _dcnt = (250)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
-} while(--i);
-} while(--cnt);
-
-}
-
-# 4 "../PostScaleTimer2PIC.c"
-int sayi = 0;
+# 5 "../PostScaleTimer2PIC.c"
+int sayi;
 void interrupt funct()
 {
 
@@ -1140,7 +1112,7 @@ sayi = 0;
 
 }
 
-# 29
+# 30
 }
 
 

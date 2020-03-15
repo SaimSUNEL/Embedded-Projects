@@ -43,9 +43,7 @@ pclath	equ	10
 	FNCALL	intlevel1,_funct
 	global	intlevel1
 	FNROOT	intlevel1
-	global	__dcnt
 	global	_sayi
-	global	_i
 	global	_PORTB
 psect	maintext,global,class=CODE,delta=2
 global __pmaintext
@@ -104,24 +102,13 @@ start_initialization:
 psect	bssCOMMON,class=COMMON,space=1
 global __pbssCOMMON
 __pbssCOMMON:
-__dcnt:
-       ds      4
-
 _sayi:
        ds      2
-
-_i:
-       ds      1
 
 ; Clear objects allocated to COMMON
 psect cinit,class=CODE,delta=2
 	clrf	((__pbssCOMMON)+0)&07Fh
 	clrf	((__pbssCOMMON)+1)&07Fh
-	clrf	((__pbssCOMMON)+2)&07Fh
-	clrf	((__pbssCOMMON)+3)&07Fh
-	clrf	((__pbssCOMMON)+4)&07Fh
-	clrf	((__pbssCOMMON)+5)&07Fh
-	clrf	((__pbssCOMMON)+6)&07Fh
 psect cinit,class=CODE,delta=2
 global end_of_initialization
 
@@ -142,9 +129,9 @@ __pcstackCOMMON:
 	ds	4
 	global	??_main
 ??_main:	; 0 bytes @ 0x4
-;;Data sizes: Strings 0, constant 0, data 0, bss 7, persistent 0 stack 0
+;;Data sizes: Strings 0, constant 0, data 0, bss 2, persistent 0 stack 0
 ;;Auto spaces:   Size  Autos    Used
-;; COMMON          14      4      11
+;; COMMON          14      4       6
 ;; BANK0           80      0       0
 ;; BANK1           80      0       0
 ;; BANK3           96      0       0
@@ -232,13 +219,13 @@ __pcstackCOMMON:
 ;;EEDATA             100      0       0       0        0.0%
 ;;NULL                 0      0       0       0        0.0%
 ;;CODE                 0      0       0       0        0.0%
-;;COMMON               E      4       B       1       78.6%
+;;COMMON               E      4       6       1       42.9%
 ;;BITSFR0              0      0       0       1        0.0%
 ;;SFR0                 0      0       0       1        0.0%
 ;;BITSFR1              0      0       0       2        0.0%
 ;;SFR1                 0      0       0       2        0.0%
 ;;STACK                0      0       0       2        0.0%
-;;ABS                  0      0       B       3        0.0%
+;;ABS                  0      0       6       3        0.0%
 ;;BITBANK0            50      0       0       4        0.0%
 ;;BITSFR3              0      0       0       4        0.0%
 ;;SFR3                 0      0       0       4        0.0%
@@ -251,14 +238,14 @@ __pcstackCOMMON:
 ;;BANK3               60      0       0       9        0.0%
 ;;BITBANK2            60      0       0      10        0.0%
 ;;BANK2               60      0       0      11        0.0%
-;;DATA                 0      0       B      12        0.0%
+;;DATA                 0      0       6      12        0.0%
 
 	global	_main
 psect	maintext
 
 ;; *************** function _main *****************
 ;; Defined at:
-;;		line 33 in file "../PostScaleTimer2PIC.c"
+;;		line 34 in file "../PostScaleTimer2PIC.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -286,90 +273,90 @@ psect	maintext
 ;;
 psect	maintext
 	file	"../PostScaleTimer2PIC.c"
-	line	33
+	line	34
 	global	__size_of_main
 	__size_of_main	equ	__end_of_main-_main
 	
 _main:	
 	opt	stack 7
 ; Regs used in _main: [wreg+status,2]
-	line	34
+	line	35
 	
-l1785:	
+l1752:	
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	bcf	(1072/8)^080h,(1072)&7
-	line	35
+	line	36
 	
-l1787:	
+l1754:	
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	clrf	(6)	;volatile
-	line	37
-	
-l1789:	
-	bsf	(95/8),(95)&7
 	line	38
 	
-l1791:	
-	bsf	(94/8),(94)&7
-	line	40
+l1756:	
+	bsf	(95/8),(95)&7
+	line	39
 	
-l1793:	
+l1758:	
+	bsf	(94/8),(94)&7
+	line	41
+	
+l1760:	
 	movlw	(0FAh)
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	movwf	(146)^080h	;volatile
-	line	43
+	line	44
 	
-l1795:	
+l1762:	
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	bcf	(145/8),(145)&7
-	line	44
+	line	45
 	
-l1797:	
+l1764:	
 	bsf	(144/8),(144)&7
-	line	49
-	
-l1799:	
-	bcf	(150/8),(150)&7
 	line	50
 	
-l1801:	
-	bcf	(149/8),(149)&7
+l1766:	
+	bcf	(150/8),(150)&7
 	line	51
 	
-l1803:	
-	bsf	(148/8),(148)&7
+l1768:	
+	bcf	(149/8),(149)&7
 	line	52
 	
-l1805:	
-	bsf	(147/8),(147)&7
-	line	54
+l1770:	
+	bsf	(148/8),(148)&7
+	line	53
 	
-l1807:	
+l1772:	
+	bsf	(147/8),(147)&7
+	line	55
+	
+l1774:	
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	bsf	(1121/8)^080h,(1121)&7
-	line	56
+	line	57
 	
-l1809:	
+l1776:	
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	bsf	(146/8),(146)&7
-	goto	l712
-	line	59
+	goto	l693
+	line	60
 	
-l711:	
+l692:	
 	
-l712:	
-	goto	l712
+l693:	
+	goto	l693
 	
-l713:	
-	line	62
+l694:	
+	line	63
 	
-l714:	
+l695:	
 	global	start
 	ljmp	start
 	opt stack 0
@@ -379,13 +366,13 @@ GLOBAL	__end_of_main
 
 	signat	_main,88
 	global	_funct
-psect	text72,local,class=CODE,delta=2
-global __ptext72
-__ptext72:
+psect	text71,local,class=CODE,delta=2
+global __ptext71
+__ptext71:
 
 ;; *************** function _funct *****************
 ;; Defined at:
-;;		line 6 in file "../PostScaleTimer2PIC.c"
+;;		line 7 in file "../PostScaleTimer2PIC.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -411,9 +398,9 @@ __ptext72:
 ;;		Interrupt level 1
 ;; This function uses a non-reentrant model
 ;;
-psect	text72
+psect	text71
 	file	"../PostScaleTimer2PIC.c"
-	line	6
+	line	7
 	global	__size_of_funct
 	__size_of_funct	equ	__end_of_funct-_funct
 	
@@ -439,60 +426,60 @@ interrupt_function:
 	movf	btemp+1,w
 	movwf	(??_funct+3)
 	ljmp	_funct
-psect	text72
-	line	8
+psect	text71
+	line	9
 	
-i1l1775:	
+i1l1742:	
 	btfss	(97/8),(97)&7
-	goto	u6_21
-	goto	u6_20
-u6_21:
-	goto	i1l708
-u6_20:
-	line	10
-	
-i1l1777:	
-	bcf	(97/8),(97)&7
+	goto	u1_21
+	goto	u1_20
+u1_21:
+	goto	i1l689
+u1_20:
 	line	11
 	
-i1l1779:	
+i1l1744:	
+	bcf	(97/8),(97)&7
+	line	12
+	
+i1l1746:	
 	movlw	low(01h)
 	addwf	(_sayi),f
 	skipnc
 	incf	(_sayi+1),f
 	movlw	high(01h)
 	addwf	(_sayi+1),f
-	line	13
+	line	14
 	movlw	0F5h
 	xorwf	(_sayi),w
 	iorwf	(_sayi+1),w
 	skipz
-	goto	u7_21
-	goto	u7_20
-u7_21:
-	goto	i1l708
-u7_20:
-	line	15
-	
-i1l1781:	
-	movlw	1<<((48)&7)
-	xorwf	((48)/8),f
+	goto	u2_21
+	goto	u2_20
+u2_21:
+	goto	i1l689
+u2_20:
 	line	16
 	
-i1l1783:	
+i1l1748:	
+	movlw	1<<((48)&7)
+	xorwf	((48)/8),f
+	line	17
+	
+i1l1750:	
 	clrf	(_sayi)
 	clrf	(_sayi+1)
-	goto	i1l708
-	line	19
+	goto	i1l689
+	line	20
 	
-i1l707:	
-	goto	i1l708
-	line	23
+i1l688:	
+	goto	i1l689
+	line	24
 	
-i1l706:	
-	line	29
+i1l687:	
+	line	30
 	
-i1l708:	
+i1l689:	
 	movf	(??_funct+3),w
 	movwf	btemp+1
 	movf	(??_funct+2),w
@@ -510,9 +497,9 @@ GLOBAL	__end_of_funct
 ;; =============== function _funct ends ============
 
 	signat	_funct,88
-psect	text73,local,class=CODE,delta=2
-global __ptext73
-__ptext73:
+psect	text72,local,class=CODE,delta=2
+global __ptext72
+__ptext72:
 	global	btemp
 	btemp set 07Eh
 

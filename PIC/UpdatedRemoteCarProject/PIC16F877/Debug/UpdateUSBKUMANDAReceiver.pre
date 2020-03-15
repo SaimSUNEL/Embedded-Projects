@@ -1030,35 +1030,7 @@ extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsign
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
-# 28 "c:\\tc\\delay.h"
-long _dcnt;
-
-# 44
-extern void DelayMs(unsigned char);
-
-# 2 "c:/tc/delay.c"
-unsigned char i;
-void
-DelayMs(unsigned char cnt)
-{
-
-do {
-{ _dcnt = (996)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
-} while(--cnt);
-
-
-
-
-do {
-i = 4;
-do {
-{ _dcnt = (250)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
-} while(--i);
-} while(--cnt);
-
-}
-
-# 16 "../UpdateUSBKUMANDAReceiver.c"
+# 17 "../UpdateUSBKUMANDAReceiver.c"
 int motor_suresi = 0;
 char ortala = 0;
 char motor_aktif = 0;
@@ -1082,10 +1054,10 @@ if(sonuc=='4'){
 for(int b=0;b<3;b++)
 {
 RC7 = 1;
-{ _dcnt = (1498)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
+_delay((unsigned long)((1498)*(1000000/4000000.0)));
 RC7 = 0;
-DelayMs(19);
-DelayMs( 1 ); }
+_delay((unsigned long)((19)*(1000000/4000.0)));
+_delay((unsigned long)((1)*(1000000/4000.0))); }
 
 
 
@@ -1094,10 +1066,10 @@ if(sonuc=='5'){
 for(int a=0;a<3;a++)
 {
 RC7=1;
-{ _dcnt = (998)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
+_delay((unsigned long)((998)*(1000000/4000000.0)));
 RC7=0;
-DelayMs(19);
-DelayMs( 2 );
+_delay((unsigned long)((19)*(1000000/4000.0)));
+_delay((unsigned long)((2)*(1000000/4000.0)));
 }
 
 
@@ -1109,10 +1081,10 @@ if(sonuc =='d' || sonuc == 'e' ){
 for(int b=0;b<4;b++)
 {
 RC7 = 1;
-{ _dcnt = (1998)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
+_delay((unsigned long)((1998)*(1000000/4000000.0)));
 RC7 = 0;
-DelayMs(19);
-DelayMs( 1 ); }
+_delay((unsigned long)((19)*(1000000/4000.0)));
+_delay((unsigned long)((1)*(1000000/4000.0))); }
 
 }
 
@@ -1121,10 +1093,10 @@ if(sonuc == 'e' ){
 for(int b=0;b<4;b++)
 {
 RC7 = 1;
-{ _dcnt = (1998)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
+_delay((unsigned long)((1998)*(1000000/4000000.0)));
 RC7 = 0;
-DelayMs(19);
-DelayMs( 1 ); }
+_delay((unsigned long)((19)*(1000000/4000.0)));
+_delay((unsigned long)((1)*(1000000/4000.0))); }
 
 }
 
@@ -1145,32 +1117,32 @@ temp = sayi;
 if( sayi > 150 && sayi < 162 )
 {
 
-{ _dcnt = (250 -1)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
-{ _dcnt = (250 -1)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
+_delay((unsigned long)((250 -1)*(1000000/4000000.0)));
+_delay((unsigned long)((250 -1)*(1000000/4000000.0)));
 
 if( RB0 == 0 )
 {
-{ _dcnt = (240 -1)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
-{ _dcnt = (230 -1)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
+_delay((unsigned long)((240 -1)*(1000000/4000000.0)));
+_delay((unsigned long)((230 -1)*(1000000/4000000.0)));
 RC5 = RB0;
 RB7=1;
 
 
 for( kk = 0 ; kk < 8 ; kk ++ )
 {
-{ _dcnt = (250)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
-{ _dcnt = (120)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
+_delay((unsigned long)((250)*(1000000/4000000.0)));
+_delay((unsigned long)((120)*(1000000/4000000.0)));
 
 
 gelen_veri[ kk ] = RB0;
 RC5 = RB0 ;
-{ _dcnt = (250)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
-{ _dcnt = (120)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
+_delay((unsigned long)((250)*(1000000/4000000.0)));
+_delay((unsigned long)((120)*(1000000/4000000.0)));
 
 RC5 = RB0;
-{ _dcnt = (250 - 1)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
-{ _dcnt = (230 - 1)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
-{ _dcnt = (220 - 1)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
+_delay((unsigned long)((250 - 1)*(1000000/4000000.0)));
+_delay((unsigned long)((230 - 1)*(1000000/4000000.0)));
+_delay((unsigned long)((220 - 1)*(1000000/4000000.0)));
 
 }
 
@@ -1179,13 +1151,13 @@ RC5 = RB0;
 
 kodu_coz();
 
-# 140
+# 141
 }
 
-# 149
+# 150
 }
 
-# 160
+# 161
 }
 void main(void)
 {
@@ -1201,13 +1173,13 @@ PORTC=0;
 while (1)
 {
 
-# 181
+# 182
 if(RB0==1)
 {
 coz();
 }
 
-# 191
+# 192
 }
 
 

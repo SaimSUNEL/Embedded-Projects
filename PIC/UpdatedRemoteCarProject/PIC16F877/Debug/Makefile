@@ -18,9 +18,9 @@ CC=picc.exe
 ASM=picc.exe
 LD=picc.exe
 LIB=picc.exe
-#  C:/Users/Saim/PIC-ATMELProjects/UpdatedRemoteCarProject/PIC16F877/Debug/Debug.cof: TOOL=LD
-#     C:/Users/Saim/PIC-ATMELProjects/UpdatedRemoteCarProject/PIC16F877/Debug/UpdateUSBKUMANDAReceiver.p1: TOOL=CC
-#        C:/Users/Saim/PIC-ATMELProjects/UpdatedRemoteCarProject/PIC16F877/UpdateUSBKUMANDAReceiver.c
+#  C:/Users/Saim/PIC-ATMELProjects/PIC/UpdatedRemoteCarProject/PIC16F877/Debug/Debug.cof: TOOL=LD
+#     C:/Users/Saim/PIC-ATMELProjects/PIC/UpdatedRemoteCarProject/PIC16F877/Debug/UpdateUSBKUMANDAReceiver.p1: TOOL=CC
+#        C:/Users/Saim/PIC-ATMELProjects/PIC/UpdatedRemoteCarProject/PIC16F877/UpdateUSBKUMANDAReceiver.c
 
 # Build tree:
 all:	Debug

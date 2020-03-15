@@ -18,9 +18,9 @@ CC=picc.exe
 ASM=picc.exe
 LD=picc.exe
 LIB=picc.exe
-#  C:/Users/Saim/PIC-ATMELProjects/PIC77ASingleServo/PIC16F877A/Debug/Debug.cof: TOOL=LD
-#     C:/Users/Saim/PIC-ATMELProjects/PIC77ASingleServo/PIC16F877A/Debug/ServowithPic.p1: TOOL=CC
-#        C:/Users/Saim/PIC-ATMELProjects/PIC77ASingleServo/PIC16F877A/ServowithPic.c
+#  C:/Users/Saim/PIC-ATMELProjects/PIC/PIC77ASingleServo/PIC16F877A/Debug/Debug.cof: TOOL=LD
+#     C:/Users/Saim/PIC-ATMELProjects/PIC/PIC77ASingleServo/PIC16F877A/Debug/ServowithPic.p1: TOOL=CC
+#        C:/Users/Saim/PIC-ATMELProjects/PIC/PIC77ASingleServo/PIC16F877A/ServowithPic.c
 
 # Build tree:
 all:	Debug

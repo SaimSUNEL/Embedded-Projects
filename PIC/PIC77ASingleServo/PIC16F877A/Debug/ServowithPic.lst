@@ -1,63 +1,65 @@
      1: 
      2: #include<htc.h>
-     3: #include "c:\\tc\\delay.c"
-     4: int app , wait , times ,ind;
-     5:  void servo_dondur( unsigned char angle )
-     6: {
-     7: 
+     3: #define DelayMs __delay_ms
+     4: #define DelayUs __delay_us
+     5: int app , wait , times ,ind;
+     6:  void servo_dondur( unsigned char angle )
+     7: {
      8: 
-     9:  wait = 540 +  8* angle   ;
-    10: times = wait/ 250;
-    11:         
-    12:  for (  app = 0 ; app < 6 ; app++ )
-    13:  {
-    14:   RB0 = 1;
-    15: 
+     9: 
+    10:  wait = 540 +  8* angle   ;
+    11: times = wait/ 250;
+    12:         
+    13:  for (  app = 0 ; app < 6 ; app++ )
+    14:  {
+    15:   RB0 = 1;
     16: 
-    17: for( ind = 0 ; ind < times ; ind ++ )
-    18: {
-    19:   
-    20: DelayUs( 250 );
-    21: 
+    17: 
+    18: for( ind = 0 ; ind < times ; ind ++ )
+    19: {
+    20:   
+    21: DelayUs( 250 );
     22: 
-    23: }
-    24: 
-    25: DelayUs( wait % 250 - 10 );
-    26: 
-    27: 
+    23: 
+    24: }
+    25: 
+    26: for(int c=0; c < wait % 250 - 10; c++)
+    27: DelayUs( 1);
     28: 
     29: 
-    30: RB0 = 0;
-    31: DelayMs( 19 );
-    32:  }
-    33:   
-    34:   
-    35: }
-    36: 
-    37: 
+    30: 
+    31: 
+    32: RB0 = 0;
+    33: DelayMs( 19 );
+    34:  }
+    35:   
+    36:   
+    37: }
     38: 
     39: 
-    40: void main()
-    41: {
-    42:         TRISB = 0;
-    43:         PORTB = 0;
-    44:         int x;
-    45:         //servo_dondur( 90 );
-    46:         servo_dondur( 20 );
-    47: while( 1 )
-    48: {
-    49: /*
-    50:         for( x=0; x < 180 ; x++ )
-    51: {
-    52:         servo_dondur( x );
-    53:         DelayMs( 15 );
-    54:         
-    55: }
-    56: 
-    57: */
+    40: 
+    41: 
+    42: void main()
+    43: {
+    44:         TRISB = 0;
+    45:         PORTB = 0;
+    46:         int x;
+    47:         //servo_dondur( 90 );
+    48:         servo_dondur( 20 );
+    49: while( 1 )
+    50: {
+    51: /*
+    52:         for( x=0; x < 180 ; x++ )
+    53: {
+    54:         servo_dondur( x );
+    55:         DelayMs( 15 );
+    56:         
+    57: }
     58: 
-    59: 
-    60: }       
-    61:         
-    62:         
-    63: }
+    59: */
+    60: 
+    61: 
+    62: }       
+    63:         
+    64:         
+    65: }

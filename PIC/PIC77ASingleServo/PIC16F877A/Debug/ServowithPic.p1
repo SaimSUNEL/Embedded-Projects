@@ -881,165 +881,109 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _EECON1bits `VS99  1 e@396 ]
 "1167 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\pic16f877a.h
 [v _EECON2 `Vuc  1 e@397 ]
-"28 c:\\tc\\delay.h
-[v __dcnt `l  1 e ]
-"2 c:\\tc\\delay.c
-[v _i `uc  1 e ]
-"4 ../ServowithPic.c
+"5 ../ServowithPic.c
 [v _app `i  1 e ]
-"4 ../ServowithPic.c
+"5 ../ServowithPic.c
 [v _wait `i  1 e ]
-"4 ../ServowithPic.c
+"5 ../ServowithPic.c
 [v _times `i  1 e ]
-"4 ../ServowithPic.c
+"5 ../ServowithPic.c
 [v _ind `i  1 e ]
+"154 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\pic.h
+[v __delay `(v  0 ef1`ul ]
+[p i __delay ]
 [p mainexit ]
-"5 c:\\tc\\delay.c
-[v _DelayMs `(v  1 ef1`uc ]
-{
-[e :U _DelayMs ]
-[v _cnt `uc  1 r1 ]
-[f ]
-"7
-[e :U 104 ]
-{
-"8
-{
-[e = __dcnt | / -> -> 996 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 105  ]
-[e :U 106 ]
-[e $U 105  ]
-[e :U 105 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 106  ]
-[e :U 107 ]
-}
-"9
-}
-[e $ != -> =- _cnt -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 104  ]
-[e :U 103 ]
-"14
-[e :U 110 ]
-{
-"15
-[e = _i -> -> 4 `i `uc ]
-"16
-[e :U 113 ]
-{
-"17
-{
-[e = __dcnt | / -> -> 250 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 114  ]
-[e :U 115 ]
-[e $U 114  ]
-[e :U 114 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 115  ]
-[e :U 116 ]
-}
-"18
-}
-[e $ != -> =- _i -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 113  ]
-[e :U 112 ]
-"19
-}
-[e $ != -> =- _cnt -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 110  ]
-[e :U 109 ]
-"21
-[e :UE 101 ]
-}
-"6 ../ServowithPic.c
+"7 ../ServowithPic.c
 [v _servo_dondur `(v  1 ef1`uc ]
 {
 [e :U _servo_dondur ]
 [v _angle `uc  1 r1 ]
 [f ]
-"9
-[e = _wait + -> 540 `i * -> 8 `i -> _angle `i ]
 "10
+[e = _wait + -> 540 `i * -> 8 `i -> _angle `i ]
+"11
 [e = _times / _wait -> 250 `i ]
-"12
+"13
 {
 [e = _app -> 0 `i ]
-[e $ < _app -> 6 `i 118  ]
-[e $U 119  ]
-"13
-[e :U 118 ]
-{
+[e $ < _app -> 6 `i 102  ]
+[e $U 103  ]
 "14
+[e :U 102 ]
+{
+"15
 [e = _RB0 -> -> 1 `i `b ]
-"17
+"18
 {
 [e = _ind -> 0 `i ]
-[e $U 124  ]
+[e $U 108  ]
+"19
+[e :U 105 ]
+{
+"21
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
+"24
+}
 "18
-[e :U 121 ]
-{
-"20
-{
-[e = __dcnt | / -> -> 250 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 125  ]
-[e :U 126 ]
-[e $U 125  ]
-[e :U 125 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 126  ]
-[e :U 127 ]
-}
-"23
-}
-"17
 [e ++ _ind -> 1 `i ]
-[e :U 124 ]
-[e $ < _ind _times 121  ]
-[e :U 122 ]
-"23
+[e :U 108 ]
+[e $ < _ind _times 105  ]
+[e :U 106 ]
+"24
 }
-"25
+"26
 {
-[e = __dcnt | / -> - % _wait -> 250 `i -> 10 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 128  ]
-[e :U 129 ]
-[e $U 128  ]
-[e :U 128 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 129  ]
-[e :U 130 ]
+[v _c `i  1 a ]
+[e = _c -> 0 `i ]
+[e $U 112  ]
+"27
+[e :U 109 ]
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
+"26
+[e ++ _c -> 1 `i ]
+[e :U 112 ]
+[e $ < _c - % _wait -> 250 `i -> 10 `i 109  ]
+[e :U 110 ]
+"27
 }
-"30
+"32
 [e = _RB0 -> -> 0 `i `b ]
-"31
-[e ( _DelayMs (1 -> -> 19 `i `uc ]
-"32
+"33
+[e ( __delay (1 -> * -> -> 19 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"34
 }
-"12
+"13
 [e ++ _app -> 1 `i ]
-[e $ < _app -> 6 `i 118  ]
-[e :U 119 ]
-"32
+[e $ < _app -> 6 `i 102  ]
+[e :U 103 ]
+"34
 }
-"35
-[e :UE 117 ]
+"37
+[e :UE 101 ]
 }
-"41
+"43
 [v _main `(v  1 ef ]
 {
 [e :U _main ]
 [f ]
-"42
-[e = _TRISB -> -> 0 `i `uc ]
-"43
-[e = _PORTB -> -> 0 `i `uc ]
 "44
-[v _x `i  1 a ]
+[e = _TRISB -> -> 0 `i `uc ]
+"45
+[e = _PORTB -> -> 0 `i `uc ]
 "46
-[e ( _servo_dondur (1 -> -> 20 `i `uc ]
-"47
-[e :U 133 ]
+[v _x `i  1 a ]
 "48
+[e ( _servo_dondur (1 -> -> 20 `i `uc ]
+"49
+[e :U 115 ]
+"50
 {
-"60
+"62
 }
-[e :U 132 ]
-"47
-[e $U 133  ]
-[e :U 134 ]
-"63
-[e :UE 131 ]
+[e :U 114 ]
+"49
+[e $U 115  ]
+[e :U 116 ]
+"65
+[e :UE 113 ]
 }

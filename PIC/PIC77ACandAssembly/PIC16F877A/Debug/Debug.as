@@ -45,12 +45,9 @@ org 0x000 ;#
 goto 0x60 ;#
 	FNCALL	_main,_FNC
 	FNCALL	_main,_seri_portu_ayarla
-	FNCALL	_main,_DelayMs
 	FNCALL	_main,_seri_porta_veri_gonder
 	FNCALL	_main,_seri_porttan_veri_al
 	FNROOT	_main
-	global	__dcnt
-	global	_i
 	global	_PORTB
 psect	_FNC_text,class=CODE,delta=2
 global __p_FNC_text
@@ -120,22 +117,6 @@ psect cinit,class=CODE,delta=2
 global start_initialization
 start_initialization:
 
-psect	bssCOMMON,class=COMMON,space=1
-global __pbssCOMMON
-__pbssCOMMON:
-__dcnt:
-       ds      4
-
-_i:
-       ds      1
-
-; Clear objects allocated to COMMON
-psect cinit,class=CODE,delta=2
-	clrf	((__pbssCOMMON)+0)&07Fh
-	clrf	((__pbssCOMMON)+1)&07Fh
-	clrf	((__pbssCOMMON)+2)&07Fh
-	clrf	((__pbssCOMMON)+3)&07Fh
-	clrf	((__pbssCOMMON)+4)&07Fh
 psect cinit,class=CODE,delta=2
 global end_of_initialization
 
@@ -147,10 +128,6 @@ ljmp _main	;jump to C main() function
 psect	cstackCOMMON,class=COMMON,space=1
 global __pcstackCOMMON
 __pcstackCOMMON:
-	global	?_DelayMs
-?_DelayMs:	; 0 bytes @ 0x0
-	global	??_DelayMs
-??_DelayMs:	; 0 bytes @ 0x0
 	global	?_FNC
 ?_FNC:	; 0 bytes @ 0x0
 	global	??_FNC
@@ -172,18 +149,15 @@ __pcstackCOMMON:
 	global	seri_porta_veri_gonder@jk
 seri_porta_veri_gonder@jk:	; 1 bytes @ 0x0
 	ds	1
-	global	DelayMs@cnt
-DelayMs@cnt:	; 1 bytes @ 0x1
-	ds	1
 	global	??_main
-??_main:	; 0 bytes @ 0x2
-	ds	1
+??_main:	; 0 bytes @ 0x1
+	ds	2
 	global	main@gelen
 main@gelen:	; 1 bytes @ 0x3
 	ds	1
-;;Data sizes: Strings 0, constant 0, data 0, bss 5, persistent 0 stack 0
+;;Data sizes: Strings 0, constant 0, data 0, bss 0, persistent 0 stack 0
 ;;Auto spaces:   Size  Autos    Used
-;; COMMON          14      4       9
+;; COMMON          14      4       4
 ;; BANK0h          16      0       0
 ;; BANK0l          64      0       0
 ;; BANK1           80      0       0
@@ -198,7 +172,8 @@ main@gelen:	; 1 bytes @ 0x3
 ;;
 ;; Critical Paths under _main in COMMON
 ;;
-;;   _main->_DelayMs
+;;   _main->_FNC
+;;   _main->_seri_porta_veri_gonder
 ;;
 ;; Critical Paths under _main in BANK0h
 ;;
@@ -221,7 +196,7 @@ main@gelen:	; 1 bytes @ 0x3
 ;;   None.
 
 ;;
-;;Main: autosize = 0, tempsize = 1, incstack = 0, save=0
+;;Main: autosize = 0, tempsize = 2, incstack = 0, save=0
 ;;
 
 ;;
@@ -230,11 +205,10 @@ main@gelen:	; 1 bytes @ 0x3
 ;; ---------------------------------------------------------------------------------
 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
 ;; ---------------------------------------------------------------------------------
-;; (0) _main                                                 2     2      0      45
-;;                                              2 COMMON     2     2      0
+;; (0) _main                                                 3     3      0      15
+;;                                              1 COMMON     3     3      0
 ;;                                _FNC
 ;;                  _seri_portu_ayarla
-;;                            _DelayMs
 ;;             _seri_porta_veri_gonder
 ;;               _seri_porttan_veri_al
 ;; ---------------------------------------------------------------------------------
@@ -248,9 +222,6 @@ main@gelen:	; 1 bytes @ 0x3
 ;; (1) _FNC                                                  1     1      0       0
 ;;                                              0 COMMON     1     1      0
 ;; ---------------------------------------------------------------------------------
-;; (1) _DelayMs                                              2     2      0      30
-;;                                              0 COMMON     2     2      0
-;; ---------------------------------------------------------------------------------
 ;; Estimated maximum stack depth 1
 ;; ---------------------------------------------------------------------------------
 
@@ -259,7 +230,6 @@ main@gelen:	; 1 bytes @ 0x3
 ;; _main (ROOT)
 ;;   _FNC
 ;;   _seri_portu_ayarla
-;;   _DelayMs
 ;;   _seri_porta_veri_gonder
 ;;   _seri_porttan_veri_al
 ;;
@@ -271,13 +241,13 @@ main@gelen:	; 1 bytes @ 0x3
 ;;EEDATA             100      0       0       0        0.0%
 ;;NULL                 0      0       0       0        0.0%
 ;;CODE                 0      0       0       0        0.0%
-;;COMMON               E      4       9       1       64.3%
+;;COMMON               E      4       4       1       28.6%
 ;;BITSFR0              0      0       0       1        0.0%
 ;;SFR0                 0      0       0       1        0.0%
 ;;BITSFR1              0      0       0       2        0.0%
 ;;SFR1                 0      0       0       2        0.0%
 ;;STACK                0      0       1       2        0.0%
-;;ABS                  0      0       9       3        0.0%
+;;ABS                  0      0       0       3        0.0%
 ;;BITBANK0h           10      0       0       4        0.0%
 ;;BITSFR3              0      0       0       4        0.0%
 ;;SFR3                 0      0       0       4        0.0%
@@ -292,7 +262,7 @@ main@gelen:	; 1 bytes @ 0x3
 ;;BANK3               60      0       0      11        0.0%
 ;;BITBANK2            60      0       0      12        0.0%
 ;;BANK2               60      0       0      13        0.0%
-;;DATA                 0      0       A      14        0.0%
+;;DATA                 0      0       0      14        0.0%
 
 	global	_main
 psect	_main_text,class=CODE,delta=2
@@ -317,14 +287,13 @@ __p_main_text:
 ;; Data sizes:     COMMON  BANK0h  BANK0l   BANK1   BANK3   BANK2
 ;;      Params:         0       0       0       0       0       0
 ;;      Locals:         1       0       0       0       0       0
-;;      Temps:          1       0       0       0       0       0
-;;      Totals:         2       0       0       0       0       0
-;;Total ram usage:        2 bytes
+;;      Temps:          2       0       0       0       0       0
+;;      Totals:         3       0       0       0       0       0
+;;Total ram usage:        3 bytes
 ;; Hardware stack levels required when called:    1
 ;; This function calls:
 ;;		_FNC
 ;;		_seri_portu_ayarla
-;;		_DelayMs
 ;;		_seri_porta_veri_gonder
 ;;		_seri_porttan_veri_al
 ;; This function is called by:
@@ -344,98 +313,108 @@ _main:
 ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
 	line	97
 	
-l2687:	
+l2656:	
 	fcall	_FNC
 	line	98
 	
-l2689:	
+l2658:	
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	clrf	(134)^080h	;volatile
 	line	99
 	
-l2691:	
+l2660:	
 	movlw	(080h)
 	movwf	(135)^080h	;volatile
 	line	100
 	
-l2693:	
+l2662:	
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	clrf	(6)	;volatile
 	line	101
 	
-l2695:	
+l2664:	
 	clrf	(7)	;volatile
 	line	102
 	
-l2697:	
+l2666:	
 	fcall	_seri_portu_ayarla
 	line	105
 	
-l2699:	
-	movlw	(0F4h)
-	fcall	_DelayMs
+l2668:	
+	opt asmopt_off
+movlw	163
+movwf	((??_main+0)+0+1),f
+	movlw	85
+movwf	((??_main+0)+0),f
+u2257:
+	decfsz	((??_main+0)+0),f
+	goto	u2257
+	decfsz	((??_main+0)+0+1),f
+	goto	u2257
+opt asmopt_on
+
 	line	106
 	
-l2701:	
+l2670:	
 	movlw	(053h)
 	fcall	_seri_porta_veri_gonder
 	line	107
 	
-l2703:	
+l2672:	
 	movlw	(061h)
 	fcall	_seri_porta_veri_gonder
 	line	108
 	
-l2705:	
+l2674:	
 	movlw	(069h)
 	fcall	_seri_porta_veri_gonder
 	line	109
 	
-l2707:	
+l2676:	
 	movlw	(06Dh)
 	fcall	_seri_porta_veri_gonder
 	line	114
 	
-l2709:	
+l2678:	
 	bsf	(94/8),(94)&7
 	line	115
 	
-l2711:	
+l2680:	
 	bsf	(95/8),(95)&7
 	line	116
 	
-l2713:	
+l2682:	
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	bsf	(1125/8)^080h,(1125)&7
 	line	117
 	
-l2715:	
+l2684:	
 	bcf	(1124/8)^080h,(1124)&7
-	goto	l2717
+	goto	l2686
 	line	118
 	
-l723:	
+l706:	
 	line	120
 	
-l2717:	
+l2686:	
 	fcall	_seri_porttan_veri_al
 	movwf	(??_main+0)+0
 	movf	(??_main+0)+0,w
 	movwf	(main@gelen)
-	goto	l2717
+	goto	l2686
 	line	122
 	
-l724:	
+l707:	
 	line	118
-	goto	l2717
+	goto	l2686
 	
-l725:	
+l708:	
 	line	126
 	
-l726:	
+l709:	
 	global	start
 	ljmp	start
 	opt stack 0
@@ -489,44 +468,44 @@ _seri_portu_ayarla:
 	_seri_portu_ayarla_absaddr equ 0x300
 ; Regs used in _seri_portu_ayarla: [wreg]
 	
-l1813:	
+l1782:	
 	movlw	(019h)
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	movwf	(153)^080h	;volatile
 	line	68
 	
-l1815:	
+l1784:	
 	bsf	(1218/8)^080h,(1218)&7
 	line	71
 	
-l1817:	
+l1786:	
 	bcf	(1220/8)^080h,(1220)&7
 	line	73
 	
-l1819:	
+l1788:	
 	bcf	(1222/8)^080h,(1222)&7
 	line	75
 	
-l1821:	
+l1790:	
 	bsf	(1221/8)^080h,(1221)&7
 	line	77
 	
-l1823:	
+l1792:	
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	bcf	(198/8),(198)&7
 	line	79
 	
-l1825:	
+l1794:	
 	bsf	(196/8),(196)&7
 	line	83
 	
-l1827:	
+l1796:	
 	bsf	(199/8),(199)&7
 	line	88
 	
-l720:	
+l703:	
 	return
 	opt stack 0
 GLOBAL	__end_of_seri_portu_ayarla
@@ -580,31 +559,31 @@ _seri_porta_veri_gonder:
 ; Regs used in _seri_porta_veri_gonder: [wreg]
 	movwf	(seri_porta_veri_gonder@jk)
 	
-l1809:	
-	goto	l714
+l1778:	
+	goto	l697
 	
-l715:	
+l698:	
 	
-l714:	
+l697:	
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	btfss	(100/8),(100)&7
-	goto	u81
-	goto	u80
-u81:
-	goto	l714
-u80:
-	goto	l1811
+	goto	u31
+	goto	u30
+u31:
+	goto	l697
+u30:
+	goto	l1780
 	
-l716:	
+l699:	
 	line	51
 	
-l1811:	
+l1780:	
 	movf	(seri_porta_veri_gonder@jk),w
 	movwf	(25)	;volatile
 	line	54
 	
-l717:	
+l700:	
 	return
 	opt stack 0
 GLOBAL	__end_of_seri_porta_veri_gonder
@@ -658,33 +637,33 @@ _seri_porttan_veri_al:
 ; Regs used in _seri_porttan_veri_al: [wreg]
 	line	46
 	
-l1803:	
-	goto	l708
+l1772:	
+	goto	l691
 	
-l709:	
+l692:	
 	
-l708:	
+l691:	
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	btfss	(101/8),(101)&7
-	goto	u71
-	goto	u70
-u71:
-	goto	l708
-u70:
-	goto	l1805
+	goto	u21
+	goto	u20
+u21:
+	goto	l691
+u20:
+	goto	l1774
 	
-l710:	
+l693:	
 	line	47
 	
-l1805:	
+l1774:	
 	movf	(26),w	;volatile
-	goto	l711
+	goto	l694
 	
-l1807:	
+l1776:	
 	line	48
 	
-l711:	
+l694:	
 	return
 	opt stack 0
 GLOBAL	__end_of_seri_porttan_veri_al
@@ -736,57 +715,57 @@ _FNC:
 ; Regs used in _FNC: [wreg+status,2+status,0]
 	line	22
 	
-l1787:	
+l1756:	
 	movlw	1<<((61)&7)
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	xorwf	((61)/8),f
 	line	23
 	
-l1789:	
+l1758:	
 	bcf	(95/8),(95)&7
 	line	25
 	
-l1791:	
+l1760:	
 	btfss	(101/8),(101)&7
-	goto	u61
-	goto	u60
-u61:
-	goto	l1799
-u60:
+	goto	u11
+	goto	u10
+u11:
+	goto	l1768
+u10:
 	line	27
 	
-l1793:	
+l1762:	
 	movlw	(01h)
 	movwf	(??_FNC+0)+0
 	movf	(??_FNC+0)+0,w
 	addwf	(6),f	;volatile
 	line	28
 	
-l1795:	
+l1764:	
 	bcf	(101/8),(101)&7
 	line	30
 	
-l1797:	
+l1766:	
 	movf	(26),w	;volatile
 	movwf	(8)	;volatile
-	goto	l1799
+	goto	l1768
 	line	31
 	
-l704:	
+l687:	
 	line	33
 	
-l1799:	
+l1768:	
 	bsf	(95/8),(95)&7
 	line	35
 	
-l1801:	
+l1770:	
 # 35 "../PICCandAssemblyCombine.c"
 retfie ;#
 psect	_FNC_text
 	line	37
 	
-l705:	
+l688:	
 	return
 	opt stack 0
 GLOBAL	__end_of_FNC
@@ -794,207 +773,7 @@ GLOBAL	__end_of_FNC
 ;; =============== function _FNC ends ============
 
 	signat	_FNC,88
-	global	_DelayMs
-psect	text123,local,class=CODE,delta=2
-global __ptext123
-__ptext123:
-
-;; *************** function _DelayMs *****************
-;; Defined at:
-;;		line 5 in file "c:\\tc\\delay.c"
-;; Parameters:    Size  Location     Type
-;;  cnt             1    wreg     unsigned char 
-;; Auto vars:     Size  Location     Type
-;;  cnt             1    1[COMMON] unsigned char 
-;; Return value:  Size  Location     Type
-;;		None               void
-;; Registers used:
-;;		wreg, status,2, status,0
-;; Tracked objects:
-;;		On entry : 0/0
-;;		On exit  : 0/0
-;;		Unchanged: 0/0
-;; Data sizes:     COMMON  BANK0h  BANK0l   BANK1   BANK3   BANK2
-;;      Params:         0       0       0       0       0       0
-;;      Locals:         1       0       0       0       0       0
-;;      Temps:          1       0       0       0       0       0
-;;      Totals:         2       0       0       0       0       0
-;;Total ram usage:        2 bytes
-;; Hardware stack levels used:    1
-;; This function calls:
-;;		Nothing
-;; This function is called by:
-;;		_main
-;; This function uses a non-reentrant model
-;;
-psect	text123
-	file	"c:\\tc\\delay.c"
-	line	5
-	global	__size_of_DelayMs
-	__size_of_DelayMs	equ	__end_of_DelayMs-_DelayMs
-	
-_DelayMs:	
-	opt	stack 7
-; Regs used in _DelayMs: [wreg+status,2+status,0]
-	movwf	(DelayMs@cnt)
-	line	7
-	
-l689:	
-	line	8
-	
-l1773:	
-	movlw	0
-	movwf	(__dcnt+3)
-	movlw	0
-	movwf	(__dcnt+2)
-	movlw	01h
-	movwf	(__dcnt+1)
-	movlw	04Dh
-	movwf	(__dcnt)
-
-	goto	l1775
-	
-l691:	
-	goto	l1775
-	
-l690:	
-	
-l1775:	
-	movlw	0FFh
-	addwf	(__dcnt),f
-	movlw	0FFh
-	skipc
-	addwf	(__dcnt+1),f
-	movlw	0FFh
-	skipc
-	addwf	(__dcnt+2),f
-	movlw	0FFh
-	skipc
-	addwf	(__dcnt+3),f
-	movf	((__dcnt+3)),w
-	iorwf	((__dcnt+2)),w
-	iorwf	((__dcnt+1)),w
-	iorwf	((__dcnt)),w
-	skipz
-	goto	u11
-	goto	u10
-u11:
-	goto	l1775
-u10:
-	goto	l1777
-	
-l692:	
-	line	9
-	
-l1777:	
-	movlw	low(01h)
-	subwf	(DelayMs@cnt),f
-	btfss	status,2
-	goto	u21
-	goto	u20
-u21:
-	goto	l689
-u20:
-	goto	l1779
-	
-l693:	
-	goto	l1779
-	line	14
-	
-l694:	
-	line	15
-	
-l1779:	
-	movlw	(04h)
-	movwf	(??_DelayMs+0)+0
-	movf	(??_DelayMs+0)+0,w
-	movwf	(_i)
-	line	16
-	
-l695:	
-	line	17
-	movlw	0
-	movwf	(__dcnt+3)
-	movlw	0
-	movwf	(__dcnt+2)
-	movlw	0
-	movwf	(__dcnt+1)
-	movlw	053h
-	movwf	(__dcnt)
-
-	goto	l1781
-	
-l697:	
-	goto	l1781
-	
-l696:	
-	
-l1781:	
-	movlw	0FFh
-	addwf	(__dcnt),f
-	movlw	0FFh
-	skipc
-	addwf	(__dcnt+1),f
-	movlw	0FFh
-	skipc
-	addwf	(__dcnt+2),f
-	movlw	0FFh
-	skipc
-	addwf	(__dcnt+3),f
-	movf	((__dcnt+3)),w
-	iorwf	((__dcnt+2)),w
-	iorwf	((__dcnt+1)),w
-	iorwf	((__dcnt)),w
-	skipz
-	goto	u31
-	goto	u30
-u31:
-	goto	l1781
-u30:
-	goto	l1783
-	
-l698:	
-	line	18
-	
-l1783:	
-	movlw	low(01h)
-	subwf	(_i),f
-	btfss	status,2
-	goto	u41
-	goto	u40
-u41:
-	goto	l695
-u40:
-	goto	l1785
-	
-l699:	
-	line	19
-	
-l1785:	
-	movlw	low(01h)
-	subwf	(DelayMs@cnt),f
-	btfss	status,2
-	goto	u51
-	goto	u50
-u51:
-	goto	l1779
-u50:
-	goto	l701
-	
-l700:	
-	line	21
-	
-l701:	
-	return
-	opt stack 0
-GLOBAL	__end_of_DelayMs
-	__end_of_DelayMs:
-;; =============== function _DelayMs ends ============
-
-	signat	_DelayMs,4216
-psect	text124,local,class=CODE,delta=2
-global __ptext124
-__ptext124:
+psect	_FNC_text
 	global	btemp
 	btemp set 07Eh
 

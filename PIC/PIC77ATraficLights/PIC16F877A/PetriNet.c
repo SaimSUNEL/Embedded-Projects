@@ -1,6 +1,8 @@
 
 #include<htc.h>
-#include "c:\\tc\\delay.c"
+#define DelayMs __delay_ms
+#define DelayUs __delay_us
+
 #define KIRMIZI 0b00000001
    #define SARI 0b00000010
 #define YESIL_1 0b00000100

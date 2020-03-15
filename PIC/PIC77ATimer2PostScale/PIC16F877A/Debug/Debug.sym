@@ -1,10 +1,9 @@
-_i 76 0 COMMON
 _RD C60 0 ABS
 _WR C61 0 ABS
 _RB0 30 0 ABS
 _PR2 92 0 ABS
-__S0 62 0 ABS
-__S1 7B 0 ABS
+__S0 5D 0 ABS
+__S1 76 0 ABS
 __S2 0 0 ABS
 _GIE 5F 0 ABS
 __Hintentry 12 0 CODE
@@ -27,9 +26,8 @@ __Hconfig 0 0 CONFIG
 __Lconfig 0 0 CONFIG
 __Hram 0 0 ABS
 __Lram 0 0 ABS
-?_main 77 0 COMMON
+?_main 70 0 COMMON
 _funct 15 0 CODE
-__dcnt 70 0 COMMON
 _TRISB0 430 0 ABS
 __Hfunctab 0 0 CODE
 __Lfunctab 0 0 CODE
@@ -55,15 +53,15 @@ __Hsfr3 0 0 ABS
 __Lsfr3 0 0 ABS
 __Hcode 0 0 ABS
 __Lcode 0 0 ABS
-??_main 7B 0 COMMON
+??_main 74 0 COMMON
 saved_w 7E 0 ABS
-?_funct 77 0 COMMON
+?_funct 70 0 COMMON
 __Hinit 12 0 CODE
 __Linit 12 0 CODE
 __end_of_main 57 0 CODE
 __Htext 0 0 ABS
 __Ltext 0 0 ABS
-end_of_initialization 5E 0 CODE
+end_of_initialization 59 0 CODE
 _T2CKPS0 90 0 ABS
 _T2CKPS1 91 0 ABS
 _TOUTPS0 93 0 ABS
@@ -86,15 +84,15 @@ __Hclrtext 0 0 ABS
 __Lclrtext 0 0 ABS
 __Hidloc 0 0 IDLOC
 __Lidloc 0 0 IDLOC
-??_funct 77 0 COMMON
+??_funct 70 0 COMMON
 __Hcinit 0 0 ABS
 __Lcinit 0 0 ABS
 __size_of_main 0 0 ABS
-__ptext72 15 0 CODE
-__ptext73 0 0 CODE
+__ptext71 15 0 CODE
+__ptext72 0 0 CODE
 __HbssCOMMON 0 0 ABS
 __LbssCOMMON 0 0 ABS
-__pbssCOMMON 70 0 COMMON
+__pbssCOMMON 74 0 COMMON
 __size_of_funct 0 0 ABS
 __Hend_init 15 0 CODE
 __Lend_init 12 0 CODE
@@ -109,15 +107,15 @@ intlevel5 0 0 CODE
 __end_of_funct 38 0 CODE
 __HcstackCOMMON 0 0 ABS
 __LcstackCOMMON 0 0 ABS
-__pcstackCOMMON 77 0 COMMON
+__pcstackCOMMON 70 0 COMMON
 start_initialization 57 0 CODE
 __Hmaintext 0 0 ABS
 __Lmaintext 0 0 ABS
 __pmaintext 38 0 CODE
 %segments
 reset_vec 0 5 CODE 0
-intentry 8 C3 CODE 8
-bssCOMMON 70 7A COMMON 70
+intentry 8 B9 CODE 8
+cstackCOMMON 70 75 COMMON 70
 %locals
 startup.obj
 startup.as
@@ -125,38 +123,33 @@ startup.as
 68 12 0 CODE
 Debug.obj
 ../PostScaleTimer2PIC.c
-34 38 0 CODE
-35 3B 0 CODE
-37 3E 0 CODE
-38 3F 0 CODE
-40 40 0 CODE
-43 44 0 CODE
-44 47 0 CODE
-49 48 0 CODE
-50 49 0 CODE
-51 4A 0 CODE
-52 4B 0 CODE
-54 4C 0 CODE
-56 4F 0 CODE
-59 53 0 CODE
-62 54 0 CODE
+35 38 0 CODE
+36 3B 0 CODE
+38 3E 0 CODE
+39 3F 0 CODE
+41 40 0 CODE
+44 44 0 CODE
+45 47 0 CODE
+50 48 0 CODE
+51 49 0 CODE
+52 4A 0 CODE
+53 4B 0 CODE
+55 4C 0 CODE
+57 4F 0 CODE
+60 53 0 CODE
+63 54 0 CODE
 Debug.as
-118 57 0 CODE
-119 58 0 CODE
-120 59 0 CODE
-121 5A 0 CODE
-122 5B 0 CODE
-123 5C 0 CODE
-124 5D 0 CODE
-131 5E 0 CODE
-132 5F 0 CODE
+110 57 0 CODE
+111 58 0 CODE
+118 59 0 CODE
+119 5A 0 CODE
 ../PostScaleTimer2PIC.c
-8 15 0 CODE
-10 19 0 CODE
-11 1A 0 CODE
-13 20 0 CODE
-15 27 0 CODE
-16 29 0 CODE
-19 2C 0 CODE
-29 2D 0 CODE
-6 4 0 CODE
+9 15 0 CODE
+11 19 0 CODE
+12 1A 0 CODE
+14 20 0 CODE
+16 27 0 CODE
+17 29 0 CODE
+20 2C 0 CODE
+30 2D 0 CODE
+7 4 0 CODE

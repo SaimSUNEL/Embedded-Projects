@@ -1090,35 +1090,7 @@ extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsign
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
-# 28 "c:\\tc\\delay.h"
-long _dcnt;
-
-# 44
-extern void DelayMs(unsigned char);
-
-# 2 "c:\\tc\\delay.c"
-unsigned char i;
-void
-DelayMs(unsigned char cnt)
-{
-
-do {
-{ _dcnt = (996)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
-} while(--cnt);
-
-
-
-
-do {
-i = 4;
-do {
-{ _dcnt = (250)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
-} while(--i);
-} while(--cnt);
-
-}
-
-# 15 "../PetriNet.c"
+# 17 "../PetriNet.c"
 void main()
 {
 
@@ -1136,7 +1108,7 @@ PORTD = 0;
 while( 1 )
 {
 
-# 37
+# 39
 PORTB = 0b00000100 | 0b00001000;
 
 PORTD = 0b00000100 | 0b00001000;
@@ -1147,24 +1119,24 @@ PORTD = 0b00000100 | 0b00001000;
 PORTC = 0b00000001;
 PORTA = 0b00000001;
 
-DelayMs( 250 );
-DelayMs( 250 );
-DelayMs( 250 );
-DelayMs( 250 );
-DelayMs( 250 );
-DelayMs( 250 );
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
 
 
 PORTB = 0;
 PORTD = 0;
 
 
-DelayMs( 250 );
+_delay((unsigned long)((250)*(4000000/4000.0)));
 
 PORTB = 0b00000100 | 0b00001000;
 
 PORTD = 0b00000100 | 0b00001000;
-DelayMs( 250 );
+_delay((unsigned long)((250)*(4000000/4000.0)));
 
 
 
@@ -1172,7 +1144,7 @@ PORTB = 0;
 PORTD = 0;
 
 
-DelayMs( 250 );
+_delay((unsigned long)((250)*(4000000/4000.0)));
 
 
 
@@ -1182,7 +1154,7 @@ PORTD = 0b00000100 | 0b00001000;
 
 
 
-DelayMs( 250 );
+_delay((unsigned long)((250)*(4000000/4000.0)));
 
 
 PORTB = 0b00000010;
@@ -1191,60 +1163,60 @@ PORTC = 0b00000010;
 PORTA = 0b00000010;
 
 
-DelayMs( 250 );
-DelayMs( 250 );
-DelayMs( 250 );
-DelayMs( 250 );
-DelayMs( 250 );
-DelayMs( 250 );
-DelayMs( 250 );
-DelayMs( 250 );
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
 
 PORTB = 0b00000001;
 PORTD = 0b00000001;
 PORTC = 0b00000100 | 0b00001000;
 PORTA = 0b00000100 | 0b00001000;
-DelayMs( 250 );
-DelayMs( 250 );
-DelayMs( 250 );
-DelayMs( 250 );
-DelayMs( 250 );
-DelayMs( 250 );
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
 PORTC = 0;
 PORTA = 0;
 
 
-DelayMs( 250 );
+_delay((unsigned long)((250)*(4000000/4000.0)));
 
 PORTC = 0b00000100 | 0b00001000;
 PORTA = 0b00000100 | 0b00001000;
 
-DelayMs( 250 );
+_delay((unsigned long)((250)*(4000000/4000.0)));
 PORTC = 0;
 PORTA = 0;
 
-DelayMs( 250 );
+_delay((unsigned long)((250)*(4000000/4000.0)));
 
 PORTC = 0b00000100 | 0b00001000;
 PORTA = 0b00000100 | 0b00001000;
-DelayMs( 250 );
+_delay((unsigned long)((250)*(4000000/4000.0)));
 PORTB = 0b00000010;
 PORTD = 0b00000010;
 PORTC = 0b00000010;
 PORTA = 0b00000010;
-DelayMs( 250 );
-DelayMs( 250 );
-DelayMs( 250 );
-DelayMs( 250 );
-DelayMs( 250 );
-DelayMs( 250 );
-DelayMs( 250 );
-DelayMs( 250 );
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
+_delay((unsigned long)((250)*(4000000/4000.0)));
 
 
 
 
 }
 
-# 152
+# 154
 }

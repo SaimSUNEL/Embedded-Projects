@@ -39,17 +39,11 @@ fsr0	equ	4
 c	equ	1
 z	equ	0
 pclath	equ	10
-	FNCALL	_main,_DelayMs
 	FNROOT	_main
-	global	_i
-	global	__dcnt
-psect	nvCOMMON,class=COMMON,space=1
-global __pnvCOMMON
-__pnvCOMMON:
-__dcnt:
-       ds      4
-
 	global	_PORTA
+psect	maintext,global,class=CODE,delta=2
+global __pmaintext
+__pmaintext:
 _PORTA	set	5
 	global	_PORTB
 _PORTB	set	6
@@ -89,15 +83,6 @@ psect cinit,class=CODE,delta=2
 global start_initialization
 start_initialization:
 
-psect	bssCOMMON,class=COMMON,space=1
-global __pbssCOMMON
-__pbssCOMMON:
-_i:
-       ds      1
-
-; Clear objects allocated to COMMON
-psect cinit,class=CODE,delta=2
-	clrf	((__pbssCOMMON)+0)&07Fh
 psect cinit,class=CODE,delta=2
 global end_of_initialization
 
@@ -109,21 +94,14 @@ ljmp _main	;jump to C main() function
 psect	cstackCOMMON,class=COMMON,space=1
 global __pcstackCOMMON
 __pcstackCOMMON:
-	global	?_DelayMs
-?_DelayMs:	; 0 bytes @ 0x0
-	global	??_DelayMs
-??_DelayMs:	; 0 bytes @ 0x0
 	global	?_main
 ?_main:	; 0 bytes @ 0x0
-	ds	1
-	global	DelayMs@cnt
-DelayMs@cnt:	; 1 bytes @ 0x1
-	ds	1
 	global	??_main
-??_main:	; 0 bytes @ 0x2
-;;Data sizes: Strings 0, constant 0, data 0, bss 1, persistent 4 stack 0
+??_main:	; 0 bytes @ 0x0
+	ds	3
+;;Data sizes: Strings 0, constant 0, data 0, bss 0, persistent 0 stack 0
 ;;Auto spaces:   Size  Autos    Used
-;; COMMON          14      2       7
+;; COMMON          14      3       3
 ;; BANK0           80      0       0
 ;; BANK1           80      0       0
 ;; BANK3           96      0       0
@@ -137,7 +115,7 @@ DelayMs@cnt:	; 1 bytes @ 0x1
 ;;
 ;; Critical Paths under _main in COMMON
 ;;
-;;   _main->_DelayMs
+;;   None.
 ;;
 ;; Critical Paths under _main in BANK0
 ;;
@@ -156,7 +134,7 @@ DelayMs@cnt:	; 1 bytes @ 0x1
 ;;   None.
 
 ;;
-;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+;;Main: autosize = 0, tempsize = 3, incstack = 0, save=0
 ;;
 
 ;;
@@ -165,19 +143,15 @@ DelayMs@cnt:	; 1 bytes @ 0x1
 ;; ---------------------------------------------------------------------------------
 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
 ;; ---------------------------------------------------------------------------------
-;; (0) _main                                                 0     0      0      30
-;;                            _DelayMs
+;; (0) _main                                                 3     3      0       0
+;;                                              0 COMMON     3     3      0
 ;; ---------------------------------------------------------------------------------
-;; (1) _DelayMs                                              2     2      0      30
-;;                                              0 COMMON     2     2      0
-;; ---------------------------------------------------------------------------------
-;; Estimated maximum stack depth 1
+;; Estimated maximum stack depth 0
 ;; ---------------------------------------------------------------------------------
 
 ;; Call Graph Graphs:
 
 ;; _main (ROOT)
-;;   _DelayMs
 ;;
 
 ;; Address spaces:
@@ -187,13 +161,13 @@ DelayMs@cnt:	; 1 bytes @ 0x1
 ;;EEDATA             100      0       0       0        0.0%
 ;;NULL                 0      0       0       0        0.0%
 ;;CODE                 0      0       0       0        0.0%
-;;COMMON               E      2       7       1       50.0%
+;;COMMON               E      3       3       1       21.4%
 ;;BITSFR0              0      0       0       1        0.0%
 ;;SFR0                 0      0       0       1        0.0%
 ;;BITSFR1              0      0       0       2        0.0%
 ;;SFR1                 0      0       0       2        0.0%
-;;STACK                0      0       1       2        0.0%
-;;ABS                  0      0       7       3        0.0%
+;;STACK                0      0       0       2        0.0%
+;;ABS                  0      0       0       3        0.0%
 ;;BITBANK0            50      0       0       4        0.0%
 ;;BITSFR3              0      0       0       4        0.0%
 ;;SFR3                 0      0       0       4        0.0%
@@ -206,16 +180,14 @@ DelayMs@cnt:	; 1 bytes @ 0x1
 ;;BANK3               60      0       0       9        0.0%
 ;;BITBANK2            60      0       0      10        0.0%
 ;;BANK2               60      0       0      11        0.0%
-;;DATA                 0      0       8      12        0.0%
+;;DATA                 0      0       0      12        0.0%
 
 	global	_main
-psect	maintext,global,class=CODE,delta=2
-global __pmaintext
-__pmaintext:
+psect	maintext
 
 ;; *************** function _main *****************
 ;; Defined at:
-;;		line 16 in file "../PetriNet.c"
+;;		line 18 in file "../PetriNet.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -223,7 +195,7 @@ __pmaintext:
 ;; Return value:  Size  Location     Type
 ;;		None               void
 ;; Registers used:
-;;		wreg, status,2, status,0, pclath, cstack
+;;		wreg, status,2
 ;; Tracked objects:
 ;;		On entry : 17F/0
 ;;		On exit  : 0/0
@@ -231,410 +203,949 @@ __pmaintext:
 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
 ;;      Params:         0       0       0       0       0
 ;;      Locals:         0       0       0       0       0
-;;      Temps:          0       0       0       0       0
-;;      Totals:         0       0       0       0       0
-;;Total ram usage:        0 bytes
-;; Hardware stack levels required when called:    1
+;;      Temps:          3       0       0       0       0
+;;      Totals:         3       0       0       0       0
+;;Total ram usage:        3 bytes
 ;; This function calls:
-;;		_DelayMs
+;;		Nothing
 ;; This function is called by:
 ;;		Startup code after reset
 ;; This function uses a non-reentrant model
 ;;
 psect	maintext
 	file	"../PetriNet.c"
-	line	16
+	line	18
 	global	__size_of_main
 	__size_of_main	equ	__end_of_main-_main
 	
 _main:	
-	opt	stack 7
-; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
-	line	18
+	opt	stack 8
+; Regs used in _main: [wreg+status,2]
+	line	20
 	
-l2626:	
+l2595:	
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	clrf	(134)^080h	;volatile
-	line	19
-	bcf	status, 5	;RP0=0, select bank0
-	bcf	status, 6	;RP1=0, select bank0
-	clrf	(6)	;volatile
-	line	20
-	bsf	status, 5	;RP0=1, select bank1
-	bcf	status, 6	;RP1=0, select bank1
-	clrf	(135)^080h	;volatile
 	line	21
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
-	clrf	(7)	;volatile
+	clrf	(6)	;volatile
 	line	22
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
-	clrf	(136)^080h	;volatile
+	clrf	(135)^080h	;volatile
 	line	23
-	clrf	(133)^080h	;volatile
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	clrf	(7)	;volatile
 	line	24
+	bsf	status, 5	;RP0=1, select bank1
+	bcf	status, 6	;RP1=0, select bank1
+	clrf	(136)^080h	;volatile
+	line	25
+	clrf	(133)^080h	;volatile
+	line	26
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	clrf	(5)	;volatile
-	line	25
+	line	27
 	clrf	(8)	;volatile
-	goto	l2628
-	line	29
+	goto	l2597
+	line	31
 	
-l704:	
-	line	37
-	
-l2628:	
-	movlw	(0Ch)
-	bcf	status, 5	;RP0=0, select bank0
-	bcf	status, 6	;RP1=0, select bank0
-	movwf	(6)	;volatile
+l687:	
 	line	39
 	
-l2630:	
+l2597:	
+	movlw	(0Ch)
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movwf	(6)	;volatile
+	line	41
+	
+l2599:	
 	movlw	(0Ch)
 	movwf	(8)	;volatile
-	line	44
+	line	46
 	
-l2632:	
+l2601:	
 	movlw	(01h)
 	movwf	(7)	;volatile
-	line	45
-	
-l2634:	
-	movlw	(01h)
-	movwf	(5)	;volatile
 	line	47
 	
-l2636:	
-	movlw	(0FAh)
-	fcall	_DelayMs
-	line	48
-	
-l2638:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2603:	
+	movlw	(01h)
+	movwf	(5)	;volatile
 	line	49
 	
-l2640:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2605:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2227:
+	decfsz	((??_main+0)+0),f
+	goto	u2227
+	decfsz	((??_main+0)+0+1),f
+	goto	u2227
+	decfsz	((??_main+0)+0+2),f
+	goto	u2227
+	nop2
+opt asmopt_on
+
 	line	50
 	
-l2642:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2607:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2237:
+	decfsz	((??_main+0)+0),f
+	goto	u2237
+	decfsz	((??_main+0)+0+1),f
+	goto	u2237
+	decfsz	((??_main+0)+0+2),f
+	goto	u2237
+	nop2
+opt asmopt_on
+
 	line	51
 	
-l2644:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2609:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2247:
+	decfsz	((??_main+0)+0),f
+	goto	u2247
+	decfsz	((??_main+0)+0+1),f
+	goto	u2247
+	decfsz	((??_main+0)+0+2),f
+	goto	u2247
+	nop2
+opt asmopt_on
+
 	line	52
 	
-l2646:	
-	movlw	(0FAh)
-	fcall	_DelayMs
-	line	55
+l2611:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2257:
+	decfsz	((??_main+0)+0),f
+	goto	u2257
+	decfsz	((??_main+0)+0+1),f
+	goto	u2257
+	decfsz	((??_main+0)+0+2),f
+	goto	u2257
+	nop2
+opt asmopt_on
+
+	line	53
+	
+l2613:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2267:
+	decfsz	((??_main+0)+0),f
+	goto	u2267
+	decfsz	((??_main+0)+0+1),f
+	goto	u2267
+	decfsz	((??_main+0)+0+2),f
+	goto	u2267
+	nop2
+opt asmopt_on
+
+	line	54
+	
+l2615:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2277:
+	decfsz	((??_main+0)+0),f
+	goto	u2277
+	decfsz	((??_main+0)+0+1),f
+	goto	u2277
+	decfsz	((??_main+0)+0+2),f
+	goto	u2277
+	nop2
+opt asmopt_on
+
+	line	57
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	clrf	(6)	;volatile
-	line	56
+	line	58
 	clrf	(8)	;volatile
-	line	59
-	
-l2648:	
-	movlw	(0FAh)
-	fcall	_DelayMs
 	line	61
 	
-l2650:	
+l2617:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2287:
+	decfsz	((??_main+0)+0),f
+	goto	u2287
+	decfsz	((??_main+0)+0+1),f
+	goto	u2287
+	decfsz	((??_main+0)+0+2),f
+	goto	u2287
+	nop2
+opt asmopt_on
+
+	line	63
+	
+l2619:	
 	movlw	(0Ch)
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(6)	;volatile
-	line	63
+	line	65
 	
-l2652:	
+l2621:	
 	movlw	(0Ch)
 	movwf	(8)	;volatile
-	line	64
+	line	66
 	
-l2654:	
-	movlw	(0FAh)
-	fcall	_DelayMs
-	line	68
+l2623:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2297:
+	decfsz	((??_main+0)+0),f
+	goto	u2297
+	decfsz	((??_main+0)+0+1),f
+	goto	u2297
+	decfsz	((??_main+0)+0+2),f
+	goto	u2297
+	nop2
+opt asmopt_on
+
+	line	70
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	clrf	(6)	;volatile
-	line	69
+	line	71
 	clrf	(8)	;volatile
-	line	72
+	line	74
 	
-l2656:	
-	movlw	(0FAh)
-	fcall	_DelayMs
-	line	76
-	
-l2658:	
-	movlw	(0Ch)
-	bcf	status, 5	;RP0=0, select bank0
-	bcf	status, 6	;RP1=0, select bank0
-	movwf	(6)	;volatile
+l2625:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2307:
+	decfsz	((??_main+0)+0),f
+	goto	u2307
+	decfsz	((??_main+0)+0+1),f
+	goto	u2307
+	decfsz	((??_main+0)+0+2),f
+	goto	u2307
+	nop2
+opt asmopt_on
+
 	line	78
 	
-l2660:	
+l2627:	
 	movlw	(0Ch)
-	movwf	(8)	;volatile
-	line	82
-	
-l2662:	
-	movlw	(0FAh)
-	fcall	_DelayMs
-	line	85
-	
-l2664:	
-	movlw	(02h)
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(6)	;volatile
-	line	86
+	line	80
 	
-l2666:	
-	movlw	(02h)
+l2629:	
+	movlw	(0Ch)
 	movwf	(8)	;volatile
+	line	84
+	
+l2631:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2317:
+	decfsz	((??_main+0)+0),f
+	goto	u2317
+	decfsz	((??_main+0)+0+1),f
+	goto	u2317
+	decfsz	((??_main+0)+0+2),f
+	goto	u2317
+	nop2
+opt asmopt_on
+
 	line	87
 	
-l2668:	
+l2633:	
 	movlw	(02h)
-	movwf	(7)	;volatile
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movwf	(6)	;volatile
 	line	88
 	
-l2670:	
+l2635:	
+	movlw	(02h)
+	movwf	(8)	;volatile
+	line	89
+	
+l2637:	
+	movlw	(02h)
+	movwf	(7)	;volatile
+	line	90
+	
+l2639:	
 	movlw	(02h)
 	movwf	(5)	;volatile
-	line	91
-	
-l2672:	
-	movlw	(0FAh)
-	fcall	_DelayMs
-	line	92
-	
-l2674:	
-	movlw	(0FAh)
-	fcall	_DelayMs
 	line	93
 	
-l2676:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2641:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2327:
+	decfsz	((??_main+0)+0),f
+	goto	u2327
+	decfsz	((??_main+0)+0+1),f
+	goto	u2327
+	decfsz	((??_main+0)+0+2),f
+	goto	u2327
+	nop2
+opt asmopt_on
+
 	line	94
 	
-l2678:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2643:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2337:
+	decfsz	((??_main+0)+0),f
+	goto	u2337
+	decfsz	((??_main+0)+0+1),f
+	goto	u2337
+	decfsz	((??_main+0)+0+2),f
+	goto	u2337
+	nop2
+opt asmopt_on
+
 	line	95
 	
-l2680:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2645:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2347:
+	decfsz	((??_main+0)+0),f
+	goto	u2347
+	decfsz	((??_main+0)+0+1),f
+	goto	u2347
+	decfsz	((??_main+0)+0+2),f
+	goto	u2347
+	nop2
+opt asmopt_on
+
 	line	96
 	
-l2682:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2647:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2357:
+	decfsz	((??_main+0)+0),f
+	goto	u2357
+	decfsz	((??_main+0)+0+1),f
+	goto	u2357
+	decfsz	((??_main+0)+0+2),f
+	goto	u2357
+	nop2
+opt asmopt_on
+
 	line	97
 	
-l2684:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2649:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2367:
+	decfsz	((??_main+0)+0),f
+	goto	u2367
+	decfsz	((??_main+0)+0+1),f
+	goto	u2367
+	decfsz	((??_main+0)+0+2),f
+	goto	u2367
+	nop2
+opt asmopt_on
+
 	line	98
 	
-l2686:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2651:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2377:
+	decfsz	((??_main+0)+0),f
+	goto	u2377
+	decfsz	((??_main+0)+0+1),f
+	goto	u2377
+	decfsz	((??_main+0)+0+2),f
+	goto	u2377
+	nop2
+opt asmopt_on
+
+	line	99
+	
+l2653:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2387:
+	decfsz	((??_main+0)+0),f
+	goto	u2387
+	decfsz	((??_main+0)+0+1),f
+	goto	u2387
+	decfsz	((??_main+0)+0+2),f
+	goto	u2387
+	nop2
+opt asmopt_on
+
 	line	100
 	
-l2688:	
-	movlw	(01h)
-	bcf	status, 5	;RP0=0, select bank0
-	bcf	status, 6	;RP1=0, select bank0
-	movwf	(6)	;volatile
-	line	101
-	
-l2690:	
-	movlw	(01h)
-	movwf	(8)	;volatile
+l2655:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2397:
+	decfsz	((??_main+0)+0),f
+	goto	u2397
+	decfsz	((??_main+0)+0+1),f
+	goto	u2397
+	decfsz	((??_main+0)+0+2),f
+	goto	u2397
+	nop2
+opt asmopt_on
+
 	line	102
 	
-l2692:	
-	movlw	(0Ch)
-	movwf	(7)	;volatile
+l2657:	
+	movlw	(01h)
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	movwf	(6)	;volatile
 	line	103
 	
-l2694:	
-	movlw	(0Ch)
-	movwf	(5)	;volatile
+l2659:	
+	movlw	(01h)
+	movwf	(8)	;volatile
 	line	104
 	
-l2696:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2661:	
+	movlw	(0Ch)
+	movwf	(7)	;volatile
 	line	105
 	
-l2698:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2663:	
+	movlw	(0Ch)
+	movwf	(5)	;volatile
 	line	106
 	
-l2700:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2665:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2407:
+	decfsz	((??_main+0)+0),f
+	goto	u2407
+	decfsz	((??_main+0)+0+1),f
+	goto	u2407
+	decfsz	((??_main+0)+0+2),f
+	goto	u2407
+	nop2
+opt asmopt_on
+
 	line	107
 	
-l2702:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2667:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2417:
+	decfsz	((??_main+0)+0),f
+	goto	u2417
+	decfsz	((??_main+0)+0+1),f
+	goto	u2417
+	decfsz	((??_main+0)+0+2),f
+	goto	u2417
+	nop2
+opt asmopt_on
+
 	line	108
 	
-l2704:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2669:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2427:
+	decfsz	((??_main+0)+0),f
+	goto	u2427
+	decfsz	((??_main+0)+0+1),f
+	goto	u2427
+	decfsz	((??_main+0)+0+2),f
+	goto	u2427
+	nop2
+opt asmopt_on
+
 	line	109
 	
-l2706:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2671:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2437:
+	decfsz	((??_main+0)+0),f
+	goto	u2437
+	decfsz	((??_main+0)+0+1),f
+	goto	u2437
+	decfsz	((??_main+0)+0+2),f
+	goto	u2437
+	nop2
+opt asmopt_on
+
 	line	110
+	
+l2673:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2447:
+	decfsz	((??_main+0)+0),f
+	goto	u2447
+	decfsz	((??_main+0)+0+1),f
+	goto	u2447
+	decfsz	((??_main+0)+0+2),f
+	goto	u2447
+	nop2
+opt asmopt_on
+
+	line	111
+	
+l2675:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2457:
+	decfsz	((??_main+0)+0),f
+	goto	u2457
+	decfsz	((??_main+0)+0+1),f
+	goto	u2457
+	decfsz	((??_main+0)+0+2),f
+	goto	u2457
+	nop2
+opt asmopt_on
+
+	line	112
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	clrf	(7)	;volatile
-	line	111
+	line	113
 	clrf	(5)	;volatile
-	line	114
-	
-l2708:	
-	movlw	(0FAh)
-	fcall	_DelayMs
 	line	116
 	
-l2710:	
+l2677:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2467:
+	decfsz	((??_main+0)+0),f
+	goto	u2467
+	decfsz	((??_main+0)+0+1),f
+	goto	u2467
+	decfsz	((??_main+0)+0+2),f
+	goto	u2467
+	nop2
+opt asmopt_on
+
+	line	118
+	
+l2679:	
 	movlw	(0Ch)
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(7)	;volatile
-	line	117
-	
-l2712:	
-	movlw	(0Ch)
-	movwf	(5)	;volatile
 	line	119
 	
-l2714:	
-	movlw	(0FAh)
-	fcall	_DelayMs
-	line	120
+l2681:	
+	movlw	(0Ch)
+	movwf	(5)	;volatile
+	line	121
+	
+l2683:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2477:
+	decfsz	((??_main+0)+0),f
+	goto	u2477
+	decfsz	((??_main+0)+0+1),f
+	goto	u2477
+	decfsz	((??_main+0)+0+2),f
+	goto	u2477
+	nop2
+opt asmopt_on
+
+	line	122
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	clrf	(7)	;volatile
-	line	121
-	clrf	(5)	;volatile
 	line	123
-	
-l2716:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+	clrf	(5)	;volatile
 	line	125
 	
-l2718:	
+l2685:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2487:
+	decfsz	((??_main+0)+0),f
+	goto	u2487
+	decfsz	((??_main+0)+0+1),f
+	goto	u2487
+	decfsz	((??_main+0)+0+2),f
+	goto	u2487
+	nop2
+opt asmopt_on
+
+	line	127
+	
+l2687:	
 	movlw	(0Ch)
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(7)	;volatile
-	line	126
-	
-l2720:	
-	movlw	(0Ch)
-	movwf	(5)	;volatile
-	line	127
-	
-l2722:	
-	movlw	(0FAh)
-	fcall	_DelayMs
 	line	128
 	
-l2724:	
+l2689:	
+	movlw	(0Ch)
+	movwf	(5)	;volatile
+	line	129
+	
+l2691:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2497:
+	decfsz	((??_main+0)+0),f
+	goto	u2497
+	decfsz	((??_main+0)+0+1),f
+	goto	u2497
+	decfsz	((??_main+0)+0+2),f
+	goto	u2497
+	nop2
+opt asmopt_on
+
+	line	130
+	
+l2693:	
 	movlw	(02h)
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(6)	;volatile
-	line	129
-	
-l2726:	
-	movlw	(02h)
-	movwf	(8)	;volatile
-	line	130
-	
-l2728:	
-	movlw	(02h)
-	movwf	(7)	;volatile
 	line	131
 	
-l2730:	
+l2695:	
 	movlw	(02h)
-	movwf	(5)	;volatile
+	movwf	(8)	;volatile
 	line	132
 	
-l2732:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2697:	
+	movlw	(02h)
+	movwf	(7)	;volatile
 	line	133
 	
-l2734:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2699:	
+	movlw	(02h)
+	movwf	(5)	;volatile
 	line	134
 	
-l2736:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2701:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2507:
+	decfsz	((??_main+0)+0),f
+	goto	u2507
+	decfsz	((??_main+0)+0+1),f
+	goto	u2507
+	decfsz	((??_main+0)+0+2),f
+	goto	u2507
+	nop2
+opt asmopt_on
+
 	line	135
 	
-l2738:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2703:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2517:
+	decfsz	((??_main+0)+0),f
+	goto	u2517
+	decfsz	((??_main+0)+0+1),f
+	goto	u2517
+	decfsz	((??_main+0)+0+2),f
+	goto	u2517
+	nop2
+opt asmopt_on
+
 	line	136
 	
-l2740:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2705:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2527:
+	decfsz	((??_main+0)+0),f
+	goto	u2527
+	decfsz	((??_main+0)+0+1),f
+	goto	u2527
+	decfsz	((??_main+0)+0+2),f
+	goto	u2527
+	nop2
+opt asmopt_on
+
 	line	137
 	
-l2742:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2707:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2537:
+	decfsz	((??_main+0)+0),f
+	goto	u2537
+	decfsz	((??_main+0)+0+1),f
+	goto	u2537
+	decfsz	((??_main+0)+0+2),f
+	goto	u2537
+	nop2
+opt asmopt_on
+
 	line	138
 	
-l2744:	
-	movlw	(0FAh)
-	fcall	_DelayMs
+l2709:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2547:
+	decfsz	((??_main+0)+0),f
+	goto	u2547
+	decfsz	((??_main+0)+0+1),f
+	goto	u2547
+	decfsz	((??_main+0)+0+2),f
+	goto	u2547
+	nop2
+opt asmopt_on
+
 	line	139
 	
-l2746:	
-	movlw	(0FAh)
-	fcall	_DelayMs
-	goto	l2628
-	line	144
+l2711:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2557:
+	decfsz	((??_main+0)+0),f
+	goto	u2557
+	decfsz	((??_main+0)+0+1),f
+	goto	u2557
+	decfsz	((??_main+0)+0+2),f
+	goto	u2557
+	nop2
+opt asmopt_on
+
+	line	140
 	
-l705:	
-	line	29
-	goto	l2628
+l2713:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2567:
+	decfsz	((??_main+0)+0),f
+	goto	u2567
+	decfsz	((??_main+0)+0+1),f
+	goto	u2567
+	decfsz	((??_main+0)+0+2),f
+	goto	u2567
+	nop2
+opt asmopt_on
+
+	line	141
 	
-l706:	
-	line	152
+l2715:	
+	opt asmopt_off
+movlw  2
+movwf	((??_main+0)+0+2),f
+movlw	69
+movwf	((??_main+0)+0+1),f
+	movlw	169
+movwf	((??_main+0)+0),f
+u2577:
+	decfsz	((??_main+0)+0),f
+	goto	u2577
+	decfsz	((??_main+0)+0+1),f
+	goto	u2577
+	decfsz	((??_main+0)+0+2),f
+	goto	u2577
+	nop2
+opt asmopt_on
+
+	goto	l2597
+	line	146
 	
-l707:	
+l688:	
+	line	31
+	goto	l2597
+	
+l689:	
+	line	154
+	
+l690:	
 	global	start
 	ljmp	start
 	opt stack 0
@@ -643,207 +1154,7 @@ GLOBAL	__end_of_main
 ;; =============== function _main ends ============
 
 	signat	_main,88
-	global	_DelayMs
-psect	text71,local,class=CODE,delta=2
-global __ptext71
-__ptext71:
-
-;; *************** function _DelayMs *****************
-;; Defined at:
-;;		line 5 in file "c:\\tc\\delay.c"
-;; Parameters:    Size  Location     Type
-;;  cnt             1    wreg     unsigned char 
-;; Auto vars:     Size  Location     Type
-;;  cnt             1    1[COMMON] unsigned char 
-;; Return value:  Size  Location     Type
-;;		None               void
-;; Registers used:
-;;		wreg, status,2, status,0
-;; Tracked objects:
-;;		On entry : 0/0
-;;		On exit  : 0/0
-;;		Unchanged: 0/0
-;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-;;      Params:         0       0       0       0       0
-;;      Locals:         1       0       0       0       0
-;;      Temps:          1       0       0       0       0
-;;      Totals:         2       0       0       0       0
-;;Total ram usage:        2 bytes
-;; Hardware stack levels used:    1
-;; This function calls:
-;;		Nothing
-;; This function is called by:
-;;		_main
-;; This function uses a non-reentrant model
-;;
-psect	text71
-	file	"c:\\tc\\delay.c"
-	line	5
-	global	__size_of_DelayMs
-	__size_of_DelayMs	equ	__end_of_DelayMs-_DelayMs
-	
-_DelayMs:	
-	opt	stack 7
-; Regs used in _DelayMs: [wreg+status,2+status,0]
-	movwf	(DelayMs@cnt)
-	line	7
-	
-l689:	
-	line	8
-	
-l1754:	
-	movlw	0
-	movwf	(__dcnt+3)
-	movlw	0
-	movwf	(__dcnt+2)
-	movlw	01h
-	movwf	(__dcnt+1)
-	movlw	04Dh
-	movwf	(__dcnt)
-
-	goto	l1756
-	
-l691:	
-	goto	l1756
-	
-l690:	
-	
-l1756:	
-	movlw	0FFh
-	addwf	(__dcnt),f
-	movlw	0FFh
-	skipc
-	addwf	(__dcnt+1),f
-	movlw	0FFh
-	skipc
-	addwf	(__dcnt+2),f
-	movlw	0FFh
-	skipc
-	addwf	(__dcnt+3),f
-	movf	((__dcnt+3)),w
-	iorwf	((__dcnt+2)),w
-	iorwf	((__dcnt+1)),w
-	iorwf	((__dcnt)),w
-	skipz
-	goto	u11
-	goto	u10
-u11:
-	goto	l1756
-u10:
-	goto	l1758
-	
-l692:	
-	line	9
-	
-l1758:	
-	movlw	low(01h)
-	subwf	(DelayMs@cnt),f
-	btfss	status,2
-	goto	u21
-	goto	u20
-u21:
-	goto	l689
-u20:
-	goto	l1760
-	
-l693:	
-	goto	l1760
-	line	14
-	
-l694:	
-	line	15
-	
-l1760:	
-	movlw	(04h)
-	movwf	(??_DelayMs+0)+0
-	movf	(??_DelayMs+0)+0,w
-	movwf	(_i)
-	line	16
-	
-l695:	
-	line	17
-	movlw	0
-	movwf	(__dcnt+3)
-	movlw	0
-	movwf	(__dcnt+2)
-	movlw	0
-	movwf	(__dcnt+1)
-	movlw	053h
-	movwf	(__dcnt)
-
-	goto	l1762
-	
-l697:	
-	goto	l1762
-	
-l696:	
-	
-l1762:	
-	movlw	0FFh
-	addwf	(__dcnt),f
-	movlw	0FFh
-	skipc
-	addwf	(__dcnt+1),f
-	movlw	0FFh
-	skipc
-	addwf	(__dcnt+2),f
-	movlw	0FFh
-	skipc
-	addwf	(__dcnt+3),f
-	movf	((__dcnt+3)),w
-	iorwf	((__dcnt+2)),w
-	iorwf	((__dcnt+1)),w
-	iorwf	((__dcnt)),w
-	skipz
-	goto	u31
-	goto	u30
-u31:
-	goto	l1762
-u30:
-	goto	l1764
-	
-l698:	
-	line	18
-	
-l1764:	
-	movlw	low(01h)
-	subwf	(_i),f
-	btfss	status,2
-	goto	u41
-	goto	u40
-u41:
-	goto	l695
-u40:
-	goto	l1766
-	
-l699:	
-	line	19
-	
-l1766:	
-	movlw	low(01h)
-	subwf	(DelayMs@cnt),f
-	btfss	status,2
-	goto	u51
-	goto	u50
-u51:
-	goto	l1760
-u50:
-	goto	l701
-	
-l700:	
-	line	21
-	
-l701:	
-	return
-	opt stack 0
-GLOBAL	__end_of_DelayMs
-	__end_of_DelayMs:
-;; =============== function _DelayMs ends ============
-
-	signat	_DelayMs,4216
-psect	text72,local,class=CODE,delta=2
-global __ptext72
-__ptext72:
+psect	maintext
 	global	btemp
 	btemp set 07Eh
 

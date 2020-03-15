@@ -18,9 +18,9 @@ CC=picc.exe
 ASM=picc.exe
 LD=picc.exe
 LIB=picc.exe
-#  C:/Users/Saim/PIC-ATMELProjects/PIC77ATimer2PostScale/PIC16F877A/Debug/Debug.cof: TOOL=LD
-#     C:/Users/Saim/PIC-ATMELProjects/PIC77ATimer2PostScale/PIC16F877A/Debug/PostScaleTimer2PIC.p1: TOOL=CC
-#        C:/Users/Saim/PIC-ATMELProjects/PIC77ATimer2PostScale/PIC16F877A/PostScaleTimer2PIC.c
+#  C:/Users/Saim/PIC-ATMELProjects/PIC/PIC77ATimer2PostScale/PIC16F877A/Debug/Debug.cof: TOOL=LD
+#     C:/Users/Saim/PIC-ATMELProjects/PIC/PIC77ATimer2PostScale/PIC16F877A/Debug/PostScaleTimer2PIC.p1: TOOL=CC
+#        C:/Users/Saim/PIC-ATMELProjects/PIC/PIC77ATimer2PostScale/PIC16F877A/PostScaleTimer2PIC.c
 
 # Build tree:
 all:	Debug

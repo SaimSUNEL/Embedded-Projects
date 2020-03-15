@@ -1090,35 +1090,7 @@ extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsign
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
-# 28 "c:\\tc\\delay.h"
-long _dcnt;
-
-# 44
-extern void DelayMs(unsigned char);
-
-# 2 "c:\\tc\\delay.c"
-unsigned char i;
-void
-DelayMs(unsigned char cnt)
-{
-
-do {
-{ _dcnt = (996)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
-} while(--cnt);
-
-
-
-
-do {
-i = 4;
-do {
-{ _dcnt = (250)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
-} while(--i);
-} while(--cnt);
-
-}
-
-# 4 "../ServowithPic.c"
+# 5 "../ServowithPic.c"
 int app , wait , times ,ind;
 void servo_dondur( unsigned char angle )
 {
@@ -1135,18 +1107,19 @@ RB0 = 1;
 for( ind = 0 ; ind < times ; ind ++ )
 {
 
-{ _dcnt = (250)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
+_delay((unsigned long)((250)*(4000000/4000000.0)));
 
 
 }
 
-{ _dcnt = (wait % 250 - 10)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
+for(int c=0; c < wait % 250 - 10; c++)
+_delay((unsigned long)((1)*(4000000/4000000.0)));
 
 
 
 
 RB0 = 0;
-DelayMs( 19 );
+_delay((unsigned long)((19)*(4000000/4000.0)));
 }
 
 
@@ -1165,7 +1138,7 @@ servo_dondur( 20 );
 while( 1 )
 {
 
-# 60
+# 62
 }
 
 

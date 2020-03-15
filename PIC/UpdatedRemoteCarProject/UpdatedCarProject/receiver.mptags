@@ -1,0 +1,30 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+!_TAG_REVISION_NAME	MCHPTags	//
+!_TAG_REVISION_VERSION	6.0.1	//
+FALSE::0	C:\Users\Saim\PIC-ATMELProjects\PIC\UpdatedRemoteCarProject\UpdatedCarProject\receiver.c	13;"	d	line:13	file:
+SAG::2	C:\Users\Saim\PIC-ATMELProjects\PIC\UpdatedRemoteCarProject\UpdatedCarProject\receiver.c	14;"	d	line:14	file:
+SOL::3	C:\Users\Saim\PIC-ATMELProjects\PIC\UpdatedRemoteCarProject\UpdatedCarProject\receiver.c	15;"	d	line:15	file:
+TRUE::1	C:\Users\Saim\PIC-ATMELProjects\PIC\UpdatedRemoteCarProject\UpdatedCarProject\receiver.c	12;"	d	line:12	file:
+XTAL_FREQ::4MHZ	C:\Users\Saim\PIC-ATMELProjects\PIC\UpdatedRemoteCarProject\UpdatedCarProject\receiver.c	10;"	d	line:10	file:
+a	C:\Users\Saim\PIC-ATMELProjects\PIC\UpdatedRemoteCarProject\UpdatedCarProject\receiver.c	24;"	v	line:24
+array	C:\Users\Saim\PIC-ATMELProjects\PIC\UpdatedRemoteCarProject\UpdatedCarProject\receiver.c	27;"	v	line:27
+code	C:\Users\Saim\PIC-ATMELProjects\PIC\UpdatedRemoteCarProject\UpdatedCarProject\receiver.c	25;"	v	line:25
+coz	C:\Users\Saim\PIC-ATMELProjects\PIC\UpdatedRemoteCarProject\UpdatedCarProject\receiver.c	90;"	f	line:90
+gelen_veri	C:\Users\Saim\PIC-ATMELProjects\PIC\UpdatedRemoteCarProject\UpdatedCarProject\receiver.c	8;"	v	line:8
+i	C:\Users\Saim\PIC-ATMELProjects\PIC\UpdatedRemoteCarProject\UpdatedCarProject\receiver.c	21;"	v	line:21
+j	C:\Users\Saim\PIC-ATMELProjects\PIC\UpdatedRemoteCarProject\UpdatedCarProject\receiver.c	21;"	v	line:21
+kk	C:\Users\Saim\PIC-ATMELProjects\PIC\UpdatedRemoteCarProject\UpdatedCarProject\receiver.c	22;"	v	line:22
+kodu_coz	C:\Users\Saim\PIC-ATMELProjects\PIC\UpdatedRemoteCarProject\UpdatedCarProject\receiver.c	28;"	f	line:28
+main	C:\Users\Saim\PIC-ATMELProjects\PIC\UpdatedRemoteCarProject\UpdatedCarProject\receiver.c	161;"	f	line:161	signature:(void)
+motor_aktif	C:\Users\Saim\PIC-ATMELProjects\PIC\UpdatedRemoteCarProject\UpdatedCarProject\receiver.c	18;"	v	line:18
+motor_suresi	C:\Users\Saim\PIC-ATMELProjects\PIC\UpdatedRemoteCarProject\UpdatedCarProject\receiver.c	16;"	v	line:16
+motor_yon	C:\Users\Saim\PIC-ATMELProjects\PIC\UpdatedRemoteCarProject\UpdatedCarProject\receiver.c	19;"	v	line:19
+ortala	C:\Users\Saim\PIC-ATMELProjects\PIC\UpdatedRemoteCarProject\UpdatedCarProject\receiver.c	17;"	v	line:17
+sayi	C:\Users\Saim\PIC-ATMELProjects\PIC\UpdatedRemoteCarProject\UpdatedCarProject\receiver.c	20;"	v	line:20
+sonuc	C:\Users\Saim\PIC-ATMELProjects\PIC\UpdatedRemoteCarProject\UpdatedCarProject\receiver.c	23;"	v	line:23
+temp	C:\Users\Saim\PIC-ATMELProjects\PIC\UpdatedRemoteCarProject\UpdatedCarProject\receiver.c	26;"	v	line:26

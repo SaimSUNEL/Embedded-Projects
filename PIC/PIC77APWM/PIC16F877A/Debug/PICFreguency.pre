@@ -1090,35 +1090,7 @@ extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsign
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
-# 28 "c:\\tc\\delay.h"
-long _dcnt;
-
-# 44
-extern void DelayMs(unsigned char);
-
-# 2 "c:\\tc\\delay.c"
-unsigned char i;
-void
-DelayMs(unsigned char cnt)
-{
-
-do {
-{ _dcnt = (996)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
-} while(--cnt);
-
-
-
-
-do {
-i = 4;
-do {
-{ _dcnt = (250)/((12*1000L)/(4*1000L))|1; while(--_dcnt != 0) continue; };
-} while(--i);
-} while(--cnt);
-
-}
-
-# 4 "../PICFreguency.c"
+# 5 "../PICFreguency.c"
 unsigned int degerler[ 10 ];
 char index;
 volatile long int freq;
@@ -1152,7 +1124,7 @@ CREN=1;
 
 SPEN=1;
 
-# 40
+# 41
 }
 
 char x ,b=0;
@@ -1168,7 +1140,7 @@ CCP1IE = 0;
 
 seri_porta_veri_gonder( degerler[ 5 ] - degerler [4]);
 
-DelayMs ( 500 );
+_delay((unsigned long)((500)*(1000000/4000.0)));
 
 
 CCP1IE = 1;

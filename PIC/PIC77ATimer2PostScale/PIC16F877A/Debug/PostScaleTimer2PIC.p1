@@ -881,136 +881,76 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _EECON1bits `VS99  1 e@396 ]
 "1167 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\pic16f877a.h
 [v _EECON2 `Vuc  1 e@397 ]
-"28 c:\\tc\\delay.h
-[v __dcnt `l  1 e ]
-"2 c:\\Tc\\delay.c
-[v _i `uc  1 e ]
-"4 ../PostScaleTimer2PIC.c
+"5 ../PostScaleTimer2PIC.c
 [v _sayi `i  1 e ]
 [p mainexit ]
-"5 c:\\Tc\\delay.c
-[v _DelayMs `(v  1 ef1`uc ]
-{
-[e :U _DelayMs ]
-[v _cnt `uc  1 r1 ]
-[f ]
-"7
-[e :U 104 ]
-{
-"8
-{
-[e = __dcnt | / -> -> 996 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 105  ]
-[e :U 106 ]
-[e $U 105  ]
-[e :U 105 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 106  ]
-[e :U 107 ]
-}
-"9
-}
-[e $ != -> =- _cnt -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 104  ]
-[e :U 103 ]
-"14
-[e :U 110 ]
-{
-"15
-[e = _i -> -> 4 `i `uc ]
-"16
-[e :U 113 ]
-{
-"17
-{
-[e = __dcnt | / -> -> 250 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 114  ]
-[e :U 115 ]
-[e $U 114  ]
-[e :U 114 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 115  ]
-[e :U 116 ]
-}
-"18
-}
-[e $ != -> =- _i -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 113  ]
-[e :U 112 ]
-"19
-}
-[e $ != -> =- _cnt -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 110  ]
-[e :U 109 ]
-"21
-[e :UE 101 ]
-}
-"4 ../PostScaleTimer2PIC.c
-[i _sayi
--> 0 `i
-]
-"6
-[v F1097 `(v  1 tf ]
-[v _funct `IF1097  1 e ]
+"7 ../PostScaleTimer2PIC.c
+[v F1092 `(v  1 tf ]
+[v _funct `IF1092  1 e ]
 {
 [e :U _funct ]
 [f ]
-"8
-[e $ ! == -> _TMR2IF `i -> 1 `i 118  ]
 "9
-{
+[e $ ! == -> _TMR2IF `i -> 1 `i 102  ]
 "10
-[e = _TMR2IF -> -> 0 `i `b ]
-"11
-[e ++ _sayi -> 1 `i ]
-"13
-[e $ ! == _sayi -> 245 `i 119  ]
-"14
 {
+"11
+[e = _TMR2IF -> -> 0 `i `b ]
+"12
+[e ++ _sayi -> 1 `i ]
+"14
+[e $ ! == _sayi -> 245 `i 103  ]
 "15
-[e = _RB0 ! _RB0 ]
+{
 "16
+[e = _RB0 ! _RB0 ]
+"17
 [e = _sayi -> 0 `i ]
-"19
+"20
 }
-[e :U 119 ]
-"23
+[e :U 103 ]
+"24
 }
-[e :U 118 ]
-"29
-[e :UE 117 ]
+[e :U 102 ]
+"30
+[e :UE 101 ]
 }
-"33
+"34
 [v _main `(v  1 ef ]
 {
 [e :U _main ]
 [f ]
-"34
-[e = _TRISB0 -> -> 0 `i `b ]
 "35
+[e = _TRISB0 -> -> 0 `i `b ]
+"36
 [e = _PORTB -> -> 0 `i `uc ]
-"37
-[e = _GIE -> -> 1 `i `b ]
 "38
+[e = _GIE -> -> 1 `i `b ]
+"39
 [e = _PEIE -> -> 1 `i `b ]
-"40
+"41
 [e = _PR2 -> -> 250 `i `uc ]
-"43
-[e = _T2CKPS1 -> -> 0 `i `b ]
 "44
+[e = _T2CKPS1 -> -> 0 `i `b ]
+"45
 [e = _T2CKPS0 -> -> 1 `i `b ]
-"49
-[e = _TOUTPS3 -> -> 0 `i `b ]
 "50
-[e = _TOUTPS2 -> -> 0 `i `b ]
+[e = _TOUTPS3 -> -> 0 `i `b ]
 "51
-[e = _TOUTPS1 -> -> 1 `i `b ]
+[e = _TOUTPS2 -> -> 0 `i `b ]
 "52
+[e = _TOUTPS1 -> -> 1 `i `b ]
+"53
 [e = _TOUTPS0 -> -> 1 `i `b ]
-"54
+"55
 [e = _TMR2IE -> -> 1 `i `b ]
-"56
+"57
 [e = _TMR2ON -> -> 1 `i `b ]
-"59
-[e :U 122 ]
-[e :U 121 ]
-[e $U 122  ]
-[e :U 123 ]
-"62
-[e :UE 120 ]
+"60
+[e :U 106 ]
+[e :U 105 ]
+[e $U 106  ]
+[e :U 107 ]
+"63
+[e :UE 104 ]
 }

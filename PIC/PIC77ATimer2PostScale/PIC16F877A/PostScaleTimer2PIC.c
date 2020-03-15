@@ -1,7 +1,8 @@
 
 #include<htc.h>
-#include "c:\\Tc\\delay.c"
-int sayi = 0;
+#define DelayMs __delay_ms
+#define DelayUs __delay_usint sayi = 0;
+int sayi;
 void interrupt funct()
 {
 	

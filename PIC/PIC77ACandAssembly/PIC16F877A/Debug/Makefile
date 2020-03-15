@@ -18,9 +18,9 @@ CC=picc.exe
 ASM=picc.exe
 LD=picc.exe
 LIB=picc.exe
-#  C:/Users/Saim/PIC-ATMELProjects/PIC77ACandAssembly/PIC16F877A/Debug/Debug.cof: TOOL=LD
-#     C:/Users/Saim/PIC-ATMELProjects/PIC77ACandAssembly/PIC16F877A/Debug/PICCandAssemblyCombine.p1: TOOL=CC
-#        C:/Users/Saim/PIC-ATMELProjects/PIC77ACandAssembly/PIC16F877A/PICCandAssemblyCombine.c
+#  C:/Users/Saim/PIC-ATMELProjects/PIC/PIC77ACandAssembly/PIC16F877A/Debug/Debug.cof: TOOL=LD
+#     C:/Users/Saim/PIC-ATMELProjects/PIC/PIC77ACandAssembly/PIC16F877A/Debug/PICCandAssemblyCombine.p1: TOOL=CC
+#        C:/Users/Saim/PIC-ATMELProjects/PIC/PIC77ACandAssembly/PIC16F877A/PICCandAssemblyCombine.c
 
 # Build tree:
 all:	Debug

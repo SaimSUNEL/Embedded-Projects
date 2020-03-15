@@ -18,9 +18,9 @@ CC=picc.exe
 ASM=picc.exe
 LD=picc.exe
 LIB=picc.exe
-#  C:/Users/Saim/PIC-ATMELProjects/PIC77APWM/PIC16F877A/Debug/Debug.cof: TOOL=LD
-#     C:/Users/Saim/PIC-ATMELProjects/PIC77APWM/PIC16F877A/Debug/PICFreguency.p1: TOOL=CC
-#        C:/Users/Saim/PIC-ATMELProjects/PIC77APWM/PIC16F877A/PICFreguency.c
+#  C:/Users/Saim/PIC-ATMELProjects/PIC/PIC77APWM/PIC16F877A/Debug/Debug.cof: TOOL=LD
+#     C:/Users/Saim/PIC-ATMELProjects/PIC/PIC77APWM/PIC16F877A/Debug/PICFreguency.p1: TOOL=CC
+#        C:/Users/Saim/PIC-ATMELProjects/PIC/PIC77APWM/PIC16F877A/PICFreguency.c
 
 # Build tree:
 all:	Debug

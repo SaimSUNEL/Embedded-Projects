@@ -1,152 +1,154 @@
      1: 
      2: #include<htc.h>
-     3: #include "c:\\tc\\delay.c"
-     4: #define KIRMIZI 0b00000001
-     5:    #define SARI 0b00000010
-     6: #define YESIL_1 0b00000100
-     7: #define YESIL_2 0b00001000
-     8: 
-     9: #define LAMP1 PORTB
-    10: #define LAMP2 PORTC
-    11: #define LAMP3 PORTD
-    12: #define LAMP4 PORTA
-    13: 
-    14: 
-    15: void main()
-    16: {
-    17:         
-    18:         TRISB = 0; 
-    19:         PORTB = 0;
-    20:          TRISC = 0;
-    21:         PORTC = 0;
-    22:         TRISD = 0;
-    23:         TRISA = 0;
-    24:         PORTA = 0;
-    25:         PORTD = 0;
-    26:         
-    27:         
+     3: #define DelayMs __delay_ms
+     4: #define DelayUs __delay_us
+     5: 
+     6: #define KIRMIZI 0b00000001
+     7:    #define SARI 0b00000010
+     8: #define YESIL_1 0b00000100
+     9: #define YESIL_2 0b00001000
+    10: 
+    11: #define LAMP1 PORTB
+    12: #define LAMP2 PORTC
+    13: #define LAMP3 PORTD
+    14: #define LAMP4 PORTA
+    15: 
+    16: 
+    17: void main()
+    18: {
+    19:         
+    20:         TRISB = 0; 
+    21:         PORTB = 0;
+    22:          TRISC = 0;
+    23:         PORTC = 0;
+    24:         TRISD = 0;
+    25:         TRISA = 0;
+    26:         PORTA = 0;
+    27:         PORTD = 0;
     28:         
-    29:         while( 1 )
-    30:         {
-    31:         
-    32:                 
-    33:                 
+    29:         
+    30:         
+    31:         while( 1 )
+    32:         {
+    33:         
     34:                 
     35:                 
     36:                 
-    37:                 LAMP1 = YESIL_1 | YESIL_2;
-    38:         
-    39:                 LAMP3 = YESIL_1 | YESIL_2;
+    37:                 
+    38:                 
+    39:                 LAMP1 = YESIL_1 | YESIL_2;
     40:         
-    41:         
+    41:                 LAMP3 = YESIL_1 | YESIL_2;
     42:         
     43:         
-    44:                 LAMP2 = KIRMIZI;
-    45:                 LAMP4 = KIRMIZI;
-    46:                 
-    47:                 DelayMs( 250 );
-    48:                 DelayMs( 250 );
+    44:         
+    45:         
+    46:                 LAMP2 = KIRMIZI;
+    47:                 LAMP4 = KIRMIZI;
+    48:                 
     49:                 DelayMs( 250 );
     50:                 DelayMs( 250 );
     51:                 DelayMs( 250 );
     52:                 DelayMs( 250 );
-    53:                 
-    54:                 
-    55:                 LAMP1 = 0;
-    56:                 LAMP3 = 0;
-    57:                 
-    58:                 
-    59:                 DelayMs( 250 );
+    53:                 DelayMs( 250 );
+    54:                 DelayMs( 250 );
+    55:                 
+    56:                 
+    57:                 LAMP1 = 0;
+    58:                 LAMP3 = 0;
+    59:                 
     60:                 
-    61:                 LAMP1 = YESIL_1 | YESIL_2;
-    62:         
-    63:                 LAMP3 = YESIL_1 | YESIL_2;
-    64:                 DelayMs( 250 );
-    65:                 
-    66:                 
+    61:                 DelayMs( 250 );
+    62:                 
+    63:                 LAMP1 = YESIL_1 | YESIL_2;
+    64:         
+    65:                 LAMP3 = YESIL_1 | YESIL_2;
+    66:                 DelayMs( 250 );
     67:                 
-    68:                 LAMP1 = 0;
-    69:                 LAMP3 = 0;
-    70:                 
-    71:                 
-    72:                 DelayMs( 250 );
+    68:                 
+    69:                 
+    70:                 LAMP1 = 0;
+    71:                 LAMP3 = 0;
+    72:                 
     73:                 
-    74:                 
+    74:                 DelayMs( 250 );
     75:                 
-    76:                 LAMP1 = YESIL_1 | YESIL_2;
-    77:         
-    78:                 LAMP3 = YESIL_1 | YESIL_2;
-    79:                 
-    80:                 
+    76:                 
+    77:                 
+    78:                 LAMP1 = YESIL_1 | YESIL_2;
+    79:         
+    80:                 LAMP3 = YESIL_1 | YESIL_2;
     81:                 
-    82:                 DelayMs( 250 );
+    82:                 
     83:                 
-    84:                 
-    85:                 LAMP1 = SARI;
-    86:                 LAMP3 = SARI;
-    87:                 LAMP2 = SARI;
-    88:                 LAMP4 = SARI;
-    89:                 
-    90:                 
-    91:                 DelayMs( 250 );
-    92:                 DelayMs( 250 );
+    84:                 DelayMs( 250 );
+    85:                 
+    86:                 
+    87:                 LAMP1 = SARI;
+    88:                 LAMP3 = SARI;
+    89:                 LAMP2 = SARI;
+    90:                 LAMP4 = SARI;
+    91:                 
+    92:                 
     93:                 DelayMs( 250 );
     94:                 DelayMs( 250 );
     95:                 DelayMs( 250 );
     96:                 DelayMs( 250 );
     97:                 DelayMs( 250 );
     98:                 DelayMs( 250 );
-    99:                 
-   100:                 LAMP1 = KIRMIZI;
-   101:                 LAMP3 = KIRMIZI;
-   102:                 LAMP2 = YESIL_1 | YESIL_2;
-   103:                 LAMP4 = YESIL_1 | YESIL_2;
-   104:                 DelayMs( 250 );
-   105:                 DelayMs( 250 );
+    99:                 DelayMs( 250 );
+   100:                 DelayMs( 250 );
+   101:                 
+   102:                 LAMP1 = KIRMIZI;
+   103:                 LAMP3 = KIRMIZI;
+   104:                 LAMP2 = YESIL_1 | YESIL_2;
+   105:                 LAMP4 = YESIL_1 | YESIL_2;
    106:                 DelayMs( 250 );
    107:                 DelayMs( 250 );
    108:                 DelayMs( 250 );
    109:                 DelayMs( 250 );
-   110:                 LAMP2 = 0;
-   111:                 LAMP4 = 0;
-   112:                 
-   113:                 
-   114:                 DelayMs( 250 );
+   110:                 DelayMs( 250 );
+   111:                 DelayMs( 250 );
+   112:                 LAMP2 = 0;
+   113:                 LAMP4 = 0;
+   114:                 
    115:                 
-   116:                 LAMP2 = YESIL_1 | YESIL_2;
-   117:                 LAMP4 = YESIL_1 | YESIL_2;
-   118:                 
-   119:                 DelayMs( 250 );
-   120: LAMP2 = 0;
-   121:                 LAMP4 = 0;
-   122: 
-   123:                 DelayMs( 250 );
-   124:                 
-   125:                 LAMP2 = YESIL_1 | YESIL_2;
-   126:                 LAMP4 = YESIL_1 | YESIL_2;
-   127: DelayMs( 250 );
-   128: LAMP1 = SARI;
-   129:                 LAMP3 = SARI;
-   130:                 LAMP2 = SARI;
-   131:                 LAMP4 = SARI;
-   132:                 DelayMs( 250 );
-   133:                 DelayMs( 250 );
+   116:                 DelayMs( 250 );
+   117:                 
+   118:                 LAMP2 = YESIL_1 | YESIL_2;
+   119:                 LAMP4 = YESIL_1 | YESIL_2;
+   120:                 
+   121:                 DelayMs( 250 );
+   122: LAMP2 = 0;
+   123:                 LAMP4 = 0;
+   124: 
+   125:                 DelayMs( 250 );
+   126:                 
+   127:                 LAMP2 = YESIL_1 | YESIL_2;
+   128:                 LAMP4 = YESIL_1 | YESIL_2;
+   129: DelayMs( 250 );
+   130: LAMP1 = SARI;
+   131:                 LAMP3 = SARI;
+   132:                 LAMP2 = SARI;
+   133:                 LAMP4 = SARI;
    134:                 DelayMs( 250 );
    135:                 DelayMs( 250 );
    136:                 DelayMs( 250 );
    137:                 DelayMs( 250 );
    138:                 DelayMs( 250 );
    139:                 DelayMs( 250 );
-   140: 
-   141: 
+   140:                 DelayMs( 250 );
+   141:                 DelayMs( 250 );
    142: 
    143: 
-   144: }
-   145:         
-   146:         
+   144: 
+   145: 
+   146: }
    147:         
    148:         
    149:         
    150:         
    151:         
-   152: }
+   152:         
+   153:         
+   154: }

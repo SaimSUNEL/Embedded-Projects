@@ -1,6 +1,7 @@
 
 #include<htc.h>
-#include "c:\\tc\\delay.c"
+#define DelayMs __delay_ms
+#define DelayUs __delay_us
 unsigned int degerler[ 10 ];
 char index;
 volatile long int freq;

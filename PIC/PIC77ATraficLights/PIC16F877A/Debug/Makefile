@@ -18,9 +18,9 @@ CC=picc.exe
 ASM=picc.exe
 LD=picc.exe
 LIB=picc.exe
-#  C:/Users/Saim/PIC-ATMELProjects/PIC77ATraficLights/PIC16F877A/Debug/Debug.cof: TOOL=LD
-#     C:/Users/Saim/PIC-ATMELProjects/PIC77ATraficLights/PIC16F877A/Debug/PetriNet.p1: TOOL=CC
-#        C:/Users/Saim/PIC-ATMELProjects/PIC77ATraficLights/PIC16F877A/PetriNet.c
+#  C:/Users/Saim/PIC-ATMELProjects/PIC/PIC77ATraficLights/PIC16F877A/Debug/Debug.cof: TOOL=LD
+#     C:/Users/Saim/PIC-ATMELProjects/PIC/PIC77ATraficLights/PIC16F877A/Debug/PetriNet.p1: TOOL=CC
+#        C:/Users/Saim/PIC-ATMELProjects/PIC/PIC77ATraficLights/PIC16F877A/PetriNet.c
 
 # Build tree:
 all:	Debug

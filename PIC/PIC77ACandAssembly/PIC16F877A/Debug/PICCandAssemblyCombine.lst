@@ -4,8 +4,8 @@
      4: 
      5: 
      6: #include<htc.h>
-     7: #include "c:\\tc\\delay.c" 
-     8: 
+     7: #define DelayMs __delay_ms
+     8: #define DelayUs __delay_us
      9: asm("org 0x000");
     10: asm("goto 0x60");
     11: 

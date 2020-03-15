@@ -881,63 +881,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _EECON1bits `VS99  1 e@396 ]
 "1167 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\pic16f877a.h
 [v _EECON2 `Vuc  1 e@397 ]
-"28 c:\\tc\\delay.h
-[v __dcnt `l  1 e ]
-"2 c:\\tc\\delay.c
-[v _i `uc  1 e ]
 [p mainexit ]
-"5 c:\\tc\\delay.c
-[v _DelayMs `(v  1 ef1`uc ]
-{
-[e :U _DelayMs ]
-[v _cnt `uc  1 r1 ]
-[f ]
-"7
-[e :U 104 ]
-{
-"8
-{
-[e = __dcnt | / -> -> 996 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 105  ]
-[e :U 106 ]
-[e $U 105  ]
-[e :U 105 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 106  ]
-[e :U 107 ]
-}
-"9
-}
-[e $ != -> =- _cnt -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 104  ]
-[e :U 103 ]
-"14
-[e :U 110 ]
-{
-"15
-[e = _i -> -> 4 `i `uc ]
-"16
-[e :U 113 ]
-{
-"17
-{
-[e = __dcnt | / -> -> 250 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 114  ]
-[e :U 115 ]
-[e $U 114  ]
-[e :U 114 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 115  ]
-[e :U 116 ]
-}
-"18
-}
-[e $ != -> =- _i -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 113  ]
-[e :U 112 ]
-"19
-}
-[e $ != -> =- _cnt -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 110  ]
-[e :U 109 ]
-"21
-[e :UE 101 ]
-}
+"154 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\pic.h
+[v __delay `(v  0 ef1`ul ]
+[p i __delay ]
 "9 ../PICCandAssemblyCombine.c
 [; org 0x000 ;#
 "10
@@ -952,7 +899,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "23
 [e = _GIE -> -> 0 `i `b ]
 "25
-[e $ ! _RCIF 118  ]
+[e $ ! _RCIF 102  ]
 "26
 {
 "27
@@ -963,13 +910,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _PORTD _RCREG ]
 "31
 }
-[e :U 118 ]
+[e :U 102 ]
 "33
 [e = _GIE -> -> 1 `i `b ]
 "35
 [; retfie ;#
 "37
-[e :UE 117 ]
+[e :UE 101 ]
 }
 "45
 [v _seri_porttan_veri_al `(uc  1 ef@512 ]
@@ -977,16 +924,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _seri_porttan_veri_al ]
 [f ]
 "46
-[e $U 120  ]
-[e :U 121 ]
-[e :U 120 ]
-[e $ ! _RCIF 121  ]
-[e :U 122 ]
+[e $U 104  ]
+[e :U 105 ]
+[e :U 104 ]
+[e $ ! _RCIF 105  ]
+[e :U 106 ]
 "47
 [e ) _RCREG ]
-[e $UE 119  ]
+[e $UE 103  ]
 "48
-[e :UE 119 ]
+[e :UE 103 ]
 }
 "50
 [v _seri_porta_veri_gonder `(v  1 ef1@592`uc ]
@@ -994,15 +941,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _seri_porta_veri_gonder ]
 [v _jk `uc  1 r1 ]
 [f ]
-[e $U 124  ]
-[e :U 125 ]
-[e :U 124 ]
-[e $ ! _TXIF 125  ]
-[e :U 126 ]
+[e $U 108  ]
+[e :U 109 ]
+[e :U 108 ]
+[e $ ! _TXIF 109  ]
+[e :U 110 ]
 "51
 [e = _TXREG _jk ]
 "54
-[e :UE 123 ]
+[e :UE 107 ]
 }
 "67
 [v _seri_portu_ayarla `(v  1 ef@768 ]
@@ -1025,7 +972,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "83
 [e = _SPEN -> -> 1 `i `b ]
 "88
-[e :UE 127 ]
+[e :UE 111 ]
 }
 "91
 [v _main `(v  1 ef@1280 ]
@@ -1047,7 +994,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "102
 [e ( _seri_portu_ayarla ..  ]
 "105
-[e ( _DelayMs (1 -> -> 500 `i `uc ]
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
 "106
 [e ( _seri_porta_veri_gonder (1 -> -> 83 `ui `uc ]
 "107
@@ -1065,17 +1012,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 "117
 [e = _TXIE -> -> 0 `i `b ]
 "118
-[e :U 130 ]
+[e :U 114 ]
 "119
 {
 "120
 [e = _gelen ( _seri_porttan_veri_al ..  ]
 "122
 }
-[e :U 129 ]
+[e :U 113 ]
 "118
-[e $U 130  ]
-[e :U 131 ]
+[e $U 114  ]
+[e :U 115 ]
 "126
-[e :UE 128 ]
+[e :UE 112 ]
 }

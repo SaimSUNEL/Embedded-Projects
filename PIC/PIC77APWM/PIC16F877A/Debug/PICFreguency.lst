@@ -1,84 +1,85 @@
      1: 
      2: #include<htc.h>
-     3: #include "c:\\tc\\delay.c"
-     4: unsigned int degerler[ 10 ];
-     5: char index;
-     6: volatile long int freq;
-     7: unsigned char seri_porttan_veri_al()
-     8: {
-     9: while( !RCIF );
-    10: return RCREG;
-    11: }
-    12: void seri_porta_veri_gonder(unsigned char jk)
-    13:  { while( !TXIF );
-    14:          TXREG=jk;
-    15: 
-    16:         
-    17:          }
-    18: void seri_portu_ayarla()
-    19: {SPBRG=25; //DIVIDER;
-    20:         BRGH=1;
-    21:         
+     3: #define DelayMs __delay_ms
+     4: #define DelayUs __delay_us
+     5: unsigned int degerler[ 10 ];
+     6: char index;
+     7: volatile long int freq;
+     8: unsigned char seri_porttan_veri_al()
+     9: {
+    10: while( !RCIF );
+    11: return RCREG;
+    12: }
+    13: void seri_porta_veri_gonder(unsigned char jk)
+    14:  { while( !TXIF );
+    15:          TXREG=jk;
+    16: 
+    17:         
+    18:          }
+    19: void seri_portu_ayarla()
+    20: {SPBRG=25; //DIVIDER;
+    21:         BRGH=1;
     22:         
-    23:         SYNC=0;
-    24:         
-    25:         TX9=0;
-    26:         
-    27:         TXEN=1;
-    28:         
-    29:         RX9=0;
-    30:         
-    31:         CREN=1;
-    32:         
+    23:         
+    24:         SYNC=0;
+    25:         
+    26:         TX9=0;
+    27:         
+    28:         TXEN=1;
+    29:         
+    30:         RX9=0;
+    31:         
+    32:         CREN=1;
     33:         
     34:         
-    35:         SPEN=1;/*
-    36:         RC6=1;
-    37:         
-    38:         RC7=1;
-    39: */
-    40:         }
-    41: 
-    42: char x ,b=0;
-    43: void interrupt FNC ( )
-    44: {
-    45: 
-    46:         degerler[ index++ ] = CCPR1;
-    47:         CCP1IF=0;
-    48:         if( index==10){index=0;
-    49:                 
+    35:         
+    36:         SPEN=1;/*
+    37:         RC6=1;
+    38:         
+    39:         RC7=1;
+    40: */
+    41:         }
+    42: 
+    43: char x ,b=0;
+    44: void interrupt FNC ( )
+    45: {
+    46: 
+    47:         degerler[ index++ ] = CCPR1;
+    48:         CCP1IF=0;
+    49:         if( index==10){index=0;
     50:                 
-    51:                 CCP1IE = 0;
-    52:         
-    53:                 seri_porta_veri_gonder( degerler[ 5 ] - degerler [4]);
-    54:                 
-    55:                 DelayMs ( 500 );
-    56:                 
+    51:                 
+    52:                 CCP1IE = 0;
+    53:         
+    54:                 seri_porta_veri_gonder( degerler[ 5 ] - degerler [4]);
+    55:                 
+    56:                 DelayMs ( 500 );
     57:                 
-    58:                                 CCP1IE = 1;
-    59:                         
-    60:                 
+    58:                 
+    59:                                 CCP1IE = 1;
+    60:                         
     61:                 
-    62:                 }
-    63:         }
-    64: 
-    65: void main()
-    66: {
-    67:         seri_portu_ayarla();
-    68: TRISB = 0;
-    69: PORTB = 0;
-    70: CCP1M2 = 1;//capture mode on every rising edge...
-    71: TMR1 = 0;
-    72: TMR1CS = 0;//internal osc / 4
-    73: GIE = 1;
-    74: PEIE = 1;
-    75: CCP1IE = 1;
-    76: T1CKPS1 = 0; //Presc 1/4
-    77: T1CKPS0 = 0;
-    78: TMR1ON = 1;
-    79:         
-    80:         while( 1 );
-    81:         
+    62:                 
+    63:                 }
+    64:         }
+    65: 
+    66: void main()
+    67: {
+    68:         seri_portu_ayarla();
+    69: TRISB = 0;
+    70: PORTB = 0;
+    71: CCP1M2 = 1;//capture mode on every rising edge...
+    72: TMR1 = 0;
+    73: TMR1CS = 0;//internal osc / 4
+    74: GIE = 1;
+    75: PEIE = 1;
+    76: CCP1IE = 1;
+    77: T1CKPS1 = 0; //Presc 1/4
+    78: T1CKPS0 = 0;
+    79: TMR1ON = 1;
+    80:         
+    81:         while( 1 );
     82:         
     83:         
-    84: }
+    84:         
+    85: }

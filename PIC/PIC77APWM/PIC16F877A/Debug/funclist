@@ -1,6 +1,5 @@
-_seri_porta_veri_gonder: CODE, 230 0 12
-_main: CODE, 169 0 30
-_DelayMs: CODE, 21 0 90
-_FNC: CODE, 111 0 58
-_seri_portu_ayarla: CODE, 216 0 14
-Total: 204
+_seri_porta_veri_gonder: CODE, 145 0 12
+_main: CODE, 81 0 30
+_FNC: CODE, 21 0 60
+_seri_portu_ayarla: CODE, 131 0 14
+Total: 116

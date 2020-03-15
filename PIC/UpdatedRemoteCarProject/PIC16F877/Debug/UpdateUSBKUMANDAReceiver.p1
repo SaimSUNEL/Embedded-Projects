@@ -829,134 +829,81 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _EECON1bits `VS94  1 e@396 ]
 "1104 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\pic16f877.h
 [v _EECON2 `Vuc  1 e@397 ]
-"28 c:\\tc\\delay.h
-[v __dcnt `l  1 e ]
-"2 c:/tc/delay.c
-[v _i `uc  1 e ]
-"16 ../UpdateUSBKUMANDAReceiver.c
-[v _motor_suresi `i  1 e ]
 "17 ../UpdateUSBKUMANDAReceiver.c
-[v _ortala `uc  1 e ]
+[v _motor_suresi `i  1 e ]
 "18 ../UpdateUSBKUMANDAReceiver.c
-[v _motor_aktif `uc  1 e ]
+[v _ortala `uc  1 e ]
 "19 ../UpdateUSBKUMANDAReceiver.c
-[v _motor_yon `uc  1 e ]
+[v _motor_aktif `uc  1 e ]
 "20 ../UpdateUSBKUMANDAReceiver.c
-[v _sayi `i  1 e ]
+[v _motor_yon `uc  1 e ]
 "21 ../UpdateUSBKUMANDAReceiver.c
-[v _j `i  1 e ]
+[v _sayi `i  1 e ]
 "22 ../UpdateUSBKUMANDAReceiver.c
-[v _kk `i  1 e ]
+[v _j `i  1 e ]
 "23 ../UpdateUSBKUMANDAReceiver.c
-[v _sonuc `i  1 e ]
+[v _kk `i  1 e ]
 "24 ../UpdateUSBKUMANDAReceiver.c
-[v _a `i  1 e ]
+[v _sonuc `i  1 e ]
 "25 ../UpdateUSBKUMANDAReceiver.c
-[v _code `uc  -> 4 `i e ]
+[v _a `i  1 e ]
 "26 ../UpdateUSBKUMANDAReceiver.c
-[v _temp `Vi  1 e ]
+[v _code `uc  -> 4 `i e ]
 "27 ../UpdateUSBKUMANDAReceiver.c
+[v _temp `Vi  1 e ]
+"28 ../UpdateUSBKUMANDAReceiver.c
 [v _array `uc  -> 50 `i e ]
+"154 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\pic.h
+[v __delay `(v  0 ef1`ul ]
+[p i __delay ]
 [p mainexit ]
-"5 c:/tc/delay.c
-[v _DelayMs `(v  1 ef1`uc ]
-{
-[e :U _DelayMs ]
-[v _cnt `uc  1 r1 ]
-[f ]
-"7
-[e :U 99 ]
-{
-"8
-{
-[e = __dcnt | / -> -> 996 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 100  ]
-[e :U 101 ]
-[e $U 100  ]
-[e :U 100 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 101  ]
-[e :U 102 ]
-}
-"9
-}
-[e $ != -> =- _cnt -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 99  ]
-[e :U 98 ]
-"14
-[e :U 105 ]
-{
-"15
-[e = _i -> -> 4 `i `uc ]
-"16
-[e :U 108 ]
-{
-"17
-{
-[e = __dcnt | / -> -> 250 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 109  ]
-[e :U 110 ]
-[e $U 109  ]
-[e :U 109 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 110  ]
-[e :U 111 ]
-}
-"18
-}
-[e $ != -> =- _i -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 108  ]
-[e :U 107 ]
-"19
-}
-[e $ != -> =- _cnt -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 105  ]
-[e :U 104 ]
-"21
-[e :UE 96 ]
-}
-"16 ../UpdateUSBKUMANDAReceiver.c
+"17 ../UpdateUSBKUMANDAReceiver.c
 [i _motor_suresi
 -> 0 `i
 ]
-"17
+"18
 [i _ortala
 -> -> 0 `i `uc
 ]
-"18
+"19
 [i _motor_aktif
 -> -> 0 `i `uc
 ]
-"19
+"20
 [i _motor_yon
 -> -> 0 `i `uc
 ]
-"20
+"21
 [i _sayi
 -> 0 `i
 ]
-"22
+"23
 [i _kk
 -> 0 `i
 ]
-"23
+"24
 [i _sonuc
 -> 0 `i
 ]
-"24
+"25
 [i _a
 -> 0 `i
 ]
-"26
+"27
 [i _temp
 -> 0 `i
 ]
-"29
+"30
 [v _kodu_coz `(v  1 ef ]
 {
 [e :U _kodu_coz ]
 [f ]
-"30
-[e = _sonuc + + + + + + * -> 64 `i -> *U + &U _gelen_veri * -> -> -> 1 `i `ui `ux -> -> # *U &U _gelen_veri `ui `ux `i * -> 32 `i -> *U + &U _gelen_veri * -> -> -> 2 `i `ui `ux -> -> # *U &U _gelen_veri `ui `ux `i * -> 16 `i -> *U + &U _gelen_veri * -> -> -> 3 `i `ui `ux -> -> # *U &U _gelen_veri `ui `ux `i * -> 8 `i -> *U + &U _gelen_veri * -> -> -> 4 `i `ui `ux -> -> # *U &U _gelen_veri `ui `ux `i * -> 4 `i -> *U + &U _gelen_veri * -> -> -> 5 `i `ui `ux -> -> # *U &U _gelen_veri `ui `ux `i * -> 2 `i -> *U + &U _gelen_veri * -> -> -> 6 `i `ui `ux -> -> # *U &U _gelen_veri `ui `ux `i -> *U + &U _gelen_veri * -> -> -> 7 `i `ui `ux -> -> # *U &U _gelen_veri `ui `ux `i ]
 "31
-[e = *U + &U _array * -> -> ++ _a -> 1 `i `ui `ux -> -> # *U &U _array `ui `ux -> _sonuc `uc ]
+[e = _sonuc + + + + + + * -> 64 `i -> *U + &U _gelen_veri * -> -> -> 1 `i `ui `ux -> -> # *U &U _gelen_veri `ui `ux `i * -> 32 `i -> *U + &U _gelen_veri * -> -> -> 2 `i `ui `ux -> -> # *U &U _gelen_veri `ui `ux `i * -> 16 `i -> *U + &U _gelen_veri * -> -> -> 3 `i `ui `ux -> -> # *U &U _gelen_veri `ui `ux `i * -> 8 `i -> *U + &U _gelen_veri * -> -> -> 4 `i `ui `ux -> -> # *U &U _gelen_veri `ui `ux `i * -> 4 `i -> *U + &U _gelen_veri * -> -> -> 5 `i `ui `ux -> -> # *U &U _gelen_veri `ui `ux `i * -> 2 `i -> *U + &U _gelen_veri * -> -> -> 6 `i `ui `ux -> -> # *U &U _gelen_veri `ui `ux `i -> *U + &U _gelen_veri * -> -> -> 7 `i `ui `ux -> -> # *U &U _gelen_veri `ui `ux `i ]
 "32
-[e $ ! == -> _sonuc `ui -> 50 `ui 113  ]
+[e = *U + &U _array * -> -> ++ _a -> 1 `i `ui `ux -> -> # *U &U _array `ui `ux -> _sonuc `uc ]
+"33
+[e $ ! == -> _sonuc `ui -> 50 `ui 97  ]
 {
 [e = _RB1 -> -> 1 `i `b ]
 [e = _RC0 -> -> 1 `i `b ]
@@ -964,407 +911,287 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _RC1 -> -> 0 `i `b ]
 [e = _RC3 -> -> 0 `i `b ]
 }
-[e :U 113 ]
-"33
-[e $ ! == _sonuc -> 22 `i 114  ]
-[e = _RB1 ! _RB1 ]
-[e :U 114 ]
+[e :U 97 ]
 "34
-[e $ ! == _sonuc -> 33 `i 115  ]
-[e = _RB2 ! _RB2 ]
-[e :U 115 ]
+[e $ ! == _sonuc -> 22 `i 98  ]
+[e = _RB1 ! _RB1 ]
+[e :U 98 ]
 "35
-[e $ ! == -> _sonuc `ui -> 52 `ui 116  ]
-{
+[e $ ! == _sonuc -> 33 `i 99  ]
+[e = _RB2 ! _RB2 ]
+[e :U 99 ]
 "36
+[e $ ! == -> _sonuc `ui -> 52 `ui 100  ]
+{
+"37
 {
 [v _b `i  1 a ]
 [e = _b -> 0 `i ]
-[e $ < _b -> 3 `i 117  ]
-[e $U 118  ]
-"37
-[e :U 117 ]
-{
+[e $ < _b -> 3 `i 101  ]
+[e $U 102  ]
 "38
-[e = _RC7 -> -> 1 `i `b ]
+[e :U 101 ]
+{
 "39
-{
-[e = __dcnt | / -> -> 1498 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 120  ]
-[e :U 121 ]
-[e $U 120  ]
-[e :U 120 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 121  ]
-[e :U 122 ]
-}
+[e = _RC7 -> -> 1 `i `b ]
 "40
-[e = _RC7 -> -> 0 `i `b ]
+[e ( __delay (1 -> * -> -> 1498 `i `d / -> -> 1000000 `l `d .4000000.0 `ul ]
 "41
-[e ( _DelayMs (1 -> -> 19 `i `uc ]
+[e = _RC7 -> -> 0 `i `b ]
 "42
-[e ( _DelayMs (1 -> -> 1 `i `uc ]
+[e ( __delay (1 -> * -> -> 19 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
+"43
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
 }
-"36
+"37
 [e ++ _b -> 1 `i ]
-[e $ < _b -> 3 `i 117  ]
-[e :U 118 ]
-"42
+[e $ < _b -> 3 `i 101  ]
+[e :U 102 ]
+"43
 }
-"46
-}
-[e :U 116 ]
 "47
-[e $ ! == -> _sonuc `ui -> 53 `ui 123  ]
-{
+}
+[e :U 100 ]
 "48
+[e $ ! == -> _sonuc `ui -> 53 `ui 104  ]
+{
+"49
 {
 [v _a `i  1 a ]
 [e = _a -> 0 `i ]
-[e $ < _a -> 3 `i 124  ]
-[e $U 125  ]
-"49
-[e :U 124 ]
-{
+[e $ < _a -> 3 `i 105  ]
+[e $U 106  ]
 "50
-[e = _RC7 -> -> 1 `i `b ]
-"51
+[e :U 105 ]
 {
-[e = __dcnt | / -> -> 998 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 127  ]
-[e :U 128 ]
-[e $U 127  ]
-[e :U 127 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 128  ]
-[e :U 129 ]
-}
+"51
+[e = _RC7 -> -> 1 `i `b ]
 "52
-[e = _RC7 -> -> 0 `i `b ]
+[e ( __delay (1 -> * -> -> 998 `i `d / -> -> 1000000 `l `d .4000000.0 `ul ]
 "53
-[e ( _DelayMs (1 -> -> 19 `i `uc ]
+[e = _RC7 -> -> 0 `i `b ]
 "54
-[e ( _DelayMs (1 -> -> 2 `i `uc ]
+[e ( __delay (1 -> * -> -> 19 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
 "55
+[e ( __delay (1 -> * -> -> 2 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
+"56
 }
-"48
+"49
 [e ++ _a -> 1 `i ]
-[e $ < _a -> 3 `i 124  ]
-[e :U 125 ]
-"55
+[e $ < _a -> 3 `i 105  ]
+[e :U 106 ]
+"56
 }
-"58
-}
-[e :U 123 ]
 "59
-[e $ ! == -> _sonuc `ui -> 55 `ui 130  ]
+}
+[e :U 104 ]
+"60
+[e $ ! == -> _sonuc `ui -> 55 `ui 108  ]
 {
 [e = _RC0 -> -> 0 `i `b ]
 [e = _RC2 -> -> 0 `i `b ]
 [e = _RC1 -> -> 1 `i `b ]
 [e = _RC3 -> -> 1 `i `b ]
 }
-[e :U 130 ]
-"61
-[e $ ! == -> _sonuc `ui -> 98 `ui 131  ]
+[e :U 108 ]
+"62
+[e $ ! == -> _sonuc `ui -> 98 `ui 109  ]
 {
 [e = _RB1 -> -> 0 `i `b ]
 [e = _RC0 -> -> 0 `i `b ]
 [e = _RC2 -> -> 0 `i `b ]
 }
-[e :U 131 ]
-"62
-[e $ ! || == -> _sonuc `ui -> 100 `ui == -> _sonuc `ui -> 101 `ui 132  ]
-{
+[e :U 109 ]
 "63
+[e $ ! || == -> _sonuc `ui -> 100 `ui == -> _sonuc `ui -> 101 `ui 110  ]
 {
-[v _b `i  1 a ]
-[e = _b -> 0 `i ]
-[e $ < _b -> 4 `i 133  ]
-[e $U 134  ]
 "64
-[e :U 133 ]
-{
-"65
-[e = _RC7 -> -> 1 `i `b ]
-"66
-{
-[e = __dcnt | / -> -> 1998 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 136  ]
-[e :U 137 ]
-[e $U 136  ]
-[e :U 136 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 137  ]
-[e :U 138 ]
-}
-"67
-[e = _RC7 -> -> 0 `i `b ]
-"68
-[e ( _DelayMs (1 -> -> 19 `i `uc ]
-"69
-[e ( _DelayMs (1 -> -> 1 `i `uc ]
-}
-"63
-[e ++ _b -> 1 `i ]
-[e $ < _b -> 4 `i 133  ]
-[e :U 134 ]
-"69
-}
-"71
-}
-[e :U 132 ]
-"74
-[e $ ! == -> _sonuc `ui -> 101 `ui 139  ]
-{
-"75
 {
 [v _b `i  1 a ]
 [e = _b -> 0 `i ]
-[e $ < _b -> 4 `i 140  ]
-[e $U 141  ]
-"76
-[e :U 140 ]
+[e $ < _b -> 4 `i 111  ]
+[e $U 112  ]
+"65
+[e :U 111 ]
 {
-"77
+"66
 [e = _RC7 -> -> 1 `i `b ]
-"78
-{
-[e = __dcnt | / -> -> 1998 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 143  ]
-[e :U 144 ]
-[e $U 143  ]
-[e :U 143 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 144  ]
-[e :U 145 ]
-}
-"79
+"67
+[e ( __delay (1 -> * -> -> 1998 `i `d / -> -> 1000000 `l `d .4000000.0 `ul ]
+"68
 [e = _RC7 -> -> 0 `i `b ]
-"80
-[e ( _DelayMs (1 -> -> 19 `i `uc ]
-"81
-[e ( _DelayMs (1 -> -> 1 `i `uc ]
+"69
+[e ( __delay (1 -> * -> -> 19 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
+"70
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
 }
-"75
+"64
 [e ++ _b -> 1 `i ]
-[e $ < _b -> 4 `i 140  ]
-[e :U 141 ]
+[e $ < _b -> 4 `i 111  ]
+[e :U 112 ]
+"70
+}
+"72
+}
+[e :U 110 ]
+"75
+[e $ ! == -> _sonuc `ui -> 101 `ui 114  ]
+{
+"76
+{
+[v _b `i  1 a ]
+[e = _b -> 0 `i ]
+[e $ < _b -> 4 `i 115  ]
+[e $U 116  ]
+"77
+[e :U 115 ]
+{
+"78
+[e = _RC7 -> -> 1 `i `b ]
+"79
+[e ( __delay (1 -> * -> -> 1998 `i `d / -> -> 1000000 `l `d .4000000.0 `ul ]
+"80
+[e = _RC7 -> -> 0 `i `b ]
 "81
+[e ( __delay (1 -> * -> -> 19 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
+"82
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
 }
-"83
+"76
+[e ++ _b -> 1 `i ]
+[e $ < _b -> 4 `i 115  ]
+[e :U 116 ]
+"82
 }
-[e :U 139 ]
-"86
-[e $ ! == -> _sonuc `ui -> 103 `ui 146  ]
+"84
+}
+[e :U 114 ]
+"87
+[e $ ! == -> _sonuc `ui -> 103 `ui 118  ]
 {
 [e = _RC0 -> -> 0 `i `b ]
 [e = _RC2 -> -> 0 `i `b ]
 [e = _RC1 -> -> 0 `i `b ]
 [e = _RC3 -> -> 0 `i `b ]
 }
-[e :U 146 ]
-"87
-[e :UE 112 ]
+[e :U 118 ]
+"88
+[e :UE 96 ]
 }
-"91
+"92
 [v _coz `(v  1 ef ]
 {
 [e :U _coz ]
 [f ]
 [e = _sayi -> 0 `i ]
-"93
-[e $U 148  ]
-[e :U 149 ]
-[e ++ _sayi -> 1 `i ]
-[e :U 148 ]
-[e $ == -> _RB0 `i -> 1 `i 149  ]
-[e :U 150 ]
 "94
+[e $U 120  ]
+[e :U 121 ]
+[e ++ _sayi -> 1 `i ]
+[e :U 120 ]
+[e $ == -> _RB0 `i -> 1 `i 121  ]
+[e :U 122 ]
+"95
 [e = _temp _sayi ]
-"99
-[e $ ! && > _sayi -> 150 `i < _sayi -> 162 `i 151  ]
 "100
+[e $ ! && > _sayi -> 150 `i < _sayi -> 162 `i 123  ]
+"101
 {
-"102
-{
-[e = __dcnt | / -> - -> 250 `i -> 1 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 152  ]
-[e :U 153 ]
-[e $U 152  ]
-[e :U 152 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 153  ]
-[e :U 154 ]
-}
 "103
-{
-[e = __dcnt | / -> - -> 250 `i -> 1 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 155  ]
-[e :U 156 ]
-[e $U 155  ]
-[e :U 155 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 156  ]
-[e :U 157 ]
-}
-"105
-[e $ ! == -> _RB0 `i -> 0 `i 158  ]
+[e ( __delay (1 -> * -> - -> 250 `i -> 1 `i `d / -> -> 1000000 `l `d .4000000.0 `ul ]
+"104
+[e ( __delay (1 -> * -> - -> 250 `i -> 1 `i `d / -> -> 1000000 `l `d .4000000.0 `ul ]
 "106
-{
+[e $ ! == -> _RB0 `i -> 0 `i 124  ]
 "107
 {
-[e = __dcnt | / -> - -> 240 `i -> 1 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 159  ]
-[e :U 160 ]
-[e $U 159  ]
-[e :U 159 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 160  ]
-[e :U 161 ]
-}
 "108
-{
-[e = __dcnt | / -> - -> 230 `i -> 1 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 162  ]
-[e :U 163 ]
-[e $U 162  ]
-[e :U 162 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 163  ]
-[e :U 164 ]
-}
+[e ( __delay (1 -> * -> - -> 240 `i -> 1 `i `d / -> -> 1000000 `l `d .4000000.0 `ul ]
 "109
-[e = _RC5 _RB0 ]
+[e ( __delay (1 -> * -> - -> 230 `i -> 1 `i `d / -> -> 1000000 `l `d .4000000.0 `ul ]
 "110
+[e = _RC5 _RB0 ]
+"111
 [e = _RB7 -> -> 1 `i `b ]
-"113
+"114
 {
 [e = _kk -> 0 `i ]
-[e $ < _kk -> 8 `i 165  ]
-[e $U 166  ]
-"114
-[e :U 165 ]
-{
+[e $ < _kk -> 8 `i 125  ]
+[e $U 126  ]
 "115
+[e :U 125 ]
 {
-[e = __dcnt | / -> -> 250 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 168  ]
-[e :U 169 ]
-[e $U 168  ]
-[e :U 168 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 169  ]
-[e :U 170 ]
-}
 "116
-{
-[e = __dcnt | / -> -> 120 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 171  ]
-[e :U 172 ]
-[e $U 171  ]
-[e :U 171 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 172  ]
-[e :U 173 ]
-}
-"119
-[e = *U + &U _gelen_veri * -> -> _kk `ui `ux -> -> # *U &U _gelen_veri `ui `ux -> -> _RB0 `i `uc ]
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 1000000 `l `d .4000000.0 `ul ]
+"117
+[e ( __delay (1 -> * -> -> 120 `i `d / -> -> 1000000 `l `d .4000000.0 `ul ]
 "120
-[e = _RC5 _RB0 ]
+[e = *U + &U _gelen_veri * -> -> _kk `ui `ux -> -> # *U &U _gelen_veri `ui `ux -> -> _RB0 `i `uc ]
 "121
-{
-[e = __dcnt | / -> -> 250 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 174  ]
-[e :U 175 ]
-[e $U 174  ]
-[e :U 174 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 175  ]
-[e :U 176 ]
-}
-"122
-{
-[e = __dcnt | / -> -> 120 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 177  ]
-[e :U 178 ]
-[e $U 177  ]
-[e :U 177 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 178  ]
-[e :U 179 ]
-}
-"124
 [e = _RC5 _RB0 ]
+"122
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 1000000 `l `d .4000000.0 `ul ]
+"123
+[e ( __delay (1 -> * -> -> 120 `i `d / -> -> 1000000 `l `d .4000000.0 `ul ]
 "125
-{
-[e = __dcnt | / -> - -> 250 `i -> 1 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 180  ]
-[e :U 181 ]
-[e $U 180  ]
-[e :U 180 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 181  ]
-[e :U 182 ]
-}
+[e = _RC5 _RB0 ]
 "126
-{
-[e = __dcnt | / -> - -> 230 `i -> 1 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 183  ]
-[e :U 184 ]
-[e $U 183  ]
-[e :U 183 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 184  ]
-[e :U 185 ]
-}
+[e ( __delay (1 -> * -> - -> 250 `i -> 1 `i `d / -> -> 1000000 `l `d .4000000.0 `ul ]
 "127
-{
-[e = __dcnt | / -> - -> 220 `i -> 1 `i `l / * -> -> 12 `i `l -> 1000 `l * -> -> 4 `i `l -> 1000 `l -> -> 1 `i `l ]
-[e $U 186  ]
-[e :U 187 ]
-[e $U 186  ]
-[e :U 186 ]
-[e $ != =- __dcnt -> -> 1 `i `l -> -> 0 `i `l 187  ]
-[e :U 188 ]
+[e ( __delay (1 -> * -> - -> 230 `i -> 1 `i `d / -> -> 1000000 `l `d .4000000.0 `ul ]
+"128
+[e ( __delay (1 -> * -> - -> 220 `i -> 1 `i `d / -> -> 1000000 `l `d .4000000.0 `ul ]
+"130
 }
-"129
-}
-"113
+"114
 [e ++ _kk -> 1 `i ]
-[e $ < _kk -> 8 `i 165  ]
-[e :U 166 ]
-"129
+[e $ < _kk -> 8 `i 125  ]
+[e :U 126 ]
+"130
 }
-"134
+"135
 [e ( _kodu_coz ..  ]
-"140
+"141
 }
-[e :U 158 ]
-"149
+[e :U 124 ]
+"150
 }
-[e :U 151 ]
-"160
-[e :UE 147 ]
+[e :U 123 ]
+"161
+[e :UE 119 ]
 }
-"162
+"163
 [v _main `(v  1 ef ]
 {
 [e :U _main ]
 [f ]
-"163
-[e = _TRISB -> -> 1 `i `uc ]
 "164
+[e = _TRISB -> -> 1 `i `uc ]
+"165
 [e = _PORTB -> -> 0 `i `uc ]
-"166
-[e = _TRISC -> -> 0 `i `uc ]
 "167
+[e = _TRISC -> -> 0 `i `uc ]
+"168
 [e = _PORTC -> -> 0 `i `uc ]
-"172
-[e :U 191 ]
 "173
+[e :U 130 ]
+"174
 {
-"181
-[e $ ! == -> _RB0 `i -> 1 `i 193  ]
 "182
-{
+[e $ ! == -> _RB0 `i -> 1 `i 132  ]
 "183
-[e ( _coz ..  ]
+{
 "184
+[e ( _coz ..  ]
+"185
 }
-[e :U 193 ]
-"191
+[e :U 132 ]
+"192
 }
-[e :U 190 ]
-"172
-[e $U 191  ]
-[e :U 192 ]
-"194
-[e :UE 189 ]
+[e :U 129 ]
+"173
+[e $U 130  ]
+[e :U 131 ]
+"195
+[e :UE 128 ]
 }

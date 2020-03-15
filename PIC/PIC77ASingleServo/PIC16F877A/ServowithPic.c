@@ -1,6 +1,7 @@
 
 #include<htc.h>
-#include "c:\\tc\\delay.c"
+#define DelayMs __delay_ms
+#define DelayUs __delay_us
 int app , wait , times ,ind;
  void servo_dondur( unsigned char angle )
 {
@@ -22,7 +23,8 @@ DelayUs( 250 );
 
 }
 
-DelayUs( wait % 250 - 10 );
+for(int c=0; c < wait % 250 - 10; c++)
+DelayUs( 1);
 
 
 

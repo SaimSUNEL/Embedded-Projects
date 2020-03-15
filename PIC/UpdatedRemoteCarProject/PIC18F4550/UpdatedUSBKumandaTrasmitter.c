@@ -4,11 +4,10 @@
 #include <htc.h>
 
 // Local includes
-//#include "c:/tc/devdelay.c"
-#include "c:/tc/usb.h"
-#include "c:/tc/HardwareProfile.h"
-#include "c:/tc/usb_function_hid.h"
-#include "c:/tc/genericHID.h"
+#include "usb.h"
+#include "HardwareProfile.h"
+#include "usb_function_hid.h"
+#include "genericHID.h"
 
  //PIC 18F4550 fuse configuration:
 // Config word 1 (Oscillator configuration)

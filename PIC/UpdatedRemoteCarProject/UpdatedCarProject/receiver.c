@@ -8,7 +8,8 @@
  char gelen_veri[8];
 #include <htc.h>
 #define XTAL_FREQ 4MHZ
-#include "c:/tc/delay.c"
+#define DelayMs __delay_ms
+#define DelayUs __delay_us
 #define TRUE 1
 #define FALSE 0
 #define SAG 2
