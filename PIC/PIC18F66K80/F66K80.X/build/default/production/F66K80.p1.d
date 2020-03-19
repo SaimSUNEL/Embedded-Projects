@@ -1,6 +1,7 @@
  build/default/production/F66K80.d  \
  build/default/production/F66K80.p1:  \
  F66K80.c  \
+I2C.h  \
 PWM.h  \
 SDCARD.h  \
 SPI.h  \

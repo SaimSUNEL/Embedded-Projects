@@ -16,6 +16,7 @@ signed int saim = 0;
 #include "SDCARD.h"
 #include "PWM.h"
 #include "EEPROM.h"
+#include "I2C.h"
 /*
 __CONFIG(1, RETEN_OFF & INTOSCSEL_LOW & SOSCSEL_LOW & XINST_OFF & FOSC_INTIO2 & PLLCFG_OFF & FCMEN_OFF & IESO_ON);
 __CONFIG(2, PWRTEN_OFF & BOREN_OFF & BORV_3 & WDTEN_OFF & WDTPS_4);
@@ -87,7 +88,8 @@ __delay_ms(10);
 __delay_ms(10);
 UART2_init();
 ADC_init();
-SPI_init();
+I2C_initialize();
+//SPI_init();
 PWM2_initialize();
 __delay_ms(15);
 DHT11_get_data();
@@ -131,6 +133,13 @@ while(1)
 
     }
 
+    I2C_Start();
+   //I2C_data_send(0b11010000);
+   //I2C_data_send(0x1);
+
+   I2C_Stop();
+        //DS1307_date();
+    
 
     lcd_write_number(measured_value);
     wait(100);//1 sec

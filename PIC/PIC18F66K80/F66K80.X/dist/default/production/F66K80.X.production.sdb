@@ -3,7 +3,7 @@
 [d edition pro ]
 [d chip 18F66K80 ]
 [d frameptr 4065 ]
-"47 C:\Users\Saim\MPLABXProjects\F66K80.X\ADC.h
+"47 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\ADC.h
 [v _ADC_init ADC_init `(v  1 e 1 0 ]
 "88
 [v _ADC_read ADC_read `(i  1 e 2 0 ]
@@ -35,23 +35,31 @@
 [v ___flmul __flmul `(d  1 e 3 0 ]
 "15 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\Umul32.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
-"25 C:\Users\Saim\MPLABXProjects\F66K80.X\DHT11.h
+"25 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\DHT11.h
 [v _DHT11_get_data DHT11_get_data `(v  1 e 1 0 ]
-"17 C:\Users\Saim\MPLABXProjects\F66K80.X\EEPROM.h
+"17 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\EEPROM.h
 [v _EEPROM_read_byte EEPROM_read_byte `(uc  1 e 1 0 ]
 "28
 [v _EEPROM_write_byte EEPROM_write_byte `(v  1 e 1 0 ]
-"14 C:\Users\Saim\MPLABXProjects\F66K80.X\EUART.h
+"14 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\EUART.h
 [v _UART1_byte_send UART1_byte_send `(v  1 e 1 0 ]
 "31
 [v _UART1_init UART1_init `(v  1 e 1 0 ]
 "79
 [v _UART2_init UART2_init `(v  1 e 1 0 ]
-"29 C:\Users\Saim\MPLABXProjects\F66K80.X\F66K80.c
+"30 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\F66K80.c
 [v _wait wait `(v  1 e 1 0 ]
-"38
+"39
 [v _main main `(v  1 e 1 0 ]
-"15 C:\Users\Saim\MPLABXProjects\F66K80.X\PWM.h
+"149 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\I2C.h
+[v _I2C_initialize I2C_initialize `(v  1 e 1 0 ]
+"213
+[v _I2C_Start I2C_Start `(v  1 e 1 0 ]
+"249
+[v _I2C_data_send I2C_data_send `(v  1 e 1 0 ]
+"372
+[v _I2C_Stop I2C_Stop `(v  1 e 1 0 ]
+"15 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\PWM.h
 [v _PWM2_set_value PWM2_set_value `(v  1 e 1 0 ]
 "24
 [v _PWM2_initialize PWM2_initialize `(v  1 e 1 0 ]
@@ -67,9 +75,9 @@
 [v _PWM5_set_value PWM5_set_value `(v  1 e 1 0 ]
 "106
 [v _PWM5_initialize PWM5_initialize `(v  1 e 1 0 ]
-"30 C:\Users\Saim\MPLABXProjects\F66K80.X\SDCARD.h
+"30 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\SDCARD.h
 [v _SDCARD_send_command SDCARD_send_command `(uc  1 e 1 0 ]
-"21 C:\Users\Saim\MPLABXProjects\F66K80.X\ShiftLCD.h
+"21 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\ShiftLCD.h
 [v _load_shift_data_lcd load_shift_data_lcd `(v  1 e 1 0 ]
 "41
 [v _shift_reg_set_pin_lcd shift_reg_set_pin_lcd `(v  1 e 1 0 ]
@@ -87,10 +95,8 @@
 [v _lcd_yaz lcd_yaz `(v  1 e 1 0 ]
 "235
 [v _lcd_write_number lcd_write_number `(v  1 e 1 0 ]
-"15 C:\Users\Saim\MPLABXProjects\F66K80.X\SPI.h
+"15 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\SPI.h
 [v _SPI_write SPI_write `(uc  1 e 1 0 ]
-"27
-[v _SPI_init SPI_init `(v  1 e 1 0 ]
 "28566 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic18f66k80.h
 [v _CCPR5L CCPR5L `VEuc  1 e 1 @3912 ]
 "28688
@@ -424,11 +430,17 @@
 [v _ADRESL ADRESL `VEuc  1 e 1 @4035 ]
 "38711
 [v _ADRESH ADRESH `VEuc  1 e 1 @4036 ]
+"39135
+[v _SSPADD SSPADD `VEuc  1 e 1 @4040 ]
 "39204
 [v _SSPBUF SSPBUF `VEuc  1 e 1 @4041 ]
 "39293
 [v _PR2 PR2 `VEuc  1 e 1 @4043 ]
-"41378
+"41372
+"41372
+[v _ACKDT ACKDT `VEb  1 e 0 @32301 ]
+"41374
+[v _ACKEN ACKEN `VEb  1 e 0 @32300 ]
 "41378
 [v _ACQT0 ACQT0 `VEb  1 e 0 @32259 ]
 "41380
@@ -525,8 +537,12 @@
 [v _IRCF2 IRCF2 `VEb  1 e 0 @32414 ]
 "44002
 [v _MFIOSEL MFIOSEL `VEb  1 e 0 @32400 ]
+"44156
+[v _PEN PEN `VEb  1 e 0 @32298 ]
 "44230
 [v _RC1 RC1 `VEb  1 e 0 @31761 ]
+"44268
+[v _RCEN RCEN `VEb  1 e 0 @32299 ]
 "44284
 [v _RD RD `VEb  1 e 0 @31736 ]
 "44286
@@ -543,6 +559,8 @@
 [v _SCS0 SCS0 `VEb  1 e 0 @32408 ]
 "46018
 [v _SCS1 SCS1 `VEb  1 e 0 @32409 ]
+"46036
+[v _SEN SEN `VEb  1 e 0 @32296 ]
 "46056
 [v _SLRF SLRF `VEb  1 e 0 @31877 ]
 "46060
@@ -615,7 +633,7 @@
 [v _WR WR `VEb  1 e 0 @31737 ]
 "47236
 [v _WREN WREN `VEb  1 e 0 @31738 ]
-"15 C:\Users\Saim\MPLABXProjects\F66K80.X\DHT11.h
+"15 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\DHT11.h
 [v _sicaklik sicaklik `uc  1 e 1 0 ]
 [v _nem nem `uc  1 e 1 0 ]
 "17
@@ -627,17 +645,19 @@
 [v _tempo tempo `uc  1 e 1 0 ]
 "21
 [v _j j `uc  1 e 1 0 ]
-"35 C:\Users\Saim\MPLABXProjects\F66K80.X\F66K80.c
+"36 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\F66K80.c
 [v _measured_value measured_value `i  1 e 2 0 ]
-"37
+"38
 [v _buff buff `[512]uc  1 e 512 0 ]
-"24 C:\Users\Saim\MPLABXProjects\F66K80.X\SDCARD.h
+"247 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\I2C.h
+[v _unnecessary unnecessary `uc  1 e 1 0 ]
+"24 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\SDCARD.h
 [v _cevap cevap `uc  1 e 1 0 ]
 "26
 [v _error error `uc  1 e 1 0 ]
 "140
 [v _nisa nisa `uc  1 e 1 0 ]
-"19 C:\Users\Saim\MPLABXProjects\F66K80.X\ShiftLCD.h
+"19 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\ShiftLCD.h
 [v _current_value_lcd current_value_lcd `uc  1 e 1 0 ]
 "59
 [v _CURRENT_MESSAGE CURRENT_MESSAGE `uc  1 e 1 0 ]
@@ -650,32 +670,32 @@
 [v __temp_ _temp_ `uc  1 e 1 0 ]
 "234
 [v _number_array number_array `[5]uc  1 e 5 0 ]
-"38 C:\Users\Saim\MPLABXProjects\F66K80.X\F66K80.c
+"39 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\F66K80.c
 [v _main main `(v  1 e 1 0 ]
 {
-"99
+"101
 [v main@j j `i  1 a 2 32 ]
-"72
+"73
 [v main@k k `uc  1 a 1 31 ]
-"112
-[v main@k_920 k `i  1 a 2 29 ]
-"113
+"114
+[v main@k_935 k `i  1 a 2 29 ]
+"115
 [v main@add_value add_value `i  1 a 2 27 ]
-"141
+"150
 } 0
-"29
+"30
 [v _wait wait `(v  1 e 1 0 ]
 {
 [v wait@val val `uc  1 a 1 wreg ]
-"31
+"32
 [v wait@k k `uc  1 a 1 2 ]
-"29
+"30
 [v wait@val val `uc  1 a 1 wreg ]
-"31
+"32
 [v wait@val val `uc  1 a 1 1 ]
-"33
+"34
 } 0
-"235 C:\Users\Saim\MPLABXProjects\F66K80.X\ShiftLCD.h
+"235 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\ShiftLCD.h
 [v _lcd_write_number lcd_write_number `(v  1 e 1 0 ]
 {
 [v lcd_write_number@number number `i  1 p 2 24 ]
@@ -742,7 +762,7 @@
 [v ___lwdiv@divisor divisor `ui  1 p 2 2 ]
 "31
 } 0
-"79 C:\Users\Saim\MPLABXProjects\F66K80.X\EUART.h
+"79 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\EUART.h
 [v _UART2_init UART2_init `(v  1 e 1 0 ]
 {
 "108
@@ -760,12 +780,7 @@
 [v UART1_byte_send@data data `uc  1 a 1 0 ]
 "20
 } 0
-"27 C:\Users\Saim\MPLABXProjects\F66K80.X\SPI.h
-[v _SPI_init SPI_init `(v  1 e 1 0 ]
-{
-"40
-} 0
-"96 C:\Users\Saim\MPLABXProjects\F66K80.X\PWM.h
+"96 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\PWM.h
 [v _PWM5_set_value PWM5_set_value `(v  1 e 1 0 ]
 {
 [v PWM5_set_value@value value `i  1 p 2 0 ]
@@ -809,7 +824,7 @@
 [v PWM2_set_value@value value `i  1 p 2 0 ]
 "23
 } 0
-"184 C:\Users\Saim\MPLABXProjects\F66K80.X\ShiftLCD.h
+"184 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\ShiftLCD.h
 [v _LCD_init LCD_init `(v  1 e 1 0 ]
 {
 "208
@@ -861,7 +876,31 @@
 [v load_shift_data_lcd@data data `uc  1 a 1 2 ]
 "40
 } 0
-"28 C:\Users\Saim\MPLABXProjects\F66K80.X\EEPROM.h
+"149 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\I2C.h
+[v _I2C_initialize I2C_initialize `(v  1 e 1 0 ]
+{
+"207
+} 0
+"249
+[v _I2C_data_send I2C_data_send `(v  1 e 1 0 ]
+{
+[v I2C_data_send@data data `uc  1 a 1 wreg ]
+[v I2C_data_send@data data `uc  1 a 1 wreg ]
+"297
+[v I2C_data_send@data data `uc  1 a 1 0 ]
+"319
+} 0
+"372
+[v _I2C_Stop I2C_Stop `(v  1 e 1 0 ]
+{
+"379
+} 0
+"213
+[v _I2C_Start I2C_Start `(v  1 e 1 0 ]
+{
+"221
+} 0
+"28 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\EEPROM.h
 [v _EEPROM_write_byte EEPROM_write_byte `(v  1 e 1 0 ]
 {
 [v EEPROM_write_byte@address address `i  1 p 2 0 ]
@@ -874,7 +913,7 @@
 [v EEPROM_read_byte@address address `i  1 p 2 0 ]
 "27
 } 0
-"25 C:\Users\Saim\MPLABXProjects\F66K80.X\DHT11.h
+"25 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\DHT11.h
 [v _DHT11_get_data DHT11_get_data `(v  1 e 1 0 ]
 {
 "42
@@ -885,7 +924,7 @@
 [v DHT11_get_data@a a `uc  1 a 1 2 ]
 "68
 } 0
-"88 C:\Users\Saim\MPLABXProjects\F66K80.X\ADC.h
+"88 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC18F66K80\F66K80.X\ADC.h
 [v _ADC_read ADC_read `(i  1 e 2 0 ]
 {
 [v ADC_read@channel_number channel_number `uc  1 a 1 wreg ]

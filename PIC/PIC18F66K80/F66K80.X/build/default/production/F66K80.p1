@@ -408,6 +408,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _EECON2 `Vuc ~T0 @X0 0 e@3966 ]
 "47232
 [v _WR `Vb ~T0 @X0 0 e@31737 ]
+"39135
+[v _SSPADD `Vuc ~T0 @X0 0 e@4040 ]
+"46036
+[v _SEN `Vb ~T0 @X0 0 e@32296 ]
+"44268
+[v _RCEN `Vb ~T0 @X0 0 e@32299 ]
+"41372
+[v _ACKDT `Vb ~T0 @X0 0 e@32301 ]
+"41374
+[v _ACKEN `Vb ~T0 @X0 0 e@32300 ]
+"44156
+[v _PEN `Vb ~T0 @X0 0 e@32298 ]
 [p mainexit ]
 "46018
 [v _SCS1 `Vb ~T0 @X0 0 e@32409 ]
@@ -19777,45 +19789,282 @@ Version 3.2 HI-TECH Software Intermediate Code
 "49
 [e :UE 2823 ]
 }
-"29 F66K80.c
-[v _wait `(v ~T0 @X0 1 ef1`uc ]
-"30
+"149 I2C.h
+[v _I2C_initialize `(v ~T0 @X0 1 ef ]
+"150
 {
-[; ;F66K80.c: 29: void wait(byte val)
-[; ;F66K80.c: 30: {
-[e :U _wait ]
-"29
-[v _val `uc ~T0 @X0 1 r1 ]
-"30
+[; ;I2C.h: 149: void I2C_initialize()
+[; ;I2C.h: 150: {
+[e :U _I2C_initialize ]
 [f ]
-[; ;F66K80.c: 31: for(byte k = 0; k < val; k++)_delay((unsigned long)((10)*(16000000UL/4000.0)));
+[; ;I2C.h: 159: TRISC3 = 1;
+"159
+[e = _TRISC3 -> -> 1 `i `b ]
+[; ;I2C.h: 160: TRISC4 = 1;
+"160
+[e = _TRISC4 -> -> 1 `i `b ]
+[; ;I2C.h: 162: SSPM3 = 1;
+"162
+[e = _SSPM3 -> -> 1 `i `b ]
+[; ;I2C.h: 163: SSPM2 = 0;
+"163
+[e = _SSPM2 -> -> 0 `i `b ]
+[; ;I2C.h: 164: SSPM1 = 0;
+"164
+[e = _SSPM1 -> -> 0 `i `b ]
+[; ;I2C.h: 165: SSPM0 = 0;
+"165
+[e = _SSPM0 -> -> 0 `i `b ]
+[; ;I2C.h: 197: SSPADD = 39;
+"197
+[e = _SSPADD -> -> 39 `i `uc ]
+[; ;I2C.h: 203: SSPEN = 1 ;
+"203
+[e = _SSPEN -> -> 1 `i `b ]
+[; ;I2C.h: 204: SSPIF = 0;
+"204
+[e = _SSPIF -> -> 0 `i `b ]
+[; ;I2C.h: 205: _delay((unsigned long)((5)*(16000000UL/4000.0)));
+"205
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 16000000 `ul `d .4000.0 `ul ]
+[; ;I2C.h: 207: }
+"207
+[e :UE 2827 ]
+}
+"213
+[v _I2C_Start `(v ~T0 @X0 1 ef ]
+"214
+{
+[; ;I2C.h: 213: void I2C_Start()
+[; ;I2C.h: 214: {
+[e :U _I2C_Start ]
+[f ]
+[; ;I2C.h: 216: SEN = 1;
+"216
+[e = _SEN -> -> 1 `i `b ]
+[; ;I2C.h: 219: while ( SEN);
+"219
+[e $U 2829  ]
+[e :U 2830 ]
+[e :U 2829 ]
+[e $ _SEN 2830  ]
+[e :U 2831 ]
+[; ;I2C.h: 220: SSPIF = 0;
+"220
+[e = _SSPIF -> -> 0 `i `b ]
+[; ;I2C.h: 221: }
+"221
+[e :UE 2828 ]
+}
+"234
+[v _I2C_data_receive `(uc ~T0 @X0 1 ef ]
+"235
+{
+[; ;I2C.h: 234: unsigned char I2C_data_receive()
+[; ;I2C.h: 235: {
+[e :U _I2C_data_receive ]
+[f ]
+[; ;I2C.h: 236: RCEN = 1;
+"236
+[e = _RCEN -> -> 1 `i `b ]
+[; ;I2C.h: 238: while(BF == 0 );
+"238
+[e $U 2833  ]
+[e :U 2834 ]
+[e :U 2833 ]
+[e $ == -> _BF `i -> 0 `i 2834  ]
+[e :U 2835 ]
+[; ;I2C.h: 239: while(SSPIF==0);
+"239
+[e $U 2836  ]
+[e :U 2837 ]
+[e :U 2836 ]
+[e $ == -> _SSPIF `i -> 0 `i 2837  ]
+[e :U 2838 ]
+[; ;I2C.h: 240: SSPIF = 0;
+"240
+[e = _SSPIF -> -> 0 `i `b ]
+[; ;I2C.h: 241: return SSPBUF;
+"241
+[e ) _SSPBUF ]
+[e $UE 2832  ]
+[; ;I2C.h: 243: }
+"243
+[e :UE 2832 ]
+}
+"247
+[v _unnecessary `uc ~T0 @X0 1 e ]
+[i _unnecessary
+-> -> 0 `i `uc
+]
+[; ;I2C.h: 247: byte unnecessary = 0;
+"249
+[v _I2C_data_send `(v ~T0 @X0 1 ef1`uc ]
+"250
+{
+[; ;I2C.h: 249: void I2C_data_send(unsigned char data)
+[; ;I2C.h: 250: {
+[e :U _I2C_data_send ]
+"249
+[v _data `uc ~T0 @X0 1 r1 ]
+"250
+[f ]
+[; ;I2C.h: 297: SSPIF = 0;
+"297
+[e = _SSPIF -> -> 0 `i `b ]
+[; ;I2C.h: 300: SSPBUF = data ;
+"300
+[e = _SSPBUF _data ]
+[; ;I2C.h: 301: while (BF);
+"301
+[e $U 2840  ]
+[e :U 2841 ]
+[e :U 2840 ]
+[e $ _BF 2841  ]
+[e :U 2842 ]
+[; ;I2C.h: 316: while(SSPIF ==0){unnecessary++; if(unnecessary == 200)break;};
+"316
+[e $U 2843  ]
+[e :U 2844 ]
+{
+[e ++ _unnecessary -> -> 1 `i `uc ]
+[e $ ! == -> _unnecessary `i -> 200 `i 2846  ]
+[e $U 2845  ]
+[e :U 2846 ]
+}
+[e :U 2843 ]
+[e $ == -> _SSPIF `i -> 0 `i 2844  ]
+[e :U 2845 ]
+[; ;I2C.h: 317: SSPIF = 0;
+"317
+[e = _SSPIF -> -> 0 `i `b ]
+[; ;I2C.h: 318: unnecessary = 0;
+"318
+[e = _unnecessary -> -> 0 `i `uc ]
+[; ;I2C.h: 319: }
+"319
+[e :UE 2839 ]
+}
+"329
+[v _I2C_SendACK `(v ~T0 @X0 1 ef ]
+"330
+{
+[; ;I2C.h: 329: void I2C_SendACK()
+[; ;I2C.h: 330: {
+[e :U _I2C_SendACK ]
+[f ]
+[; ;I2C.h: 336: ACKDT = 0 ;
+"336
+[e = _ACKDT -> -> 0 `i `b ]
+[; ;I2C.h: 337: ACKEN = 1;
+"337
+[e = _ACKEN -> -> 1 `i `b ]
+[; ;I2C.h: 338: while (ACKEN);
+"338
+[e $U 2848  ]
+[e :U 2849 ]
+[e :U 2848 ]
+[e $ _ACKEN 2849  ]
+[e :U 2850 ]
+[; ;I2C.h: 339: SSPIF = 0;
+"339
+[e = _SSPIF -> -> 0 `i `b ]
+[; ;I2C.h: 341: }
+"341
+[e :UE 2847 ]
+}
+"346
+[v _I2C_SendNACK `(v ~T0 @X0 1 ef ]
+"347
+{
+[; ;I2C.h: 346: void I2C_SendNACK()
+[; ;I2C.h: 347: {
+[e :U _I2C_SendNACK ]
+[f ]
+[; ;I2C.h: 348: ACKDT = 1 ;
+"348
+[e = _ACKDT -> -> 1 `i `b ]
+[; ;I2C.h: 349: ACKEN = 1;
+"349
+[e = _ACKEN -> -> 1 `i `b ]
+[; ;I2C.h: 350: while (ACKEN);
+"350
+[e $U 2852  ]
+[e :U 2853 ]
+[e :U 2852 ]
+[e $ _ACKEN 2853  ]
+[e :U 2854 ]
+[; ;I2C.h: 351: SSPIF = 0;
+"351
+[e = _SSPIF -> -> 0 `i `b ]
+[; ;I2C.h: 353: }
+"353
+[e :UE 2851 ]
+}
+"372
+[v _I2C_Stop `(v ~T0 @X0 1 ef ]
+"373
+{
+[; ;I2C.h: 372: void I2C_Stop()
+[; ;I2C.h: 373: {
+[e :U _I2C_Stop ]
+[f ]
+[; ;I2C.h: 374: PEN = 1;
+"374
+[e = _PEN -> -> 1 `i `b ]
+[; ;I2C.h: 375: while(PEN);
+"375
+[e $U 2856  ]
+[e :U 2857 ]
+[e :U 2856 ]
+[e $ _PEN 2857  ]
+[e :U 2858 ]
+[; ;I2C.h: 377: SSPIF = 0;
+"377
+[e = _SSPIF -> -> 0 `i `b ]
+[; ;I2C.h: 379: }
+"379
+[e :UE 2855 ]
+}
+"30 F66K80.c
+[v _wait `(v ~T0 @X0 1 ef1`uc ]
 "31
+{
+[; ;F66K80.c: 30: void wait(byte val)
+[; ;F66K80.c: 31: {
+[e :U _wait ]
+"30
+[v _val `uc ~T0 @X0 1 r1 ]
+"31
+[f ]
+[; ;F66K80.c: 32: for(byte k = 0; k < val; k++)_delay((unsigned long)((10)*(16000000UL/4000.0)));
+"32
 {
 [v _k `uc ~T0 @X0 1 a ]
 [e = _k -> -> 0 `i `uc ]
-[e $U 2831  ]
-[e :U 2828 ]
+[e $U 2863  ]
+[e :U 2860 ]
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `ul `d .4000.0 `ul ]
 [e ++ _k -> -> 1 `i `uc ]
-[e :U 2831 ]
-[e $ < -> _k `i -> _val `i 2828  ]
-[e :U 2829 ]
+[e :U 2863 ]
+[e $ < -> _k `i -> _val `i 2860  ]
+[e :U 2861 ]
 }
-[; ;F66K80.c: 33: }
-"33
-[e :UE 2827 ]
-}
+[; ;F66K80.c: 34: }
 "34
+[e :UE 2859 ]
+}
+"35
 [v _received `uc ~T0 @X0 1 e ]
 [v _received2 `uc ~T0 @X0 1 e ]
-[; ;F66K80.c: 34: char received, received2;
-"35
-[v _measured_value `i ~T0 @X0 1 e ]
-[; ;F66K80.c: 35: int measured_value;
+[; ;F66K80.c: 35: char received, received2;
 "36
-[v _status `uc ~T0 @X0 1 e ]
-[; ;F66K80.c: 36: byte status;
+[v _measured_value `i ~T0 @X0 1 e ]
+[; ;F66K80.c: 36: int measured_value;
 "37
+[v _status `uc ~T0 @X0 1 e ]
+[; ;F66K80.c: 37: byte status;
+"38
 [v _buff `uc ~T0 @X0 -> 512 `i e ]
 [i _buff
 :U ..
@@ -19830,279 +20079,291 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 107 `ui `uc
 ..
 ]
-[; ;F66K80.c: 37: byte buff[512] = {'D', 'e', 'n', 'e', 'm', 'e', 'l', 'i', 'k'};
-"38
-[v _main `(v ~T0 @X0 1 ef ]
+[; ;F66K80.c: 38: byte buff[512] = {'D', 'e', 'n', 'e', 'm', 'e', 'l', 'i', 'k'};
 "39
+[v _main `(v ~T0 @X0 1 ef ]
+"40
 {
-[; ;F66K80.c: 38: void main()
-[; ;F66K80.c: 39: {
+[; ;F66K80.c: 39: void main()
+[; ;F66K80.c: 40: {
 [e :U _main ]
 [f ]
-[; ;F66K80.c: 41: SCS1 = 1;
-"41
-[e = _SCS1 -> -> 1 `i `b ]
-[; ;F66K80.c: 42: SCS0 = 0;
+[; ;F66K80.c: 42: SCS1 = 1;
 "42
-[e = _SCS0 -> -> 0 `i `b ]
-[; ;F66K80.c: 43: INTSRC = 1;
+[e = _SCS1 -> -> 1 `i `b ]
+[; ;F66K80.c: 43: SCS0 = 0;
 "43
-[e = _INTSRC -> -> 1 `i `b ]
-[; ;F66K80.c: 44: MFIOSEL = 0;
+[e = _SCS0 -> -> 0 `i `b ]
+[; ;F66K80.c: 44: INTSRC = 1;
 "44
-[e = _MFIOSEL -> -> 0 `i `b ]
-[; ;F66K80.c: 45: _delay((unsigned long)((5)*(16000000UL/4000.0)));
+[e = _INTSRC -> -> 1 `i `b ]
+[; ;F66K80.c: 45: MFIOSEL = 0;
 "45
+[e = _MFIOSEL -> -> 0 `i `b ]
+[; ;F66K80.c: 46: _delay((unsigned long)((5)*(16000000UL/4000.0)));
+"46
 [e ( __delay (1 -> * -> -> 5 `i `d / -> -> 16000000 `ul `d .4000.0 `ul ]
-[; ;F66K80.c: 50: IRCF2 = 1;
-"50
-[e = _IRCF2 -> -> 1 `i `b ]
-[; ;F66K80.c: 51: IRCF1 = 1;
+[; ;F66K80.c: 51: IRCF2 = 1;
 "51
-[e = _IRCF1 -> -> 1 `i `b ]
-[; ;F66K80.c: 52: IRCF0 = 1;
+[e = _IRCF2 -> -> 1 `i `b ]
+[; ;F66K80.c: 52: IRCF1 = 1;
 "52
-[e = _IRCF0 -> -> 1 `i `b ]
-[; ;F66K80.c: 53: _delay((unsigned long)((10)*(16000000UL/4000.0)));
+[e = _IRCF1 -> -> 1 `i `b ]
+[; ;F66K80.c: 53: IRCF0 = 1;
 "53
+[e = _IRCF0 -> -> 1 `i `b ]
+[; ;F66K80.c: 54: _delay((unsigned long)((10)*(16000000UL/4000.0)));
+"54
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `ul `d .4000.0 `ul ]
-[; ;F66K80.c: 55: _delay((unsigned long)((10)*(16000000UL/4000.0)));
-"55
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `ul `d .4000.0 `ul ]
-[; ;F66K80.c: 56: PWM2_initialize();
+[; ;F66K80.c: 56: _delay((unsigned long)((10)*(16000000UL/4000.0)));
 "56
-[e ( _PWM2_initialize ..  ]
-[; ;F66K80.c: 57: PWM3_initialize();
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `ul `d .4000.0 `ul ]
+[; ;F66K80.c: 57: PWM2_initialize();
 "57
-[e ( _PWM3_initialize ..  ]
-[; ;F66K80.c: 58: PWM4_initialize();
+[e ( _PWM2_initialize ..  ]
+[; ;F66K80.c: 58: PWM3_initialize();
 "58
-[e ( _PWM4_initialize ..  ]
-[; ;F66K80.c: 59: PWM5_initialize();
+[e ( _PWM3_initialize ..  ]
+[; ;F66K80.c: 59: PWM4_initialize();
 "59
-[e ( _PWM5_initialize ..  ]
-[; ;F66K80.c: 60: PWM2_set_value(100);
+[e ( _PWM4_initialize ..  ]
+[; ;F66K80.c: 60: PWM5_initialize();
 "60
-[e ( _PWM2_set_value (1 -> 100 `i ]
-[; ;F66K80.c: 61: PWM3_set_value(300);
+[e ( _PWM5_initialize ..  ]
+[; ;F66K80.c: 61: PWM2_set_value(100);
 "61
-[e ( _PWM3_set_value (1 -> 300 `i ]
-[; ;F66K80.c: 62: PWM4_set_value(500);
+[e ( _PWM2_set_value (1 -> 100 `i ]
+[; ;F66K80.c: 62: PWM3_set_value(300);
 "62
-[e ( _PWM4_set_value (1 -> 500 `i ]
-[; ;F66K80.c: 63: PWM5_set_value(700);
+[e ( _PWM3_set_value (1 -> 300 `i ]
+[; ;F66K80.c: 63: PWM4_set_value(500);
 "63
-[e ( _PWM5_set_value (1 -> 700 `i ]
-[; ;F66K80.c: 64: EEPROM_write_byte(10, 'J');
+[e ( _PWM4_set_value (1 -> 500 `i ]
+[; ;F66K80.c: 64: PWM5_set_value(700);
 "64
-[e ( _EEPROM_write_byte (2 , -> 10 `i -> -> 74 `ui `uc ]
-[; ;F66K80.c: 65: _delay((unsigned long)((5)*(16000000UL/4000.0)));
+[e ( _PWM5_set_value (1 -> 700 `i ]
+[; ;F66K80.c: 65: EEPROM_write_byte(10, 'J');
 "65
-[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 16000000 `ul `d .4000.0 `ul ]
-[; ;F66K80.c: 66: TRISF3 = 0;
+[e ( _EEPROM_write_byte (2 , -> 10 `i -> -> 74 `ui `uc ]
+[; ;F66K80.c: 66: _delay((unsigned long)((5)*(16000000UL/4000.0)));
 "66
-[e = _TRISF3 -> -> 0 `i `b ]
-[; ;F66K80.c: 67: TRISF4=0;
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 16000000 `ul `d .4000.0 `ul ]
+[; ;F66K80.c: 67: TRISF3 = 0;
 "67
-[e = _TRISF4 -> -> 0 `i `b ]
-[; ;F66K80.c: 68: TRISF5=0;
+[e = _TRISF3 -> -> 0 `i `b ]
+[; ;F66K80.c: 68: TRISF4=0;
 "68
-[e = _TRISF5 -> -> 0 `i `b ]
-[; ;F66K80.c: 69: LCD_init();
+[e = _TRISF4 -> -> 0 `i `b ]
+[; ;F66K80.c: 69: TRISF5=0;
 "69
-[e ( _LCD_init ..  ]
-[; ;F66K80.c: 70: lcd_write("Temp : ");
+[e = _TRISF5 -> -> 0 `i `b ]
+[; ;F66K80.c: 70: LCD_init();
 "70
-[e ( _lcd_write (1 :s 6C ]
-[; ;F66K80.c: 71: UART1_init();
+[e ( _LCD_init ..  ]
+[; ;F66K80.c: 71: lcd_write("Temp : ");
 "71
-[e ( _UART1_init ..  ]
-[; ;F66K80.c: 72: for(char k =0; k < 4; k++) UART1_byte_send(EEPROM_read_byte(10+k));
+[e ( _lcd_write (1 :s 6C ]
+[; ;F66K80.c: 72: UART1_init();
 "72
+[e ( _UART1_init ..  ]
+[; ;F66K80.c: 73: for(char k =0; k < 4; k++) UART1_byte_send(EEPROM_read_byte(10+k));
+"73
 {
 [v _k `uc ~T0 @X0 1 a ]
 [e = _k -> -> 0 `i `uc ]
-[e $ < -> _k `i -> 4 `i 2833  ]
-[e $U 2834  ]
-[e :U 2833 ]
+[e $ < -> _k `i -> 4 `i 2865  ]
+[e $U 2866  ]
+[e :U 2865 ]
 [e ( _UART1_byte_send (1 ( _EEPROM_read_byte (1 + -> 10 `i -> _k `i ]
 [e ++ _k -> -> 1 `i `uc ]
-[e $ < -> _k `i -> 4 `i 2833  ]
-[e :U 2834 ]
+[e $ < -> _k `i -> 4 `i 2865  ]
+[e :U 2866 ]
 }
-[; ;F66K80.c: 73: TRISB6 = 0;
-"73
-[e = _TRISB6 -> -> 0 `i `b ]
-[; ;F66K80.c: 74: TRISB5 = 0;
+[; ;F66K80.c: 74: TRISB6 = 0;
 "74
-[e = _TRISB5 -> -> 0 `i `b ]
-[; ;F66K80.c: 75: PORTD = 0;
+[e = _TRISB6 -> -> 0 `i `b ]
+[; ;F66K80.c: 75: TRISB5 = 0;
 "75
-[e = _PORTD -> -> 0 `i `uc ]
-[; ;F66K80.c: 76: TRISD = 0x0;
+[e = _TRISB5 -> -> 0 `i `b ]
+[; ;F66K80.c: 76: PORTD = 0;
 "76
-[e = _TRISD -> -> 0 `i `uc ]
-[; ;F66K80.c: 77: RD0 = 0;
+[e = _PORTD -> -> 0 `i `uc ]
+[; ;F66K80.c: 77: TRISD = 0x0;
 "77
-[e = _RD0 -> -> 0 `i `b ]
-[; ;F66K80.c: 78: PORTE = 0;
+[e = _TRISD -> -> 0 `i `uc ]
+[; ;F66K80.c: 78: RD0 = 0;
 "78
-[e = _PORTE -> -> 0 `i `uc ]
-[; ;F66K80.c: 79: PORTF = 0;
+[e = _RD0 -> -> 0 `i `b ]
+[; ;F66K80.c: 79: PORTE = 0;
 "79
-[e = _PORTF -> -> 0 `i `uc ]
-[; ;F66K80.c: 80: TRISF1 = 1;
+[e = _PORTE -> -> 0 `i `uc ]
+[; ;F66K80.c: 80: PORTF = 0;
 "80
-[e = _TRISF1 -> -> 1 `i `b ]
-[; ;F66K80.c: 81: TRISE = 0;
+[e = _PORTF -> -> 0 `i `uc ]
+[; ;F66K80.c: 81: TRISF1 = 1;
 "81
-[e = _TRISE -> -> 0 `i `uc ]
-[; ;F66K80.c: 82: TRISD0 = 1;
+[e = _TRISF1 -> -> 1 `i `b ]
+[; ;F66K80.c: 82: TRISE = 0;
 "82
-[e = _TRISD0 -> -> 1 `i `b ]
-[; ;F66K80.c: 83: SLRF = 0;
+[e = _TRISE -> -> 0 `i `uc ]
+[; ;F66K80.c: 83: TRISD0 = 1;
 "83
-[e = _SLRF -> -> 0 `i `b ]
-[; ;F66K80.c: 84: ANCON0 =0; ANCON1 = 0;
+[e = _TRISD0 -> -> 1 `i `b ]
+[; ;F66K80.c: 84: SLRF = 0;
 "84
+[e = _SLRF -> -> 0 `i `b ]
+[; ;F66K80.c: 85: ANCON0 =0; ANCON1 = 0;
+"85
 [e = _ANCON0 -> -> 0 `i `uc ]
 [e = _ANCON1 -> -> 0 `i `uc ]
-[; ;F66K80.c: 86: _delay((unsigned long)((10)*(16000000UL/4000.0)));
-"86
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `ul `d .4000.0 `ul ]
 [; ;F66K80.c: 87: _delay((unsigned long)((10)*(16000000UL/4000.0)));
 "87
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `ul `d .4000.0 `ul ]
-[; ;F66K80.c: 88: UART2_init();
+[; ;F66K80.c: 88: _delay((unsigned long)((10)*(16000000UL/4000.0)));
 "88
-[e ( _UART2_init ..  ]
-[; ;F66K80.c: 89: ADC_init();
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `ul `d .4000.0 `ul ]
+[; ;F66K80.c: 89: UART2_init();
 "89
-[e ( _ADC_init ..  ]
-[; ;F66K80.c: 90: SPI_init();
+[e ( _UART2_init ..  ]
+[; ;F66K80.c: 90: ADC_init();
 "90
-[e ( _SPI_init ..  ]
-[; ;F66K80.c: 91: PWM2_initialize();
+[e ( _ADC_init ..  ]
+[; ;F66K80.c: 91: I2C_initialize();
 "91
-[e ( _PWM2_initialize ..  ]
-[; ;F66K80.c: 92: _delay((unsigned long)((15)*(16000000UL/4000.0)));
-"92
-[e ( __delay (1 -> * -> -> 15 `i `d / -> -> 16000000 `ul `d .4000.0 `ul ]
-[; ;F66K80.c: 93: DHT11_get_data();
+[e ( _I2C_initialize ..  ]
+[; ;F66K80.c: 93: PWM2_initialize();
 "93
-[e ( _DHT11_get_data ..  ]
-[; ;F66K80.c: 94: PORTD = sicaklik;
+[e ( _PWM2_initialize ..  ]
+[; ;F66K80.c: 94: _delay((unsigned long)((15)*(16000000UL/4000.0)));
 "94
-[e = _PORTD _sicaklik ]
-[; ;F66K80.c: 96: TRISC1 = 0;
+[e ( __delay (1 -> * -> -> 15 `i `d / -> -> 16000000 `ul `d .4000.0 `ul ]
+[; ;F66K80.c: 95: DHT11_get_data();
+"95
+[e ( _DHT11_get_data ..  ]
+[; ;F66K80.c: 96: PORTD = sicaklik;
 "96
-[e = _TRISC1 -> -> 0 `i `b ]
-[; ;F66K80.c: 98: wait(25);
+[e = _PORTD _sicaklik ]
+[; ;F66K80.c: 98: TRISC1 = 0;
 "98
+[e = _TRISC1 -> -> 0 `i `b ]
+[; ;F66K80.c: 100: wait(25);
+"100
 [e ( _wait (1 -> -> 25 `i `uc ]
-[; ;F66K80.c: 99: for(int j = 0; j < 512; j++) buff[j] = j;
-"99
+[; ;F66K80.c: 101: for(int j = 0; j < 512; j++) buff[j] = j;
+"101
 {
 [v _j `i ~T0 @X0 1 a ]
 [e = _j -> 0 `i ]
-[e $ < _j -> 512 `i 2836  ]
-[e $U 2837  ]
-[e :U 2836 ]
+[e $ < _j -> 512 `i 2868  ]
+[e $U 2869  ]
+[e :U 2868 ]
 [e = *U + &U _buff * -> -> _j `ui `ux -> -> # *U &U _buff `ui `ux -> _j `uc ]
 [e ++ _j -> 1 `i ]
-[e $ < _j -> 512 `i 2836  ]
-[e :U 2837 ]
+[e $ < _j -> 512 `i 2868  ]
+[e :U 2869 ]
 }
-[; ;F66K80.c: 101: wait(100);
-"101
+[; ;F66K80.c: 103: wait(100);
+"103
 [e ( _wait (1 -> -> 100 `i `uc ]
-[; ;F66K80.c: 104: EEPROM_write_byte(10, 'S');
-"104
-[e ( _EEPROM_write_byte (2 , -> 10 `i -> -> 83 `ui `uc ]
-[; ;F66K80.c: 105: _delay((unsigned long)((5)*(16000000UL/4000.0)));
-"105
-[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 16000000 `ul `d .4000.0 `ul ]
-[; ;F66K80.c: 106: EEPROM_write_byte(11, 'a');
+[; ;F66K80.c: 106: EEPROM_write_byte(10, 'S');
 "106
-[e ( _EEPROM_write_byte (2 , -> 11 `i -> -> 97 `ui `uc ]
+[e ( _EEPROM_write_byte (2 , -> 10 `i -> -> 83 `ui `uc ]
 [; ;F66K80.c: 107: _delay((unsigned long)((5)*(16000000UL/4000.0)));
 "107
 [e ( __delay (1 -> * -> -> 5 `i `d / -> -> 16000000 `ul `d .4000.0 `ul ]
-[; ;F66K80.c: 108: EEPROM_write_byte(12, 'i');
+[; ;F66K80.c: 108: EEPROM_write_byte(11, 'a');
 "108
-[e ( _EEPROM_write_byte (2 , -> 12 `i -> -> 105 `ui `uc ]
+[e ( _EEPROM_write_byte (2 , -> 11 `i -> -> 97 `ui `uc ]
 [; ;F66K80.c: 109: _delay((unsigned long)((5)*(16000000UL/4000.0)));
 "109
 [e ( __delay (1 -> * -> -> 5 `i `d / -> -> 16000000 `ul `d .4000.0 `ul ]
-[; ;F66K80.c: 110: EEPROM_write_byte(13, 'm');
+[; ;F66K80.c: 110: EEPROM_write_byte(12, 'i');
 "110
-[e ( _EEPROM_write_byte (2 , -> 13 `i -> -> 109 `ui `uc ]
+[e ( _EEPROM_write_byte (2 , -> 12 `i -> -> 105 `ui `uc ]
 [; ;F66K80.c: 111: _delay((unsigned long)((5)*(16000000UL/4000.0)));
 "111
 [e ( __delay (1 -> * -> -> 5 `i `d / -> -> 16000000 `ul `d .4000.0 `ul ]
+[; ;F66K80.c: 112: EEPROM_write_byte(13, 'm');
 "112
-[v _k `i ~T0 @X0 1 a ]
-[; ;F66K80.c: 112: int k = 0;
-[e = _k -> 0 `i ]
+[e ( _EEPROM_write_byte (2 , -> 13 `i -> -> 109 `ui `uc ]
+[; ;F66K80.c: 113: _delay((unsigned long)((5)*(16000000UL/4000.0)));
 "113
-[v _add_value `i ~T0 @X0 1 a ]
-[; ;F66K80.c: 113: int add_value = 20;
-[e = _add_value -> 20 `i ]
-[; ;F66K80.c: 114: while(1)
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 16000000 `ul `d .4000.0 `ul ]
 "114
-[e :U 2840 ]
-[; ;F66K80.c: 115: {
-"115
-{
-[; ;F66K80.c: 116: lcd_clear();
-"116
-[e ( _lcd_clear ..  ]
-[; ;F66K80.c: 123: if(k==0)
-"123
-[e $ ! == _k -> 0 `i 2842  ]
-[; ;F66K80.c: 124: {
-"124
-{
-[; ;F66K80.c: 125: measured_value = ADC_read(0);
-"125
-[e = _measured_value ( _ADC_read (1 -> -> 0 `i `uc ]
-[; ;F66K80.c: 126: k = 1;
-"126
-[e = _k -> 1 `i ]
-"127
-}
-[; ;F66K80.c: 127: }
-[e $U 2843  ]
-"128
-[e :U 2842 ]
-[; ;F66K80.c: 128: else {
-{
-[; ;F66K80.c: 129: k = 0;
-"129
+[v _k `i ~T0 @X0 1 a ]
+[; ;F66K80.c: 114: int k = 0;
 [e = _k -> 0 `i ]
-[; ;F66K80.c: 130: measured_value = ADC_read(1);
+"115
+[v _add_value `i ~T0 @X0 1 a ]
+[; ;F66K80.c: 115: int add_value = 20;
+[e = _add_value -> 20 `i ]
+[; ;F66K80.c: 116: while(1)
+"116
+[e :U 2872 ]
+[; ;F66K80.c: 117: {
+"117
+{
+[; ;F66K80.c: 118: lcd_clear();
+"118
+[e ( _lcd_clear ..  ]
+[; ;F66K80.c: 125: if(k==0)
+"125
+[e $ ! == _k -> 0 `i 2874  ]
+[; ;F66K80.c: 126: {
+"126
+{
+[; ;F66K80.c: 127: measured_value = ADC_read(0);
+"127
+[e = _measured_value ( _ADC_read (1 -> -> 0 `i `uc ]
+[; ;F66K80.c: 128: k = 1;
+"128
+[e = _k -> 1 `i ]
+"129
+}
+[; ;F66K80.c: 129: }
+[e $U 2875  ]
 "130
-[e = _measured_value ( _ADC_read (1 -> -> 1 `i `uc ]
+[e :U 2874 ]
+[; ;F66K80.c: 130: else {
+{
+[; ;F66K80.c: 131: k = 0;
+"131
+[e = _k -> 0 `i ]
+[; ;F66K80.c: 132: measured_value = ADC_read(1);
 "132
+[e = _measured_value ( _ADC_read (1 -> -> 1 `i `uc ]
+"134
 }
-[e :U 2843 ]
-[; ;F66K80.c: 132: }
-[; ;F66K80.c: 135: lcd_write_number(measured_value);
-"135
-[e ( _lcd_write_number (1 _measured_value ]
-[; ;F66K80.c: 136: wait(100);
+[e :U 2875 ]
+[; ;F66K80.c: 134: }
+[; ;F66K80.c: 136: I2C_Start();
 "136
-[e ( _wait (1 -> -> 100 `i `uc ]
+[e ( _I2C_Start ..  ]
+[; ;F66K80.c: 137: I2C_data_send(0b11010000);
+"137
+[e ( _I2C_data_send (1 -> -> 208 `i `uc ]
+[; ;F66K80.c: 138: I2C_data_send(0x1);
+"138
+[e ( _I2C_data_send (1 -> -> 1 `i `uc ]
+[; ;F66K80.c: 140: I2C_Stop();
 "140
+[e ( _I2C_Stop ..  ]
+[; ;F66K80.c: 144: lcd_write_number(measured_value);
+"144
+[e ( _lcd_write_number (1 _measured_value ]
+[; ;F66K80.c: 145: wait(100);
+"145
+[e ( _wait (1 -> -> 100 `i `uc ]
+"149
 }
-[e :U 2839 ]
-"114
-[e $U 2840  ]
-[e :U 2841 ]
-[; ;F66K80.c: 140: }
-[; ;F66K80.c: 141: }
-"141
-[e :UE 2832 ]
+[e :U 2871 ]
+"116
+[e $U 2872  ]
+[e :U 2873 ]
+[; ;F66K80.c: 149: }
+[; ;F66K80.c: 150: }
+"150
+[e :UE 2864 ]
 }
 [a 4C 105 108 108 101 103 97 108 0 ]
 [a 5C 105 108 108 101 103 97 108 0 ]
