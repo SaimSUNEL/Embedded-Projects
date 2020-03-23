@@ -14,6 +14,8 @@ Proteus 8.6 SP2
 	MPASM v5.42
 	VRASM: AVR macro assembler 2.1.42
 	avr-gcc (WinAVR 20100110) 4.3.3
+	Macro Assembler Version 6.14.8444
+
 
 Atmel Studio 6.2
 
