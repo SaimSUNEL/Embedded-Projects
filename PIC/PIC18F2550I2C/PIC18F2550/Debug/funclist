@@ -1,0 +1,7 @@
+_I2C_initialize: CODE, 32524 0 48
+_I2C_Start: CODE, 32454 0 34
+_main: CODE, 32624 0 144
+_I2C_data_send: CODE, 32572 0 52
+_I2C_Stop: CODE, 32434 0 10
+_wait: CODE, 32488 0 36
+Total: 324

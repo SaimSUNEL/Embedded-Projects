@@ -6,7 +6,7 @@
  </FRAME>
  <MODULE name="VSMDEBUG">
   <PWI>
-   <POPUP w="800" x="389" flags="00008003" y="357" h="200" pid="0" iid="-1">
+   <POPUP w="800" x="281" flags="00000003" y="357" h="200" pid="0" iid="-1">
     <PROPERTIES>
      <ITEM name="Message Column Width">550</ITEM>
      <ITEM name="ShowGrid">No</ITEM>
@@ -32,7 +32,7 @@
      <ITEM name="nItems">0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="600" x="140" flags="0000002b" y="159" h="400" pid="1" iid="1">
+   <POPUP w="600" x="321" flags="0000002b" y="243" h="400" pid="1" iid="1">
     <PROPERTIES>
      <ITEM name="CaseSensitive">No</ITEM>
      <ITEM name="DISPADDRS">Yes</ITEM>
@@ -93,7 +93,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="16" x="631" flags="0000000b" y="121" h="32" pid="6" iid="1">
+   <POPUP w="16" x="1222" flags="0000000b" y="331" h="32" pid="6" iid="1">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -164,7 +164,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="695" x="671" flags="00000001" y="307" h="446" pid="0" iid="18">
+   <POPUP w="695" x="671" flags="00000001" y="322" h="446" pid="0" iid="18">
     <PROPERTIES/>
    </POPUP>
    <POPUP w="450" x="271" flags="00000023" y="378" h="250" pid="0" iid="19">
@@ -179,8 +179,9 @@
      <ITEM name="VSplitter1Pos">238</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="450" x="177" flags="00000023" y="371" h="250" pid="0" iid="21">
+   <POPUP w="450" x="554" flags="00008023" y="120" h="250" pid="0" iid="21">
     <PROPERTIES>
+     <ITEM name="AutoEcho">0</ITEM>
      <ITEM name="ComboBox1000">S</ITEM>
      <ITEM name="ComboBox1001">Sr</ITEM>
      <ITEM name="ComboBox1002">P</ITEM>
@@ -192,10 +193,11 @@
      <ITEM name="ComboBox1008">A</ITEM>
      <ITEM name="ComboBox1009">N</ITEM>
      <ITEM name="HSplitter1Pos">100</ITEM>
+     <ITEM name="HexMode">0</ITEM>
      <ITEM name="VSplitter1Pos">6</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="450" x="224" flags="00000023" y="122" h="250" pid="0" iid="24">
+   <POPUP w="450" x="121" flags="00000023" y="228" h="250" pid="0" iid="24">
     <PROPERTIES>
      <ITEM name="ComboBox1000">S</ITEM>
      <ITEM name="ComboBox1001">Sr</ITEM>
@@ -222,6 +224,12 @@
      <ITEM name="ShowChanges">Yes</ITEM>
      <ITEM name="ShowToolTips">Yes</ITEM>
      <ITEM name="TopLineAddress">00000000</ITEM>
+    </PROPERTIES>
+   </POPUP>
+   <POPUP w="450" x="100" flags="00000023" y="119" h="250" pid="0" iid="22">
+    <PROPERTIES>
+     <ITEM name="AutoEcho">0</ITEM>
+     <ITEM name="HexMode">0</ITEM>
     </PROPERTIES>
    </POPUP>
   </PWI>

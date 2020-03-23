@@ -1,0 +1,356 @@
+Version 3.2 HI-TECH Software Intermediate Code
+[s S226 :1 `Vuc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S226 . EPSTALL EPINEN EPOUTEN EPCONDIS EPHSHK ]
+"34 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\usbregs18.h
+[v __USB_ENDPOINT `VS226 -> 15 `i e@3952 ]
+[s S229 :2 `Vuc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S229 . BC89 BSTALL DTSEN . DTS UOWN ]
+[s S230 :2 `Vuc 1 :4 `Vuc 1 :1 `uc 1 :1 `uc 1 ]
+[n S230 . BC89 PID . UOWN ]
+[u S228 `S229 1 `S230 1 ]
+[n S228 . CPU SIE ]
+[s S227 `S228 1 `Vuc 1 `Vui 1 ]
+[n S227 . BDSTAT BDCNT BDADR ]
+"37 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\usbregs18.h
+[v __USB_DESCRIPTOR `VS227 -> 64 `i e@1024 ]
+"1569 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\pic18.h
+[v __delay `(v 0 ef1`ul ]
+[p i __delay ]
+"1090 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\pic18f2550.h
+[v _TRISB1 `Vb 0 e@31897 ]
+"1089 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\pic18f2550.h
+[v _TRISB0 `Vb 0 e@31896 ]
+"48 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\legacy/ppic18f2550.h
+[v _RB1 `VNb 0 e@31753 ]
+"47 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\legacy/ppic18f2550.h
+[v _RB0 `VNb 0 e@31752 ]
+[s S152 :4 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 ]
+[n S152 . SSPM CKP SSPEN SSPOV WCOL ]
+[s S153 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 ]
+[n S153 . SSPM0 SSPM1 SSPM2 SSPM3 ]
+[u S151 `S152 1 `S153 1 ]
+[n S151 . . . ]
+"1855 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\pic18f2550.h
+[v _SSPCON1bits `S151 0 e@4038 ]
+[s S155 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 ]
+[n S155 . BF UA R_nW S P D_nA CKE SMP ]
+[s S156 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 ]
+[n S156 . . . . . . . . . ]
+[s S157 :2 `Vuc 1 :1 `Vuc 1 :2 `Vuc 1 :1 `Vuc 1 ]
+[n S157 . . R_W . D_A ]
+[s S158 :2 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 ]
+[n S158 . . I2C_READ I2C_START I2C_STOP I2C_DAT ]
+[s S159 :2 `Vuc 1 :1 `Vuc 1 :2 `Vuc 1 :1 `Vuc 1 ]
+[n S159 . . nW . nA ]
+[s S160 :2 `Vuc 1 :1 `Vuc 1 :2 `Vuc 1 :1 `Vuc 1 ]
+[n S160 . . nWRITE . nADDRESS ]
+[s S161 :2 `Vuc 1 :1 `Vuc 1 :2 `Vuc 1 :1 `Vuc 1 ]
+[n S161 . . READ_WRITE . DATA_ADDRESS ]
+[s S162 :2 `Vuc 1 :1 `Vuc 1 :2 `Vuc 1 :1 `Vuc 1 ]
+[n S162 . . R . D ]
+[u S154 `S155 1 `S156 1 `S157 1 `S158 1 `S159 1 `S160 1 `S161 1 `S162 1 ]
+[n S154 . . . . . . . . . ]
+"1940 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\pic18f2550.h
+[v _SSPSTATbits `S154 0 e@4039 ]
+"1943 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\pic18f2550.h
+[v _SSPADD `Vuc 0 e@4040 ]
+[s S92 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 ]
+[n S92 . TMR1IF TMR2IF CCP1IF SSPIF TXIF RCIF ADIF ]
+[s S93 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :2 `Vuc 1 :1 `Vuc 1 ]
+[n S93 . . . . . . . ]
+[u S91 `S92 1 `S93 1 ]
+[n S91 . . . ]
+"1235 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\pic18f2550.h
+[v _PIR1bits `S91 0 e@3998 ]
+[s S150 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 :1 `Vuc 1 ]
+[n S150 . SEN RSEN PEN RCEN ACKEN ACKDT ACKSTAT GCEN ]
+[u S149 `S150 1 ]
+[n S149 . . ]
+"1828 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\pic18f2550.h
+[v _SSPCON2bits `S149 0 e@4037 ]
+"1947 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\pic18f2550.h
+[v _SSPBUF `Vuc 0 e@4041 ]
+"249 ../I2C.h
+[v _unnecessary `uc 1 e ]
+[p mainexit ]
+"1164 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\pic18f2550.h
+[v _INTSRC `Vb 0 e@31967 ]
+"2156 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\pic18f2550.h
+[v _IRCF2 `Vb 0 e@32414 ]
+"2155 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\pic18f2550.h
+[v _IRCF1 `Vb 0 e@32413 ]
+"2154 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\pic18f2550.h
+[v _IRCF0 `Vb 0 e@32412 ]
+"1132 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\pic18f2550.h
+[v _TRISC0 `Vb 0 e@31904 ]
+"40 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\legacy/ppic18f2550.h
+[v _RC0 `VNb 0 e@31760 ]
+"69 ../PIC18F2550.c
+[v _wait `(v 1 ef1`uc ]
+{
+[e :U _wait ]
+[v _val `uc 1 r1 ]
+[f ]
+"71
+{
+[v _k `uc 1 a ]
+[e = _k -> -> 0 `i `uc ]
+[e $U 235  ]
+[e :U 232 ]
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+[e ++ _k -> -> 1 `i `uc ]
+[e :U 235 ]
+[e $ < -> _k `i -> _val `i 232  ]
+[e :U 233 ]
+}
+"73
+[e :UE 231 ]
+}
+"146 ../I2C.h
+[v _I2C_initialize `(v 1 ef ]
+{
+[e :U _I2C_initialize ]
+[f ]
+"155
+[e = _TRISB1 -> -> 1 `i `b ]
+"156
+[e = _TRISB0 -> -> 1 `i `b ]
+"157
+[e = _RB1 = _RB0 -> -> 0 `i `b ]
+"159
+[e = . . _SSPCON1bits 1 3 -> -> 1 `i `uc ]
+"160
+[e = . . _SSPCON1bits 1 2 -> -> 0 `i `uc ]
+"161
+[e = . . _SSPCON1bits 1 1 -> -> 0 `i `uc ]
+"162
+[e = . . _SSPCON1bits 1 0 -> -> 0 `i `uc ]
+"192
+[e = . . _SSPSTATbits 0 7 -> -> 1 `i `uc ]
+"193
+[e = . . _SSPSTATbits 0 6 -> -> 0 `i `uc ]
+"194
+[e = _SSPADD -> -> 19 `i `uc ]
+"200
+[e = . . _SSPCON1bits 0 2 -> -> 1 `i `uc ]
+"201
+[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+"202
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"204
+[e :UE 236 ]
+}
+"211
+[v _I2C_Start `(v 1 ef ]
+{
+[e :U _I2C_Start ]
+[f ]
+"212
+[e = . . _SSPCON2bits 0 0 -> -> 1 `i `uc ]
+"215
+[e $U 238  ]
+[e :U 239 ]
+[e :U 238 ]
+[e $ != -> . . _SSPCON2bits 0 0 `i -> -> -> 0 `i `Vuc `i 239  ]
+[e :U 240 ]
+"217
+[e $U 241  ]
+[e :U 242 ]
+[e :U 241 ]
+[e $ == -> . . _SSPSTATbits 0 3 `i -> 0 `i 242  ]
+[e :U 243 ]
+"218
+[e = . . _SSPSTATbits 0 3 -> -> 0 `i `uc ]
+"219
+[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+"220
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"222
+[e :UE 237 ]
+}
+"236
+[v _I2C_data_receive `(uc 1 ef ]
+{
+[e :U _I2C_data_receive ]
+[f ]
+"237
+[e = . . _SSPCON2bits 0 3 -> -> 1 `i `uc ]
+"238
+[e $U 245  ]
+[e :U 246 ]
+[e :U 245 ]
+[e $ == -> . . _SSPSTATbits 0 0 `i -> 0 `i 246  ]
+[e :U 247 ]
+"239
+[e $U 248  ]
+[e :U 249 ]
+[e :U 248 ]
+[e $ == -> . . _PIR1bits 0 3 `i -> 0 `i 249  ]
+[e :U 250 ]
+"240
+[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+"241
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"243
+[e ) _SSPBUF ]
+[e $UE 244  ]
+"245
+[e :UE 244 ]
+}
+[i _unnecessary
+"249
+-> -> 0 `i `uc
+]
+"252
+[v _I2C_data_send `(v 1 ef1`uc ]
+{
+[e :U _I2C_data_send ]
+[v _data `uc 1 r1 ]
+[f ]
+"299
+[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+"302
+[e = _SSPBUF _data ]
+"303
+[e $U 252  ]
+[e :U 253 ]
+[e :U 252 ]
+[e $ != -> . . _SSPSTATbits 0 0 `i -> -> -> 0 `i `Vuc `i 253  ]
+[e :U 254 ]
+"318
+[e $U 255  ]
+[e :U 256 ]
+{
+[e ++ _unnecessary -> -> 1 `i `uc ]
+[e $ ! == -> _unnecessary `i -> 200 `i 258  ]
+[e $U 257  ]
+[e :U 258 ]
+}
+[e :U 255 ]
+[e $ == -> . . _PIR1bits 0 3 `i -> 0 `i 256  ]
+[e :U 257 ]
+"319
+[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+"320
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"322
+[e = _unnecessary -> -> 0 `i `uc ]
+"323
+[e :UE 251 ]
+}
+"334
+[v _I2C_SendACK `(v 1 ef ]
+{
+[e :U _I2C_SendACK ]
+[f ]
+"340
+[e = . . _SSPCON2bits 0 5 -> -> 0 `i `uc ]
+"341
+[e = . . _SSPCON2bits 0 4 -> -> 1 `i `uc ]
+"342
+[e $U 260  ]
+[e :U 261 ]
+[e :U 260 ]
+[e $ != -> . . _SSPCON2bits 0 4 `i -> -> -> 0 `i `Vuc `i 261  ]
+[e :U 262 ]
+"343
+[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+"345
+[e :UE 259 ]
+}
+"351
+[v _I2C_SendNACK `(v 1 ef ]
+{
+[e :U _I2C_SendNACK ]
+[f ]
+"352
+[e = . . _SSPCON2bits 0 5 -> -> 1 `i `uc ]
+"353
+[e = . . _SSPCON2bits 0 4 -> -> 1 `i `uc ]
+"354
+[e $U 264  ]
+[e :U 265 ]
+[e :U 264 ]
+[e $ != -> . . _SSPCON2bits 0 4 `i -> -> -> 0 `i `Vuc `i 265  ]
+[e :U 266 ]
+"355
+[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+"356
+[e :UE 263 ]
+}
+"376
+[v _I2C_Stop `(v 1 ef ]
+{
+[e :U _I2C_Stop ]
+[f ]
+"377
+[e = . . _SSPCON2bits 0 2 -> -> 1 `i `uc ]
+"378
+[e $U 268  ]
+[e :U 269 ]
+[e :U 268 ]
+[e $ != -> . . _SSPCON2bits 0 2 `i -> -> -> 0 `i `Vuc `i 269  ]
+[e :U 270 ]
+"380
+[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+"382
+[e :UE 267 ]
+}
+"76 ../PIC18F2550.c
+[v _main `(v 1 ef ]
+{
+[e :U _main ]
+[f ]
+"78
+[e = _INTSRC -> -> 1 `i `b ]
+"83
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"88
+[e = _IRCF2 -> -> 1 `i `b ]
+"89
+[e = _IRCF1 -> -> 1 `i `b ]
+"90
+[e = _IRCF0 -> -> 1 `i `b ]
+"91
+[e ( _I2C_initialize ..  ]
+"92
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"93
+[e ( _wait (1 -> -> 50 `i `uc ]
+"94
+[e = _TRISC0 -> -> 0 `i `b ]
+"95
+[e :U 273 ]
+"96
+{
+"97
+[e ( _I2C_Start ..  ]
+"98
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"99
+[e ( _I2C_Stop ..  ]
+"100
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"102
+[e ( _I2C_Start ..  ]
+"103
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"104
+[e ( _I2C_data_send (1 -> -> 85 `i `uc ]
+"105
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"106
+[e ( _I2C_Stop ..  ]
+"109
+[e = _RC0 ! _RC0 ]
+"110
+[e ( _wait (1 -> -> 100 `i `uc ]
+"111
+}
+[e :U 272 ]
+"95
+[e $U 273  ]
+[e :U 274 ]
+"114
+[e :UE 271 ]
+}

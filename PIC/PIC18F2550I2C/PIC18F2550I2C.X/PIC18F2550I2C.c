@@ -1,6 +1,6 @@
 
 #include <xc.h>
-#define _XTAL_FREQ 4000000UL
+#define _XTAL_FREQ 8000000UL
 
 // #pragma config statements should precede project file includes.
 // Use project enums instead of #define for ON and OFF.
@@ -74,8 +74,6 @@ void wait(byte val)
 }
 #include "I2C.h"
 #include "DS1307.h"
-
-
 void main()
 {
     
@@ -91,7 +89,7 @@ __delay_ms(5);
 //4MHZ...
 IRCF2 = 1;
 IRCF1 = 1;
-IRCF0 = 0;
+IRCF0 = 1;
 I2C_initialize();
 
 __delay_ms(10);
@@ -99,18 +97,16 @@ wait(50);
 TRISC0 = 0;
 while(1)
 {
+        
     I2C_Start();
-    __delay_ms(1);
-    I2C_data_send(0b01010101);
-    __delay_ms(1);
+    
     I2C_Stop();
     
     
+    
+    
     RC0 = ~RC0;
-    wait(100);
-    
-    
-    
+    wait(100);   
 }
 
     

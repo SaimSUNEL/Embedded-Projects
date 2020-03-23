@@ -13,6 +13,7 @@
       <itemPath>I2C.h</itemPath>
       <itemPath>DS1307.h</itemPath>
       <itemPath>SDCARD.h</itemPath>
+      <itemPath>DHT11.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"

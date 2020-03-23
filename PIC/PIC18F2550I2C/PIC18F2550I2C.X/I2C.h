@@ -196,15 +196,25 @@ starting an Acknowledge sequence
 //SSPADD = ((Fosc/BitRate)/4)-1 
 SSPSTATbits.SMP = 1;
 SSPSTATbits.CKE = 0;
-SSPADD = 39;//0x27;//0xa;
+SSPADD = 19;//0x27;//0xa;
 //SDAHT = 1; //SDA hold time...
 
  
+    // R_nW write_noTX; P stopbit_notdetected; S startbit_notdetected; BF RCinprocess_TXcomplete; SMP Standard Speed; UA dontupdate; CKE disabled; D_nA lastbyte_address; 
+    SSPSTAT = 0x80;
+    // SSPEN enabled; WCOL no_collision; CKP Idle:Low, Active:High; SSPM FOSC/4_SSPxADD_I2C; SSPOV no_overflow; 
+    SSPCON1 = 0x28;
+    // Baud Rate Generator Value: SSPADD 19;   
+    SSPADD = 0x13;
 
  //Enable Module....  
  SSPCON1bits.SSPEN = 1 ;
  PIR1bits.SSPIF = 0;
    __delay_ms(5);
+   
+   
+   
+   
 
 }
 

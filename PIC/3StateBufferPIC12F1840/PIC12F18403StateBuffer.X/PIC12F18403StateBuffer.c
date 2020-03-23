@@ -17,10 +17,10 @@ void DELAY100(byte number)
         __delay_ms(100);
 }
 #include "UART.h"
-
+#include "ADC.h"
 void main()
 {
-    ANSELA = 0;
+    ANSELA = 0; //All ADC inputs are disabled...
     
     TRISA = 0b00111110;
  
@@ -37,21 +37,36 @@ IRCF0 = 1;
 SCS1 = 1 ; //Internel oscillator
 SCS0 = 0;
 
-
-RXDTSEL = 1; //Rx pini RA5 te...e o
 DELAY(120);
 
-UART_init();
+#define BUFFER_1 RA0
+#define BUFFER_3 RA2
 
-DELAY(100);
-//if(false)
-   
-TRISA0 = 0; //RA0 Output
+TRISA0 = 0; RA0 = 1; //Buffer disabled..
+TRISA2 = 0; RA2 = 1; //Buffer disabled..
+
+TRISA4 = 0; RA4 = 0; //multiplexer selection...
+
+BUFFER_1 = 1; //enable buffer one    
+BUFFER_3 = 1; //Disable third buffer
+
+TRISA1 = 0; RA1 = 1;
+
+//ANSA1 = 1;
+//ADC_init();
+
+__delay_ms(25);
+//RA1 = 1;
+RA4 = 1;
+
+TRISA5 = 0;
 while(true)
 {
-    RA0 = ~RA0;
-    DELAY100(10);
+    //ADC_read(0);
+    RA1 = ~RA1;
+    DELAY100(5);
     
+    RA5 = RA1;
 }
 
 }

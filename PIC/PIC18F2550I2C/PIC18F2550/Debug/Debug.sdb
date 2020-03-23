@@ -1,0 +1,211 @@
+[p GLOBOPT AUTOSTATIC LFSROK SPACEOPT EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F2550 ]
+[s S21 . 1 `Vuc 1 EPSTALL 1 0 :1:0 
+`uc 1 EPINEN 1 0 :1:1 
+`uc 1 EPOUTEN 1 0 :1:2 
+`uc 1 EPCONDIS 1 0 :1:3 
+`uc 1 EPHSHK 1 0 :1:4 
+]
+"34 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\usbregs18.h
+[s S28 . 1 `Vuc 1 BC89 1 0 :2:0 
+`uc 1 BSTALL 1 0 :1:2 
+`uc 1 DTSEN 1 0 :1:3 
+`uc 1 . 1 0 :2:4 
+`uc 1 DTS 1 0 :1:6 
+`uc 1 UOWN 1 0 :1:7 
+]
+[s S35 . 1 `Vuc 1 BC89 1 0 :2:0 
+`Vuc 1 PID 1 0 :4:2 
+`uc 1 . 1 0 :1:6 
+`uc 1 UOWN 1 0 :1:7 
+]
+[u S40 . 1 `S28 1 CPU 1 0 `S35 1 SIE 1 0 ]
+[s S43 . 4 `S40 1 BDSTAT 1 0 `Vuc 1 BDCNT 1 1 `Vui 1 BDADR 2 2 ]
+"47 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\legacy/ppic18f2550.h
+[s S54 . 1 `Vuc 1 SSPM 1 0 :4:0 
+`Vuc 1 CKP 1 0 :1:4 
+`Vuc 1 SSPEN 1 0 :1:5 
+`Vuc 1 SSPOV 1 0 :1:6 
+`Vuc 1 WCOL 1 0 :1:7 
+]
+[s S60 . 1 `Vuc 1 SSPM0 1 0 :1:0 
+`Vuc 1 SSPM1 1 0 :1:1 
+`Vuc 1 SSPM2 1 0 :1:2 
+`Vuc 1 SSPM3 1 0 :1:3 
+]
+[u S65 . 1 `S54 1 . 1 0 `S60 1 . 1 0 ]
+"1855 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\pic18f2550.h
+[s S69 . 1 `Vuc 1 BF 1 0 :1:0 
+`Vuc 1 UA 1 0 :1:1 
+`Vuc 1 R_nW 1 0 :1:2 
+`Vuc 1 S 1 0 :1:3 
+`Vuc 1 P 1 0 :1:4 
+`Vuc 1 D_nA 1 0 :1:5 
+`Vuc 1 CKE 1 0 :1:6 
+`Vuc 1 SMP 1 0 :1:7 
+]
+[s S78 . 1 `Vuc 1 . 1 0 :1:0 
+`Vuc 1 . 1 0 :1:1 
+`Vuc 1 . 1 0 :1:2 
+`Vuc 1 . 1 0 :1:3 
+`Vuc 1 . 1 0 :1:4 
+`Vuc 1 . 1 0 :1:5 
+`Vuc 1 . 1 0 :1:6 
+`Vuc 1 . 1 0 :1:7 
+]
+[s S87 . 1 `Vuc 1 . 1 0 :2:0 
+`Vuc 1 R_W 1 0 :1:2 
+`Vuc 1 . 1 0 :2:3 
+`Vuc 1 D_A 1 0 :1:5 
+]
+[s S92 . 1 `Vuc 1 . 1 0 :2:0 
+`Vuc 1 I2C_READ 1 0 :1:2 
+`Vuc 1 I2C_START 1 0 :1:3 
+`Vuc 1 I2C_STOP 1 0 :1:4 
+`Vuc 1 I2C_DAT 1 0 :1:5 
+]
+[s S98 . 1 `Vuc 1 . 1 0 :2:0 
+`Vuc 1 nW 1 0 :1:2 
+`Vuc 1 . 1 0 :2:3 
+`Vuc 1 nA 1 0 :1:5 
+]
+[s S103 . 1 `Vuc 1 . 1 0 :2:0 
+`Vuc 1 nWRITE 1 0 :1:2 
+`Vuc 1 . 1 0 :2:3 
+`Vuc 1 nADDRESS 1 0 :1:5 
+]
+[s S108 . 1 `Vuc 1 . 1 0 :2:0 
+`Vuc 1 READ_WRITE 1 0 :1:2 
+`Vuc 1 . 1 0 :2:3 
+`Vuc 1 DATA_ADDRESS 1 0 :1:5 
+]
+[s S113 . 1 `Vuc 1 . 1 0 :2:0 
+`Vuc 1 R 1 0 :1:2 
+`Vuc 1 . 1 0 :2:3 
+`Vuc 1 D 1 0 :1:5 
+]
+[u S118 . 1 `S69 1 . 1 0 `S78 1 . 1 0 `S87 1 . 1 0 `S92 1 . 1 0 `S98 1 . 1 0 `S103 1 . 1 0 `S108 1 . 1 0 `S113 1 . 1 0 ]
+"1943
+[s S129 . 1 `Vuc 1 TMR1IF 1 0 :1:0 
+`Vuc 1 TMR2IF 1 0 :1:1 
+`Vuc 1 CCP1IF 1 0 :1:2 
+`Vuc 1 SSPIF 1 0 :1:3 
+`Vuc 1 TXIF 1 0 :1:4 
+`Vuc 1 RCIF 1 0 :1:5 
+`Vuc 1 ADIF 1 0 :1:6 
+]
+[s S137 . 1 `Vuc 1 . 1 0 :1:0 
+`Vuc 1 . 1 0 :1:1 
+`Vuc 1 . 1 0 :1:2 
+`Vuc 1 . 1 0 :1:3 
+`Vuc 1 . 1 0 :2:4 
+`Vuc 1 . 1 0 :1:6 
+]
+[u S144 . 1 `S129 1 . 1 0 `S137 1 . 1 0 ]
+"1235
+[s S148 . 1 `Vuc 1 SEN 1 0 :1:0 
+`Vuc 1 RSEN 1 0 :1:1 
+`Vuc 1 PEN 1 0 :1:2 
+`Vuc 1 RCEN 1 0 :1:3 
+`Vuc 1 ACKEN 1 0 :1:4 
+`Vuc 1 ACKDT 1 0 :1:5 
+`Vuc 1 ACKSTAT 1 0 :1:6 
+`Vuc 1 GCEN 1 0 :1:7 
+]
+[u S157 . 1 `S148 1 . 1 0 ]
+"252 ../I2C.h
+[v _data `uc  1 a 1 fsr0l ]
+"69 ../PIC18F2550.c
+[v _val `uc  1 a 1 fsr2l ]
+"252 ../I2C.h
+[v _data `uc  1 a 1 fsr0l ]
+"69 ../PIC18F2550.c
+[v _val `uc  1 a 1 fsr2l ]
+"146 ../I2C.h
+[v _I2C_initialize `(v  1 e 0 0 ]
+"211
+[v _I2C_Start `(v  1 e 0 0 ]
+"252
+[v _I2C_data_send `(v  1 e 0 0 ]
+"376
+[v _I2C_Stop `(v  1 e 0 0 ]
+"69 ../PIC18F2550.c
+[v _wait `(v  1 e 0 0 ]
+"76
+[v _main `(v  1 e 0 0 ]
+"1569 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\pic18.h
+[v __delay `(v  1 e 0 0 ]
+"249 ../I2C.h
+[v _unnecessary `uc  1 e 1 @0 ]
+"40 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\legacy/ppic18f2550.h
+[v _RC0 `VNb  1 e 0 @31760 ]
+"47
+[v _RB0 `VNb  1 e 0 @31752 ]
+"48
+[v _RB1 `VNb  1 e 0 @31753 ]
+"1089 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\pic18f2550.h
+[v _TRISB0 `Vb  1 e 0 @31896 ]
+"1090
+[v _TRISB1 `Vb  1 e 0 @31897 ]
+"1132
+[v _TRISC0 `Vb  1 e 0 @31904 ]
+"1164
+[v _INTSRC `Vb  1 e 0 @31967 ]
+"1235
+[v _PIR1bits `S144  1 e 1 @3998 ]
+"1828
+[v _SSPCON2bits `S157  1 e 1 @4037 ]
+"1855
+[v _SSPCON1bits `S65  1 e 1 @4038 ]
+"1940
+[v _SSPSTATbits `S118  1 e 1 @4039 ]
+"1943
+[v _SSPADD `Vuc  1 e 1 @4040 ]
+"1947
+[v _SSPBUF `Vuc  1 e 1 @4041 ]
+"2154
+[v _IRCF0 `Vb  1 e 0 @32412 ]
+"2155
+[v _IRCF1 `Vb  1 e 0 @32413 ]
+"2156
+[v _IRCF2 `Vb  1 e 0 @32414 ]
+"34 C:\Program Files (x86)\HI-TECH Software\PICC-18\PRO\9.66\include\usbregs18.h
+[v __USB_ENDPOINT `V[15]S21  1 e 15 @3952 ]
+"37
+[v __USB_DESCRIPTOR `V[64]S43  1 e 256 @1024 ]
+"76 ../PIC18F2550.c
+[v _main `(v  1 e 0 0 ]
+{
+"114
+} 0
+"211 ../I2C.h
+[v _I2C_Start `(v  1 e 0 0 ]
+{
+"222
+} 0
+"376
+[v _I2C_Stop `(v  1 e 0 0 ]
+{
+"382
+} 0
+"252
+[v _I2C_data_send `(v  1 e 0 0 ]
+{
+[v _data `uc  1 a 1 wreg ]
+[v _data `uc  1 a 1 fsr0l ]
+"323
+} 0
+"146
+[v _I2C_initialize `(v  1 e 0 0 ]
+{
+"204
+} 0
+"69 ../PIC18F2550.c
+[v _wait `(v  1 e 0 0 ]
+{
+[v _val `uc  1 a 1 wreg ]
+[v _val `uc  1 a 1 fsr2l ]
+"73
+} 0

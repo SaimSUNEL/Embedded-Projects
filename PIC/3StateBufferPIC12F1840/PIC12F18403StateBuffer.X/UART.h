@@ -41,9 +41,9 @@ void UART_init ( )
    //Async mode...
    SYNC = 0 ;
    //9600 baud rate for 16MHz..
-   BRGH = 0;
+   BRGH = 1;
    BRG16 = 0 ;
-   SPBRG = 12;//25 ;
+   SPBRG = 25;//25 ;
    //continuous receive enabled...
    CREN = 1 ;
    //Serial port enable...
