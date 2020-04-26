@@ -19,4 +19,8 @@ Proteus 8.6 SP2
 
 Atmel Studio 6.2
 
+STM32CubeIDE Version: 1.2.0
+
+Micropython (ESP8266, https://docs.micropython.org/en/latest/esp8266/tutorial/intro.html) 
+
 Visual Studio Premium 2013

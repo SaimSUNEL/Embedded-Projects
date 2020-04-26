@@ -1,0 +1,612 @@
+%CMF
+# %PSECTS Section
+# For each object file, details of its psects are enumerated here.
+# The begining of the section is indicated by %PSECTS.  The first
+# line indicates the name of the first object file, e.g.
+#    $foo.obj
+# Each line that follows describes a psect in that object file, until
+# the next object file.  The lines that describe a psect have the
+# format:
+#    <psect name> <class name> <space> <link address> <load addresses> <length> <delta>
+# All addresses and the length are given in unqualified hexadecimal
+# in delta units.  Any other numeric values are decimal.
+%PSECTS
+$dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+cinit CODE 0 55 55 1B 2
+text1 CODE 0 146 146 16 2
+text3 CODE 0 70 70 5B 2
+text4 CODE 0 125 125 21 2
+idataCOMMON CODE 0 16C 16C 1 2
+maintext CODE 0 CB CB 5A 2
+cstackCOMMON COMMON 1 70 70 C 1
+cstackBANK0 BANK0 1 2A 2A 8 1
+inittext CODE 0 166 166 6 2
+intentry CODE 0 4 4 4F 2
+bssBANK0 BANK0 1 32 32 7 1
+idataBANK0 CODE 0 15C 15C A 2
+dataBANK0 BANK0 1 20 20 A 1
+dataCOMMON COMMON 1 7D 7D 1 1
+bssCOMMON COMMON 1 7C 7C 1 1
+$C:\Users\Saim\AppData\Local\Temp\s2vs.obj
+reset_vec CODE 0 0 0 3 2
+end_init CODE 0 53 53 2 2
+config CONFIG 0 8007 8007 2 2
+# %UNUSED Section
+# This section enumerates the unused ranges of each CLASS. Each entry
+# is described on a single line as follows:
+#    <class name> <range> <delta>
+# Addresses given in the range are in hexadecimal and units of delta.
+%UNUSED
+RAM 39-6F 1
+RAM A0-EF 1
+RAM 120-15F 1
+BANK0 39-6F 1
+BANK1 A0-EF 1
+BANK2 120-15F 1
+CONST 3-3 2
+CONST 16D-FFF 2
+ENTRY 3-3 2
+ENTRY 16D-FFF 2
+IDLOC 8000-8003 2
+SFR10 500-56F 1
+SFR11 580-5EF 1
+SFR12 600-66F 1
+SFR13 680-6EF 1
+SFR14 700-76F 1
+SFR15 780-7EF 1
+SFR16 800-86F 1
+SFR17 880-8EF 1
+SFR18 900-96F 1
+SFR19 980-9EF 1
+SFR20 A00-A6F 1
+SFR21 A80-AEF 1
+SFR22 B00-B6F 1
+SFR23 B80-BEF 1
+SFR24 C00-C6F 1
+SFR25 C80-CEF 1
+SFR26 D00-D6F 1
+SFR27 D80-DEF 1
+SFR28 E00-E6F 1
+SFR29 E80-EEF 1
+SFR30 F00-F6F 1
+SFR31 F80-FEF 1
+STACK 2019-20DF 1
+CODE 3-3 2
+CODE 16D-FFF 2
+SFR0 0-1F 1
+SFR1 80-9F 1
+SFR2 100-11F 1
+SFR3 180-1EF 1
+SFR4 200-26F 1
+SFR5 280-2EF 1
+SFR6 300-36F 1
+SFR7 380-3EF 1
+SFR8 400-46F 1
+SFR9 480-4EF 1
+BIGRAM 2000-20DF 1
+EEDATA F000-F0FF 2
+STRCODE 3-3 2
+STRCODE 16D-FFF 2
+STRING 3-3 2
+STRING 16D-FFF 2
+# %LINETAB Section
+# This section enumerates the file/line to address mappings.
+# The beginning of the section is indicated by %LINETAB.
+# The first line indicates the name of the first object file, e.g.
+#   $foo.obj
+# Each line that follows describes a single mapping until the next
+# object file.  Mappings have the following format:
+#    <address> <psect name> <class name> ><line number>:<file name>
+# The address is absolute and given given in unqualified hex 
+# in delta units of the psect. All mappings within an object file
+# are in ascending order of addresses.
+# All other numeric values are in decimal.
+%LINETAB
+$dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+55 cinit CODE >429:C:\Users\Saim\AppData\Local\Temp\s2vs.
+55 cinit CODE >432:C:\Users\Saim\AppData\Local\Temp\s2vs.
+55 cinit CODE >472:C:\Users\Saim\AppData\Local\Temp\s2vs.
+56 cinit CODE >476:C:\Users\Saim\AppData\Local\Temp\s2vs.
+57 cinit CODE >477:C:\Users\Saim\AppData\Local\Temp\s2vs.
+58 cinit CODE >478:C:\Users\Saim\AppData\Local\Temp\s2vs.
+59 cinit CODE >479:C:\Users\Saim\AppData\Local\Temp\s2vs.
+5A cinit CODE >480:C:\Users\Saim\AppData\Local\Temp\s2vs.
+5B cinit CODE >481:C:\Users\Saim\AppData\Local\Temp\s2vs.
+5C cinit CODE >482:C:\Users\Saim\AppData\Local\Temp\s2vs.
+5D cinit CODE >497:C:\Users\Saim\AppData\Local\Temp\s2vs.
+60 cinit CODE >498:C:\Users\Saim\AppData\Local\Temp\s2vs.
+61 cinit CODE >502:C:\Users\Saim\AppData\Local\Temp\s2vs.
+62 cinit CODE >503:C:\Users\Saim\AppData\Local\Temp\s2vs.
+63 cinit CODE >504:C:\Users\Saim\AppData\Local\Temp\s2vs.
+64 cinit CODE >505:C:\Users\Saim\AppData\Local\Temp\s2vs.
+65 cinit CODE >506:C:\Users\Saim\AppData\Local\Temp\s2vs.
+66 cinit CODE >507:C:\Users\Saim\AppData\Local\Temp\s2vs.
+67 cinit CODE >508:C:\Users\Saim\AppData\Local\Temp\s2vs.
+68 cinit CODE >509:C:\Users\Saim\AppData\Local\Temp\s2vs.
+69 cinit CODE >510:C:\Users\Saim\AppData\Local\Temp\s2vs.
+6A cinit CODE >511:C:\Users\Saim\AppData\Local\Temp\s2vs.
+6C cinit CODE >517:C:\Users\Saim\AppData\Local\Temp\s2vs.
+6C cinit CODE >519:C:\Users\Saim\AppData\Local\Temp\s2vs.
+6D cinit CODE >520:C:\Users\Saim\AppData\Local\Temp\s2vs.
+6E cinit CODE >521:C:\Users\Saim\AppData\Local\Temp\s2vs.
+4 intentry CODE >22:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+4 intentry CODE >32:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+9 intentry CODE >24:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+B intentry CODE >25:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+C intentry CODE >26:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+10 intentry CODE >27:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+14 intentry CODE >29:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+15 intentry CODE >30:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+19 intentry CODE >31:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+1D intentry CODE >34:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+1E intentry CODE >35:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+22 intentry CODE >38:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+26 intentry CODE >41:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+2B intentry CODE >42:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+2C intentry CODE >43:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+30 intentry CODE >45:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+31 intentry CODE >47:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+32 intentry CODE >48:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+32 intentry CODE >50:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+34 intentry CODE >52:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+38 intentry CODE >54:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+3C intentry CODE >55:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+40 intentry CODE >56:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+41 intentry CODE >57:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+42 intentry CODE >58:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+43 intentry CODE >59:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+47 intentry CODE >61:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+4B intentry CODE >62:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+4C intentry CODE >65:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+4E intentry CODE >68:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+125 text4 CODE >4:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lbdiv.c
+126 text4 CODE >9:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lbdiv.c
+127 text4 CODE >10:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lbdiv.c
+12A text4 CODE >11:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lbdiv.c
+12C text4 CODE >12:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lbdiv.c
+12E text4 CODE >13:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lbdiv.c
+130 text4 CODE >14:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lbdiv.c
+134 text4 CODE >12:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lbdiv.c
+135 text4 CODE >17:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lbdiv.c
+137 text4 CODE >18:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lbdiv.c
+13B text4 CODE >19:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lbdiv.c
+13D text4 CODE >20:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lbdiv.c
+13E text4 CODE >22:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lbdiv.c
+140 text4 CODE >23:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lbdiv.c
+144 text4 CODE >25:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lbdiv.c
+70 text3 CODE >42:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+71 text3 CODE >44:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+83 text3 CODE >45:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+8B text3 CODE >46:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+8F text3 CODE >47:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+9B text3 CODE >49:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+A1 text3 CODE >47:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+A6 text3 CODE >52:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+AE text3 CODE >53:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+B5 text3 CODE >54:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+BC text3 CODE >56:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+C3 text3 CODE >57:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+CA text3 CODE >62:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+146 text1 CODE >28:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+148 text1 CODE >30:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+14D text1 CODE >31:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+156 text1 CODE >30:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+CB maintext CODE >64:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+CB maintext CODE >66:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+CD maintext CODE >68:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+CF maintext CODE >70:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+D0 maintext CODE >75:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+D1 maintext CODE >76:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+D2 maintext CODE >77:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+D3 maintext CODE >78:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+D4 maintext CODE >80:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+D5 maintext CODE >81:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+D6 maintext CODE >83:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+D8 maintext CODE >84:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+D9 maintext CODE >87:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+DA maintext CODE >88:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+DB maintext CODE >90:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+DF maintext CODE >92:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+E2 maintext CODE >95:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+E3 maintext CODE >96:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+E4 maintext CODE >99:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+E5 maintext CODE >100:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+E6 maintext CODE >102:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+E7 maintext CODE >103:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+E8 maintext CODE >106:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+EC maintext CODE >109:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+EE maintext CODE >115:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+F2 maintext CODE >116:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+100 maintext CODE >117:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+102 maintext CODE >118:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+104 maintext CODE >119:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+108 maintext CODE >120:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+109 maintext CODE >124:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+10B maintext CODE >125:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+10C maintext CODE >129:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+10E maintext CODE >130:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+10F maintext CODE >134:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+113 maintext CODE >135:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+116 maintext CODE >136:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+124 maintext CODE >132:C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+166 inittext CODE >486:C:\Users\Saim\AppData\Local\Temp\s2vs.
+166 inittext CODE >487:C:\Users\Saim\AppData\Local\Temp\s2vs.
+167 inittext CODE >488:C:\Users\Saim\AppData\Local\Temp\s2vs.
+167 inittext CODE >489:C:\Users\Saim\AppData\Local\Temp\s2vs.
+168 inittext CODE >490:C:\Users\Saim\AppData\Local\Temp\s2vs.
+169 inittext CODE >491:C:\Users\Saim\AppData\Local\Temp\s2vs.
+16A inittext CODE >492:C:\Users\Saim\AppData\Local\Temp\s2vs.
+16B inittext CODE >493:C:\Users\Saim\AppData\Local\Temp\s2vs.
+# %SYMTAB Section
+# An enumeration of all symbols in the program.
+# The beginning of the section is indicated by %SYMTAB.
+# Each line describes a single symbol as follows:
+#    <label> <value> [-]<load-adj> <class> <space> <psect> <file-name>
+# The value and load-adj are both in unqualified hexadecimal.
+# All other numeric values are in decimal.  The load-adj is the
+# quantity one needs to add to the symbol value in order to obtain the load
+# address of the symbol.  This value may be signed. If the symbol
+# was defined in a psect then <psect> will be "-". File-name
+# is the name of the object file in which the symbol was defined.
+%SYMTAB
+___latbits 1 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__LdataBANK0 0 0 ABS 0 dataBANK0 -
+__Hspace_0 8009 0 ABS 0 - -
+__Hspace_1 7E 0 ABS 0 - -
+__Hspace_2 0 0 ABS 0 - -
+__Hspace_3 0 0 ABS 0 - -
+__HidataBANK0 0 0 ABS 0 idataBANK0 -
+_second_count 7C 0 COMMON 1 bssCOMMON dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__Heeprom_data 0 0 EEDATA 3 eeprom_data -
+ltemp0 7E 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+ltemp1 82 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+ltemp2 86 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+ltemp3 80 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__Hstrings 0 0 ABS 0 strings -
+_PEIE 5E 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_SCS0 4C8 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_SCS1 4C9 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_TMR1 16 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+___sp 0 0 STACK 2 stack C:\Users\Saim\AppData\Local\Temp\s2vs.obj
+_leds 32 0 BANK0 1 bssBANK0 dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_main 196 0 CODE 0 maintext dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+btemp 7E 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+ltemp 7E 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+start A6 0 CODE 0 init C:\Users\Saim\AppData\Local\Temp\s2vs.obj
+ttemp 7E 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+wtemp 7E 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__CFG_BOREN$OFF 0 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__size_of_main 0 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__size_of___lbdiv 0 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__HbssCOMMON 0 0 ABS 0 bssCOMMON -
+__LidataBANK0 0 0 ABS 0 idataBANK0 -
+__Hpowerup 0 0 CODE 0 powerup -
+DELAY@k 2D 0 BANK0 1 cstackBANK0 dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+ttemp0 7E 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+ttemp1 81 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+ttemp2 84 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+ttemp3 87 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+ttemp4 7F 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__HdataCOMMON 0 0 ABS 0 dataCOMMON -
+intlevel0 0 0 CODE 0 functab C:\Users\Saim\AppData\Local\Temp\s2vs.obj
+intlevel1 0 0 CODE 0 functab C:\Users\Saim\AppData\Local\Temp\s2vs.obj
+intlevel2 0 0 CODE 0 functab C:\Users\Saim\AppData\Local\Temp\s2vs.obj
+intlevel3 0 0 CODE 0 functab C:\Users\Saim\AppData\Local\Temp\s2vs.obj
+intlevel4 0 0 CODE 0 functab C:\Users\Saim\AppData\Local\Temp\s2vs.obj
+intlevel5 0 0 CODE 0 functab C:\Users\Saim\AppData\Local\Temp\s2vs.obj
+__LbssCOMMON 0 0 ABS 0 bssCOMMON -
+_TMR1CS0 C6 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_TMR1CS1 C7 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+wtemp0 7E 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+wtemp1 80 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+wtemp2 82 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+wtemp3 84 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+wtemp4 86 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+wtemp5 88 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+wtemp6 7F 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__Hfunctab 0 0 CODE 0 functab -
+__Hclrtext 0 0 ABS 0 clrtext -
+__pidataCOMMON 2D8 0 CODE 0 idataCOMMON dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_ANSELA 18C 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__LdataCOMMON 0 0 ABS 0 dataCOMMON -
+___lbdiv@dividend 72 0 COMMON 1 cstackCOMMON dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_count_status 7D 0 COMMON 1 dataCOMMON dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__Lmaintext 0 0 ABS 0 maintext -
+__end_of___lbdiv 28C 0 CODE 0 text4 dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_IOCAN3 1C93 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_IOCAP3 1C8B 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__size_of_DELAY 0 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__LidataCOMMON 0 0 ABS 0 idataCOMMON -
+__CFG_FCMEN$OFF 0 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__CFG_MCLRE$OFF 0 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+start_initialization AA 0 CODE 0 cinit dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__CFG_STVREN$OFF 0 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_SPLLEN 4CF 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__pcstackBANK0 2A 0 BANK0 1 cstackBANK0 dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_TMR1GE CF 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_TMR1IE 488 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_TMR1IF 88 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_TMR1ON C0 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_TRISA0 460 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+___lbdiv@counter 73 0 COMMON 1 cstackCOMMON dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+___int_sp 0 0 STACK 2 stack C:\Users\Saim\AppData\Local\Temp\s2vs.obj
+__Hbank0 0 0 ABS 0 bank0 -
+__Hbank1 0 0 ABS 0 bank1 -
+__Hbank2 0 0 ABS 0 bank2 -
+__Hbank3 0 0 BANK3 1 bank3 -
+__Hbank4 0 0 BANK4 1 bank4 -
+__Hbank5 0 0 BANK5 1 bank5 -
+__Hbank6 0 0 BANK6 1 bank6 -
+__Hbank7 0 0 BANK7 1 bank7 -
+__Hbank8 0 0 BANK8 1 bank8 -
+__Hbank9 0 0 BANK9 1 bank9 -
+__Hcinit E0 0 CODE 0 cinit -
+__Hidloc 0 0 IDLOC 0 idloc -
+__Hsfr10 0 0 ABS 0 sfr10 -
+__Hsfr11 0 0 ABS 0 sfr11 -
+__Hsfr12 0 0 ABS 0 sfr12 -
+__Hsfr13 0 0 ABS 0 sfr13 -
+__Hsfr14 0 0 ABS 0 sfr14 -
+__Hsfr15 0 0 ABS 0 sfr15 -
+__Hsfr16 0 0 ABS 0 sfr16 -
+__Hsfr17 0 0 ABS 0 sfr17 -
+__Hsfr18 0 0 ABS 0 sfr18 -
+__Hsfr19 0 0 ABS 0 sfr19 -
+__Hsfr20 0 0 ABS 0 sfr20 -
+__Hsfr21 0 0 ABS 0 sfr21 -
+__Hsfr22 0 0 ABS 0 sfr22 -
+__Hsfr23 0 0 ABS 0 sfr23 -
+__Hsfr24 0 0 ABS 0 sfr24 -
+__Hsfr25 0 0 ABS 0 sfr25 -
+__Hsfr26 0 0 ABS 0 sfr26 -
+__Hsfr27 0 0 ABS 0 sfr27 -
+__Hsfr28 0 0 ABS 0 sfr28 -
+__Hsfr29 0 0 ABS 0 sfr29 -
+__Hsfr30 0 0 ABS 0 sfr30 -
+__Hsfr31 0 0 ABS 0 sfr31 -
+__Hstack 0 0 STACK 2 stack -
+__Hbank10 0 0 BANK10 1 bank10 -
+__Hbank11 0 0 BANK11 1 bank11 -
+__Hbank12 0 0 BANK12 1 bank12 -
+__Hbank13 0 0 BANK13 1 bank13 -
+__Hbank14 0 0 BANK14 1 bank14 -
+__Hbank15 0 0 BANK15 1 bank15 -
+__Hbank16 0 0 BANK16 1 bank16 -
+__Hbank17 0 0 BANK17 1 bank17 -
+__Hbank18 0 0 BANK18 1 bank18 -
+__Hbank19 0 0 BANK19 1 bank19 -
+__Hbank20 0 0 BANK20 1 bank20 -
+__Hbank21 0 0 BANK21 1 bank21 -
+__Hbank22 0 0 BANK22 1 bank22 -
+__Hbank23 0 0 BANK23 1 bank23 -
+__Hbank24 0 0 BANK24 1 bank24 -
+__Hbank25 0 0 BANK25 1 bank25 -
+__Hbank26 0 0 BANK26 1 bank26 -
+__Hbank27 0 0 BANK27 1 bank27 -
+__Hbank28 0 0 BANK28 1 bank28 -
+__Hbank29 0 0 BANK29 1 bank29 -
+__Hbank30 0 0 BANK30 1 bank30 -
+__Hbank31 0 0 BANK31 1 bank31 -
+__Hbigram 0 0 ABS 0 bigram -
+__Hmaintext 0 0 ABS 0 maintext -
+__CFG_FOSC$INTOSC 0 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__Hcommon 0 0 ABS 0 common -
+__Hconfig 10012 0 CONFIG 0 config -
+__Lbank0 0 0 ABS 0 bank0 -
+__Lbank1 0 0 ABS 0 bank1 -
+__Lbank2 0 0 ABS 0 bank2 -
+__Lbank3 0 0 BANK3 1 bank3 -
+__Lbank4 0 0 BANK4 1 bank4 -
+__Lbank5 0 0 BANK5 1 bank5 -
+__Lbank6 0 0 BANK6 1 bank6 -
+__Lbank7 0 0 BANK7 1 bank7 -
+__Lbank8 0 0 BANK8 1 bank8 -
+__Lbank9 0 0 BANK9 1 bank9 -
+__Lcinit AA 0 CODE 0 cinit -
+__Lidloc 0 0 IDLOC 0 idloc -
+__Lsfr10 0 0 ABS 0 sfr10 -
+__Lsfr11 0 0 ABS 0 sfr11 -
+__Lsfr12 0 0 ABS 0 sfr12 -
+__Lsfr13 0 0 ABS 0 sfr13 -
+__Lsfr14 0 0 ABS 0 sfr14 -
+__Lsfr15 0 0 ABS 0 sfr15 -
+__Lsfr16 0 0 ABS 0 sfr16 -
+__Lsfr17 0 0 ABS 0 sfr17 -
+__Lsfr18 0 0 ABS 0 sfr18 -
+__Lsfr19 0 0 ABS 0 sfr19 -
+__Lsfr20 0 0 ABS 0 sfr20 -
+__Lsfr21 0 0 ABS 0 sfr21 -
+__Lsfr22 0 0 ABS 0 sfr22 -
+__Lsfr23 0 0 ABS 0 sfr23 -
+__Lsfr24 0 0 ABS 0 sfr24 -
+__Lsfr25 0 0 ABS 0 sfr25 -
+__Lsfr26 0 0 ABS 0 sfr26 -
+__Lsfr27 0 0 ABS 0 sfr27 -
+__Lsfr28 0 0 ABS 0 sfr28 -
+__Lsfr29 0 0 ABS 0 sfr29 -
+__Lsfr30 0 0 ABS 0 sfr30 -
+__Lsfr31 0 0 ABS 0 sfr31 -
+__Lstack 0 0 STACK 2 stack -
+__end_of_show_time 196 0 CODE 0 text3 dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+init_ram 2CC 0 CODE 0 inittext dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+show_time@a 79 0 COMMON 1 cstackCOMMON dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+show_time@c 78 0 COMMON 1 cstackCOMMON dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__size_of_show_time 0 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__Linittext 0 0 ABS 0 inittext -
+__Habs1 0 0 ABS 0 abs1 -
+__Hcode 0 0 ABS 0 code -
+__Hinit A6 0 CODE 0 init -
+__Hsfr0 0 0 ABS 0 sfr0 -
+__Hsfr1 0 0 ABS 0 sfr1 -
+__Hsfr2 0 0 ABS 0 sfr2 -
+__Hsfr3 0 0 ABS 0 sfr3 -
+__Hsfr4 0 0 ABS 0 sfr4 -
+__Hsfr5 0 0 ABS 0 sfr5 -
+__Hsfr6 0 0 ABS 0 sfr6 -
+__Hsfr7 0 0 ABS 0 sfr7 -
+__Hsfr8 0 0 ABS 0 sfr8 -
+__Hsfr9 0 0 ABS 0 sfr9 -
+__Htext 0 0 ABS 0 text -
+__Labs1 0 0 ABS 0 abs1 -
+__Lcode 0 0 ABS 0 code -
+__Linit A6 0 CODE 0 init -
+__Lsfr0 0 0 ABS 0 sfr0 -
+__Lsfr1 0 0 ABS 0 sfr1 -
+__Lsfr2 0 0 ABS 0 sfr2 -
+__Lsfr3 0 0 ABS 0 sfr3 -
+__Lsfr4 0 0 ABS 0 sfr4 -
+__Lsfr5 0 0 ABS 0 sfr5 -
+__Lsfr6 0 0 ABS 0 sfr6 -
+__Lsfr7 0 0 ABS 0 sfr7 -
+__Lsfr8 0 0 ABS 0 sfr8 -
+__Lsfr9 0 0 ABS 0 sfr9 -
+__Ltext 0 0 ABS 0 text -
+__LcstackBANK0 0 0 ABS 0 cstackBANK0 -
+int$flags 7E 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__HcstackCOMMON 0 0 ABS 0 cstackCOMMON -
+DELAY@number 2C 0 BANK0 1 cstackBANK0 dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_FNC 8 0 CODE 0 intentry dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_GIE 5F 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_RA0 60 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_RA1 61 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_RA2 62 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_RA4 64 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_RA5 65 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__S0 8009 0 ABS 0 - -
+__S1 7E 0 ABS 0 - -
+__S2 0 0 ABS 0 - -
+__S3 0 0 ABS 0 - -
+_show_time E0 0 CODE 0 text3 dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__HidataCOMMON 0 0 ABS 0 idataCOMMON -
+__end_of_FNC A6 0 CODE 0 intentry dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+show_time@gap 76 0 COMMON 1 cstackCOMMON dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_rakamlar 20 0 BANK0 1 dataBANK0 dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__Lintentry 8 0 CODE 0 intentry -
+reset_vec 0 0 CODE 0 reset_vec C:\Users\Saim\AppData\Local\Temp\s2vs.obj
+__pdataBANK0 20 0 BANK0 1 dataBANK0 dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__LbssBANK0 0 0 ABS 0 bssBANK0 -
+_timer_count 38 0 BANK0 1 bssBANK0 dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+___lbdiv 24A 0 CODE 0 text4 dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__Lbank10 0 0 BANK10 1 bank10 -
+__Lbank11 0 0 BANK11 1 bank11 -
+__Lbank12 0 0 BANK12 1 bank12 -
+__Lbank13 0 0 BANK13 1 bank13 -
+__Lbank14 0 0 BANK14 1 bank14 -
+__Lbank15 0 0 BANK15 1 bank15 -
+__Lbank16 0 0 BANK16 1 bank16 -
+__Lbank17 0 0 BANK17 1 bank17 -
+__Lbank18 0 0 BANK18 1 bank18 -
+__Lbank19 0 0 BANK19 1 bank19 -
+__Lbank20 0 0 BANK20 1 bank20 -
+__Lbank21 0 0 BANK21 1 bank21 -
+__Lbank22 0 0 BANK22 1 bank22 -
+__Lbank23 0 0 BANK23 1 bank23 -
+__Lbank24 0 0 BANK24 1 bank24 -
+__Lbank25 0 0 BANK25 1 bank25 -
+__Lbank26 0 0 BANK26 1 bank26 -
+__Lbank27 0 0 BANK27 1 bank27 -
+__Lbank28 0 0 BANK28 1 bank28 -
+__Lbank29 0 0 BANK29 1 bank29 -
+__Lbank30 0 0 BANK30 1 bank30 -
+__Lbank31 0 0 BANK31 1 bank31 -
+__pmaintext 196 0 CODE 0 maintext dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__Lbigram 0 0 ABS 0 bigram -
+__CFG_BORV$LO 0 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__Lcommon 0 0 ABS 0 common -
+__Lconfig 1000E 0 CONFIG 0 config -
+__CFG_CP$OFF 0 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__CFG_IESO$ON 0 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__CFG_WDTE$OFF 0 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__Hinittext 0 0 ABS 0 inittext -
+___lbdiv@divisor 70 0 COMMON 1 cstackCOMMON dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+main@rakam 31 0 BANK0 1 cstackBANK0 dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+stackhi 20DF 0 ABS 0 - C:\Users\Saim\AppData\Local\Temp\s2vs.obj
+stacklo 2019 0 ABS 0 - C:\Users\Saim\AppData\Local\Temp\s2vs.obj
+__CFG_LVP$OFF 0 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__Lspace_0 0 0 ABS 0 - -
+__Lspace_1 0 0 ABS 0 - -
+__Lspace_2 0 0 ABS 0 - -
+__Lspace_3 0 0 ABS 0 - -
+__pbssCOMMON 7C 0 COMMON 1 bssCOMMON dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__HcstackBANK0 0 0 ABS 0 cstackBANK0 -
+__Lend_init A6 0 CODE 0 end_init -
+__LcstackCOMMON 0 0 ABS 0 cstackCOMMON -
+end_of_initialization D8 0 CODE 0 cinit dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__Hintentry A6 0 CODE 0 intentry -
+__Lstrings 0 0 ABS 0 strings -
+__Hreset_vec 6 0 CODE 0 reset_vec -
+__HbssBANK0 0 0 ABS 0 bssBANK0 -
+__ptext1 28C 0 CODE 0 text1 dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__ptext3 E0 0 CODE 0 text3 dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__ptext4 24A 0 CODE 0 text4 dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+___lbdiv@quotient 74 0 COMMON 1 cstackCOMMON dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__Lpowerup 0 0 CODE 0 powerup -
+_SHIFT_REG_DATA 37 0 BANK0 1 bssBANK0 dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__Leeprom_data 0 0 EEDATA 3 eeprom_data -
+__Lreset_vec 0 0 CODE 0 reset_vec -
+__CFG_CLKOUTEN$OFF 0 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__end_of__initialization D8 0 CODE 0 cinit dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__Lfunctab 0 0 CODE 0 functab -
+__pidataBANK0 2B8 0 CODE 0 idataBANK0 dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__Lclrtext 0 0 ABS 0 clrtext -
+show_time@rakam 77 0 COMMON 1 cstackCOMMON dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__CFG_PLLEN$OFF 0 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_T1CKPS0 C4 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_T1CKPS1 C5 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__pcstackCOMMON 70 0 COMMON 1 cstackCOMMON dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__Hend_init AA 0 CODE 0 end_init -
+__end_of_main 24A 0 CODE 0 maintext dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__end_of_DELAY 2B8 0 CODE 0 text1 dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_DELAY 28C 0 CODE 0 text1 dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_IOCAF 393 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_IOCAN 392 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_IOCAP 391 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_IOCIE 5B 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_IOCIF 58 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_IRCF0 4CB 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_IRCF1 4CC 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_IRCF2 4CD 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_IRCF3 4CE 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_PORTA C 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+_TRISA 8C 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__Hram 0 0 ABS 0 ram -
+__Lram 0 0 ABS 0 ram -
+__CFG_CPD$OFF 0 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__pintentry 8 0 CODE 0 intentry dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__size_of_FNC 0 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__HdataBANK0 0 0 ABS 0 dataBANK0 -
+__initialization AA 0 CODE 0 cinit dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__CFG_PWRTE$OFF 0 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__pbssBANK0 32 0 BANK0 1 bssBANK0 dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__pdataCOMMON 7D 0 COMMON 1 dataCOMMON dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+__CFG_WRT$OFF 0 0 ABS 0 - dist/default/debug\PIC12F1840CounterWithLeds.X.debug.obj
+# %SPLITSTAB Section
+# This section enumerates all the psect splits performed by the assembler.
+# The beginning of the section is indicated by %SPLITSTAB.
+# Each line is a record a particular split, where the parent psect is on
+# the left and the child on the right.  Note that a child psect is always
+# split form the top of the parent psect. All splits from a given parent
+# are listed in the order in which they occurred.
+%SPLITSTAB
+# %DABS Section
+# This section contains a table of all usuage of the assember
+# directive DABS in the program. Each line has the following format:
+#   <name> <space> <address> <size>
+# If the DABS was originally labelled then that shall be <name>,
+# otherwise name will be "-".  The <space> number is in decimal.
+# <address> and <size> are in byte units as unqaulified hexadecimal
+%DABS
+- 1 7E 2
+# %SEGMENTS Section
+# This sections enumerates the segments of the program.  Each segment
+# is described on a single line as follows:
+#    <name> <space> <link address> <file address> <size> <delta>
+# Addresses and size are in unqualified hexadecimal.  The link address
+# and size are in units of delta. The file address is in units of bytes.
+# All other numeric quantities are in decimal.
+%SEGMENTS
+cstackCOMMON 1 70 70 E 1
+intentry 0 4 8 169 2
+reset_vec 0 0 0 3 2
+dataBANK0 1 20 20 19 1
+config 0 8007 1000E 2 2

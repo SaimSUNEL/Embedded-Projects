@@ -1,0 +1,168 @@
+[p LITE_MODE AUTOSTATIC PIC14 PIC14E ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 12F1840 ]
+[d frameptr 6 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"86 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"4 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lbdiv.c
+[v ___lbdiv __lbdiv `(uc  1 e 1 0 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\pic\eeprom.c
+[v _eecpymem eecpymem `(v  1 e 1 0 ]
+"39
+[v _memcpyee memcpyee `(v  1 e 1 0 ]
+"22 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+[v _FNC FNC `II(v  1 e 1 0 ]
+"22 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\OneShiftRegisterSevenSegment.h
+[v _shift_register shift_register `(v  1 e 1 0 ]
+"65
+[v _set_shift_pin set_shift_pin `(v  1 e 1 0 ]
+"89
+[v _set_digit set_digit `(v  1 e 1 0 ]
+"28 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+[v _DELAY DELAY `(v  1 e 1 0 ]
+"42
+[v _show_time show_time `(v  1 e 1 0 ]
+"64
+[v _main main `(v  1 e 1 0 ]
+"414 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic12f1840.h
+[v _PORTA PORTA `VEuc  1 e 1 @12 ]
+"582
+[v _TMR1 TMR1 `VEus  1 e 2 @22 ]
+"973
+[v _TRISA TRISA `VEuc  1 e 1 @140 ]
+"2341
+[v _ANSELA ANSELA `VEuc  1 e 1 @396 ]
+"4035
+[v _IOCAP IOCAP `VEuc  1 e 1 @913 ]
+"4092
+[v _IOCAN IOCAN `VEuc  1 e 1 @914 ]
+"4149
+[v _IOCAF IOCAF `VEuc  1 e 1 @915 ]
+"4970
+[v _GIE GIE `VEb  1 e 0 @95 ]
+"5006
+[v _IOCAN3 IOCAN3 `VEb  1 e 0 @7315 ]
+"5018
+[v _IOCAP3 IOCAP3 `VEb  1 e 0 @7307 ]
+"5024
+[v _IOCIE IOCIE `VEb  1 e 0 @91 ]
+"5026
+[v _IOCIF IOCIF `VEb  1 e 0 @88 ]
+"5028
+[v _IRCF0 IRCF0 `VEb  1 e 0 @1227 ]
+"5030
+[v _IRCF1 IRCF1 `VEb  1 e 0 @1228 ]
+"5032
+[v _IRCF2 IRCF2 `VEb  1 e 0 @1229 ]
+"5034
+[v _IRCF3 IRCF3 `VEb  1 e 0 @1230 ]
+"5136
+[v _PEIE PEIE `VEb  1 e 0 @94 ]
+"5158
+[v _RA0 RA0 `VEb  1 e 0 @96 ]
+"5160
+[v _RA1 RA1 `VEb  1 e 0 @97 ]
+"5162
+[v _RA2 RA2 `VEb  1 e 0 @98 ]
+"5166
+[v _RA4 RA4 `VEb  1 e 0 @100 ]
+"5168
+[v _RA5 RA5 `VEb  1 e 0 @101 ]
+"5198
+[v _SCS0 SCS0 `VEb  1 e 0 @1224 ]
+"5200
+[v _SCS1 SCS1 `VEb  1 e 0 @1225 ]
+"5216
+[v _SPLLEN SPLLEN `VEb  1 e 0 @1231 ]
+"5292
+[v _T1CKPS0 T1CKPS0 `VEb  1 e 0 @196 ]
+"5294
+[v _T1CKPS1 T1CKPS1 `VEb  1 e 0 @197 ]
+"5338
+[v _TMR1CS0 TMR1CS0 `VEb  1 e 0 @198 ]
+"5340
+[v _TMR1CS1 TMR1CS1 `VEb  1 e 0 @199 ]
+"5342
+[v _TMR1GE TMR1GE `VEb  1 e 0 @207 ]
+"5348
+[v _TMR1IE TMR1IE `VEb  1 e 0 @1160 ]
+"5350
+[v _TMR1IF TMR1IF `VEb  1 e 0 @136 ]
+"5352
+[v _TMR1ON TMR1ON `VEb  1 e 0 @192 ]
+"5360
+[v _TRISA0 TRISA0 `VEb  1 e 0 @1120 ]
+"18 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+[v _count_status count_status `uc  1 e 1 0 ]
+"19
+[v _timer_count timer_count `uc  1 e 1 0 ]
+"20
+[v _second_count second_count `uc  1 e 1 0 ]
+"64 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\OneShiftRegisterSevenSegment.h
+[v _SHIFT_REG_DATA SHIFT_REG_DATA `uc  1 e 1 0 ]
+"87
+[v _rakamlar rakamlar `[10]uc  1 e 10 0 ]
+"41 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+[v _leds leds `[5]uc  1 e 5 0 ]
+"64
+[v _main main `(v  1 e 1 0 ]
+{
+"129
+[v main@rakam rakam `uc  1 a 1 7 ]
+"141
+} 0
+"28
+[v _DELAY DELAY `(v  1 e 1 0 ]
+{
+[v DELAY@number number `uc  1 a 1 wreg ]
+"30
+[v DELAY@k k `uc  1 a 1 3 ]
+"28
+[v DELAY@number number `uc  1 a 1 wreg ]
+"30
+[v DELAY@number number `uc  1 a 1 2 ]
+"32
+} 0
+"22 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\INTERRUPT.h
+[v _FNC FNC `II(v  1 e 1 0 ]
+{
+"68
+} 0
+"42 C:\Users\Saim\PIC-ATMELProjects\PIC\PIC12F1840CounterWithLeds\PIC12F1840CounterWithLeds.X\PIC12F1840CounterWithLeds.c
+[v _show_time show_time `(v  1 e 1 0 ]
+{
+[v show_time@rakam rakam `uc  1 a 1 wreg ]
+"47
+[v show_time@c c `uc  1 a 1 8 ]
+"44
+[v show_time@a a `uc  1 a 1 9 ]
+"46
+[v show_time@gap gap `uc  1 a 1 6 ]
+"42
+[v show_time@rakam rakam `uc  1 a 1 wreg ]
+"44
+[v show_time@rakam rakam `uc  1 a 1 7 ]
+"62
+} 0
+"4 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lbdiv.c
+[v ___lbdiv __lbdiv `(uc  1 e 1 0 ]
+{
+[v ___lbdiv@dividend dividend `uc  1 a 1 wreg ]
+"6
+[v ___lbdiv@quotient quotient `uc  1 a 1 4 ]
+"7
+[v ___lbdiv@counter counter `uc  1 a 1 3 ]
+"4
+[v ___lbdiv@dividend dividend `uc  1 a 1 wreg ]
+[v ___lbdiv@divisor divisor `uc  1 p 1 0 ]
+"9
+[v ___lbdiv@dividend dividend `uc  1 a 1 2 ]
+"26
+} 0
