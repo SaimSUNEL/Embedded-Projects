@@ -1,4 +1,4 @@
-# Embeded-Projects
+# Embedded-Projects
 Repository of several PIC, Atmel, 8086, STM32, ESP8266 microcontroller projects
 
 Compilers and Tools
